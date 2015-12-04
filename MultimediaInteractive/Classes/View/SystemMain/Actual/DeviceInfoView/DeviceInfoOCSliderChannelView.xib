@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DeviceInfoBaseView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gei-aG-2by" userLabel="titleView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MAe-Kr-tQu">
+                            <rect key="frame" x="10" y="25" width="100" height="100"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="BUS-FB-ki6"/>
+                                <constraint firstAttribute="height" constant="100" id="l2y-w0-ekf"/>
+                                <constraint firstAttribute="width" constant="180" id="pWo-rl-TJR"/>
+                                <constraint firstAttribute="height" constant="180" id="wxx-QS-QvK"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="pWo-rl-TJR"/>
+                                    <exclude reference="wxx-QS-QvK"/>
+                                </mask>
+                            </variation>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vi3-ur-I68">
+                            <rect key="frame" x="565" y="105" width="30" height="20"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="27f-0t-WBJ"/>
+                                <constraint firstAttribute="height" constant="20" id="3Wf-kk-8dn"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1m-kD-RkY" userLabel="NameLabel">
+                            <rect key="frame" x="115" y="75" width="0.0" height="0.0"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="0EH-Em-S4Z"/>
+                        <constraint firstItem="MAe-Kr-tQu" firstAttribute="centerY" secondItem="gei-aG-2by" secondAttribute="centerY" id="2GJ-VO-UAK"/>
+                        <constraint firstItem="s1m-kD-RkY" firstAttribute="bottom" secondItem="MAe-Kr-tQu" secondAttribute="bottom" constant="-10" id="Fxz-jg-AQQ"/>
+                        <constraint firstAttribute="trailing" secondItem="s1m-kD-RkY" secondAttribute="trailing" constant="5" id="HID-C0-ABP"/>
+                        <constraint firstItem="MAe-Kr-tQu" firstAttribute="leading" secondItem="gei-aG-2by" secondAttribute="leading" constant="10" id="V3G-Qp-03N"/>
+                        <constraint firstAttribute="trailing" secondItem="vi3-ur-I68" secondAttribute="trailing" constant="5" id="W7c-EG-eIT"/>
+                        <constraint firstItem="s1m-kD-RkY" firstAttribute="centerY" secondItem="MAe-Kr-tQu" secondAttribute="centerY" id="a7v-GA-Xko"/>
+                        <constraint firstItem="vi3-ur-I68" firstAttribute="bottom" secondItem="MAe-Kr-tQu" secondAttribute="bottom" id="kPc-UP-r0e"/>
+                        <constraint firstItem="s1m-kD-RkY" firstAttribute="leading" secondItem="MAe-Kr-tQu" secondAttribute="trailing" constant="5" id="nl4-2L-wLf"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="image" keyPath="backgroundColorFromUIImage" value="controlBg"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Fxz-jg-AQQ"/>
+                            <exclude reference="HID-C0-ABP"/>
+                        </mask>
+                    </variation>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="infoSplit" translatesAutoresizingMaskIntoConstraints="NO" id="tcF-0l-Ap6">
+                    <rect key="frame" x="0.0" y="150" width="600" height="23"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="240" id="O0D-BZ-QlK"/>
+                        <constraint firstAttribute="height" constant="23" id="ht8-vb-T9j"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="O0D-BZ-QlK"/>
+                        </mask>
+                    </variation>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3a-Lt-yhf" userLabel="controlView">
+                    <rect key="frame" x="0.0" y="173" width="600" height="427"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fe4-wQ-2WP" userLabel="siderView" customClass="WFFCircularSlider">
+                            <rect key="frame" x="200" y="96" width="200" height="200"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="EaF-w3-FQt"/>
+                                <constraint firstAttribute="height" constant="200" id="hYv-ZH-1tW"/>
+                            </constraints>
+                            <connections>
+                                <action selector="sliderValueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="n7Y-Gl-mo8"/>
+                            </connections>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqH-Ww-7lh">
+                            <rect key="frame" x="20" y="316" width="103" height="36"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="QxW-3d-zVA"/>
+                                <constraint firstAttribute="width" constant="103" id="ijz-eL-CXm"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="open">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" backgroundImage="openHighlight"/>
+                            <state key="highlighted" backgroundImage="openHighlight"/>
+                            <connections>
+                                <action selector="openButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="wae-qf-QrW"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUB-O2-DtO">
+                            <rect key="frame" x="477" y="316" width="103" height="36"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" backgroundImage="close">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" backgroundImage="closeHighlight"/>
+                            <state key="highlighted" backgroundImage="closeHighlight"/>
+                            <connections>
+                                <action selector="closeButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="hr2-r1-vFh"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAq-SI-L5N" userLabel="chanelView" customClass="WFFDropdownList">
+                            <rect key="frame" x="190" y="20" width="220" height="36"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="220" id="ies-d5-mcg"/>
+                                <constraint firstAttribute="height" constant="36" id="med-tI-Dmo"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="image" keyPath="rightImage" value="dropdownRightImage.png"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="maxCountForShow">
+                                    <integer key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="image" keyPath="rightImageSelected" value="dropdownRightImageClick.png"/>
+                                <userDefinedRuntimeAttribute type="image" keyPath="backgroundImageSelected" value="dropdownListBg_Selected.png"/>
+                                <userDefinedRuntimeAttribute type="image" keyPath="listCellBackgroundImage" value="dropdownListCellBg.png"/>
+                                <userDefinedRuntimeAttribute type="image" keyPath="listCellBackgroundImageSelected" value="dropdownListCellBgSelected.png"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="tableTextColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Fe4-wQ-2WP" firstAttribute="top" secondItem="NAq-SI-L5N" secondAttribute="bottom" constant="40" id="4PN-rD-F7K"/>
+                        <constraint firstItem="Fe4-wQ-2WP" firstAttribute="leading" secondItem="E3a-Lt-yhf" secondAttribute="leading" constant="5" id="5TF-l6-zYP"/>
+                        <constraint firstAttribute="height" constant="180" id="5hU-qE-55N"/>
+                        <constraint firstItem="wqH-Ww-7lh" firstAttribute="leading" secondItem="E3a-Lt-yhf" secondAttribute="leading" constant="20" id="5jD-s9-kHR"/>
+                        <constraint firstAttribute="trailing" secondItem="PUB-O2-DtO" secondAttribute="trailing" constant="20" id="6Ch-ho-bLS"/>
+                        <constraint firstItem="wqH-Ww-7lh" firstAttribute="top" secondItem="Fe4-wQ-2WP" secondAttribute="bottom" constant="20" id="FRX-vQ-tyP"/>
+                        <constraint firstItem="NAq-SI-L5N" firstAttribute="centerX" secondItem="E3a-Lt-yhf" secondAttribute="centerX" id="Ihw-H6-M35"/>
+                        <constraint firstAttribute="width" constant="180" id="OZw-Sk-gCk"/>
+                        <constraint firstItem="wqH-Ww-7lh" firstAttribute="top" secondItem="Fe4-wQ-2WP" secondAttribute="bottom" constant="20" id="TAf-lB-Ebc"/>
+                        <constraint firstItem="PUB-O2-DtO" firstAttribute="leading" secondItem="wqH-Ww-7lh" secondAttribute="trailing" constant="10" id="U7J-uO-4iA"/>
+                        <constraint firstItem="Fe4-wQ-2WP" firstAttribute="centerX" secondItem="E3a-Lt-yhf" secondAttribute="centerX" id="ZCU-x9-rNZ"/>
+                        <constraint firstAttribute="trailing" secondItem="Fe4-wQ-2WP" secondAttribute="trailing" constant="5" id="bi3-lw-YPe"/>
+                        <constraint firstItem="PUB-O2-DtO" firstAttribute="width" secondItem="wqH-Ww-7lh" secondAttribute="width" id="huR-zX-d91"/>
+                        <constraint firstItem="wqH-Ww-7lh" firstAttribute="centerY" secondItem="E3a-Lt-yhf" secondAttribute="centerY" priority="750" id="j1t-Jk-4J5"/>
+                        <constraint firstItem="wqH-Ww-7lh" firstAttribute="top" secondItem="NAq-SI-L5N" secondAttribute="bottom" constant="70" id="jhL-Hq-dg8"/>
+                        <constraint firstAttribute="bottom" secondItem="wqH-Ww-7lh" secondAttribute="bottom" constant="40" id="knw-4t-Ppn"/>
+                        <constraint firstItem="NAq-SI-L5N" firstAttribute="top" secondItem="E3a-Lt-yhf" secondAttribute="top" constant="20" id="vGo-RL-8fM"/>
+                        <constraint firstItem="PUB-O2-DtO" firstAttribute="bottom" secondItem="wqH-Ww-7lh" secondAttribute="bottom" id="xvc-kr-hCR"/>
+                        <constraint firstItem="PUB-O2-DtO" firstAttribute="height" secondItem="wqH-Ww-7lh" secondAttribute="height" id="zBQ-qU-9Rz"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="image" keyPath="backgroundColorFromUIImage" value="controlBg"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="5hU-qE-55N"/>
+                            <exclude reference="OZw-Sk-gCk"/>
+                            <exclude reference="5TF-l6-zYP"/>
+                            <exclude reference="bi3-lw-YPe"/>
+                            <exclude reference="FRX-vQ-tyP"/>
+                            <exclude reference="jhL-Hq-dg8"/>
+                            <exclude reference="knw-4t-Ppn"/>
+                            <exclude reference="U7J-uO-4iA"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="gei-aG-2by" secondAttribute="trailing" id="2hy-Js-Udt"/>
+                <constraint firstItem="tcF-0l-Ap6" firstAttribute="trailing" secondItem="gei-aG-2by" secondAttribute="trailing" id="2wA-Cb-wAA"/>
+                <constraint firstItem="tcF-0l-Ap6" firstAttribute="leading" secondItem="gei-aG-2by" secondAttribute="leading" id="5CS-Tx-HRV"/>
+                <constraint firstAttribute="bottom" secondItem="E3a-Lt-yhf" secondAttribute="bottom" id="8hX-Tl-4RO"/>
+                <constraint firstItem="E3a-Lt-yhf" firstAttribute="top" secondItem="tcF-0l-Ap6" secondAttribute="bottom" id="A2y-sq-IjL"/>
+                <constraint firstItem="tcF-0l-Ap6" firstAttribute="top" secondItem="gei-aG-2by" secondAttribute="bottom" id="H1g-CC-RoL"/>
+                <constraint firstItem="gei-aG-2by" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LeR-3V-doc"/>
+                <constraint firstItem="gei-aG-2by" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UWp-iN-h9t"/>
+                <constraint firstAttribute="trailing" secondItem="E3a-Lt-yhf" secondAttribute="trailing" id="VHL-fi-yvn"/>
+                <constraint firstItem="E3a-Lt-yhf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Y2o-wO-Nh3"/>
+            </constraints>
+            <connections>
+                <outlet property="channelDropdown" destination="NAq-SI-L5N" id="Qsf-oG-G5c"/>
+                <outlet property="deviceInfoCloseButton" destination="PUB-O2-DtO" id="8Wc-l8-r0z"/>
+                <outlet property="deviceInfoImageView" destination="MAe-Kr-tQu" id="LVK-jM-I0e"/>
+                <outlet property="deviceInfoNameLabel" destination="s1m-kD-RkY" id="Mxo-93-PLb"/>
+                <outlet property="deviceInfoOpenButton" destination="wqH-Ww-7lh" id="uNO-l1-4vn"/>
+                <outlet property="volumeSlider" destination="Fe4-wQ-2WP" id="1t5-N7-UaB"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="close" width="308" height="108"/>
+        <image name="closeHighlight" width="317" height="108"/>
+        <image name="controlBg" width="3" height="3"/>
+        <image name="dropdownListBg_Selected.png" width="1" height="48"/>
+        <image name="dropdownListCellBg.png" width="1" height="48"/>
+        <image name="dropdownListCellBgSelected.png" width="1" height="48"/>
+        <image name="dropdownRightImage.png" width="375" height="375"/>
+        <image name="dropdownRightImageClick.png" width="1" height="48"/>
+        <image name="infoSplit" width="2" height="23"/>
+        <image name="open" width="308" height="108"/>
+        <image name="openHighlight" width="317" height="108"/>
+    </resources>
+</document>

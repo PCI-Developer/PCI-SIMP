@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>实景</string>
+		<key>image</key>
+		<string>Actual.png</string>
+		<key>selectedImage</key>
+		<string></string>
+		<key>gotoVC</key>
+		<string>ActualModeViewController</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>日志</string>
+		<key>image</key>
+		<string>Log.png</string>
+		<key>selectedImage</key>
+		<string></string>
+		<key>gotoVC</key>
+		<string>LogInfoViewController</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>设置</string>
+		<key>image</key>
+		<string>Config.png</string>
+		<key>selectedImage</key>
+		<string></string>
+		<key>gotoVC</key>
+		<string>ConfigViewController</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>帮助</string>
+		<key>image</key>
+		<string>Help.png</string>
+		<key>selectedImage</key>
+		<string></string>
+		<key>gotoVC</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>注销</string>
+		<key>image</key>
+		<string>Logout.png</string>
+		<key>selectedImage</key>
+		<string></string>
+		<key>gotoVC</key>
+		<string>logout</string>
+	</dict>
+</array>
+</plist>

@@ -1,0 +1,160 @@
+{
+    "音箱":{
+        "name" : "音箱",
+        "inOrOut":"out",
+        "soundConnectedType":[
+                              "麦克",
+                              "电脑",
+                              "笔记本",
+                              "DVD",
+                              "视频会议"
+                              ],
+        "videoConnectedType":[
+        
+        ],
+        "imageName" : "loudspeaker",
+        "isActual" : true,
+        "controlCMD" : ["oc", "slider"],
+        "minValue" : -50,
+        "maxValue" : 5
+    },
+    "麦克":{
+        "name" : "麦克风",
+        "inOrOut":"in",
+        "soundConnectedType":[
+                              "音箱",
+                              "电视"
+                              ],
+        "videoConnectedType":[
+        
+        ],
+        "imageName" : "mic",
+        "isActual" : true,
+        "controlCMD" : ["oc"],
+        "minValue" : -50,
+        "maxValue" : 5
+    },
+    "大屏幕":{
+        "name" : "大屏幕",
+        "inOrOut":"out",
+        "soundConnectedType":[
+        
+        ],
+        "videoConnectedType":[
+                              "摄像头",
+                              "电脑",
+                              "笔记本",
+                              "DVD",
+                              "视频会议"
+        ],
+        "imageName" : "led",
+        "isActual" : true,
+        "controlCMD" : ["oc"]
+    },
+    "摄像头":{
+        "name" : "摄像头",
+        "inOrOut":"in",
+        "soundConnectedType":[
+        
+        ],
+        "videoConnectedType":[
+                              "大屏幕",
+                              "电视"
+                              ],
+        "imageName" : "camera",
+        "isActual" : true,
+        "controlCMD" : ["orientation"]
+    },
+    "电脑":{
+        "name" : "电脑",
+        "inOrOut":"in",
+        "soundConnectedType":[
+                              "音箱",
+                              "电视"
+                              ],
+        "videoConnectedType":[
+                              "大屏幕",
+                              "电视"
+                              ],
+        "imageName" : "computer",
+        "isActual" : true,
+        "controlCMD" : ["slider"],
+        "minValue" : -50,
+        "maxValue" : 5
+    },
+    "笔记本":{
+        "name" : "笔记本",
+        "inOrOut":"in",
+        "soundConnectedType":[
+                              "音箱",
+                              "电视"
+                              ],
+        "videoConnectedType":[
+                              "大屏幕",
+                              "电视"
+                              ],
+        "imageName" : "notebook",
+        "isActual" : true,
+        "controlCMD" : ["slider"],
+        "minValue" : -50,
+        "maxValue" : 5
+    },
+    "电视":{
+        "name" : "电视",
+        "inOrOut":"out",
+        "soundConnectedType":[
+                              "麦克",
+                              "电脑",
+                              "笔记本",
+                              "DVD",
+                              "视频会议"
+                              ],
+        "videoConnectedType":[
+                              "摄像头",
+                              "电脑",
+                              "笔记本",
+                              "DVD",
+                              "视频会议"
+                              ],
+        "imageName" : "tv",
+        "isActual" : true,
+        "controlCMD" : ["oc", "slider", "channel"],
+        "minValue" : -50,
+        "maxValue" : 5
+    },
+    "DVD":{
+        "name" : "DVD",
+        "inOrOut":"in",
+        "soundConnectedType":[
+                              "音箱",
+                              "电视"
+                              ],
+        "videoConnectedType":[
+                              "大屏幕",
+                              "电视"
+                              ],
+        "imageName" : "dvd",
+        "isActual" : true,
+        "controlCMD" : ["slider"],
+        "minValue" : -50,
+        "maxValue" : 5
+    },
+    "视频会议":{
+        "name" : "视频会议",
+        "inOrOut":"in",
+        "soundConnectedType":[
+                              "音箱",
+                              "电视"
+                              ],
+        "videoConnectedType":[
+                              "大屏幕",
+                              "电视"
+                              ],
+        "imageName" : "videoMeetting",
+        "isActual" : true,
+        "controlCMD" : ["oc", "slider"],
+        "minValue" : -50,
+        "maxValue" : 5
+    }
+    
+}

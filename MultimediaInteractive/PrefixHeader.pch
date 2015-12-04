@@ -1,0 +1,60 @@
+//
+//  PrefixHeader.pch
+//  MultimediaInteractive
+//
+//  Created by 吴非凡 on 15/9/11.
+//  Copyright (c) 2015年 东方佳联. All rights reserved.
+//
+
+#ifndef MultimediaInteractive_PrefixHeader_pch
+#define MultimediaInteractive_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#pragma mark - 单例
+#define kSingleTon_M(classname) \
++ (instancetype)share##classname\
+{ \
+    static classname *share = nil; \
+    static dispatch_once_t onceToken; \
+    dispatch_once(&onceToken, ^{ \
+        share = [classname new]; \
+    }); \
+    return share; \
+}
+
+#define kSingleTon_H(classname) \
++ (instancetype)share##classname;
+
+
+
+#ifdef DEBUG
+#define kLog(...) NSLog(__VA_ARGS__)
+#else
+#define kLog(...)
+#endif
+
+
+
+
+
+#import "Const.h"
+#import "UIColor+Category.h"
+#import "NSString+ConvertDate.h"
+#import "UIViewController+PresentAlertController.h"
+
+#import "WFFProgressHud.h"
+#import "MJRefresh.h"
+#import "UIView+Animation.h"
+
+#import "User.h"
+#import "DeviceForUser.h"
+
+#import "DBHelper.h"
+#import "Common.h"
+#import "SocketManager.h"
+#import "OPManager.h"
+
+
+
+#endif

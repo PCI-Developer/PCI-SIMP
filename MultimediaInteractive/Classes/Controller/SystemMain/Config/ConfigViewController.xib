@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConfigViewController">
+            <connections>
+                <outlet property="areaConfigTableView" destination="eHj-12-sZ6" id="GnL-Pk-0HK"/>
+                <outlet property="detailOfConfigTableView" destination="Vj5-RU-cLa" id="fgD-vM-9iK"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" userLabel="MainView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kuc-bv-afg">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWV-1a-iqh">
+                            <rect key="frame" x="190" y="0.0" width="10" height="495"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="image" keyPath="backgroundColorFromUIImage" value="configSplitH"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qan-jV-7HW">
+                            <rect key="frame" x="0.0" y="495" width="600" height="10"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="10" id="6g5-yr-Kbx"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="image" keyPath="backgroundColorFromUIImage" value="configSplitV"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Qan-jV-7HW" firstAttribute="leading" secondItem="Kuc-bv-afg" secondAttribute="leading" id="P7w-Cn-jLM"/>
+                        <constraint firstAttribute="bottom" secondItem="Qan-jV-7HW" secondAttribute="bottom" constant="90" id="TSX-iy-Q4b"/>
+                        <constraint firstItem="nWV-1a-iqh" firstAttribute="top" secondItem="Kuc-bv-afg" secondAttribute="top" id="URl-NX-UmB"/>
+                        <constraint firstAttribute="trailing" secondItem="Qan-jV-7HW" secondAttribute="trailing" id="ztl-hk-PY0"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="image" keyPath="backgroundColorFromUIImage" value="bottomBg.png"/>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="TSX-iy-Q4b"/>
+                        </mask>
+                    </variation>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XjK-eH-SOr">
+                    <rect key="frame" x="32" y="525" width="110" height="35"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="110" id="L2i-tu-KXz"/>
+                        <constraint firstAttribute="height" constant="35" id="uog-iE-IUL"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="addForConfig">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="addForConfigHighlight">
+                        <color key="titleColor" white="0.58223684210526316" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="40"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="addButtonAction:" destination="-1" eventType="touchUpInside" id="rs9-Y5-F5g"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F5d-a1-F2N">
+                    <rect key="frame" x="174" y="525" width="110" height="35"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" backgroundImage="deleteForConfig">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="deleteForConfigHighlight.png">
+                        <color key="titleColor" white="0.58223684210000004" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="40"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="deleteButtonAction:" destination="-1" eventType="touchUpInside" id="AXj-wa-WWO"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qlf-JX-a6I">
+                    <rect key="frame" x="316" y="525" width="110" height="35"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" backgroundImage="saveForConfig">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="saveForConfigHighlight.png">
+                        <color key="titleColor" white="0.58223684210000004" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="40"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="saveButtonAction:" destination="-1" eventType="touchUpInside" id="CfS-xm-rq5"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vcM-Dj-Cec">
+                    <rect key="frame" x="426" y="525" width="32" height="35"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J2B-VP-Qsi">
+                    <rect key="frame" x="284" y="525" width="32" height="35"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hAp-uO-fTp">
+                    <rect key="frame" x="142" y="525" width="32" height="35"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M0X-bE-Cib">
+                    <rect key="frame" x="0.0" y="525" width="32" height="35"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="29" id="k1e-vL-RbY"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="k1e-vL-RbY"/>
+                        </mask>
+                    </variation>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXx-xb-brv">
+                    <rect key="frame" x="568" y="525" width="32" height="35"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AC5-SS-4oK">
+                    <rect key="frame" x="458" y="525" width="110" height="35"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" backgroundImage="applyForConfig">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="applyForConfigHighlight.png">
+                        <color key="titleColor" white="0.58223684210000004" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="40"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="applyButtonAction:" destination="-1" eventType="touchUpInside" id="yAu-QI-nGN"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eHj-12-sZ6">
+                    <rect key="frame" x="0.0" y="50" width="190" height="445"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="190" id="gRl-D6-KJ9"/>
+                    </constraints>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Tlq-Ww-RYT"/>
+                        <outlet property="delegate" destination="-1" id="Ujx-h1-ill"/>
+                    </connections>
+                </tableView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Vj5-RU-cLa">
+                    <rect key="frame" x="200" y="50" width="400" height="445"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="400" id="4Dc-Aw-KFn"/>
+                    </constraints>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="4Dc-Aw-KFn"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="KOx-ug-05z"/>
+                        <outlet property="delegate" destination="-1" id="ffG-cu-S7X"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" red="0.10935433201058198" green="0.10935433201058198" blue="0.10935433201058198" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="F5d-a1-F2N" firstAttribute="height" secondItem="hAp-uO-fTp" secondAttribute="height" id="0BL-oA-8rg"/>
+                <constraint firstItem="qlf-JX-a6I" firstAttribute="top" secondItem="J2B-VP-Qsi" secondAttribute="top" id="0my-zO-pe7"/>
+                <constraint firstItem="Kuc-bv-afg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="127-ja-hwT"/>
+                <constraint firstItem="eHj-12-sZ6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="178-CU-yjO"/>
+                <constraint firstItem="Vj5-RU-cLa" firstAttribute="height" secondItem="eHj-12-sZ6" secondAttribute="height" id="1gC-3k-Z2R"/>
+                <constraint firstItem="F5d-a1-F2N" firstAttribute="width" secondItem="XjK-eH-SOr" secondAttribute="width" id="2jN-Lq-WxP"/>
+                <constraint firstItem="J2B-VP-Qsi" firstAttribute="top" secondItem="F5d-a1-F2N" secondAttribute="top" id="2m1-fs-0Wv"/>
+                <constraint firstItem="Qan-jV-7HW" firstAttribute="top" secondItem="eHj-12-sZ6" secondAttribute="bottom" id="470-IG-5a4"/>
+                <constraint firstItem="Kuc-bv-afg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5Bu-4u-02m"/>
+                <constraint firstItem="AC5-SS-4oK" firstAttribute="height" secondItem="vcM-Dj-Cec" secondAttribute="height" id="5Jo-g6-oj3"/>
+                <constraint firstAttribute="trailing" secondItem="Vj5-RU-cLa" secondAttribute="trailing" id="5hW-gb-wMu"/>
+                <constraint firstItem="J2B-VP-Qsi" firstAttribute="width" secondItem="hAp-uO-fTp" secondAttribute="width" id="6Fs-Ro-Kzs"/>
+                <constraint firstItem="Vj5-RU-cLa" firstAttribute="leading" secondItem="eHj-12-sZ6" secondAttribute="trailing" constant="10" id="6b0-Dj-0Wf"/>
+                <constraint firstAttribute="bottom" secondItem="XjK-eH-SOr" secondAttribute="bottom" constant="40" id="78f-he-0qU"/>
+                <constraint firstItem="zXx-xb-brv" firstAttribute="top" secondItem="AC5-SS-4oK" secondAttribute="top" id="AQ1-18-rlG"/>
+                <constraint firstItem="AC5-SS-4oK" firstAttribute="leading" secondItem="vcM-Dj-Cec" secondAttribute="trailing" id="AmW-LH-3cn"/>
+                <constraint firstAttribute="trailing" secondItem="Kuc-bv-afg" secondAttribute="trailing" id="CP5-vx-U6h"/>
+                <constraint firstItem="hAp-uO-fTp" firstAttribute="top" secondItem="XjK-eH-SOr" secondAttribute="top" id="E3x-pG-NJx"/>
+                <constraint firstAttribute="trailing" secondItem="zXx-xb-brv" secondAttribute="trailing" id="Esm-wM-UNr"/>
+                <constraint firstItem="AC5-SS-4oK" firstAttribute="top" secondItem="vcM-Dj-Cec" secondAttribute="top" id="FjD-9l-qzy"/>
+                <constraint firstItem="vcM-Dj-Cec" firstAttribute="width" secondItem="J2B-VP-Qsi" secondAttribute="width" id="GZN-5M-Whs"/>
+                <constraint firstItem="vcM-Dj-Cec" firstAttribute="leading" secondItem="qlf-JX-a6I" secondAttribute="trailing" id="HIM-qU-NeJ"/>
+                <constraint firstItem="AC5-SS-4oK" firstAttribute="width" secondItem="qlf-JX-a6I" secondAttribute="width" id="IP2-Qy-Lii"/>
+                <constraint firstItem="hAp-uO-fTp" firstAttribute="width" secondItem="M0X-bE-Cib" secondAttribute="width" id="KO4-GZ-F9w"/>
+                <constraint firstItem="hAp-uO-fTp" firstAttribute="leading" secondItem="XjK-eH-SOr" secondAttribute="trailing" id="Mhu-qC-pKB"/>
+                <constraint firstItem="M0X-bE-Cib" firstAttribute="height" secondItem="XjK-eH-SOr" secondAttribute="height" id="QB8-gu-aOZ"/>
+                <constraint firstItem="XjK-eH-SOr" firstAttribute="top" secondItem="eHj-12-sZ6" secondAttribute="bottom" constant="30" id="SE3-1o-Ar8"/>
+                <constraint firstItem="Vj5-RU-cLa" firstAttribute="leading" secondItem="nWV-1a-iqh" secondAttribute="trailing" id="SLt-PY-ZfN"/>
+                <constraint firstItem="nWV-1a-iqh" firstAttribute="leading" secondItem="eHj-12-sZ6" secondAttribute="trailing" id="TH3-aL-LHv"/>
+                <constraint firstItem="vcM-Dj-Cec" firstAttribute="top" secondItem="qlf-JX-a6I" secondAttribute="top" id="TyV-T0-lDQ"/>
+                <constraint firstItem="zXx-xb-brv" firstAttribute="width" secondItem="vcM-Dj-Cec" secondAttribute="width" id="UHf-n1-HdO"/>
+                <constraint firstItem="XjK-eH-SOr" firstAttribute="leading" secondItem="M0X-bE-Cib" secondAttribute="trailing" id="XXc-Yr-Sms"/>
+                <constraint firstItem="nWV-1a-iqh" firstAttribute="top" secondItem="eHj-12-sZ6" secondAttribute="top" id="YLL-Lc-GCz"/>
+                <constraint firstItem="zXx-xb-brv" firstAttribute="height" secondItem="AC5-SS-4oK" secondAttribute="height" id="Yzl-Mo-N9Q"/>
+                <constraint firstItem="M0X-bE-Cib" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Zjk-IB-QJc"/>
+                <constraint firstItem="J2B-VP-Qsi" firstAttribute="leading" secondItem="F5d-a1-F2N" secondAttribute="trailing" id="bbf-l5-KBO"/>
+                <constraint firstItem="Vj5-RU-cLa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="dxB-Q9-F2b"/>
+                <constraint firstItem="F5d-a1-F2N" firstAttribute="top" secondItem="hAp-uO-fTp" secondAttribute="top" id="fId-Ib-wJs"/>
+                <constraint firstItem="Vj5-RU-cLa" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="2:3" id="fwl-lh-MCC"/>
+                <constraint firstItem="F5d-a1-F2N" firstAttribute="leading" secondItem="hAp-uO-fTp" secondAttribute="trailing" id="hEi-Ey-jPP"/>
+                <constraint firstItem="zXx-xb-brv" firstAttribute="leading" secondItem="AC5-SS-4oK" secondAttribute="trailing" id="hR0-rB-6ML"/>
+                <constraint firstItem="qlf-JX-a6I" firstAttribute="width" secondItem="F5d-a1-F2N" secondAttribute="width" id="hgJ-Ua-Ips"/>
+                <constraint firstItem="XjK-eH-SOr" firstAttribute="leading" secondItem="M0X-bE-Cib" secondAttribute="trailing" constant="8" id="ifZ-j5-Unn"/>
+                <constraint firstItem="qlf-JX-a6I" firstAttribute="height" secondItem="J2B-VP-Qsi" secondAttribute="height" id="joE-O1-LPL"/>
+                <constraint firstItem="nWV-1a-iqh" firstAttribute="bottom" secondItem="eHj-12-sZ6" secondAttribute="bottom" id="mgc-G9-9ub"/>
+                <constraint firstAttribute="bottom" secondItem="Kuc-bv-afg" secondAttribute="bottom" id="nAZ-1a-M0O"/>
+                <constraint firstItem="eHj-12-sZ6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="oa1-cg-A6n"/>
+                <constraint firstItem="hAp-uO-fTp" firstAttribute="height" secondItem="XjK-eH-SOr" secondAttribute="height" id="qR3-Ui-VjN"/>
+                <constraint firstItem="qlf-JX-a6I" firstAttribute="leading" secondItem="J2B-VP-Qsi" secondAttribute="trailing" id="qbu-dP-ZEp"/>
+                <constraint firstItem="vcM-Dj-Cec" firstAttribute="height" secondItem="qlf-JX-a6I" secondAttribute="height" id="reI-SZ-WWG"/>
+                <constraint firstItem="AC5-SS-4oK" firstAttribute="width" secondItem="vcM-Dj-Cec" secondAttribute="width" id="uEp-8B-oXH"/>
+                <constraint firstItem="Vj5-RU-cLa" firstAttribute="top" secondItem="eHj-12-sZ6" secondAttribute="top" id="unr-9X-KcR"/>
+                <constraint firstItem="J2B-VP-Qsi" firstAttribute="height" secondItem="F5d-a1-F2N" secondAttribute="height" id="vbR-C9-qc7"/>
+                <constraint firstItem="M0X-bE-Cib" firstAttribute="top" secondItem="XjK-eH-SOr" secondAttribute="top" id="yfc-KJ-JLL"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="YLL-Lc-GCz"/>
+                    <exclude reference="dxB-Q9-F2b"/>
+                    <exclude reference="fwl-lh-MCC"/>
+                    <exclude reference="ifZ-j5-Unn"/>
+                    <exclude reference="uEp-8B-oXH"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+    <resources>
+        <image name="addForConfig" width="110" height="35"/>
+        <image name="addForConfigHighlight" width="110" height="35"/>
+        <image name="applyForConfig" width="110" height="35"/>
+        <image name="applyForConfigHighlight.png" width="110" height="35"/>
+        <image name="bottomBg.png" width="3" height="3"/>
+        <image name="configSplitH" width="17" height="4"/>
+        <image name="configSplitV" width="2" height="17"/>
+        <image name="deleteForConfig" width="110" height="35"/>
+        <image name="deleteForConfigHighlight.png" width="110" height="35"/>
+        <image name="saveForConfig" width="110" height="35"/>
+        <image name="saveForConfigHighlight.png" width="110" height="35"/>
+    </resources>
+</document>

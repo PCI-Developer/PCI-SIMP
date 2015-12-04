@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CameraFollowConfigView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LHS-cB-foI">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="image" keyPath="backgroundColorFromUIImage" value="controlBg.png"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBN-OB-iwl" userLabel="titleView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Zf-OM-AvQ" customClass="WFFDropdownList">
+                            <rect key="frame" x="175" y="57" width="250" height="36"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="2Mu-8m-ssy"/>
+                                <constraint firstAttribute="width" constant="250" id="Gbp-Wo-Rzt"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="image" keyPath="listCellBackgroundImage" value="dropdownListCellBg.png"/>
+                                <userDefinedRuntimeAttribute type="image" keyPath="listCellBackgroundImageSelected" value="dropdownListCellBgSelected.png"/>
+                                <userDefinedRuntimeAttribute type="image" keyPath="backgroundImageSelected" value="dropdownListBg_Selected.png"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="maxCountForShow">
+                                    <integer key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="image" keyPath="rightImage" value="dropdownRightImage.png"/>
+                                <userDefinedRuntimeAttribute type="image" keyPath="rightImageSelected" value="dropdownRightImageClick.png"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="tableTextColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="6Zf-OM-AvQ" firstAttribute="centerY" secondItem="KBN-OB-iwl" secondAttribute="centerY" id="FWZ-3V-tBi"/>
+                        <constraint firstItem="6Zf-OM-AvQ" firstAttribute="centerX" secondItem="KBN-OB-iwl" secondAttribute="centerX" id="lsT-2C-Era"/>
+                        <constraint firstAttribute="height" constant="150" id="tz1-Yg-CTe"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="image" keyPath="backgroundColorFromUIImage" value="controlBg.png"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="infoSplit" translatesAutoresizingMaskIntoConstraints="NO" id="wnQ-Fk-jPy">
+                    <rect key="frame" x="0.0" y="150" width="600" height="23"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="23" id="90c-pG-jhZ"/>
+                        <constraint firstAttribute="width" constant="240" id="Vtj-YQ-FNE"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Vtj-YQ-FNE"/>
+                        </mask>
+                    </variation>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BKx-kf-wwQ" userLabel="OrientationButtonsView">
+                    <rect key="frame" x="175" y="201" width="250" height="250"/>
+                    <subviews>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Pq-bI-uwN" userLabel="下">
+                            <rect key="frame" x="100" y="122" width="50" height="120"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="120" id="N11-t0-iL1"/>
+                                <constraint firstAttribute="width" constant="50" id="peX-SL-JSK"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="down">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled" backgroundImage="down.png"/>
+                            <state key="highlighted" backgroundImage="downHighlight.png"/>
+                            <connections>
+                                <action selector="orientationTouchDown:" destination="iN0-l3-epB" eventType="touchDown" id="Tjn-qo-bfw"/>
+                                <action selector="orientationTouchUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="5Rj-Fr-yb1"/>
+                                <action selector="orientationTouchUp:" destination="iN0-l3-epB" eventType="touchUpOutside" id="9V3-Ng-Vd0"/>
+                                <action selector="orientationTouchUp:" destination="iN0-l3-epB" eventType="touchCancel" id="Cjw-AF-qBm"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k9C-tH-g00" userLabel="右">
+                            <rect key="frame" x="122" y="100" width="120" height="50"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="120" id="WdV-Vr-37B"/>
+                                <constraint firstAttribute="height" constant="50" id="cAI-QF-Ww8"/>
+                                <constraint firstAttribute="height" constant="35" id="osy-qd-gVZ"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="left">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled" backgroundImage="left.png"/>
+                            <state key="highlighted" backgroundImage="leftHighlight"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="osy-qd-gVZ"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="orientationTouchDown:" destination="iN0-l3-epB" eventType="touchDown" id="Fff-YG-pqK"/>
+                                <action selector="orientationTouchUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="b0Q-Gg-6rh"/>
+                                <action selector="orientationTouchUp:" destination="iN0-l3-epB" eventType="touchUpOutside" id="egJ-a2-ism"/>
+                                <action selector="orientationTouchUp:" destination="iN0-l3-epB" eventType="touchCancel" id="equ-Rx-EYV"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rl6-tN-xkf" userLabel="上">
+                            <rect key="frame" x="100" y="8" width="50" height="120"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="120" id="6rU-GR-YxS"/>
+                                <constraint firstAttribute="width" constant="50" id="x98-mu-DyY"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="up">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled" backgroundImage="up.png"/>
+                            <state key="highlighted" backgroundImage="upHighlight.png"/>
+                            <connections>
+                                <action selector="orientationTouchDown:" destination="iN0-l3-epB" eventType="touchDown" id="MPm-he-0iT"/>
+                                <action selector="orientationTouchUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="BPe-14-zwV"/>
+                                <action selector="orientationTouchUp:" destination="iN0-l3-epB" eventType="touchUpOutside" id="BmL-7P-avJ"/>
+                                <action selector="orientationTouchUp:" destination="iN0-l3-epB" eventType="touchCancel" id="Vm9-a2-WQc"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="js4-k1-IpM" userLabel="左">
+                            <rect key="frame" x="8" y="100" width="120" height="50"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="js4-k1-IpM" secondAttribute="height" multiplier="16:35" id="HyO-N9-O5C"/>
+                                <constraint firstAttribute="width" constant="120" id="XjS-Rc-pbg"/>
+                                <constraint firstAttribute="width" secondItem="js4-k1-IpM" secondAttribute="height" id="n4F-k8-3LR"/>
+                                <constraint firstAttribute="height" constant="50" id="nmC-Ny-LKp"/>
+                                <constraint firstAttribute="height" constant="35" id="rz0-o3-25E"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="right">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled" backgroundImage="right.png"/>
+                            <state key="highlighted" backgroundImage="rightHighlight.png"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="HyO-N9-O5C"/>
+                                    <exclude reference="n4F-k8-3LR"/>
+                                    <exclude reference="rz0-o3-25E"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="orientationTouchDown:" destination="iN0-l3-epB" eventType="touchDown" id="6YR-qb-7ad"/>
+                                <action selector="orientationTouchUp:" destination="iN0-l3-epB" eventType="touchUpOutside" id="I2y-b9-ZLj"/>
+                                <action selector="orientationTouchUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="szi-Fr-TKN"/>
+                                <action selector="orientationTouchUp:" destination="iN0-l3-epB" eventType="touchCancel" id="wAn-q7-kTq"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="DQf-zI-uqq"/>
+                        <constraint firstItem="js4-k1-IpM" firstAttribute="leading" secondItem="BKx-kf-wwQ" secondAttribute="leading" constant="8" id="GkM-Ra-EP2"/>
+                        <constraint firstItem="7Pq-bI-uwN" firstAttribute="centerX" secondItem="BKx-kf-wwQ" secondAttribute="centerX" id="Obz-34-yl1"/>
+                        <constraint firstItem="js4-k1-IpM" firstAttribute="centerY" secondItem="BKx-kf-wwQ" secondAttribute="centerY" id="UQL-AV-ce4"/>
+                        <constraint firstItem="k9C-tH-g00" firstAttribute="centerY" secondItem="BKx-kf-wwQ" secondAttribute="centerY" id="UnB-dy-74v"/>
+                        <constraint firstAttribute="trailing" secondItem="js4-k1-IpM" secondAttribute="trailing" constant="80" id="YPo-uM-7TJ"/>
+                        <constraint firstItem="rl6-tN-xkf" firstAttribute="centerX" secondItem="BKx-kf-wwQ" secondAttribute="centerX" id="cnH-hx-IBS"/>
+                        <constraint firstAttribute="trailing" secondItem="k9C-tH-g00" secondAttribute="trailing" constant="8" id="j9b-bg-PSy"/>
+                        <constraint firstAttribute="bottom" secondItem="7Pq-bI-uwN" secondAttribute="bottom" constant="8" id="mst-LK-Hzg"/>
+                        <constraint firstAttribute="height" constant="250" id="qPz-Ve-eo6"/>
+                        <constraint firstItem="rl6-tN-xkf" firstAttribute="top" secondItem="BKx-kf-wwQ" secondAttribute="top" constant="8" id="wwk-9Z-G8d"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="YPo-uM-7TJ"/>
+                        </mask>
+                    </variation>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SXd-Lq-LcN">
+                    <rect key="frame" x="244.5" y="471" width="110" height="34"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="G8t-vK-iey"/>
+                        <constraint firstAttribute="width" constant="110" id="KjI-vE-jZD"/>
+                        <constraint firstAttribute="width" constant="189" id="vkC-Rm-zda"/>
+                        <constraint firstAttribute="height" constant="34" id="xF4-YP-clm"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="applyForConfig"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="G8t-vK-iey"/>
+                            <exclude reference="vkC-Rm-zda"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="applyButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="BZT-RC-YAF"/>
+                    </connections>
+                </button>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="wnQ-Fk-jPy" firstAttribute="trailing" secondItem="KBN-OB-iwl" secondAttribute="trailing" id="55j-2M-3yC"/>
+                <constraint firstItem="LHS-cB-foI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8b5-Tn-wb5"/>
+                <constraint firstItem="SXd-Lq-LcN" firstAttribute="centerY" secondItem="BKx-kf-wwQ" secondAttribute="centerY" id="EZl-mj-jUO"/>
+                <constraint firstItem="wnQ-Fk-jPy" firstAttribute="leading" secondItem="KBN-OB-iwl" secondAttribute="leading" id="I3Q-2R-rS7"/>
+                <constraint firstItem="LHS-cB-foI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="KAa-nB-WBV"/>
+                <constraint firstItem="KBN-OB-iwl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="MGD-4H-KbV"/>
+                <constraint firstItem="SXd-Lq-LcN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="OAn-OS-hpV"/>
+                <constraint firstAttribute="trailing" secondItem="KBN-OB-iwl" secondAttribute="trailing" id="TkJ-xt-4fK"/>
+                <constraint firstAttribute="trailing" secondItem="LHS-cB-foI" secondAttribute="trailing" id="TwC-4b-fM7"/>
+                <constraint firstAttribute="bottom" secondItem="SXd-Lq-LcN" secondAttribute="bottom" constant="50" id="X1P-cg-gwK"/>
+                <constraint firstItem="SXd-Lq-LcN" firstAttribute="top" secondItem="BKx-kf-wwQ" secondAttribute="bottom" constant="20" id="eMN-aa-ZRp"/>
+                <constraint firstItem="SXd-Lq-LcN" firstAttribute="top" secondItem="BKx-kf-wwQ" secondAttribute="bottom" constant="20" id="hd5-rf-jCJ"/>
+                <constraint firstItem="SXd-Lq-LcN" firstAttribute="top" secondItem="BKx-kf-wwQ" secondAttribute="bottom" constant="54" id="iHG-7g-Y5F"/>
+                <constraint firstAttribute="bottom" secondItem="LHS-cB-foI" secondAttribute="bottom" id="lCl-YJ-EsR"/>
+                <constraint firstItem="wnQ-Fk-jPy" firstAttribute="top" secondItem="KBN-OB-iwl" secondAttribute="bottom" id="qND-bt-nwM"/>
+                <constraint firstItem="KBN-OB-iwl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uxm-UC-HBT"/>
+                <constraint firstItem="BKx-kf-wwQ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wnR-df-3yM"/>
+                <constraint firstItem="BKx-kf-wwQ" firstAttribute="top" secondItem="wnQ-Fk-jPy" secondAttribute="bottom" constant="28" id="x77-Kt-rmj"/>
+                <constraint firstItem="SXd-Lq-LcN" firstAttribute="width" secondItem="BKx-kf-wwQ" secondAttribute="width" id="xBp-Pq-7eN"/>
+                <constraint firstItem="BKx-kf-wwQ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ymg-xs-rvm"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="ymg-xs-rvm"/>
+                    <exclude reference="EZl-mj-jUO"/>
+                    <exclude reference="X1P-cg-gwK"/>
+                    <exclude reference="hd5-rf-jCJ"/>
+                    <exclude reference="iHG-7g-Y5F"/>
+                    <exclude reference="xBp-Pq-7eN"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="cameraDropdownList" destination="6Zf-OM-AvQ" id="vFd-VQ-rsD"/>
+                <outlet property="orientationView" destination="BKx-kf-wwQ" id="esC-ta-ujV"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="applyForConfig" width="437" height="138"/>
+        <image name="controlBg.png" width="3" height="3"/>
+        <image name="down" width="100" height="231"/>
+        <image name="down.png" width="375" height="375"/>
+        <image name="downHighlight.png" width="375" height="375"/>
+        <image name="dropdownListBg_Selected.png" width="375" height="375"/>
+        <image name="dropdownListCellBg.png" width="1" height="48"/>
+        <image name="dropdownListCellBgSelected.png" width="375" height="375"/>
+        <image name="dropdownRightImage.png" width="1" height="48"/>
+        <image name="dropdownRightImageClick.png" width="1" height="48"/>
+        <image name="infoSplit" width="2" height="23"/>
+        <image name="left" width="231" height="100"/>
+        <image name="left.png" width="375" height="375"/>
+        <image name="leftHighlight" width="231" height="100"/>
+        <image name="right" width="231" height="100"/>
+        <image name="right.png" width="375" height="375"/>
+        <image name="rightHighlight.png" width="375" height="375"/>
+        <image name="up" width="100" height="231"/>
+        <image name="up.png" width="375" height="375"/>
+        <image name="upHighlight.png" width="375" height="375"/>
+    </resources>
+</document>
