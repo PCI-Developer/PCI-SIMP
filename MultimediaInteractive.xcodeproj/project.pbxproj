@@ -23,8 +23,6 @@
 		602C3B4E1BAFCCCC000C41DA /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3ADA1BAFCCCC000C41DA /* Common.m */; };
 		602C3B4F1BAFCCCC000C41DA /* DBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3ADC1BAFCCCC000C41DA /* DBHelper.m */; };
 		602C3B501BAFCCCC000C41DA /* SocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3ADE1BAFCCCC000C41DA /* SocketManager.m */; };
-		602C3B511BAFCCCC000C41DA /* PermissionCheckingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3AE31BAFCCCC000C41DA /* PermissionCheckingViewController.m */; };
-		602C3B521BAFCCCC000C41DA /* PermissionCheckingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 602C3AE41BAFCCCC000C41DA /* PermissionCheckingViewController.xib */; };
 		602C3B531BAFCCCC000C41DA /* ActualModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3AE91BAFCCCC000C41DA /* ActualModeViewController.m */; };
 		602C3B541BAFCCCC000C41DA /* ActualModeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 602C3AEA1BAFCCCC000C41DA /* ActualModeViewController.xib */; };
 		602C3B571BAFCCCC000C41DA /* NormalModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3AF21BAFCCCC000C41DA /* NormalModeViewController.m */; };
@@ -76,6 +74,12 @@
 		60AE841A1BD0DFC000F85304 /* UIColor+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AE84191BD0DFC000F85304 /* UIColor+Category.m */; };
 		60AE842C1BD0EEE900F85304 /* SHMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AE842A1BD0EEE900F85304 /* SHMenuCell.m */; };
 		60AE842D1BD0EEE900F85304 /* SHMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60AE842B1BD0EEE900F85304 /* SHMenuCell.xib */; };
+		60BEC2981C166D89001BEED5 /* PermissionCheckingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60BEC2961C166D89001BEED5 /* PermissionCheckingViewController.m */; };
+		60BEC2991C166D89001BEED5 /* PermissionCheckingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60BEC2971C166D89001BEED5 /* PermissionCheckingViewController.xib */; };
+		60BEC29E1C166EDC001BEED5 /* ProcessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60BEC29C1C166EDC001BEED5 /* ProcessViewController.m */; };
+		60BEC29F1C166EDC001BEED5 /* ProcessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60BEC29D1C166EDC001BEED5 /* ProcessViewController.xib */; };
+		60BEC2A11C1672E0001BEED5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60BEC2A01C1672E0001BEED5 /* Security.framework */; };
+		60BEC2A31C1672E6001BEED5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60BEC2A21C1672E6001BEED5 /* CFNetwork.framework */; };
 		60C3212B1C0E995F00A89DA5 /* WFFCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C3212A1C0E995F00A89DA5 /* WFFCircularSlider.m */; };
 		60C32BF61BE74F690036D208 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C32BF51BE74F690036D208 /* Reachability.m */; };
 		60C32BF81BE7570D0036D208 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60C32BF71BE7570D0036D208 /* SystemConfiguration.framework */; };
@@ -162,9 +166,6 @@
 		602C3ADC1BAFCCCC000C41DA /* DBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBHelper.m; sourceTree = "<group>"; };
 		602C3ADD1BAFCCCC000C41DA /* SocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketManager.h; sourceTree = "<group>"; };
 		602C3ADE1BAFCCCC000C41DA /* SocketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketManager.m; sourceTree = "<group>"; };
-		602C3AE21BAFCCCC000C41DA /* PermissionCheckingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissionCheckingViewController.h; sourceTree = "<group>"; };
-		602C3AE31BAFCCCC000C41DA /* PermissionCheckingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissionCheckingViewController.m; sourceTree = "<group>"; };
-		602C3AE41BAFCCCC000C41DA /* PermissionCheckingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PermissionCheckingViewController.xib; sourceTree = "<group>"; };
 		602C3AE81BAFCCCC000C41DA /* ActualModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualModeViewController.h; sourceTree = "<group>"; };
 		602C3AE91BAFCCCC000C41DA /* ActualModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActualModeViewController.m; sourceTree = "<group>"; };
 		602C3AEA1BAFCCCC000C41DA /* ActualModeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActualModeViewController.xib; sourceTree = "<group>"; };
@@ -250,6 +251,14 @@
 		60AE84291BD0EEE900F85304 /* SHMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMenuCell.h; sourceTree = "<group>"; };
 		60AE842A1BD0EEE900F85304 /* SHMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMenuCell.m; sourceTree = "<group>"; };
 		60AE842B1BD0EEE900F85304 /* SHMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHMenuCell.xib; sourceTree = "<group>"; };
+		60BEC2951C166D89001BEED5 /* PermissionCheckingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissionCheckingViewController.h; sourceTree = "<group>"; };
+		60BEC2961C166D89001BEED5 /* PermissionCheckingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissionCheckingViewController.m; sourceTree = "<group>"; };
+		60BEC2971C166D89001BEED5 /* PermissionCheckingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PermissionCheckingViewController.xib; sourceTree = "<group>"; };
+		60BEC29B1C166EDC001BEED5 /* ProcessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessViewController.h; sourceTree = "<group>"; };
+		60BEC29C1C166EDC001BEED5 /* ProcessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProcessViewController.m; sourceTree = "<group>"; };
+		60BEC29D1C166EDC001BEED5 /* ProcessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProcessViewController.xib; sourceTree = "<group>"; };
+		60BEC2A01C1672E0001BEED5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		60BEC2A21C1672E6001BEED5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		60C321291C0E995F00A89DA5 /* WFFCircularSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFFCircularSlider.h; sourceTree = "<group>"; };
 		60C3212A1C0E995F00A89DA5 /* WFFCircularSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFFCircularSlider.m; sourceTree = "<group>"; };
 		60C32BF41BE74F690036D208 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -329,6 +338,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60BEC2A31C1672E6001BEED5 /* CFNetwork.framework in Frameworks */,
+				60BEC2A11C1672E0001BEED5 /* Security.framework in Frameworks */,
 				60C32BF81BE7570D0036D208 /* SystemConfiguration.framework in Frameworks */,
 				602C3B801BAFCD10000C41DA /* libsqlite3.tbd in Frameworks */,
 			);
@@ -453,33 +464,16 @@
 		602C3ADF1BAFCCCC000C41DA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				602C3AE01BAFCCCC000C41DA /* Other */,
+				60BEC2941C166D89001BEED5 /* PermissionChecking */,
 				602C3AE61BAFCCCC000C41DA /* SystemMain */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		602C3AE01BAFCCCC000C41DA /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				602C3AE11BAFCCCC000C41DA /* PermissionChecking */,
-			);
-			path = Other;
-			sourceTree = "<group>";
-		};
-		602C3AE11BAFCCCC000C41DA /* PermissionChecking */ = {
-			isa = PBXGroup;
-			children = (
-				602C3AE21BAFCCCC000C41DA /* PermissionCheckingViewController.h */,
-				602C3AE31BAFCCCC000C41DA /* PermissionCheckingViewController.m */,
-				602C3AE41BAFCCCC000C41DA /* PermissionCheckingViewController.xib */,
-			);
-			path = PermissionChecking;
-			sourceTree = "<group>";
-		};
 		602C3AE61BAFCCCC000C41DA /* SystemMain */ = {
 			isa = PBXGroup;
 			children = (
+				60BEC29A1C166ECD001BEED5 /* Process */,
 				602C3AE71BAFCCCC000C41DA /* Actual */,
 				602C3AEB1BAFCCCC000C41DA /* Config */,
 				602C3AEC1BAFCCCC000C41DA /* LogAndInfomation */,
@@ -826,6 +820,8 @@
 		606314F11BE89220009FEEC8 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				60BEC2A21C1672E6001BEED5 /* CFNetwork.framework */,
+				60BEC2A01C1672E0001BEED5 /* Security.framework */,
 				60C32BF71BE7570D0036D208 /* SystemConfiguration.framework */,
 				602C3B7F1BAFCD10000C41DA /* libsqlite3.tbd */,
 			);
@@ -888,6 +884,26 @@
 				6045B2D01C03534900D22D01 /* DeviceInfoView */,
 			);
 			path = Actual;
+			sourceTree = "<group>";
+		};
+		60BEC2941C166D89001BEED5 /* PermissionChecking */ = {
+			isa = PBXGroup;
+			children = (
+				60BEC2951C166D89001BEED5 /* PermissionCheckingViewController.h */,
+				60BEC2961C166D89001BEED5 /* PermissionCheckingViewController.m */,
+				60BEC2971C166D89001BEED5 /* PermissionCheckingViewController.xib */,
+			);
+			path = PermissionChecking;
+			sourceTree = "<group>";
+		};
+		60BEC29A1C166ECD001BEED5 /* Process */ = {
+			isa = PBXGroup;
+			children = (
+				60BEC29B1C166EDC001BEED5 /* ProcessViewController.h */,
+				60BEC29C1C166EDC001BEED5 /* ProcessViewController.m */,
+				60BEC29D1C166EDC001BEED5 /* ProcessViewController.xib */,
+			);
+			path = Process;
 			sourceTree = "<group>";
 		};
 		60C32BF31BE74F690036D208 /* Reachability */ = {
@@ -1117,11 +1133,12 @@
 				60A3D5A31BCCCFAA00313F8F /* Home.png in Resources */,
 				602C3AB21BAFCC88000C41DA /* LaunchScreen.storyboard in Resources */,
 				6009C7061BF5EAAA00C8B183 /* hudLoading.png in Resources */,
+				60BEC2991C166D89001BEED5 /* PermissionCheckingViewController.xib in Resources */,
 				60A3E2261BD48DB900B4FFCA /* DeviceCollectionViewCell.xib in Resources */,
-				602C3B521BAFCCCC000C41DA /* PermissionCheckingViewController.xib in Resources */,
 				60A3D5A61BCCCFAA00313F8F /* menu_info.plist in Resources */,
 				602C3AAF1BAFCC88000C41DA /* Assets.xcassets in Resources */,
 				6009C7031BF5E97A00C8B183 /* hudError.png in Resources */,
+				60BEC29F1C166EDC001BEED5 /* ProcessViewController.xib in Resources */,
 				60AE842D1BD0EEE900F85304 /* SHMenuCell.xib in Resources */,
 				609B6FA61C04525B00B62D95 /* CameraFollowConfigView.xib in Resources */,
 				60E78C451BB4DC2C00EF6074 /* LogInfoViewController.xib in Resources */,
@@ -1184,7 +1201,6 @@
 				602C3B591BAFCCCC000C41DA /* SystemMainViewController.m in Sources */,
 				60E78C761BB4E3C300EF6074 /* MJRefreshFooter.m in Sources */,
 				602C3AA41BAFCC88000C41DA /* main.m in Sources */,
-				602C3B511BAFCCCC000C41DA /* PermissionCheckingViewController.m in Sources */,
 				60A3D5AA1BCCCFAA00313F8F /* SHStripeMenuExecuter.m in Sources */,
 				60E78C9B1BB4E7FA00EF6074 /* LogTableViewCell.m in Sources */,
 				60FAE64E1BBB744C0064ECB9 /* AreaConfig.m in Sources */,
@@ -1203,6 +1219,7 @@
 				60E78C851BB4E3C300EF6074 /* UIView+MJExtension.m in Sources */,
 				60E78C791BB4E3C300EF6074 /* MJRefreshAutoNormalFooter.m in Sources */,
 				60CC2F971BC79043004836D6 /* UIViewController+PresentAlertController.m in Sources */,
+				60BEC29E1C166EDC001BEED5 /* ProcessViewController.m in Sources */,
 				60CBC2E01BE9FC79001E5DFE /* FMResultSet.m in Sources */,
 				60FAE6511BBB74560064ECB9 /* DetailOfAreaConfig.m in Sources */,
 				602C3B761BAFCCCC000C41DA /* AsyncSocket.m in Sources */,
@@ -1224,6 +1241,7 @@
 				60A3D5AB1BCCCFAA00313F8F /* SHStripeMenuViewController.m in Sources */,
 				6089BB651BBA64B600BAAE4E /* ConfigViewController.m in Sources */,
 				602C3B741BAFCCCC000C41DA /* GCDAsyncSocket.m in Sources */,
+				60BEC2981C166D89001BEED5 /* PermissionCheckingViewController.m in Sources */,
 				602C3B681BAFCCCC000C41DA /* LogInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

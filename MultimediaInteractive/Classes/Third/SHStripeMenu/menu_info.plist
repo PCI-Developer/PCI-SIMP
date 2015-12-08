@@ -30,7 +30,7 @@
 		<key>selectedImage</key>
 		<string></string>
 		<key>gotoVC</key>
-		<string>ConfigViewController</string>
+		<string>ProcessViewController</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -50,6 +50,8 @@
 		<key>selectedImage</key>
 		<string></string>
 		<key>gotoVC</key>
+		<string></string>
+		<key>function</key>
 		<string>logout</string>
 	</dict>
 </array>

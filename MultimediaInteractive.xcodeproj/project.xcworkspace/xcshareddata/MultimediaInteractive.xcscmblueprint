@@ -1,16 +1,18 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B42D3F5A30770ED63DC980429C9874E1D638CED1",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "199D140A979FE3D1F89C980013BF784EE85D4CC0",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
     "60b5c825-4fb8-4975-a861-cdc06fd4b25b++260" : {
 
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "199D140A979FE3D1F89C980013BF784EE85D4CC0" : 0,
     "B42D3F5A30770ED63DC980429C9874E1D638CED1" : 0,
     "60b5c825-4fb8-4975-a861-cdc06fd4b25b++260" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "70ADA1AE-1181-4BB4-8F07-A2703BC72709",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "199D140A979FE3D1F89C980013BF784EE85D4CC0" : "PCI-SIMP\/",
     "B42D3F5A30770ED63DC980429C9874E1D638CED1" : "SIMS-PCI\/",
     "60b5c825-4fb8-4975-a861-cdc06fd4b25b++260" : "SIMS-PCI\/MultimediaInteractive\/Classes\/Third\/KVN\/"
   },
@@ -18,6 +20,11 @@
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MultimediaInteractive.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/PCI-Developer\/PCI-SIMP.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "199D140A979FE3D1F89C980013BF784EE85D4CC0"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/115.28.227.1",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",

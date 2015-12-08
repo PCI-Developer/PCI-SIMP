@@ -13,5 +13,5 @@
 @property (nonatomic, copy) NSString *image;
 @property (nonatomic, copy) NSString *gotoVC;
 @property (nonatomic, copy) NSString *selectedImage;
-
+@property (nonatomic, copy) NSString *function;
 @end

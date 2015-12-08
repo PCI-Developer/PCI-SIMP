@@ -34,17 +34,13 @@
 @property (nonatomic, strong) NSMutableDictionary *viewControllersDict;
 
 // 当前选中的菜单项
-@property (nonatomic, assign) NSInteger selectedIndex;
+@property (nonatomic, copy) NSString *selectedVC;
 
 // 上一次选中的菜单项
-@property (nonatomic, assign) NSInteger lastIndex;
+@property (nonatomic, copy) NSString *lastVC;
 // 当前展示的子vc的view
 @property (nonatomic, strong) UIView *currentView;
 
-// 标记子页面是否需要更新,当选中同一项时,会据此进行判断是否更新
-@property (nonatomic, strong) NSMutableArray *needsUpdateArray;
-
-@property (nonatomic, strong) NSArray *menuTitleArray;
 
 @property (nonatomic, strong) SHStripeMenuExecuter *menu;
 
@@ -59,6 +55,12 @@
 
 // 时间同步
 @property (nonatomic, strong) NSTimer *timer;
+
+/**
+ *  当选中同一项的时候,根据此字段决定是否重载界面
+ *  界面的加载是在selectedVC的setter中实现的.当切换区域的时候,手动调用setter方法进行重载.此时需要设置为YES;
+ */
+@property (nonatomic, copy) NSMutableDictionary *notNeedUpdateDict;
 @end
 
 #define kBatteryBgWidthOfFull (-10)
@@ -66,13 +68,6 @@
 
 @implementation SystemMainViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        self.needsUpdateArray = [NSMutableArray arrayWithObjects:@(YES), @(YES), @(YES), @(YES), nil];
-    }
-    return self;
-}
 
 #pragma mark - 懒加载
 - (NSMutableDictionary *)viewControllersDict
@@ -83,17 +78,11 @@
     return _viewControllersDict;
 }
 
-- (NSArray *)menuTitleArray
-{
-    if (!_menuTitleArray) {
-        _menuTitleArray = [NSArray arrayWithObjects:@"ActualModeViewController", @"LogInfoViewController", @"ConfigViewController", nil];
-    }
-    return _menuTitleArray;
-}
-
 #pragma mark - 生命周期函数
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.notNeedUpdateDict = [NSMutableDictionary dictionary];
     self.menu = [SHStripeMenuExecuter new];
     [self.menu setupToParentView:self withLineView:({
         UIImageView *imageView  = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"showMenu"]];
@@ -110,7 +99,7 @@
     // 服务器连接通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectedStateChanged:) name:NotificationDidConnectedStateChange object:nil];
     
-    self.selectedIndex = 0;
+    self.selectedVC = @"ActualModeViewController";
 
     // 网络变更通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wifiStatusChanged:) name:kReachabilityChangedNotification object:nil];
@@ -161,7 +150,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSLog(@"system dealloc");
+//    kLog(@"system dealloc");
 }
 
 
@@ -251,16 +240,14 @@
 #pragma mark - SHSTripeMenuExecuterDelegate
 - (void)stripeMenuItemSelected:(SHMenuItem *)item
 {
-    if ([item.gotoVC length] == 0) {
-        return;
-    }
-    if ([self.menuTitleArray containsObject:item.gotoVC]) { // gotoVC字段 如果为vc则跳转,否则则执行方法
-        NSInteger index = [self.menuTitleArray indexOfObject:item.gotoVC];
-        self.selectedIndex = index;
+    if ([item.gotoVC length] > 0) {
+        self.selectedVC = item.gotoVC;
     } else {
-        SEL sel = NSSelectorFromString(item.gotoVC);
-        // 改BuildSetting的ENABLE_STRICT_OBJC_MSGSEND字段为NO才可使用
-        objc_msgSend(self, sel);
+        if (item.function) {
+            SEL sel = NSSelectorFromString(item.function);
+            // 改BuildSetting的ENABLE_STRICT_OBJC_MSGSEND字段为NO才可使用
+            objc_msgSend(self, sel);
+        }
     }
 }
 
@@ -326,21 +313,23 @@
 }
 
 #pragma mark - 跳转到指定区域
+
 - (void)gotoAreaWithIndex:(NSInteger)index
 {
     [[Common shareCommon] changeAreaWithIndex:index];
     [self.viewControllersDict removeAllObjects];
-    // 将所有子页面标记为需要更新
-    for (int i = 0; i < self.needsUpdateArray.count; i++) {
-        self.needsUpdateArray[i] = @(YES);
-    }
+    
+    /**
+     *  标记为需要重载
+     */
+    [self.notNeedUpdateDict removeAllObjects];
     // 切换区域.移除所有
     for (UIViewController *vc in self.childViewControllers) {
         [vc removeFromParentViewController];
     }
     
     // 重新加载子页面
-    self.selectedIndex = _selectedIndex;
+    self.selectedVC = _selectedVC;
 }
 #pragma mark - 获取所有区域名称
 - (NSArray *)getAreasName
@@ -369,33 +358,31 @@
     }
 }
 
-- (void)setSelectedIndex:(NSInteger)selectedIndex
+- (void)setSelectedVC:(NSString *)selectedVC
 {
-    if (selectedIndex == 3) {
-        return;
-    }
-    if (_selectedIndex == selectedIndex) {
-        if ([self.needsUpdateArray[selectedIndex] boolValue]) { // 对应下标是否需要更新
-            self.needsUpdateArray[selectedIndex] = @(NO);
-        } else {
+    if (_selectedVC == selectedVC) {
+        if (self.notNeedUpdateDict[selectedVC] && [self.notNeedUpdateDict[selectedVC] boolValue]) {
             return;
+        } else { // 需要重载,重载后就不需要,因此设置为YES
+            self.notNeedUpdateDict[selectedVC] = @(YES);
         }
     }
-    _lastIndex = _selectedIndex;
-    _selectedIndex = selectedIndex;
     
-    UIViewController *vc = self.viewControllersDict[@(selectedIndex)];
+    self.lastVC = _selectedVC;
+    _selectedVC = selectedVC;
+    
+    
+    UIViewController *vc = self.viewControllersDict[selectedVC];
     
     // 类工厂创建vc
     if (!vc) {
-        vc = [((UIViewController *)[NSClassFromString(self.menuTitleArray[_selectedIndex]) alloc]) initWithNibName:self.menuTitleArray[_selectedIndex] bundle:nil];
-//        [self addChildViewController:vc];//加进去后,更改区域时也必须删掉,否则随着区域切换次数的增加,内存会无穷增加.因此直接略去
-        [self.viewControllersDict setObject:vc forKey:@(selectedIndex)];
+        vc = [((UIViewController *)[NSClassFromString(_selectedVC) alloc]) initWithNibName:_selectedVC bundle:nil];
+        //        [self addChildViewController:vc];//加进去后,更改区域时也必须删掉,否则随着区域切换次数的增加,内存会无穷增加.因此直接略去
+        [self.viewControllersDict setObject:vc forKey:_selectedVC];
         vc.view.frame = _contentView.bounds;
     }
     
     self.currentView = vc.view;
 }
-
 
 @end
