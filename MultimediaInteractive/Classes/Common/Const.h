@@ -14,7 +14,6 @@ static NSString *ViewpointTypeLeft = @"左";
 static NSString *ViewpointTypeRight = @"右";
 
 
-
 typedef enum {
     DataListTypeArea,
     DataListTypeDevice
@@ -111,12 +110,14 @@ typedef enum {
 #define kProtocolCMDFromServerForDeviceList @"UEQPLIST"
 #define kProtocolCMDFromServerForLogin @"REOPERATOR"
 #define kProtocolCMDFromServerForCameraFollow @"RSWCAMFLOW"
+#define kProtocolCMDFromServerForXJList @"XJLIST"
 
 #define kProtocolCMDByControlDevice @"EQPCTRl"
 #define kProtocolCMDByCameraFollow @"SWCAMFLOW"
 #define kProtocolGetAreaList @"ASKAREA"
 #define kProtocolGetDeviceList @"ASKUEQPLIST"
 #define kProtocolLogin @"ASKOPERATOR"
+#define kProtocolGetXJList @"ASKXJLIST"
 
 #define kProtocolControlDeviceCMDOfOpen @"Open"
 #define kProtocolControlDeviceCMDOfClose @"Close"
@@ -151,3 +152,7 @@ typedef enum {
 #define kDocumentFilePath (NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject)
 #define kActualImageFolder [kDocumentFilePath stringByAppendingPathComponent:@"Actual"]
 #define kActualImageFilePathWithAreaName(areaname, viewpointType) [kActualImageFolder stringByAppendingPathComponent:[NSString stringWithFormat:@"actualImage_%@_%@.png", (areaname), (viewpointType)]]
+
+#define kLocalUserKey @"localUser"
+
+#define kNotificationWillEnterForeground @"applicationWillEnterForeground"

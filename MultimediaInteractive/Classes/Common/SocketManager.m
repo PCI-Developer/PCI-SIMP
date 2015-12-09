@@ -177,6 +177,19 @@ kSingleTon_M(SocketManager)
     //    if ([protocolString containsString:kProtocolNetLink]) {
     serverTimerLastHeartHit = kHeartHitTimeOut;
     //    }
+    
+    if ([protocolString containsString:kProtocolCMDFromServerForXJList]) {
+        NSInteger cmdNum = [[self getItemWithProtocolString:protocolString index:2] integerValue];
+        RequestServerResponseBlock block = self.operationBlockDict[@(cmdNum)];
+        if (block) {
+            NSString *info = (NSString *)[self getItemWithProtocolString:protocolString index:4];
+            block(YES, cmdNum, info);
+        }
+        // 执行完移除
+        [self.operationBlockDict removeObjectForKey:@(cmdNum)];
+
+    }
+    
     if ([protocolString containsString:kProtocolCMDFromServerForCameraFollow]) {
         NSInteger cmdNum = [[self getItemWithProtocolString:protocolString index:2] integerValue];
         RequestServerResponseBlock block = self.operationBlockDict[@(cmdNum)];
@@ -410,6 +423,31 @@ kSingleTon_M(SocketManager)
 }
 
 
+/**
+ *  获取流程列表
+ *
+ *  @param resultBlock 回调block
+ */
+- (void)getXJListWithResultBlock:(RequestServerResponseBlock)resultBlock
+{
+    // 生成协议串,并转成要发送的data数据
+    NSString *protocolString = [self getProtocolStringWithCMD:kProtocolGetXJList info:nil];
+    
+    NSData *data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
+        if (resultBlock) {
+            resultBlock(NO, currentNum, nil);
+        }
+    } else {
+        // 发送成功后执行代理方法 didWriteData
+        [self.pcSocket writeData:data withTimeout:kTimeOut tag:currentNum];
+        // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
+        [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
+    }
+    currentNum++;
+}
+
 // 信息元 --  设备编号1,设备编号2,…&命令&命令参数[&控制地址]
 - (void)sendMessageWithDevicesID:(NSString *)devicesID
                      ControlType:(CMDType)controlType
@@ -491,7 +529,6 @@ kSingleTon_M(SocketManager)
         kLog(@"%@", protocolString);
         data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
     }
-    
     
     if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
         if (resultBlock) {

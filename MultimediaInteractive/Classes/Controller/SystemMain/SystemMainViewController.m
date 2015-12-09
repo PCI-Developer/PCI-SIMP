@@ -9,7 +9,6 @@
 #import "SystemMainViewController.h"
 #import "WFFDropdownList.h"
 #import "SHStripeMenuExecuter.h"
-#import "NormalModeViewController.h"
 #import "ActualModeViewController.h"
 #import "LogInfoViewController.h"
 #import "ConfigViewController.h"
@@ -58,9 +57,11 @@
 
 /**
  *  当选中同一项的时候,根据此字段决定是否重载界面
- *  界面的加载是在selectedVC的setter中实现的.当切换区域的时候,手动调用setter方法进行重载.此时需要设置为YES;
+ *  -- 界面的加载是在selectedVC的setter中实现的.
+ *  -- 当切换区域的时候,手动调用setter方法进行重载.此时需要设置为YES.;
  */
-@property (nonatomic, copy) NSMutableDictionary *notNeedUpdateDict;
+@property (nonatomic, assign) BOOL hasChangedArea;
+
 @end
 
 #define kBatteryBgWidthOfFull (-10)
@@ -82,7 +83,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.notNeedUpdateDict = [NSMutableDictionary dictionary];
+    self.hasChangedArea = NO;
     self.menu = [SHStripeMenuExecuter new];
     [self.menu setupToParentView:self withLineView:({
         UIImageView *imageView  = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"showMenu"]];
@@ -322,7 +323,7 @@
     /**
      *  标记为需要重载
      */
-    [self.notNeedUpdateDict removeAllObjects];
+    self.hasChangedArea = YES;
     // 切换区域.移除所有
     for (UIViewController *vc in self.childViewControllers) {
         [vc removeFromParentViewController];
@@ -360,17 +361,18 @@
 
 - (void)setSelectedVC:(NSString *)selectedVC
 {
+    // 同一个点击  或者  切换区域
     if (_selectedVC == selectedVC) {
-        if (self.notNeedUpdateDict[selectedVC] && [self.notNeedUpdateDict[selectedVC] boolValue]) {
+        // 同一个点击 不需要任何操作.
+        if (!self.hasChangedArea) {
             return;
-        } else { // 需要重载,重载后就不需要,因此设置为YES
-            self.notNeedUpdateDict[selectedVC] = @(YES);
         }
     }
     
+    self.hasChangedArea = NO;
+    
     self.lastVC = _selectedVC;
     _selectedVC = selectedVC;
-    
     
     UIViewController *vc = self.viewControllersDict[selectedVC];
     

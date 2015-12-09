@@ -13,7 +13,6 @@
 		6009C7031BF5E97A00C8B183 /* hudError.png in Resources */ = {isa = PBXBuildFile; fileRef = 6009C7011BF5E97A00C8B183 /* hudError.png */; };
 		6009C7041BF5E97A00C8B183 /* hudSuccess.png in Resources */ = {isa = PBXBuildFile; fileRef = 6009C7021BF5E97A00C8B183 /* hudSuccess.png */; };
 		6009C7061BF5EAAA00C8B183 /* hudLoading.png in Resources */ = {isa = PBXBuildFile; fileRef = 6009C7051BF5EAAA00C8B183 /* hudLoading.png */; };
-		601491221BD47DCD00A1C42E /* WFFVolumnSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 601491211BD47DCD00A1C42E /* WFFVolumnSlider.m */; };
 		602C3AA41BAFCC88000C41DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3AA31BAFCC88000C41DA /* main.m */; };
 		602C3AAF1BAFCC88000C41DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 602C3AAE1BAFCC88000C41DA /* Assets.xcassets */; };
 		602C3AB21BAFCC88000C41DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 602C3AB01BAFCC88000C41DA /* LaunchScreen.storyboard */; };
@@ -25,8 +24,6 @@
 		602C3B501BAFCCCC000C41DA /* SocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3ADE1BAFCCCC000C41DA /* SocketManager.m */; };
 		602C3B531BAFCCCC000C41DA /* ActualModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3AE91BAFCCCC000C41DA /* ActualModeViewController.m */; };
 		602C3B541BAFCCCC000C41DA /* ActualModeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 602C3AEA1BAFCCCC000C41DA /* ActualModeViewController.xib */; };
-		602C3B571BAFCCCC000C41DA /* NormalModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3AF21BAFCCCC000C41DA /* NormalModeViewController.m */; };
-		602C3B581BAFCCCC000C41DA /* NormalModeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 602C3AF31BAFCCCC000C41DA /* NormalModeViewController.xib */; };
 		602C3B591BAFCCCC000C41DA /* SystemMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3AF51BAFCCCC000C41DA /* SystemMainViewController.m */; };
 		602C3B5A1BAFCCCC000C41DA /* SystemMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 602C3AF61BAFCCCC000C41DA /* SystemMainViewController.xib */; };
 		602C3B5B1BAFCCCC000C41DA /* CALayer+BorderColorFromUIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3AFA1BAFCCCC000C41DA /* CALayer+BorderColorFromUIColor.m */; };
@@ -43,6 +40,7 @@
 		602C3B771BAFCCCC000C41DA /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3B371BAFCCCC000C41DA /* AsyncUdpSocket.m */; };
 		602C3B781BAFCCCC000C41DA /* 库的配置.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 602C3B381BAFCCCC000C41DA /* 库的配置.rtf */; };
 		602C3B801BAFCD10000C41DA /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 602C3B7F1BAFCD10000C41DA /* libsqlite3.tbd */; };
+		6031CBC81C16A707004EDBCC /* WFFCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 6031CBC71C16A707004EDBCC /* WFFCheckBox.m */; };
 		6045B2D31C03534900D22D01 /* DeviceInfoBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6045B2D21C03534900D22D01 /* DeviceInfoBaseView.m */; };
 		6045B2D81C0353AC00D22D01 /* DeviceInfoCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6045B2D71C0353AC00D22D01 /* DeviceInfoCameraView.xib */; };
 		6045B2DD1C035DFE00D22D01 /* DeviceInfoOCView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6045B2DC1C035DFE00D22D01 /* DeviceInfoOCView.xib */; };
@@ -74,6 +72,7 @@
 		60AE841A1BD0DFC000F85304 /* UIColor+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AE84191BD0DFC000F85304 /* UIColor+Category.m */; };
 		60AE842C1BD0EEE900F85304 /* SHMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AE842A1BD0EEE900F85304 /* SHMenuCell.m */; };
 		60AE842D1BD0EEE900F85304 /* SHMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60AE842B1BD0EEE900F85304 /* SHMenuCell.xib */; };
+		60B0B0D01C17D6FB0021044E /* Process.m in Sources */ = {isa = PBXBuildFile; fileRef = 60B0B0CF1C17D6FB0021044E /* Process.m */; };
 		60BEC2981C166D89001BEED5 /* PermissionCheckingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60BEC2961C166D89001BEED5 /* PermissionCheckingViewController.m */; };
 		60BEC2991C166D89001BEED5 /* PermissionCheckingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60BEC2971C166D89001BEED5 /* PermissionCheckingViewController.xib */; };
 		60BEC29E1C166EDC001BEED5 /* ProcessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60BEC29C1C166EDC001BEED5 /* ProcessViewController.m */; };
@@ -145,8 +144,6 @@
 		6009C7011BF5E97A00C8B183 /* hudError.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudError.png; sourceTree = "<group>"; };
 		6009C7021BF5E97A00C8B183 /* hudSuccess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudSuccess.png; sourceTree = "<group>"; };
 		6009C7051BF5EAAA00C8B183 /* hudLoading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudLoading.png; sourceTree = "<group>"; };
-		601491201BD47DCD00A1C42E /* WFFVolumnSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFFVolumnSlider.h; sourceTree = "<group>"; };
-		601491211BD47DCD00A1C42E /* WFFVolumnSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFFVolumnSlider.m; sourceTree = "<group>"; };
 		602C3A9F1BAFCC88000C41DA /* MultimediaInteractive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultimediaInteractive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		602C3AA31BAFCC88000C41DA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		602C3AAE1BAFCC88000C41DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -169,9 +166,6 @@
 		602C3AE81BAFCCCC000C41DA /* ActualModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualModeViewController.h; sourceTree = "<group>"; };
 		602C3AE91BAFCCCC000C41DA /* ActualModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActualModeViewController.m; sourceTree = "<group>"; };
 		602C3AEA1BAFCCCC000C41DA /* ActualModeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActualModeViewController.xib; sourceTree = "<group>"; };
-		602C3AF11BAFCCCC000C41DA /* NormalModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalModeViewController.h; sourceTree = "<group>"; };
-		602C3AF21BAFCCCC000C41DA /* NormalModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalModeViewController.m; sourceTree = "<group>"; };
-		602C3AF31BAFCCCC000C41DA /* NormalModeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NormalModeViewController.xib; sourceTree = "<group>"; };
 		602C3AF41BAFCCCC000C41DA /* SystemMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMainViewController.h; sourceTree = "<group>"; };
 		602C3AF51BAFCCCC000C41DA /* SystemMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemMainViewController.m; sourceTree = "<group>"; };
 		602C3AF61BAFCCCC000C41DA /* SystemMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SystemMainViewController.xib; sourceTree = "<group>"; };
@@ -201,6 +195,8 @@
 		602C3B381BAFCCCC000C41DA /* 库的配置.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "库的配置.rtf"; sourceTree = "<group>"; };
 		602C3B7E1BAFCCE3000C41DA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		602C3B7F1BAFCD10000C41DA /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		6031CBC61C16A707004EDBCC /* WFFCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFFCheckBox.h; sourceTree = "<group>"; };
+		6031CBC71C16A707004EDBCC /* WFFCheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFFCheckBox.m; sourceTree = "<group>"; };
 		6045B2D11C03534900D22D01 /* DeviceInfoBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfoBaseView.h; sourceTree = "<group>"; };
 		6045B2D21C03534900D22D01 /* DeviceInfoBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfoBaseView.m; sourceTree = "<group>"; };
 		6045B2D71C0353AC00D22D01 /* DeviceInfoCameraView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoCameraView.xib; sourceTree = "<group>"; };
@@ -251,6 +247,8 @@
 		60AE84291BD0EEE900F85304 /* SHMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMenuCell.h; sourceTree = "<group>"; };
 		60AE842A1BD0EEE900F85304 /* SHMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMenuCell.m; sourceTree = "<group>"; };
 		60AE842B1BD0EEE900F85304 /* SHMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHMenuCell.xib; sourceTree = "<group>"; };
+		60B0B0CE1C17D6FB0021044E /* Process.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Process.h; sourceTree = "<group>"; };
+		60B0B0CF1C17D6FB0021044E /* Process.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Process.m; sourceTree = "<group>"; };
 		60BEC2951C166D89001BEED5 /* PermissionCheckingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissionCheckingViewController.h; sourceTree = "<group>"; };
 		60BEC2961C166D89001BEED5 /* PermissionCheckingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissionCheckingViewController.m; sourceTree = "<group>"; };
 		60BEC2971C166D89001BEED5 /* PermissionCheckingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PermissionCheckingViewController.xib; sourceTree = "<group>"; };
@@ -477,7 +475,6 @@
 				602C3AE71BAFCCCC000C41DA /* Actual */,
 				602C3AEB1BAFCCCC000C41DA /* Config */,
 				602C3AEC1BAFCCCC000C41DA /* LogAndInfomation */,
-				602C3AED1BAFCCCC000C41DA /* Normal */,
 				602C3AF41BAFCCCC000C41DA /* SystemMainViewController.h */,
 				602C3AF51BAFCCCC000C41DA /* SystemMainViewController.m */,
 				602C3AF61BAFCCCC000C41DA /* SystemMainViewController.xib */,
@@ -518,16 +515,6 @@
 			path = LogAndInfomation;
 			sourceTree = "<group>";
 		};
-		602C3AED1BAFCCCC000C41DA /* Normal */ = {
-			isa = PBXGroup;
-			children = (
-				602C3AF11BAFCCCC000C41DA /* NormalModeViewController.h */,
-				602C3AF21BAFCCCC000C41DA /* NormalModeViewController.m */,
-				602C3AF31BAFCCCC000C41DA /* NormalModeViewController.xib */,
-			);
-			path = Normal;
-			sourceTree = "<group>";
-		};
 		602C3AF71BAFCCCC000C41DA /* Custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,12 +547,12 @@
 			children = (
 				60C321291C0E995F00A89DA5 /* WFFCircularSlider.h */,
 				60C3212A1C0E995F00A89DA5 /* WFFCircularSlider.m */,
+				6031CBC61C16A707004EDBCC /* WFFCheckBox.h */,
+				6031CBC71C16A707004EDBCC /* WFFCheckBox.m */,
 				602C3B021BAFCCCC000C41DA /* WFFDropdownList.h */,
 				602C3B031BAFCCCC000C41DA /* WFFDropdownList.m */,
 				602C3B041BAFCCCC000C41DA /* WFFFollowHandsView.h */,
 				602C3B051BAFCCCC000C41DA /* WFFFollowHandsView.m */,
-				601491201BD47DCD00A1C42E /* WFFVolumnSlider.h */,
-				601491211BD47DCD00A1C42E /* WFFVolumnSlider.m */,
 				60CBB6E31BE2F7CD00A4D471 /* PopMenu.h */,
 				60CBB6E41BE2F7CD00A4D471 /* PopMenu.m */,
 				6009C6F81BF5DC8000C8B183 /* WFFProgressHud.h */,
@@ -625,6 +612,8 @@
 			children = (
 				6077D7611BCB9A6F00DABD89 /* DetaiLayoutOfAreaByViewpointType.h */,
 				6077D7621BCB9A6F00DABD89 /* DetaiLayoutOfAreaByViewpointType.m */,
+				60B0B0CE1C17D6FB0021044E /* Process.h */,
+				60B0B0CF1C17D6FB0021044E /* Process.m */,
 			);
 			path = Actual;
 			sourceTree = "<group>";
@@ -1121,7 +1110,6 @@
 				602C3B691BAFCCCC000C41DA /* DeviceType.json in Resources */,
 				60A3D5AC1BCCCFAA00313F8F /* SHStripeMenuViewController.xib in Resources */,
 				60A3D5A41BCCCFAA00313F8F /* Mail-2.png in Resources */,
-				602C3B581BAFCCCC000C41DA /* NormalModeViewController.xib in Resources */,
 				6045B2DD1C035DFE00D22D01 /* DeviceInfoOCView.xib in Resources */,
 				609B6FA81C04559700B62D95 /* DeviceInfoMicView.xib in Resources */,
 				60A3D5A51BCCCFAA00313F8F /* Stat.png in Resources */,
@@ -1180,6 +1168,7 @@
 				602C3B641BAFCCCC000C41DA /* Area.m in Sources */,
 				60E78C7F1BB4E3C300EF6074 /* MJRefreshNormalHeader.m in Sources */,
 				60E78C831BB4E3C300EF6074 /* UIScrollView+MJExtension.m in Sources */,
+				60B0B0D01C17D6FB0021044E /* Process.m in Sources */,
 				6045B2D31C03534900D22D01 /* DeviceInfoBaseView.m in Sources */,
 				609B6F9E1C040DC600B62D95 /* UIView+AutoLayout.m in Sources */,
 				60E78C7A1BB4E3C300EF6074 /* MJRefreshAutoStateFooter.m in Sources */,
@@ -1188,6 +1177,7 @@
 				60C32BF61BE74F690036D208 /* Reachability.m in Sources */,
 				6077D75F1BCB585600DABD89 /* UIView+Animation.m in Sources */,
 				602C3B4E1BAFCCCC000C41DA /* Common.m in Sources */,
+				6031CBC81C16A707004EDBCC /* WFFCheckBox.m in Sources */,
 				602C3B4D1BAFCCCC000C41DA /* AppDelegate.m in Sources */,
 				602C3B611BAFCCCC000C41DA /* WFFFollowHandsView.m in Sources */,
 				60E78C781BB4E3C300EF6074 /* MJRefreshAutoGifFooter.m in Sources */,
@@ -1204,7 +1194,6 @@
 				60A3D5AA1BCCCFAA00313F8F /* SHStripeMenuExecuter.m in Sources */,
 				60E78C9B1BB4E7FA00EF6074 /* LogTableViewCell.m in Sources */,
 				60FAE64E1BBB744C0064ECB9 /* AreaConfig.m in Sources */,
-				602C3B571BAFCCCC000C41DA /* NormalModeViewController.m in Sources */,
 				60E78C731BB4E3C300EF6074 /* MJRefreshAutoFooter.m in Sources */,
 				602C3B5B1BAFCCCC000C41DA /* CALayer+BorderColorFromUIColor.m in Sources */,
 				60E78C821BB4E3C300EF6074 /* MJRefreshConst.m in Sources */,
@@ -1213,7 +1202,6 @@
 				60E78C7E1BB4E3C300EF6074 /* MJRefreshGifHeader.m in Sources */,
 				60E78C7D1BB4E3C300EF6074 /* MJRefreshBackStateFooter.m in Sources */,
 				60CBC2DE1BE9FC79001E5DFE /* FMDatabasePool.m in Sources */,
-				601491221BD47DCD00A1C42E /* WFFVolumnSlider.m in Sources */,
 				602C3B501BAFCCCC000C41DA /* SocketManager.m in Sources */,
 				609B6FA41C0451EF00B62D95 /* CameraFollowConfigView.m in Sources */,
 				60E78C851BB4E3C300EF6074 /* UIView+MJExtension.m in Sources */,

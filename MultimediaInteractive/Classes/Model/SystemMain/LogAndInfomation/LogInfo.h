@@ -10,7 +10,9 @@
 #import "PrefixHeader.pch"
 
 
-
+/**
+ *  重写了description方法
+ */
 @interface LogInfo : NSObject
 
 /**

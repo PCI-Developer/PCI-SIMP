@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 /**
  *  获取所有区域,登陆时获取.不会重复向服务器请求
  */
@@ -28,6 +29,12 @@
  *  当前登陆用户
  */
 #define kCurrentUser ([[Common shareCommon] currentUser])
+
+/**
+ *  历史登陆用户
+ */
+#define kLocalUser ([[Common shareCommon] localUser])
+
 /**
  *  当前区域实体设备
  */
@@ -75,10 +82,10 @@
 kSingleTon_H(Common)
 
 
-- (void)clearCacheData;
-
 - (User *)currentUser;
 - (NSString *)userName;
+
+- (User *)localUser;
 
 - (Area *)currentArea;
 - (NSString *)areaName;
@@ -129,6 +136,8 @@ kSingleTon_H(Common)
 #pragma mark - 登陆
 - (void)loginWithUserName:(NSString *)userName
                       pwd:(NSString *)pwd
+               remeberPwd:(BOOL)remeberPwd
+                autoLogin:(BOOL)autoLogin
          completionHandle:(void (^)(BOOL isSuccess, NSString *errorDescription))completionHandle;
 
 #pragma mark - 注销登陆
@@ -136,11 +145,12 @@ kSingleTon_H(Common)
 
 #pragma mark - 保存日志
 - (void)cacheLogWithModel:(LogInfo *)logInfo;
+
 #pragma mark - 获取此次启动后的日志
 - (NSDictionary *)logDict;
-
 
 #pragma mark - 清除当前区域所有设备的配置信息
 - (void)clearConfigOfAllDevice;
 
+- (void)clearCacheData;
 @end

@@ -8,10 +8,13 @@
 
 #import "PermissionCheckingViewController.h"
 #import "SystemMainViewController.h"
+#import "WFFCheckBox.h"
 @interface PermissionCheckingViewController ()<UITextFieldDelegate>
 {
     dispatch_source_t timer;
 }
+@property (weak, nonatomic) IBOutlet WFFCheckBox *remeberPwdCheckBox;
+@property (weak, nonatomic) IBOutlet WFFCheckBox *autoLoginCheckBox;
 @property (weak, nonatomic) IBOutlet UIButton *anonLoginButton;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 - (IBAction)anonLoginButtonAction:(UIButton *)sender;
@@ -22,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *pwdInputImageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintsWhileShowKeyboard;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintsWhileHideKeyboard;
+
+// 该界面刚进来并没有连接服务器,点击登陆才会开始连接服务器.连接到服务器后,需要做登陆操作.
 // 当收到通知的时候,如果连接上服务器了.根据该字段决定是否登陆
 @property (nonatomic, assign) BOOL needLoginAfterConnected;
 @end
@@ -31,19 +36,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChanged:) name:UIKeyboardDidChangeFrameNotification object:nil];
-    self.loginButton.layer.masksToBounds = YES;
-    self.anonLoginButton.layer.masksToBounds = YES;
+    
+    self.remeberPwdCheckBox.tintEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+    self.autoLoginCheckBox.tintEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    [self.userNameTextField becomeFirstResponder];
     
     self.needLoginAfterConnected = NO;
-    self.userNameTextField.text = nil;
-    self.pwdTextField.text = nil;
+    
+    // 如果上次登陆用户存在
+    if (kLocalUser) {
+        self.userNameTextField.text = kLocalUser.name;
+        self.remeberPwdCheckBox.selected = kLocalUser.remeberPwd;
+        self.autoLoginCheckBox.selected = kLocalUser.autoLogin;
+        if (kLocalUser.remeberPwd) {
+            self.pwdTextField.text = kLocalUser.pwd;
+        }
+        if (kLocalUser.autoLogin) {
+            // 自动登陆
+            [self loginButtonAction:self.loginButton];
+        }
+    } else {
+        self.remeberPwdCheckBox.selected = NO;
+        self.autoLoginCheckBox.selected = NO;
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectedStateChanged:) name:NotificationDidConnectedStateChange object:nil];
 }
@@ -54,7 +74,6 @@
     if (timer != NULL) {
         dispatch_source_cancel(timer);
     }
-    
 }
 
 - (void)dealloc
@@ -69,14 +88,12 @@
             [self loginButtonAction:nil];
         }
     }
-   
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - 键盘显示隐藏
 - (void)keyboardDidChanged:(NSNotification *)sender
@@ -126,7 +143,7 @@
 - (IBAction)anonLoginButtonAction:(UIButton *)sender {
     [Common shareCommon].isDemo = YES;
     __weak typeof(self) weakSelf = self;
-    [[Common shareCommon] loginWithUserName:self.userNameTextField.text pwd:self.pwdTextField.text completionHandle:^(BOOL isSuccess, NSString *errorDescription) {
+    [[Common shareCommon] loginWithUserName:self.userNameTextField.text pwd:self.pwdTextField.text remeberPwd:self.remeberPwdCheckBox.selected autoLogin:self.autoLoginCheckBox.selected completionHandle:^(BOOL isSuccess, NSString *errorDescription) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (isSuccess) {
                 SystemMainViewController *nextVC = [[SystemMainViewController alloc] initWithNibName:@"SystemMainViewController" bundle:nil];
@@ -149,6 +166,22 @@
     }
 }
 
+- (IBAction)remeberPwdCheckBoxValueChanged:(WFFCheckBox *)sender {
+    if (!sender.selected) {
+        if (self.autoLoginCheckBox.selected) {
+            self.autoLoginCheckBox.selected = NO;
+        }
+    }
+}
+
+- (IBAction)autoLoginCheckBoxValueChanged:(WFFCheckBox *)sender {
+    if (sender.selected) {
+        if (!self.remeberPwdCheckBox.selected) {
+            self.remeberPwdCheckBox.selected = YES;
+        }
+    }
+}
+
 - (IBAction)loginButtonAction:(UIButton *)sender {
     [self.view endEditing:YES];
     
@@ -156,7 +189,6 @@
     
     if (![self.userNameTextField.text length] || ![self.pwdTextField.text length]) {
         [WFFProgressHud showErrorStatus:@"用户名或密码不可为空"];
-//        [KVNProgress showErrorWithStatus:@"用户名或密码不可为空"];
         return;
     }
     
@@ -188,7 +220,7 @@
     });
     self.needLoginAfterConnected = NO;
     
-    [[Common shareCommon] loginWithUserName:self.userNameTextField.text pwd:self.pwdTextField.text completionHandle:^(BOOL isSuccess, NSString *errorDescription) {
+    [[Common shareCommon] loginWithUserName:self.userNameTextField.text pwd:self.pwdTextField.text remeberPwd:self.remeberPwdCheckBox.selected autoLogin:self.autoLoginCheckBox.selected completionHandle:^(BOOL isSuccess, NSString *errorDescription) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (isSuccess) {
                 SystemMainViewController *nextVC = [[SystemMainViewController alloc] initWithNibName:@"SystemMainViewController" bundle:nil];

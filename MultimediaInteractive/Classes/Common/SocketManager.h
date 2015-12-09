@@ -66,6 +66,13 @@ kSingleTon_H(SocketManager)
             resultBlock:(RequestServerResponseBlock)resultBlock;
 
 /**
+ *  获取流程列表
+ *
+ *  @param resultBlock 回调block
+ */
+- (void)getXJListWithResultBlock:(RequestServerResponseBlock)resultBlock;
+
+/**
  *  创建套接字监听
  */
 - (void) createTcpSocket;

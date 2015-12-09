@@ -83,7 +83,6 @@ kSingleTon_M(WFFProgressHud)
     if (self.isAutoDismiss) {
         [self dismiss];
     }
-    
 }
 
 + (void)showWithStatus:(NSString *)status onView:(UIView *)view

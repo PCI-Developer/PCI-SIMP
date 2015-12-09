@@ -14,7 +14,6 @@
 #import "WFFDropdownList.h"
 #import "Area.h"
 #import "DetaiLayoutOfAreaByViewpointType.h"
-#import "WFFVolumnSlider.h"
 #import "PopMenu.h"
 #import "LogInfo.h"
 #import "AutoSizeCollectionView.h"
@@ -153,19 +152,18 @@
     [self.commonDeviceCollectionView registerNib:[UINib nibWithNibName:@"DeviceCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"commonDeviceCell"];
     //
     self.imageViewTapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewTapGRAction:)];
-//    self.viewForExitOperationTapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewForExitOperationTapGRAction:)];
     [self.actualImageView addGestureRecognizer:self.imageViewTapGR];
-//    [self.viewForExitOperation addGestureRecognizer:self.viewForExitOperationTapGR];
     
     
     // 屏幕旋转通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDeviceOrientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
     
+    // 从后台返回的通知 (返回后,所有动画停止,必须手动layoutDevice.否则在演示版[不会收到设备更新通知]会出现空的设备图标)
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:kNotificationWillEnterForeground object:nil];
+    
     self.viewpointTypeArray = @[ViewpointTypeVertical, ViewpointTypeFront, ViewpointTypeBack, ViewpointTypeLeft, ViewpointTypeRight];
     
     self.allTypeOfDevicesArray = kAllTypeOfCurrentDevices;
-//    // 默认第一视角
-//    self.currentViewpointType = self.viewpointTypeArray[0];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -203,6 +201,18 @@
     [self.commonDeviceCollectionView invalidateIntrinsicContentSize];
     
 }
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - 从后台返回
+- (void)applicationWillEnterForeground:(NSNotification *)sender
+{
+    [self layoutDeviceByDB];
+}
+
 #pragma mark 屏幕旋转
 - (void)handleDeviceOrientationDidChange:(NSNotification *)notification
 {
@@ -1715,19 +1725,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
-    NSArray *viewpointTypes = [[DBHelper shareDBHelper] getAllViewpointTypes];
-    if ([viewpointTypes containsObject:self.lastViewpointType]) { // 如果上一次的已经配置好了,就切换到上一次.
-        self.currentViewpointType = _lastViewpointType;
-    } else {
-        
-        if ([viewpointTypes count] > 0) {
-            self.currentViewpointType = viewpointTypes.firstObject;
-        } else {
-            self.currentMode = ActualModeTypeNormal;
-//            [((SystemMainViewController *)self.parentViewController) goBack];
-        }
-    }
 }
+
 #pragma mark - 控件点击事件
 - (IBAction)saveButtonAction:(UIButton *)sender {
     // 保存场景(为默认场景)
@@ -1740,25 +1739,15 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 - (IBAction)cancelButtonAction:(UIButton *)sender {
     self.currentMode = ActualModeTypeNormal;
 }
+
 - (IBAction)cancelButtonActionForAddScreen:(UIButton *)sender {
     self.currentMode = ActualModeTypeNormal;
-//    NSArray *viewpointTypes = [[DBHelper shareDBHelper] getAllViewpointTypes];
-//    if ([viewpointTypes containsObject:self.lastViewpointType]) { // 如果上一次的已经配置好了,就切换到上一次.
-//        self.currentViewpointType = _lastViewpointType;
-//    } else {
-////        self.currentMode = ActualModeTypeNormal;
-//        if ([viewpointTypes count] > 0) {
-//            self.currentViewpointType = viewpointTypes.firstObject;
-//        } else {
-//            self.currentMode = ActualModeTypeNormal;
-////            [((SystemMainViewController *)self.parentViewController) goBack];
-//        }
-//    }
 }
 
 - (IBAction)putInOrderButtonAction:(UIButton *)sender {
     [self layoutInOrder];
 }
+
 - (IBAction)okButtonActionForAddScreen:(UIButton *)sender {
     
     
@@ -1806,7 +1795,6 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     } else { // > 0  -- 已经显示,刷新计时时间
         secondsToHiddenViewpointButtonView = 2.0f;
     }
-    
 }
 
 - (IBAction)addDeviceButtonAction:(UIButton *)sender {
@@ -1831,14 +1819,13 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     // 开启自动隐藏视角切换的定时器
     [self startTimerForAutoHideViewpointButtonsView];
 }
+
 - (IBAction)showQuickChooseButtonAction:(UIButton *)sender {
     // 操作界面隐藏(视角切换/更改布局/更改底图)
     if (self.operatioinView.hidden == NO) {
         [self.operatioinView setHidden:YES animated:YES];
     }
-    
 //    [self.deviceInfoTypeChoose setHidden:NO animated:YES];
-    
     
     if ([kCommonDevices count] > 0) {
         [self.commonDeviceBackgroundView viewWithTag:777].hidden = YES;
@@ -1848,7 +1835,6 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         [self.commonDeviceBackgroundView viewWithTag:777].hidden = NO;
     }
 }
-
 
 - (BOOL)checkPermissions
 {

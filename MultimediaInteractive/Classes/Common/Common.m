@@ -32,6 +32,11 @@
 
 @property (nonatomic, strong) NSMutableDictionary *logDict; // 日志信息 键:命令编号 值:LogInfo
 
+/**
+ *  上次登陆成功的用户
+ */
+@property (nonatomic, strong) User *localUser;
+
 
 @end
 
@@ -43,6 +48,9 @@ kSingleTon_M(Common)
 - (instancetype)init
 {
     if (self = [super init]) {
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:kLocalUserKey]) {
+            self.localUser = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:kLocalUserKey]];
+        }
         self.logDict = [NSMutableDictionary dictionary];
         self.hasLogin = NO;
         self.isDemo = NO;
@@ -50,9 +58,6 @@ kSingleTon_M(Common)
     }
     return self;
 }
-
-
-
 
 #pragma mark - 方法
 - (User *)currentUser
@@ -63,6 +68,11 @@ kSingleTon_M(Common)
 - (NSString *)userName
 {
     return _currentUser.name;
+}
+
+- (User *)localUser
+{
+    return _localUser;
 }
 
 - (Area *)currentArea
@@ -252,11 +262,19 @@ kSingleTon_M(Common)
 #pragma mark - 登陆
 - (void)loginWithUserName:(NSString *)userName
                       pwd:(NSString *)pwd
+               remeberPwd:(BOOL)remeberPwd
+                autoLogin:(BOOL)autoLogin
          completionHandle:(void (^)(BOOL isSuccess, NSString *errorDescription))completionHandle
 {
     __weak typeof(self) weakSelf = self;
     [self checkPermissionWithUserName:userName pwd:pwd completionHandle:^(BOOL isSucess) {
         if (isSucess) {
+            weakSelf.currentUser.remeberPwd = remeberPwd;
+            weakSelf.currentUser.autoLogin = autoLogin;
+            if (![Common shareCommon].isDemo) {
+                [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:weakSelf.currentUser] forKey:kLocalUserKey];
+            }
+            
             [weakSelf initalDataWithCompletionHandle:^(BOOL hasData, NSString *errorInfo) {
                 //            kLog(@"area %@  device %@", weakSelf.allAreasArray, weakSelf.allDevicesDict);
                 if (hasData) {
@@ -518,6 +536,7 @@ kSingleTon_M(Common)
                             }
                         }
                     }
+                    
                     if (weakSelf.allAreasArray) {
                         if (completionHandle) {
                             completionHandle(YES, nil);

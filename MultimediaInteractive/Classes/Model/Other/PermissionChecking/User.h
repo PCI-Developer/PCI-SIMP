@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
-
 @interface User : NSObject <NSCoding>
 
 @property (nonatomic, copy) NSString *ID;
@@ -21,4 +19,7 @@
 
 @property (nonatomic, assign) NSInteger level;
 
+@property (nonatomic, assign) BOOL remeberPwd;
+
+@property (nonatomic, assign) BOOL autoLogin;
 @end

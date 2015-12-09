@@ -57,11 +57,12 @@
         } else {// 不需要动画
             if ([imageView.animationImages count] > 0 && imageView.isAnimating) {
                 [imageView stopAnimating];
+                imageView.animationImages = nil;
             }
         }
     }
     
-    
+//    kLog(@"%@", imageName);
     return imageName;
 }
 

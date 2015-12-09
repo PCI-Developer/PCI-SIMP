@@ -17,7 +17,6 @@
 
 - (NSString *)description
 {
-    
     NSString *opString = @"";
     NSString *deviceName = nil;
     NSString *deviceType = nil;
