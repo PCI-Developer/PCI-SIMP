@@ -13,7 +13,7 @@
 /**
  *  利用十六进制值设置背景色
  */
-@property (nonatomic, copy) NSString *backgroundColorFromHexColor;
+@property (nonatomic, copy) IBInspectable NSString *backgroundColorFromHexColor;
 
 /**
  *  利用图片平铺设置背景色
@@ -55,4 +55,8 @@
 
 // 是否带转场动画的隐藏
 - (void)setHidden:(BOOL)hidden animated:(BOOL)animated;
+
+
+// 是否带转场动画的隐藏
+- (void)setHidden:(BOOL)hidden animated:(BOOL)animated completionHandle:(void (^)())completionHandle;
 @end

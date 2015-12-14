@@ -40,7 +40,7 @@ kSingleTon_H(SocketManager)
  *  @param arg         参数
  *  @param resultBlock 回调block
  */
-- (void)sendMessageWithDevicesID:(NSString *)devicesID
+- (void)ctrlDevicesWithDevicesID:(NSString *)devicesID
                      ControlType:(CMDType)controlType
                               arg:(NSString *)arg
                        resultBlock:(RequestServerResponseBlock)resultBlock;
@@ -71,6 +71,17 @@ kSingleTon_H(SocketManager)
  *  @param resultBlock 回调block
  */
 - (void)getXJListWithResultBlock:(RequestServerResponseBlock)resultBlock;
+
+/**
+ *  处理流程
+ *
+ *  @param processID   流程ID
+ *  @param isStart     开始或者停止
+ *  @param resultBlock 回调block
+ */
+- (void)doByProcessWithProcessID:(NSString *)processID
+                         isStart:(BOOL)isStart
+                     resultBlock:(RequestServerResponseBlock)resultBlock;
 
 /**
  *  创建套接字监听

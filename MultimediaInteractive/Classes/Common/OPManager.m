@@ -135,7 +135,7 @@ kSingleTon_M(OPManager)
         kSaveLog(logInfo);
         
         // 操作
-        [[SocketManager shareSocketManager] sendMessageWithDevicesID:ID ControlType:logInfo.cmdType arg:logInfo.value resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
+        [[SocketManager shareSocketManager] ctrlDevicesWithDevicesID:ID ControlType:logInfo.cmdType arg:logInfo.value resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
             // info - 设备编号,结果&设备编号,结果
             NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
             // 处理信息元
@@ -278,7 +278,7 @@ kSingleTon_M(OPManager)
         kCacheLog(logInfo);
         kSaveLog(logInfo);
         // 操作
-        [[SocketManager shareSocketManager] sendMessageWithDevicesID:ID ControlType:logInfo.cmdType arg:logInfo.value resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
+        [[SocketManager shareSocketManager] ctrlDevicesWithDevicesID:ID ControlType:logInfo.cmdType arg:logInfo.value resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
             // info - 设备编号,结果&设备编号,结果
             NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
             // 处理信息元
@@ -351,8 +351,6 @@ kSingleTon_M(OPManager)
                 resultBlock(isSuccess, cmdNumber, devicesArray, otherDevices);
             }
         }];
-//    });
-    
 }
 
 

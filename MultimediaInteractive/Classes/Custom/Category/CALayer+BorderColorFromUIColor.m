@@ -7,7 +7,7 @@
 //
 
 #import "CALayer+BorderColorFromUIColor.h"
-
+#import "UIColor+Category.h"
 @implementation CALayer (BorderColorFromUIColor)
 
 - (UIColor *)borderColorFromUIColor
@@ -19,5 +19,16 @@
 {
     self.borderColor = borderColorFromUIColor.CGColor;
 }
+
+- (NSString *)borderHexColorFromUIColor
+{
+    return nil;
+}
+
+- (void)setBorderHexColorFromUIColor:(NSString *)borderHexColorFromUIColor
+{
+    self.borderColor = [UIColor colorFromHexRGB:borderHexColorFromUIColor].CGColor;
+}
+
 
 @end

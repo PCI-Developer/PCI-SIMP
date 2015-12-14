@@ -13,6 +13,10 @@
 		6009C7031BF5E97A00C8B183 /* hudError.png in Resources */ = {isa = PBXBuildFile; fileRef = 6009C7011BF5E97A00C8B183 /* hudError.png */; };
 		6009C7041BF5E97A00C8B183 /* hudSuccess.png in Resources */ = {isa = PBXBuildFile; fileRef = 6009C7021BF5E97A00C8B183 /* hudSuccess.png */; };
 		6009C7061BF5EAAA00C8B183 /* hudLoading.png in Resources */ = {isa = PBXBuildFile; fileRef = 6009C7051BF5EAAA00C8B183 /* hudLoading.png */; };
+		6015FBA51C197376003A417E /* CameraFollowConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6015FBA31C197376003A417E /* CameraFollowConfigView.m */; };
+		6015FBA61C197376003A417E /* CameraFollowConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6015FBA41C197376003A417E /* CameraFollowConfigView.xib */; };
+		6015FBA91C197384003A417E /* ProcessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6015FBA81C197384003A417E /* ProcessView.m */; };
+		6015FBAB1C197390003A417E /* ProcessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6015FBAA1C197390003A417E /* ProcessView.xib */; };
 		602C3AA41BAFCC88000C41DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3AA31BAFCC88000C41DA /* main.m */; };
 		602C3AAF1BAFCC88000C41DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 602C3AAE1BAFCC88000C41DA /* Assets.xcassets */; };
 		602C3AB21BAFCC88000C41DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 602C3AB01BAFCC88000C41DA /* LaunchScreen.storyboard */; };
@@ -52,8 +56,6 @@
 		6089BB661BBA64B600BAAE4E /* ConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6089BB641BBA64B600BAAE4E /* ConfigViewController.xib */; };
 		608A33601BB536ED00E0AA57 /* OPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 608A335F1BB536ED00E0AA57 /* OPManager.m */; };
 		609B6F9E1C040DC600B62D95 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 609B6F9D1C040DC600B62D95 /* UIView+AutoLayout.m */; };
-		609B6FA41C0451EF00B62D95 /* CameraFollowConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 609B6FA31C0451EF00B62D95 /* CameraFollowConfigView.m */; };
-		609B6FA61C04525B00B62D95 /* CameraFollowConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 609B6FA51C04525B00B62D95 /* CameraFollowConfigView.xib */; };
 		609B6FA81C04559700B62D95 /* DeviceInfoMicView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 609B6FA71C04559700B62D95 /* DeviceInfoMicView.xib */; };
 		60A3D5A11BCCCFAA00313F8F /* Chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A3D58E1BCCCFAA00313F8F /* Chat.png */; };
 		60A3D5A21BCCCFAA00313F8F /* Graph.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A3D58F1BCCCFAA00313F8F /* Graph.png */; };
@@ -144,6 +146,12 @@
 		6009C7011BF5E97A00C8B183 /* hudError.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudError.png; sourceTree = "<group>"; };
 		6009C7021BF5E97A00C8B183 /* hudSuccess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudSuccess.png; sourceTree = "<group>"; };
 		6009C7051BF5EAAA00C8B183 /* hudLoading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudLoading.png; sourceTree = "<group>"; };
+		6015FBA21C197376003A417E /* CameraFollowConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFollowConfigView.h; sourceTree = "<group>"; };
+		6015FBA31C197376003A417E /* CameraFollowConfigView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraFollowConfigView.m; sourceTree = "<group>"; };
+		6015FBA41C197376003A417E /* CameraFollowConfigView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraFollowConfigView.xib; sourceTree = "<group>"; };
+		6015FBA71C197384003A417E /* ProcessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessView.h; sourceTree = "<group>"; };
+		6015FBA81C197384003A417E /* ProcessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProcessView.m; sourceTree = "<group>"; };
+		6015FBAA1C197390003A417E /* ProcessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProcessView.xib; sourceTree = "<group>"; };
 		602C3A9F1BAFCC88000C41DA /* MultimediaInteractive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultimediaInteractive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		602C3AA31BAFCC88000C41DA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		602C3AAE1BAFCC88000C41DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -216,9 +224,6 @@
 		608A335F1BB536ED00E0AA57 /* OPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPManager.m; sourceTree = "<group>"; };
 		609B6F9C1C040DC600B62D95 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
 		609B6F9D1C040DC600B62D95 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
-		609B6FA21C0451EF00B62D95 /* CameraFollowConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFollowConfigView.h; sourceTree = "<group>"; };
-		609B6FA31C0451EF00B62D95 /* CameraFollowConfigView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraFollowConfigView.m; sourceTree = "<group>"; };
-		609B6FA51C04525B00B62D95 /* CameraFollowConfigView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraFollowConfigView.xib; sourceTree = "<group>"; };
 		609B6FA71C04559700B62D95 /* DeviceInfoMicView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoMicView.xib; sourceTree = "<group>"; };
 		60A3D58E1BCCCFAA00313F8F /* Chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chat.png; sourceTree = "<group>"; };
 		60A3D58F1BCCCFAA00313F8F /* Graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Graph.png; sourceTree = "<group>"; };
@@ -865,11 +870,14 @@
 		60A3E22A1BD48E2900B4FFCA /* Actual */ = {
 			isa = PBXGroup;
 			children = (
+				6015FBA21C197376003A417E /* CameraFollowConfigView.h */,
+				6015FBA31C197376003A417E /* CameraFollowConfigView.m */,
+				6015FBA41C197376003A417E /* CameraFollowConfigView.xib */,
 				60A3E22B1BD48E3100B4FFCA /* AutoSizeCollectionView.h */,
 				60A3E22C1BD48E3100B4FFCA /* AutoSizeCollectionView.m */,
-				609B6FA21C0451EF00B62D95 /* CameraFollowConfigView.h */,
-				609B6FA31C0451EF00B62D95 /* CameraFollowConfigView.m */,
-				609B6FA51C04525B00B62D95 /* CameraFollowConfigView.xib */,
+				6015FBA71C197384003A417E /* ProcessView.h */,
+				6015FBA81C197384003A417E /* ProcessView.m */,
+				6015FBAA1C197390003A417E /* ProcessView.xib */,
 				6045B2D01C03534900D22D01 /* DeviceInfoView */,
 			);
 			path = Actual;
@@ -1115,6 +1123,7 @@
 				60A3D5A51BCCCFAA00313F8F /* Stat.png in Resources */,
 				6089BB661BBA64B600BAAE4E /* ConfigViewController.xib in Resources */,
 				60A3D5A21BCCCFAA00313F8F /* Graph.png in Resources */,
+				6015FBA61C197376003A417E /* CameraFollowConfigView.xib in Resources */,
 				6009C7041BF5E97A00C8B183 /* hudSuccess.png in Resources */,
 				602C3B781BAFCCCC000C41DA /* 库的配置.rtf in Resources */,
 				60CD4E431C03F95400CF51F9 /* DeviceInfoOCSliderView.xib in Resources */,
@@ -1126,9 +1135,9 @@
 				60A3D5A61BCCCFAA00313F8F /* menu_info.plist in Resources */,
 				602C3AAF1BAFCC88000C41DA /* Assets.xcassets in Resources */,
 				6009C7031BF5E97A00C8B183 /* hudError.png in Resources */,
+				6015FBAB1C197390003A417E /* ProcessView.xib in Resources */,
 				60BEC29F1C166EDC001BEED5 /* ProcessViewController.xib in Resources */,
 				60AE842D1BD0EEE900F85304 /* SHMenuCell.xib in Resources */,
-				609B6FA61C04525B00B62D95 /* CameraFollowConfigView.xib in Resources */,
 				60E78C451BB4DC2C00EF6074 /* LogInfoViewController.xib in Resources */,
 				602C3B541BAFCCCC000C41DA /* ActualModeViewController.xib in Resources */,
 				6009C6FC1BF5DCDF00C8B183 /* WFFProgressHud.xib in Resources */,
@@ -1162,6 +1171,7 @@
 			files = (
 				6009C6FA1BF5DC8000C8B183 /* WFFProgressHud.m in Sources */,
 				60E78C751BB4E3C300EF6074 /* MJRefreshComponent.m in Sources */,
+				6015FBA91C197384003A417E /* ProcessView.m in Sources */,
 				608A33601BB536ED00E0AA57 /* OPManager.m in Sources */,
 				60AE842C1BD0EEE900F85304 /* SHMenuCell.m in Sources */,
 				60E78C801BB4E3C300EF6074 /* MJRefreshStateHeader.m in Sources */,
@@ -1203,7 +1213,6 @@
 				60E78C7D1BB4E3C300EF6074 /* MJRefreshBackStateFooter.m in Sources */,
 				60CBC2DE1BE9FC79001E5DFE /* FMDatabasePool.m in Sources */,
 				602C3B501BAFCCCC000C41DA /* SocketManager.m in Sources */,
-				609B6FA41C0451EF00B62D95 /* CameraFollowConfigView.m in Sources */,
 				60E78C851BB4E3C300EF6074 /* UIView+MJExtension.m in Sources */,
 				60E78C791BB4E3C300EF6074 /* MJRefreshAutoNormalFooter.m in Sources */,
 				60CC2F971BC79043004836D6 /* UIViewController+PresentAlertController.m in Sources */,
@@ -1218,6 +1227,7 @@
 				60A3D5A71BCCCFAA00313F8F /* SHLineView.m in Sources */,
 				60CBC2DC1BE9FC79001E5DFE /* FMDatabase.m in Sources */,
 				60C3212B1C0E995F00A89DA5 /* WFFCircularSlider.m in Sources */,
+				6015FBA51C197376003A417E /* CameraFollowConfigView.m in Sources */,
 				602C3B531BAFCCCC000C41DA /* ActualModeViewController.m in Sources */,
 				602C3B601BAFCCCC000C41DA /* WFFDropdownList.m in Sources */,
 				60A3E22D1BD48E3100B4FFCA /* AutoSizeCollectionView.m in Sources */,

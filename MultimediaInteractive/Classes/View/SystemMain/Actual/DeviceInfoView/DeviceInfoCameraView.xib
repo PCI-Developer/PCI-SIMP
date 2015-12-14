@@ -155,6 +155,7 @@
                                     <state key="disabled" backgroundImage="up.png"/>
                                     <state key="highlighted" backgroundImage="upHighlight.png"/>
                                     <connections>
+                                        <action selector="fsdf:" destination="iN0-l3-epB" eventType="editingDidEndOnExit" id="sAE-Of-6dE"/>
                                         <action selector="orientationButtonTouchDown:" destination="iN0-l3-epB" eventType="touchDown" id="fbo-D4-Qgo"/>
                                         <action selector="orientationButtonTouchUp:" destination="iN0-l3-epB" eventType="touchUpOutside" id="2SH-e5-G7l"/>
                                         <action selector="orientationButtonTouchUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="Mjg-n1-eXx"/>

@@ -11,6 +11,7 @@
 #import "Area.h"
 #import "DeviceForUser.h"
 #import "LogInfo.h"
+#import "Process.h"
 @interface Common () {
 
 }
@@ -25,6 +26,8 @@
 
 @property (nonatomic, strong) NSDictionary *deviceTypeDict;
 
+@property (nonatomic, strong) NSMutableDictionary *allProcessDict;// 键:areaID 值:process模型数组
+
 @property (nonatomic, strong) NSMutableArray *commonDeviceArray; // 公共设备
 
 #pragma mark - 实景图
@@ -32,10 +35,6 @@
 
 @property (nonatomic, strong) NSMutableDictionary *logDict; // 日志信息 键:命令编号 值:LogInfo
 
-/**
- *  上次登陆成功的用户
- */
-@property (nonatomic, strong) User *localUser;
 
 
 @end
@@ -49,7 +48,7 @@ kSingleTon_M(Common)
 {
     if (self = [super init]) {
         if ([[NSUserDefaults standardUserDefaults] objectForKey:kLocalUserKey]) {
-            self.localUser = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:kLocalUserKey]];
+            self.currentUser = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:kLocalUserKey]];
         }
         self.logDict = [NSMutableDictionary dictionary];
         self.hasLogin = NO;
@@ -70,10 +69,6 @@ kSingleTon_M(Common)
     return _currentUser.name;
 }
 
-- (User *)localUser
-{
-    return _localUser;
-}
 
 - (Area *)currentArea
 {
@@ -119,6 +114,12 @@ kSingleTon_M(Common)
         }
     }
     return array;
+}
+
+#pragma mark - 获取当前区域的流程
+- (NSArray *)processByCurrentArea
+{
+    return self.allProcessDict[kCurrentArea.AreaID];
 }
 
 #pragma mark - 根据设备ID获取当前区域的实体设备
@@ -276,19 +277,10 @@ kSingleTon_M(Common)
             }
             
             [weakSelf initalDataWithCompletionHandle:^(BOOL hasData, NSString *errorInfo) {
-                //            kLog(@"area %@  device %@", weakSelf.allAreasArray, weakSelf.allDevicesDict);
                 if (hasData) {
-//                    if (weakSelf.allAreasArray.count > 0) {
-                        weakSelf.currentArea = weakSelf.allAreasArray.firstObject;
-//                    } else {
-//                        if (completionHandle) {
-//                            completionHandle(NO, @"服务器尚未配置设备数据或场地数据,请检查后重试!");
-//                        }
-//                        return ;
-//                    }
+                    weakSelf.currentArea = weakSelf.allAreasArray.firstObject;
                     completionHandle(YES, nil);
                 } else {
-                    
                     if (completionHandle) {
                         completionHandle(NO, errorInfo);
                     }
@@ -303,41 +295,73 @@ kSingleTon_M(Common)
     }];
 }
 
+- (void)loadProcessDataListWithCompletionHandle:(void (^)(BOOL, NSString *))completionHandle
+{
+    [[SocketManager shareSocketManager] getXJListWithResultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
+        if (isSuccess) {
+            if ([info length] > 0) {
+                NSArray *processArray = [info componentsSeparatedByString:@"&"];
+                int i = 0;
+                // 服务器有返回,则不为nil.
+                self.allProcessDict = [NSMutableDictionary dictionary];
+                for (NSString *processString in processArray) {
+                    if ([processString length] > 0) {
+                        Process *process = [Process new];
+                        process.AreaID = [processString componentsSeparatedByString:@","][0];
+                        process.processId = [processString componentsSeparatedByString:@","][1];
+                        process.processName = [processString componentsSeparatedByString:@","][2];
+                        process.processInfo = [processString componentsSeparatedByString:@","][3];
+                        if (self.allProcessDict[process.AreaID]) {
+                            [self.allProcessDict[process.AreaID] addObject:process];
+                        } else {
+                            NSMutableArray *array = [NSMutableArray arrayWithObject:process];
+                            [self.allProcessDict setObject:array forKey:process.AreaID];
+                        }
+                    } else {
+                        kLog(@"第%d条流程无效", i + 1);
+                    }
+                    i++;
+                }
+                if (completionHandle) {
+                    completionHandle(YES, nil);
+                }
+            } else {
+                if (completionHandle) {
+                    completionHandle(NO, @"服务器尚未配置流程!");
+                }
+            }
+        } else {
+            if (completionHandle) {
+                completionHandle(NO, @"服务器连接失败");
+            }
+        }
+    }];
+}
 
 - (void)checkPermissionWithUserName:(NSString *)userName
                                 pwd:(NSString *)pwd
                    completionHandle:(void(^)(BOOL isSucess))completionHandle
 {
-    // 演示模式,不用验证
-    if (_isDemo) {
-        User *user  = [User new];
-        user.name = @"演示用户";
-        user.ID = @"demo";
-        user.timestampByLogin = (long)[NSDate date];
-        self.currentUser = user;
-        [Common shareCommon].hasLogin = YES;
-        if (completionHandle) {
-            completionHandle(YES);
-        }
-        return;
-    }
     
     
-    User *user  = [User new];
-    user.name = userName;
-    user.timestampByLogin = (long)[NSDate date];
-    self.currentUser = user;
+    
     __weak typeof(self) weakSelf = self;
     [[SocketManager shareSocketManager] loginWithUserId:userName pwd:pwd resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
         NSInteger level = [[info componentsSeparatedByString:@"&"].lastObject integerValue];
         if (level > 0) {
-            weakSelf.currentUser.level = level;
+            User *user  = [User new];
+            user.name = userName;
+            user.pwd = pwd;
+            user.timestampByLogin = (long)[NSDate date];
+            user.level = level;
+            
+            weakSelf.currentUser = user;
             [Common shareCommon].hasLogin = YES;
             if (completionHandle) {
                 completionHandle(YES);
             }
         } else { // 验证失败
-            weakSelf.currentUser = nil;
+//            weakSelf.currentUser = nil;
             if (completionHandle) {
                 completionHandle(NO);
             }
@@ -456,7 +480,9 @@ kSingleTon_M(Common)
         commonAreaID = nil;
         // 5秒后获取不到数据,就认定网络连接故障
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kTimeOut * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (!weakSelf.allAreasArray || !weakSelf.allDevicesDict) {
+            // 判断当前是否登陆状态.
+            // 如果不加登陆状态的判断.当用户登陆后马上注销.此时数据均为空.就会提示错误.
+            if (weakSelf.hasLogin && (!weakSelf.allAreasArray || !weakSelf.allDevicesDict)) {
                 if (completionHandle) {
                     completionHandle(NO, errorDes ? errorDes : @"服务器连接超时!请重试!");
                 }

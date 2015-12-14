@@ -48,24 +48,37 @@
     
     self.needLoginAfterConnected = NO;
     
-    // 如果上次登陆用户存在
-    if (kLocalUser) {
-        self.userNameTextField.text = kLocalUser.name;
-        self.remeberPwdCheckBox.selected = kLocalUser.remeberPwd;
-        self.autoLoginCheckBox.selected = kLocalUser.autoLogin;
-        if (kLocalUser.remeberPwd) {
-            self.pwdTextField.text = kLocalUser.pwd;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectedStateChanged:) name:NotificationDidConnectedStateChange object:nil];
+    
+    // 如果历史登陆用户存在
+    if (kCurrentUser) {
+        self.userNameTextField.text = kCurrentUser.name;
+        self.remeberPwdCheckBox.selected = kCurrentUser.remeberPwd;
+        self.autoLoginCheckBox.selected = kCurrentUser.autoLogin;
+        if (kCurrentUser.remeberPwd) {
+            self.pwdTextField.text = kCurrentUser.pwd;
+        } else {
+            self.pwdTextField.text = nil;
         }
-        if (kLocalUser.autoLogin) {
-            // 自动登陆
-            [self loginButtonAction:self.loginButton];
-        }
+        
+        // 自动登陆
+        // 界面第一次启动时,需要自动登陆.
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            if (kCurrentUser.autoLogin) {
+                [self loginButtonAction:self.loginButton];
+            }
+        });
+            
+        
     } else {
+        self.userNameTextField.text = nil;
+        self.pwdTextField.text = nil;
         self.remeberPwdCheckBox.selected = NO;
         self.autoLoginCheckBox.selected = NO;
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectedStateChanged:) name:NotificationDidConnectedStateChange object:nil];
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -73,6 +86,7 @@
     [super viewDidDisappear:animated];
     if (timer != NULL) {
         dispatch_source_cancel(timer);
+        timer = NULL;
     }
 }
 
@@ -215,6 +229,7 @@
         
         return;
     }
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [WFFProgressHud showWithStatus:@"正在登陆..."];
     });

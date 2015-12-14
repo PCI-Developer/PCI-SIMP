@@ -376,7 +376,7 @@
     
     UIViewController *vc = self.viewControllersDict[selectedVC];
     
-    // 类工厂创建vc
+    // 创建vc
     if (!vc) {
         vc = [((UIViewController *)[NSClassFromString(_selectedVC) alloc]) initWithNibName:_selectedVC bundle:nil];
         //        [self addChildViewController:vc];//加进去后,更改区域时也必须删掉,否则随着区域切换次数的增加,内存会无穷增加.因此直接略去

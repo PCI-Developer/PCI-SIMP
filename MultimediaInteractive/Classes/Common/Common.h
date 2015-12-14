@@ -31,9 +31,10 @@
 #define kCurrentUser ([[Common shareCommon] currentUser])
 
 /**
- *  历史登陆用户
+ *  当前区域流程
  */
-#define kLocalUser ([[Common shareCommon] localUser])
+#define kProcessByCurrentArea ([[Common shareCommon] processByCurrentArea])
+
 
 /**
  *  当前区域实体设备
@@ -85,8 +86,6 @@ kSingleTon_H(Common)
 - (User *)currentUser;
 - (NSString *)userName;
 
-- (User *)localUser;
-
 - (Area *)currentArea;
 - (NSString *)areaName;
 
@@ -101,6 +100,8 @@ kSingleTon_H(Common)
 
 #pragma mark - 获取当前区域的所有实体设备
 - (NSArray *)getActualDevicesArray;
+
+- (NSArray *)processByCurrentArea;
 
 #pragma mark - 根据设备ID获取当前区域的实体设备
 - (DeviceForUser *)getActualDeviceWithID:(NSInteger)deviceID;
@@ -139,6 +140,8 @@ kSingleTon_H(Common)
                remeberPwd:(BOOL)remeberPwd
                 autoLogin:(BOOL)autoLogin
          completionHandle:(void (^)(BOOL isSuccess, NSString *errorDescription))completionHandle;
+
+- (void)loadProcessDataListWithCompletionHandle:(void(^)(BOOL isSuccess, NSString *errorDescription))completionHandle;
 
 #pragma mark - 注销登陆
 - (void)logout;

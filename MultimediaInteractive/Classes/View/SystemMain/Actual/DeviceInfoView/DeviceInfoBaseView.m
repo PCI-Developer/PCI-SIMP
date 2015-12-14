@@ -85,6 +85,10 @@
     }
 }
 
+- (IBAction)fsdf:(id)sender {
+    NSLog(@"fdsf");
+}
+
 - (IBAction)orientationButtonTouchUp:(UIButton *)sender
 {
     if ([self.delegate respondsToSelector:@selector(deviceInfoView:orientationButtonTouchUp:)]) {

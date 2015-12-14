@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ProcessView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无流程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tu8-Oz-iK5">
+                    <rect key="frame" x="260" y="288" width="80" height="24"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="流程管理" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDn-wF-DMW">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="FCH-hN-dNf"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="image" keyPath="backgroundColorFromUIImage" value="processTitleBg"/>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DIx-Ka-3yI">
+                    <rect key="frame" x="0.0" y="40" width="600" height="560"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pgE-O1-DSX">
+                            <rect key="frame" x="10" y="10" width="240" height="540"/>
+                            <animations/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="240" id="Xn4-rL-AVT"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="backgroundColorFromHexColor" value="1A1A1A"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="layer.borderHexColorFromUIColor" value="0A0A0A"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </tableView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="izF-Pq-4Cs" userLabel="processDescription">
+                            <rect key="frame" x="260" y="10" width="330" height="460"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXM-Zv-evL">
+                                    <rect key="frame" x="0.0" y="0.0" width="330" height="0.0"/>
+                                    <animations/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="168" id="lxu-Ld-V4K"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="lxu-Ld-V4K"/>
+                                        </mask>
+                                    </variation>
+                                </label>
+                            </subviews>
+                            <animations/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="XXM-Zv-evL" firstAttribute="leading" secondItem="izF-Pq-4Cs" secondAttribute="leading" id="3jz-s3-bjz"/>
+                                <constraint firstAttribute="trailing" secondItem="XXM-Zv-evL" secondAttribute="trailing" id="71E-aL-ctL"/>
+                                <constraint firstAttribute="bottom" secondItem="XXM-Zv-evL" secondAttribute="bottom" id="Km6-Il-KtV"/>
+                                <constraint firstItem="XXM-Zv-evL" firstAttribute="top" secondItem="izF-Pq-4Cs" secondAttribute="top" id="QBt-HJ-RHc"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="backgroundColorFromHexColor" value="1A1A1A"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="layer.borderHexColorFromUIColor" value="0A0A0A"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Km6-Il-KtV"/>
+                                </mask>
+                            </variation>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vK-Xl-paR">
+                            <rect key="frame" x="260" y="480" width="160" height="70"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="70" id="Ch0-cf-bhN"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="startProcessButton"/>
+                            <state key="highlighted" backgroundImage="startProcessButtonHighlight"/>
+                            <connections>
+                                <action selector="startProcessButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="MYq-YE-L9Z"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCA-ii-P2r">
+                            <rect key="frame" x="430" y="480" width="160" height="70"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="MJQ-hs-gnM"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="stopProcessButton"/>
+                            <state key="highlighted" backgroundImage="stopProcessButtonHighlight"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="MJQ-hs-gnM"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="stopProcessButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="nha-Re-qHn"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="izF-Pq-4Cs" firstAttribute="leading" secondItem="pgE-O1-DSX" secondAttribute="trailing" constant="10" id="0c6-CT-aGu"/>
+                        <constraint firstAttribute="bottom" secondItem="MCA-ii-P2r" secondAttribute="bottom" constant="10" id="1HX-Z0-mdb"/>
+                        <constraint firstItem="8vK-Xl-paR" firstAttribute="leading" secondItem="izF-Pq-4Cs" secondAttribute="leading" id="3sn-7t-LTl"/>
+                        <constraint firstItem="8vK-Xl-paR" firstAttribute="leading" secondItem="pgE-O1-DSX" secondAttribute="trailing" constant="10" id="72A-75-jLr"/>
+                        <constraint firstItem="MCA-ii-P2r" firstAttribute="trailing" secondItem="izF-Pq-4Cs" secondAttribute="trailing" id="92j-ir-oUt"/>
+                        <constraint firstItem="pgE-O1-DSX" firstAttribute="width" secondItem="DIx-Ka-3yI" secondAttribute="width" multiplier="1:2" id="IYA-rY-3qp"/>
+                        <constraint firstItem="MCA-ii-P2r" firstAttribute="bottom" secondItem="8vK-Xl-paR" secondAttribute="bottom" id="Lqw-D1-jH8"/>
+                        <constraint firstItem="pgE-O1-DSX" firstAttribute="leading" secondItem="DIx-Ka-3yI" secondAttribute="leading" constant="10" id="O18-MM-zMo"/>
+                        <constraint firstItem="MCA-ii-P2r" firstAttribute="top" secondItem="izF-Pq-4Cs" secondAttribute="bottom" constant="10" id="SLQ-Tm-BRj"/>
+                        <constraint firstItem="MCA-ii-P2r" firstAttribute="width" secondItem="8vK-Xl-paR" secondAttribute="width" id="Tr5-KM-O4m"/>
+                        <constraint firstAttribute="trailing" secondItem="MCA-ii-P2r" secondAttribute="trailing" constant="10" id="adh-BB-UUe"/>
+                        <constraint firstItem="pgE-O1-DSX" firstAttribute="top" secondItem="DIx-Ka-3yI" secondAttribute="top" constant="10" id="de8-Vr-5b0"/>
+                        <constraint firstAttribute="trailing" secondItem="izF-Pq-4Cs" secondAttribute="trailing" constant="10" id="di9-pm-DyM"/>
+                        <constraint firstAttribute="bottom" secondItem="8vK-Xl-paR" secondAttribute="bottom" constant="10" id="kfY-vG-nMj"/>
+                        <constraint firstItem="MCA-ii-P2r" firstAttribute="leading" secondItem="8vK-Xl-paR" secondAttribute="trailing" constant="10" id="n9J-WY-FDO"/>
+                        <constraint firstItem="MCA-ii-P2r" firstAttribute="leading" secondItem="8vK-Xl-paR" secondAttribute="trailing" constant="10" id="tum-0v-WER"/>
+                        <constraint firstItem="MCA-ii-P2r" firstAttribute="height" secondItem="8vK-Xl-paR" secondAttribute="height" id="u49-oQ-Sih"/>
+                        <constraint firstItem="izF-Pq-4Cs" firstAttribute="top" secondItem="DIx-Ka-3yI" secondAttribute="top" constant="10" id="xeI-tk-5CS"/>
+                        <constraint firstAttribute="bottom" secondItem="pgE-O1-DSX" secondAttribute="bottom" constant="10" id="zGS-gM-Igd"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="IYA-rY-3qp"/>
+                            <exclude reference="72A-75-jLr"/>
+                            <exclude reference="1HX-Z0-mdb"/>
+                            <exclude reference="adh-BB-UUe"/>
+                            <exclude reference="tum-0v-WER"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Tu8-Oz-iK5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3KO-Qf-MOa"/>
+                <constraint firstAttribute="trailing" secondItem="DIx-Ka-3yI" secondAttribute="trailing" id="CoD-q7-pqZ"/>
+                <constraint firstItem="DIx-Ka-3yI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="R3o-Jk-mIa"/>
+                <constraint firstItem="XDn-wF-DMW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TTs-uD-OP5"/>
+                <constraint firstItem="XDn-wF-DMW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="TgL-QI-lBD"/>
+                <constraint firstAttribute="trailing" secondItem="XDn-wF-DMW" secondAttribute="trailing" id="bJu-lW-INf"/>
+                <constraint firstItem="DIx-Ka-3yI" firstAttribute="top" secondItem="XDn-wF-DMW" secondAttribute="bottom" id="bRh-c3-D5u"/>
+                <constraint firstAttribute="bottom" secondItem="DIx-Ka-3yI" secondAttribute="bottom" id="rdB-6F-iXL"/>
+                <constraint firstItem="Tu8-Oz-iK5" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="zpA-zc-lVX"/>
+            </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="image" keyPath="backgroundColorFromUIImage" value="processMainBg"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="infoLabel" destination="Tu8-Oz-iK5" id="TST-TF-pOf"/>
+                <outlet property="mainView" destination="DIx-Ka-3yI" id="d8z-iW-xhp"/>
+                <outlet property="processDescriptionLabel" destination="XXM-Zv-evL" id="6Jz-SA-HbO"/>
+                <outlet property="startButton" destination="8vK-Xl-paR" id="gaU-oR-Ecn"/>
+                <outlet property="stopButton" destination="MCA-ii-P2r" id="GDe-If-0Vv"/>
+                <outlet property="tableView" destination="pgE-O1-DSX" id="NDg-pH-h8i"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="processMainBg" width="1" height="420"/>
+        <image name="processTitleBg" width="1" height="40"/>
+        <image name="startProcessButton" width="360" height="140"/>
+        <image name="startProcessButtonHighlight" width="180" height="70"/>
+        <image name="stopProcessButton" width="360" height="140"/>
+        <image name="stopProcessButtonHighlight" width="360" height="140"/>
+    </resources>
+</document>

@@ -24,8 +24,9 @@ typedef enum {
     SocketStateConnected
 }SocketState;
 
+// 控制设备相关命令字
 typedef enum {
-    CMDTypeSetValue = 0,
+    CMDTypeSetValue,
     CMDTypeOpen,
     CMDTypeClose,
     CMDTypeGet,
@@ -111,6 +112,8 @@ typedef enum {
 #define kProtocolCMDFromServerForLogin @"REOPERATOR"
 #define kProtocolCMDFromServerForCameraFollow @"RSWCAMFLOW"
 #define kProtocolCMDFromServerForXJList @"XJLIST"
+#define kProtocolCMDFromServerForDoProcess @"XJCTRLOK"
+
 
 #define kProtocolCMDByControlDevice @"EQPCTRl"
 #define kProtocolCMDByCameraFollow @"SWCAMFLOW"
@@ -118,6 +121,7 @@ typedef enum {
 #define kProtocolGetDeviceList @"ASKUEQPLIST"
 #define kProtocolLogin @"ASKOPERATOR"
 #define kProtocolGetXJList @"ASKXJLIST"
+#define kProtocolCMDByDoProcess @"XJCTRL"
 
 #define kProtocolControlDeviceCMDOfOpen @"Open"
 #define kProtocolControlDeviceCMDOfClose @"Close"

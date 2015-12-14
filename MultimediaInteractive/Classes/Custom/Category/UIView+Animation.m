@@ -92,6 +92,27 @@
         NSString *subType = hidden ? kCATransitionFromLeft : kCATransitionFromRight;
         [self addTransitionWithType:kRightViewTransitionType subType:subType duration:0.25 key:@"transition"];
     }
+    if (!hidden) { // 要显示
+        [self.superview bringSubviewToFront:self];
+    }
     [super setValue:@(hidden) forKey:@"hidden"];
 }
+
+// 是否带转场动画的隐藏
+- (void)setHidden:(BOOL)hidden animated:(BOOL)animated completionHandle:(void (^)())completionHandle
+{
+    if (animated) {
+        NSString *subType = hidden ? kCATransitionFromLeft : kCATransitionFromRight;
+        [self addTransitionWithType:kRightViewTransitionType subType:subType duration:0.25 key:@"transition"];
+    }
+    if (!hidden) { // 要显示
+        [self.superview bringSubviewToFront:self];
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        completionHandle();
+    });
+    [super setValue:@(hidden) forKey:@"hidden"];
+}
+
 @end

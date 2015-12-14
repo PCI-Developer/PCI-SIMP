@@ -25,6 +25,18 @@
 
 #import "CameraFollowConfigView.h"
 
+#import "ProcessView.h"
+
+/**
+ 枚举值.当前置顶的view类型
+ */
+typedef enum
+{
+    TopViewTypeNone = 0,
+    TopViewTypeForDeviceInfoView,
+    TopViewTypeForProcessView,
+    TopViewTypeForCommonDeviceView
+} TopViewType;
 
 @interface ActualModeViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, WFFFollowHandsViewDelegate,UIGestureRecognizerDelegate, WFFDropdownListDelegate, DeviceInfoBaseViewDelegate>
 
@@ -32,7 +44,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *actualImageView;
-@property (nonatomic, strong) UITapGestureRecognizer *imageViewTapGR;
+@property (nonatomic, strong) UITapGestureRecognizer *actualImageViewTapGR;
 
 // 遮罩层(包含collectionView
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
@@ -44,10 +56,13 @@
 
 - (IBAction)putInOrderButtonAction:(UIButton *)sender;
 
+@property (weak, nonatomic) IBOutlet UIView *processBackgroundView;
+@property (nonatomic, strong) ProcessView *processView;
+- (IBAction)processBackgroundViewTapGRAction:(UITapGestureRecognizer *)sender;
 // 操作层
 @property (weak, nonatomic) IBOutlet UIView *operatioinView;
-//@property (weak, nonatomic) IBOutlet UIView *viewForExitOperation;
-//@property (nonatomic, strong) UITapGestureRecognizer *viewForExitOperationTapGR;
+
+- (IBAction)showProcessViewButtonAction:(UIButton *)sender;
 - (IBAction)addDeviceButtonAction:(UIButton *)sender;
 
 - (IBAction)changeActualImageButtonAction:(UIButton *)sender;
@@ -93,7 +108,12 @@
 - (IBAction)showQuickChooseButtonAction:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UIButton *showQuickChooseButton;
 
-#pragma mark 用于开关按钮的位置适配(居中或靠底
+/**
+ *  上一次选中设备
+ *  当设备调整方向的时候,另一个触摸点隐藏掉设备信息界面.会触发方向按钮的cancel的Action,执行代理TouchUp.
+ *  而此时self.selectedDevice已经为空.导致执行 停止方向调整的指令 会传送空的device.
+ */
+@property (nonatomic, strong) DeviceForUser *lastSelectedDevice;
 /**
  *  选中设备
  */
@@ -151,8 +171,8 @@
     [self.deviceTypeCollectionView registerNib:[UINib nibWithNibName:@"DeviceCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"deviceTypeCell"];
     [self.commonDeviceCollectionView registerNib:[UINib nibWithNibName:@"DeviceCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"commonDeviceCell"];
     //
-    self.imageViewTapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewTapGRAction:)];
-    [self.actualImageView addGestureRecognizer:self.imageViewTapGR];
+    self.actualImageViewTapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actualImageViewTapGRAction:)];
+    [self.actualImageView addGestureRecognizer:self.actualImageViewTapGR];
     
     
     // 屏幕旋转通知
@@ -210,7 +230,7 @@
 #pragma mark - 从后台返回
 - (void)applicationWillEnterForeground:(NSNotification *)sender
 {
-    [self layoutDeviceByDB];
+    [self setCurrentMode:ActualModeTypeNormal];
 }
 
 #pragma mark 屏幕旋转
@@ -306,7 +326,9 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         return;
     }
     isDeviceInfoOrientationButtonTouchDown = NO;
-    kDeviceStopPTZ(self.selectedDevice, ^(BOOL isSuccess, NSInteger cmdNumber, DeviceForUser *deviceForUser, DeviceForUser *otherDeviceForUser) {
+    // 当设备信息界面隐藏时,会触发cancel的Action,执行该代理方法.此时selectedDevice已经为nil.只能根据lastSelectedDeviced; 否则会导致内部发送消息拼接参数的时候崩溃
+    
+    kDeviceStopPTZ(self.selectedDevice ? self.selectedDevice : self.lastSelectedDevice, ^(BOOL isSuccess, NSInteger cmdNumber, DeviceForUser *deviceForUser, DeviceForUser *otherDeviceForUser) {
         if (isSuccess) {
             
             kLog(@"命令编号%ld 操作设备类型:%@ 设备ID:%@ 停止调整方向%@",(long)cmdNumber, kDeviceTypeInfo(deviceForUser.UEQP_Type)[@"name"], deviceForUser.UEQP_ID, isSuccess ? @"成功" : @"失败");
@@ -563,33 +585,102 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     });
 
 }
-
-
-#pragma mark 点击隐藏
-- (void)hideDeviceInfo
+#pragma mark - 根据当前置顶的view,隐藏无用的view,或者显示有用界面
+- (void)updateViewHideOrShowByType:(TopViewType)topViewType
 {
-    if (self.operatioinView.hidden) {
-        [self.operatioinView setHidden:NO animated:YES];
+    __weak typeof(self) weakSelf = self;
+    switch (topViewType) {
+        case TopViewTypeNone: // 隐藏所有
+            // 显示操作界面
+            if (self.operatioinView.hidden) {
+                [self.operatioinView setHidden:NO animated:YES];
+            }
+            // 隐藏快速选择
+            if (self.deviceInfoTypeChoose.hidden == NO) {
+                [self.deviceInfoTypeChoose setHidden:YES animated:YES];
+            }
+            
+            
+            
+            // 隐藏公共设备
+            if (self.commonDeviceBackgroundView.hidden == NO) {
+                [self.commonDeviceBackgroundView setHidden:YES animated:YES completionHandle:^{
+                    if (weakSelf.showQuickChooseButton.hidden) {
+                        [weakSelf.showQuickChooseButton setHidden:NO animated:YES];
+                    }
+                }];
+            } else {
+                if (self.showQuickChooseButton.hidden) {
+                    [self.showQuickChooseButton setHidden:NO animated:YES];
+                }
+            }
+            
+            // 隐藏设备信息界面
+            if (self.deviceInfoBackgroundView.hidden == NO) {
+                [self.deviceInfoBackgroundView setHidden:YES animated:YES];
+            }
+            // 隐藏流程界面
+            if (self.processBackgroundView.hidden == NO) {
+                [self.processBackgroundView setHidden:YES animated:YES];
+            }
+            self.selectedDevice = nil;
+            self.selectedDeviceType = nil;
+            // 公共设备 && 快速选择
+            [self setCellHighlightWithCollectionView:self.deviceTypeCollectionView indexPath:nil];
+            [self setCellHighlightWithCollectionView:self.commonDeviceCollectionView indexPath:nil];
+            break;
+        case TopViewTypeForDeviceInfoView:
+            // 显示设备信息界面 -- 拖动的时候,不一定选中了.没选中就不需要显示
+            if (self.deviceInfoBackgroundView.hidden && (self.selectedDevice || self.selectedDeviceType)) {
+                [self.deviceInfoBackgroundView setHidden:NO animated:YES];
+            }
+            // 隐藏操作界面
+            if (self.operatioinView.hidden == NO) {
+                [self.operatioinView setHidden:YES animated:YES];
+            }
+            // 隐藏流程界面
+            if (self.processBackgroundView.hidden == NO) {
+                [self.processBackgroundView setHidden:YES animated:YES];
+            }
+            break;
+        case TopViewTypeForCommonDeviceView:
+            if (self.showQuickChooseButton.hidden == NO) {
+                [self.showQuickChooseButton setHidden:YES animated:YES completionHandle:^{
+                    if (weakSelf.commonDeviceBackgroundView.hidden) {
+                        [weakSelf.commonDeviceBackgroundView setHidden:NO animated:YES];
+                    }
+                }];
+            } else {
+                if (self.commonDeviceBackgroundView.hidden) {
+                    [self.commonDeviceBackgroundView setHidden:NO animated:YES];
+                }
+            }
+            
+            
+            
+            // 隐藏操作界面
+            if (self.operatioinView.hidden == NO) {
+                [self.operatioinView setHidden:YES animated:YES];
+            }
+            // 隐藏流程界面
+            if (self.processBackgroundView.hidden == NO) {
+                [self.processBackgroundView setHidden:YES animated:YES];
+            }
+            break;
+        case TopViewTypeForProcessView:
+            // 隐藏操作界面
+            if (self.operatioinView.hidden == NO) {
+                [self.operatioinView setHidden:YES animated:YES];
+            }
+            if (self.showQuickChooseButton.hidden == NO) {
+                [self.showQuickChooseButton setHidden:YES animated:YES];
+            }
+            // 显示流程界面
+            if (self.processBackgroundView.hidden) {
+                [self.processBackgroundView setHidden:NO animated:YES];
+            }
+            break;
     }
-    
-    if (self.deviceInfoTypeChoose.hidden == NO) {
-        [self.deviceInfoTypeChoose setHidden:YES animated:YES];
-    }
-    
-    if (self.commonDeviceBackgroundView.hidden == NO) {
-        [self.commonDeviceBackgroundView setHidden:YES animated:YES];
-    }
-    
-    if (self.deviceInfoBackgroundView.hidden == NO) {
-        [self.deviceInfoBackgroundView setHidden:YES animated:YES];
-    }
-    
-    self.selectedDevice = nil;
-    self.selectedDeviceType = nil;
-//    // 快速选择
-    [self setCellHighlightWithCollectionView:self.deviceTypeCollectionView indexPath:nil];
-    [self setCellHighlightWithCollectionView:self.commonDeviceCollectionView indexPath:nil];
-    
 }
 
 
@@ -708,20 +799,16 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 - (void)showDeviceInfoByIsBatch:(BOOL)isBatch
 {
     [self updateUIOfDeviceInfoView];
-    // 操作界面隐藏(视角切换/更改布局/更改底图)
-    if (self.operatioinView.hidden == NO) {
-        [self.operatioinView setHidden:YES animated:YES];
-    }
     
-    if (self.deviceInfoBackgroundView.hidden) {
-        [self.deviceInfoBackgroundView setHidden:NO animated:YES];
-    }
+    
+    
+    [self updateViewHideOrShowByType:TopViewTypeForDeviceInfoView];
 }
 
 #pragma mark - 图片点击切换操作状态
-- (void)imageViewTapGRAction:(UITapGestureRecognizer *)sender
+- (void)actualImageViewTapGRAction:(UITapGestureRecognizer *)sender
 {
-    [self hideDeviceInfo];
+    [self updateViewHideOrShowByType:TopViewTypeNone];
 }
 
 #pragma mark - 根据AUTOID获取设备的布局模型
@@ -825,7 +912,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     if (self.currentMode != ActualModeTypeNormal) {
         return;
     }
-
+    
+    
     // 吧移动的设备 置于最前面;
     [followHandsView.superview bringSubviewToFront:followHandsView];
     // 放入移动设备字典中
@@ -898,6 +986,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         [self followHandsView:followHandsView doMoveForChangeLayoutWithPoint:handsPointInSuperView isEnd:YES];
         return;
     }
+    
+    
     [self.movingViewDict removeObjectForKey:@(followHandsView.tag)];
     
     
@@ -1032,6 +1122,10 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         return;
     }
 }
+
+
+
+
 
 #pragma mark 点击选中设备
 - (void)clickFollowHandsView:(WFFFollowHandsView *)followHandsView
@@ -1451,12 +1545,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 #pragma mark - 显示创建场景的shadeView
 - (void)showShadeView:(BOOL)isShow
 {
-    self.screenConfigShadeView.hidden = !isShow;
-    if (isShow) {
-        [self.view bringSubviewToFront:_screenConfigShadeView];
-        
-    }
-    
+    [self.screenConfigShadeView setHidden:!isShow animated:YES];
 }
 
 #pragma mark - setter
@@ -1464,7 +1553,9 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 - (void)setSelectedDevice:(DeviceForUser *)selectedDevice
 {
     if (_selectedDevice != selectedDevice) {
+        
         if (_selectedDevice) {
+            self.lastSelectedDevice = _selectedDevice;
             // 原本选中设备的布局模型 -- 如果是公共设备,则为空
             DetaiLayoutOfAreaByViewpointType *oldSelectedDeviceDetailLayout = [self getDetailOfAreaScreenWithAutoID:_selectedDevice.AutoID];
             // 修改界面的选中状态
@@ -1570,7 +1661,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         self.operatioinView.hidden = YES;
 //    }
     // 默认图片不可点击()
-    self.imageViewTapGR.enabled = NO;
+    self.actualImageViewTapGR.enabled = NO;
     // 视角切换默认隐藏
     self.viewpointButtonsView.hidden = YES;
     self.deviceInfoBackgroundView.hidden = YES;
@@ -1604,12 +1695,13 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         self.showQuickChooseButton.hidden = NO;
         // 操作界面显示(视角切换/更改布局/更改底图)
         self.operatioinView.hidden = NO;
+        
         // 显示视角切换(3秒消失)
         [self startTimerForAutoHideViewpointButtonsView];
         [self setDeviceViewGREnable:YES withType:@"move"];
         [self setDeviceViewGREnable:NO withType:@"longPress"];
         [self setDeviceViewGREnable:YES withType:@"click"];
-        self.imageViewTapGR.enabled = YES;
+        self.actualImageViewTapGR.enabled = YES;
     } else if (_currentMode == ActualModeTypeConfig) {
         if ([self.devicesArray count] == 0) {
             [WFFProgressHud showErrorStatus:@"没有可添加设备!"];
@@ -1748,9 +1840,50 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     [self layoutInOrder];
 }
 
+- (void)showProcess
+{
+    if (!_processView) {
+        self.processView = [[ProcessView alloc] init];
+        _processView.translatesAutoresizingMaskIntoConstraints = NO;
+        [_processBackgroundView addSubview:_processView];
+        _processView.doSomethingBlock = ^(NSString *selectedProcessID, BOOL isStart) {
+                [[SocketManager shareSocketManager] doByProcessWithProcessID:selectedProcessID isStart:isStart resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
+                    if (isSuccess) {
+                        kLog(@"流程处理成功");
+                    } else {
+                        kLog(@"流程处理失败");
+                    }
+                }];
+            };
+        // 设置约束
+        [_processView autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
+        [_processView autoAlignAxisToSuperviewAxis:ALAxisVertical];
+        [_processView autoSetDimension:ALDimensionWidth toSize:630];
+        [_processView autoSetDimension:ALDimensionHeight toSize:420];
+    }
+    
+    _processView.processArray = kProcessByCurrentArea;
+}
+
+- (IBAction)showProcessViewButtonAction:(UIButton *)sender {
+    [self updateViewHideOrShowByType:TopViewTypeForProcessView];
+    [self showProcess];
+    if (!kProcessByCurrentArea) {
+        __weak typeof(self) weakSelf = self;
+        [[Common shareCommon] loadProcessDataListWithCompletionHandle:^(BOOL isSuccess, NSString *errorDescription) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (isSuccess) {
+                    weakSelf.processView.processArray = kProcessByCurrentArea;
+                } else {
+                    weakSelf.processView.errorDescription = errorDescription;
+                }
+             });
+        }];
+    }
+    
+}
+
 - (IBAction)okButtonActionForAddScreen:(UIButton *)sender {
-    
-    
     // 保存场景(为默认场景)
     [self saveDeviceLayout];
     // setter,normal自动将场景配置应用到界面
@@ -1759,7 +1892,6 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 }
 
 - (IBAction)showViewpointsViewButtonAction:(UIButton *)sender {
-    
     [self startTimerForAutoHideViewpointButtonsView];// 几秒后自动隐藏
 }
 
@@ -1822,15 +1954,10 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 
 - (IBAction)showQuickChooseButtonAction:(UIButton *)sender {
     // 操作界面隐藏(视角切换/更改布局/更改底图)
-    if (self.operatioinView.hidden == NO) {
-        [self.operatioinView setHidden:YES animated:YES];
-    }
-//    [self.deviceInfoTypeChoose setHidden:NO animated:YES];
+    [self updateViewHideOrShowByType:TopViewTypeForCommonDeviceView];
     
-    if ([kCommonDevices count] > 0) {
+    if ([kCommonDevices count] > 0) { // 根据数据有无,隐藏或显示collectionView
         [self.commonDeviceBackgroundView viewWithTag:777].hidden = YES;
-
-        [self.commonDeviceBackgroundView setHidden:NO animated:YES];
     } else {
         [self.commonDeviceBackgroundView viewWithTag:777].hidden = NO;
     }
@@ -1847,4 +1974,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     }
 }
 
+- (IBAction)processBackgroundViewTapGRAction:(UITapGestureRecognizer *)sender {
+    [self updateViewHideOrShowByType:TopViewTypeNone];
+}
 @end

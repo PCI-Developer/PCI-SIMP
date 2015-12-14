@@ -7,7 +7,7 @@
 //
 
 #import "SocketManager.h"
-
+#import "Area.h"
 #define kHeartHitTimeOut 10
 @interface SocketManager ()<GCDAsyncSocketDelegate> {
     
@@ -178,6 +178,19 @@ kSingleTon_M(SocketManager)
     serverTimerLastHeartHit = kHeartHitTimeOut;
     //    }
     
+    
+    // 操作流程
+    if ([protocolString containsString:kProtocolCMDFromServerForDoProcess]) {
+        NSInteger cmdNum = [[self getItemWithProtocolString:protocolString index:2] integerValue];
+        RequestServerResponseBlock block = self.operationBlockDict[@(cmdNum)];
+        if (block) {
+            block(YES, cmdNum, nil);
+        }
+        // 执行完移除
+        [self.operationBlockDict removeObjectForKey:@(cmdNum)];
+    }
+    
+    // 流程列表
     if ([protocolString containsString:kProtocolCMDFromServerForXJList]) {
         NSInteger cmdNum = [[self getItemWithProtocolString:protocolString index:2] integerValue];
         RequestServerResponseBlock block = self.operationBlockDict[@(cmdNum)];
@@ -342,6 +355,36 @@ kSingleTon_M(SocketManager)
 #pragma mark - 公有方法
 
 #pragma mark - 发送数据
+
+/**
+ *   发送消息
+ *
+ *  @param cmdString   命令字
+ *  @param cmdInfo     信息元
+ *  @param resultBlock 回调block
+ */
+- (void)sendMessageWithCMD:(NSString *)cmdString
+                   cmdInfo:(NSString *)cmdInfo // 控制设备此字段为空,由sub来拼凑
+               resultBlock:(RequestServerResponseBlock)resultBlock
+{
+    // 生成协议串,并转成要发送的data数据
+    NSString *protocolString = [self getProtocolStringWithCMD:cmdString info:cmdInfo];
+    
+    NSData *data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
+        if (resultBlock) {
+            resultBlock(NO, currentNum, nil);
+        }
+    } else {
+        // 发送成功后执行代理方法 didWriteData
+        [self.pcSocket writeData:data withTimeout:kTimeOut tag:currentNum];
+        // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
+        [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
+    }
+    currentNum++;
+}
+
 // 心跳包
 - (void)sendHeartBeat
 {
@@ -371,22 +414,23 @@ kSingleTon_M(SocketManager)
             protocolCMD = kProtocolGetDeviceList;
             break;
     }
-    // 生成协议串,并转成要发送的data数据
-    NSString *protocolString = [self getProtocolStringWithCMD:protocolCMD info:nil];
-    
-    NSData *data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
-        if (resultBlock) {
-            resultBlock(NO, currentNum, nil);
-        }
-    } else {
-        // 发送成功后执行代理方法 didWriteData
-        [self.pcSocket writeData:data withTimeout:kTimeOut tag:currentNum];
-        // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
-        [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
-    }
-    currentNum++;
+    [self sendMessageWithCMD:protocolCMD cmdInfo:nil resultBlock:resultBlock];
+//    // 生成协议串,并转成要发送的data数据
+//    NSString *protocolString = [self getProtocolStringWithCMD:protocolCMD info:nil];
+//    
+//    NSData *data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
+//    
+//    if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
+//        if (resultBlock) {
+//            resultBlock(NO, currentNum, nil);
+//        }
+//    } else {
+//        // 发送成功后执行代理方法 didWriteData
+//        [self.pcSocket writeData:data withTimeout:kTimeOut tag:currentNum];
+//        // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
+//        [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
+//    }
+//    currentNum++;
 }
 
 
@@ -402,24 +446,34 @@ kSingleTon_M(SocketManager)
             resultBlock:(RequestServerResponseBlock)resultBlock
 {
     
-    NSString *info = [NSString stringWithFormat:@"%@&%@", userId, pwd];
-    // 生成协议串,并转成要发送的data数据
-    NSString *protocolString = [self getProtocolStringWithCMD:kProtocolLogin info:info];
-    
-    NSData *data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
+    if ([Common shareCommon].isDemo) {
         if (resultBlock) {
-            resultBlock(NO, currentNum, [NSString stringWithFormat:@"%@&%@", userId, @"-1"]);
+            // 模拟返回999权限的用户
+            resultBlock(YES, currentNum, @"&999");
         }
-    } else {
-        // 发送成功后执行代理方法 didWriteData
-        [self.pcSocket writeData:data withTimeout:kTimeOut tag:currentNum];
-        // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
-        [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
+        currentNum++;
+        return;
     }
-    currentNum++;
     
+    NSString *info = [NSString stringWithFormat:@"%@&%@", userId, pwd];
+    [self sendMessageWithCMD:kProtocolLogin cmdInfo:info resultBlock:resultBlock];
+//    // 生成协议串,并转成要发送的data数据
+//    NSString *protocolString = [self getProtocolStringWithCMD:kProtocolLogin info:info];
+//    
+//    NSData *data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
+//    
+//    if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
+//        if (resultBlock) {
+//            resultBlock(NO, currentNum, nil/*[NSString stringWithFormat:@"%@&%@", userId, @"-1"]*/);
+//        }
+//    } else {
+//        // 发送成功后执行代理方法 didWriteData
+//        [self.pcSocket writeData:data withTimeout:kTimeOut tag:currentNum];
+//        // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
+//        [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
+//    }
+//    currentNum++;
+//    
 }
 
 
@@ -430,26 +484,69 @@ kSingleTon_M(SocketManager)
  */
 - (void)getXJListWithResultBlock:(RequestServerResponseBlock)resultBlock
 {
-    // 生成协议串,并转成要发送的data数据
-    NSString *protocolString = [self getProtocolStringWithCMD:kProtocolGetXJList info:nil];
-    
-    NSData *data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
+    if ([Common shareCommon].isDemo) {
         if (resultBlock) {
-            resultBlock(NO, currentNum, nil);
+            // 模拟返回999权限的用户
+            resultBlock(YES, currentNum, [NSString stringWithFormat:@"%@,process001,流程001,说明说明...&%@,process002,流程002,说明说明说明.", kCurrentArea.AreaID, kCurrentArea.AreaID]);
         }
-    } else {
-        // 发送成功后执行代理方法 didWriteData
-        [self.pcSocket writeData:data withTimeout:kTimeOut tag:currentNum];
-        // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
-        [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
+        currentNum++;
+        return;
     }
-    currentNum++;
+    
+    [self sendMessageWithCMD:kProtocolGetXJList cmdInfo:nil resultBlock:resultBlock];
+//    // 生成协议串,并转成要发送的data数据
+//    NSString *protocolString = [self getProtocolStringWithCMD:kProtocolGetXJList info:nil];
+//    
+//    NSData *data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
+//    
+//    if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
+//        if (resultBlock) {
+//            resultBlock(NO, currentNum, nil);
+//        }
+//    } else {
+//        // 发送成功后执行代理方法 didWriteData
+//        [self.pcSocket writeData:data withTimeout:kTimeOut tag:currentNum];
+//        // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
+//        [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
+//    }
+//    currentNum++;
+}
+
+
+
+/**
+ *  处理流程
+ *
+ *  @param processID   流程ID
+ *  @param isStart     开始或者停止
+ *  @param resultBlock 回调block
+ */
+- (void)doByProcessWithProcessID:(NSString *)processID
+                         isStart:(BOOL)isStart
+                     resultBlock:(RequestServerResponseBlock)resultBlock
+{
+    NSString *info = [NSString stringWithFormat:@"%@&%@", isStart ? @"OPEN" : @"CLOSE", processID];
+    [self sendMessageWithCMD:kProtocolCMDByDoProcess cmdInfo:info resultBlock:resultBlock];
+//    // 生成协议串,并转成要发送的data数据
+//    NSString *protocolString = [self getProtocolStringWithCMD:kProtocolCMDByDoProcess info:info];
+//    
+//    NSData *data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
+//    
+//    if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
+//        if (resultBlock) {
+//            resultBlock(NO, currentNum, nil);
+//        }
+//    } else {
+//        // 发送成功后执行代理方法 didWriteData
+//        [self.pcSocket writeData:data withTimeout:kTimeOut tag:currentNum];
+//        // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
+//        [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
+//    }
+//    currentNum++;
 }
 
 // 信息元 --  设备编号1,设备编号2,…&命令&命令参数[&控制地址]
-- (void)sendMessageWithDevicesID:(NSString *)devicesID
+- (void)ctrlDevicesWithDevicesID:(NSString *)devicesID
                      ControlType:(CMDType)controlType
                              arg:(NSString *)arg
                      resultBlock:(RequestServerResponseBlock)resultBlock
@@ -472,7 +569,9 @@ kSingleTon_M(SocketManager)
         return;
     }
     
-    NSMutableString *info = [NSMutableString stringWithString:devicesID];
+    NSMutableString *info = [NSMutableString string];
+    // 不直接初始化,是防止devicesID为nil的情况出现.导致崩溃
+    [info appendString:devicesID];
     NSString *control = nil;
     BOOL isEQPCTRL = YES;
     switch (controlType) {
@@ -513,34 +612,36 @@ kSingleTon_M(SocketManager)
             isEQPCTRL = NO;
             break;
     }
-    NSData *data = nil;
+//    NSData *data = nil;
     if (isEQPCTRL) { // 控制设备
         //
         [info appendFormat:@"&%@", control];
         [info appendFormat:@"&%@", arg ? arg : @""];
-        // 生成协议串,并转成要发送的data数据
-        NSString *protocolString = [self getProtocolStringWithCMD:kProtocolCMDByControlDevice info:info];
-        kLog(@"%@", protocolString);
-        data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
+        [self sendMessageWithCMD:kProtocolCMDByControlDevice cmdInfo:info resultBlock:resultBlock];
+//        // 生成协议串,并转成要发送的data数据
+//        NSString *protocolString = [self getProtocolStringWithCMD:kProtocolCMDByControlDevice info:info];
+//        kLog(@"%@", protocolString);
+//        data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
     } else {
         [info appendFormat:@"&%@", arg ? arg : @""];
-        // 生成协议串,并转成要发送的data数据
-        NSString *protocolString = [self getProtocolStringWithCMD:kProtocolCMDByCameraFollow info:info];
-        kLog(@"%@", protocolString);
-        data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
+        [self sendMessageWithCMD:kProtocolCMDByCameraFollow cmdInfo:info resultBlock:resultBlock];
+//        // 生成协议串,并转成要发送的data数据
+//        NSString *protocolString = [self getProtocolStringWithCMD:kProtocolCMDByCameraFollow info:info];
+//        kLog(@"%@", protocolString);
+//        data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
     }
     
-    if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
-        if (resultBlock) {
-            resultBlock(NO, currentNum, nil);
-        }
-    } else {
-        // 发送成功后执行代理方法 didWriteData
-        [self.pcSocket writeData:data withTimeout:kTimeOut tag:currentNum];
-        // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
-        [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
-    }
-    currentNum++;
+//    if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
+//        if (resultBlock) {
+//            resultBlock(NO, currentNum, nil);
+//        }
+//    } else {
+//        // 发送成功后执行代理方法 didWriteData
+//        [self.pcSocket writeData:data withTimeout:kTimeOut tag:currentNum];
+//        // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
+//        [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
+//    }
+//    currentNum++;
 }
 
 #pragma mark - 生成协议串 , 根据命令字+信息元
