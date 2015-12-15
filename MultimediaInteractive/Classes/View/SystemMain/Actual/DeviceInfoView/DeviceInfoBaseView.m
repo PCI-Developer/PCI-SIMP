@@ -33,18 +33,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (UIViewController*)viewControllerWithView:(UIView *)view {
-    for (UIView* next = [view superview]; next; next = next.superview) {
-        UIResponder* nextResponder = [next nextResponder];
-        if ([nextResponder isKindOfClass:[UIViewController class]]) {
-            return (UIViewController*)nextResponder;
-        }
-    }
-    return nil;  
-}
-
 - (void)sliderLeaveFocus:(NSNotification *)sender {
-    NSLog(@"%@", [self viewControllerWithView:self.superview.superview]);
     WFFCircularSlider *slider = (WFFCircularSlider *)sender.object;
     if ([self.delegate respondsToSelector:@selector(deviceInfoViewSliderLeaveFoucsWithValue:)]) {
         [self.delegate deviceInfoViewSliderLeaveFoucsWithValue:slider.value];
