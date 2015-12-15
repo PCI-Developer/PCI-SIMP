@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "screenConfigHighlight.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "applyForCameraFollowConfigHighlight@2x.png",
       "scale" : "2x"
     },
     {

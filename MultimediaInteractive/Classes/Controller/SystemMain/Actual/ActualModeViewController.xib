@@ -260,10 +260,11 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n7U-sj-6wu" userLabel="otherButtonView">
                             <rect key="frame" x="0.0" y="5" width="455" height="85"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="crO-m3-XKM" userLabel="流程">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="crO-m3-XKM" userLabel="流程">
                                     <rect key="frame" x="365" y="0.0" width="85" height="85"/>
                                     <animations/>
-                                    <state key="normal" title="流程"/>
+                                    <state key="normal" backgroundImage="process"/>
+                                    <state key="highlighted" backgroundImage="processHighlight"/>
                                     <connections>
                                         <action selector="showProcessViewButtonAction:" destination="-1" eventType="touchUpInside" id="NQm-EU-kqS"/>
                                     </connections>
@@ -283,8 +284,8 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDj-Iy-DE3" userLabel="场景设置">
                                     <rect key="frame" x="185" y="0.0" width="85" height="85"/>
                                     <animations/>
-                                    <state key="normal" backgroundImage="screenConfig.png"/>
-                                    <state key="highlighted" backgroundImage="screenConfigHighlight.png"/>
+                                    <state key="normal" backgroundImage="screenConfig"/>
+                                    <state key="highlighted" backgroundImage="screenConfigHiglight"/>
                                     <connections>
                                         <action selector="changeCurrenScreenButtonAction:" destination="-1" eventType="touchUpInside" id="K64-of-xcQ"/>
                                     </connections>
@@ -763,8 +764,10 @@
         <image name="okForDeviceConfig.png" width="170" height="48"/>
         <image name="okForDeviceConfigHighlight.png" width="170" height="48"/>
         <image name="okHighlight" width="436" height="137"/>
-        <image name="screenConfig.png" width="128" height="128"/>
-        <image name="screenConfigHighlight.png" width="140" height="140"/>
+        <image name="process" width="85" height="85"/>
+        <image name="processHighlight" width="85" height="85"/>
+        <image name="screenConfig" width="85" height="85"/>
+        <image name="screenConfigHiglight" width="85" height="85"/>
         <image name="showDeviceTypes" width="71" height="71"/>
         <image name="trash" width="375" height="375"/>
         <image name="trashHighlight" width="375" height="375"/>

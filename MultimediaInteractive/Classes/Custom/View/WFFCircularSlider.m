@@ -60,8 +60,11 @@
     
     self.value = 0;
     
-    [self addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(grAction:)]];
-    [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(grAction:)]];
+    [self addGestureRecognizer:({
+        UIPanGestureRecognizer *panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(grAction:)];
+        panGR;
+    })];
+//    [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(grAction:)]];
 //    [self addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(grAction:)]];
     
     self.layer.cornerRadius = self.bounds.size.width / 2;
@@ -167,17 +170,33 @@
     
     CGFloat value = (radian - kStartRadian) / kRadianRange;
     
+//    // --- Old
+//    // 不允许超出范围,即大于1 -- 对于这个起始和终止,value > 1代表的就是起始点和终止点之间的位置.
+//    if (value > 1 && [sender isKindOfClass:[UIPanGestureRecognizer class]]) { // 如果是直接点击的话, 也进行赋值
+//        // 不对_value赋值.value的setter中,会更新界面显示
+//        // 假如这里令value = 1时,当从起始点往终止点方向一动就会突兀的跳至终止点.
+//        // 同理,假如令value = 0时,当从终止点往起始点方向一动就会突兀的跳至起始点
+//    } else {
+//        self.value = value > 1 ? 1 : value;
+//    }
+//    // --- Old
     
     
-    // 不允许超出范围,即大于1 -- 对于这个起始和终止,value > 1代表的就是起始点和终止点之间的位置.
+    
+    /**
+     *  触摸点移动到最大最小无效区间后,停止手势
+     */
     if (value > 1 && [sender isKindOfClass:[UIPanGestureRecognizer class]]) { // 如果是直接点击的话, 也进行赋值
         // 不对_value赋值.value的setter中,会更新界面显示
         // 假如这里令value = 1时,当从起始点往终止点方向一动就会突兀的跳至终止点.
         // 同理,假如令value = 0时,当从终止点往起始点方向一动就会突兀的跳至起始点
+        
+        // 终止手势 -- 重启
+        ((UIGestureRecognizer *)self.gestureRecognizers.firstObject).enabled = NO;
+        ((UIGestureRecognizer *)self.gestureRecognizers.firstObject).enabled = YES;
     } else {
         self.value = value > 1 ? 1 : value;
     }
-    
     
     if (sender.state == UIGestureRecognizerStateEnded || sender.state == UIGestureRecognizerStateFailed || sender.state == UIGestureRecognizerStateCancelled) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kSliderLeaveFocusNotification object:self];

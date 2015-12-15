@@ -288,7 +288,6 @@ typedef enum
 }
 
 #pragma mark - 设备详情页
-
 - (CameraFollowConfigView *)cameraFollowConfigView
 {
     if (!_cameraFollowConfigView) {

@@ -201,16 +201,17 @@
                         </mask>
                     </variation>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SXd-Lq-LcN">
-                    <rect key="frame" x="244.5" y="471" width="110" height="34"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SXd-Lq-LcN">
+                    <rect key="frame" x="241" y="471" width="117" height="49"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="G8t-vK-iey"/>
-                        <constraint firstAttribute="width" constant="110" id="KjI-vE-jZD"/>
+                        <constraint firstAttribute="width" constant="117" id="KjI-vE-jZD"/>
                         <constraint firstAttribute="width" constant="189" id="vkC-Rm-zda"/>
-                        <constraint firstAttribute="height" constant="34" id="xF4-YP-clm"/>
+                        <constraint firstAttribute="height" constant="49" id="xF4-YP-clm"/>
                     </constraints>
-                    <state key="normal" backgroundImage="applyForConfig"/>
+                    <state key="normal" backgroundImage="applyForCameraFollowConfig"/>
+                    <state key="highlighted" backgroundImage="applyForCameraFollowConfigHighlight"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="G8t-vK-iey"/>
@@ -263,7 +264,8 @@
         </view>
     </objects>
     <resources>
-        <image name="applyForConfig" width="437" height="138"/>
+        <image name="applyForCameraFollowConfig" width="117" height="49"/>
+        <image name="applyForCameraFollowConfigHighlight" width="117" height="49"/>
         <image name="controlBg.png" width="3" height="3"/>
         <image name="down" width="100" height="231"/>
         <image name="down.png" width="375" height="375"/>

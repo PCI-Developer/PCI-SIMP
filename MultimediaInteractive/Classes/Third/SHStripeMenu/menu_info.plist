@@ -24,16 +24,6 @@
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>设置</string>
-		<key>image</key>
-		<string>Config.png</string>
-		<key>selectedImage</key>
-		<string></string>
-		<key>gotoVC</key>
-		<string>ProcessViewController</string>
-	</dict>
-	<dict>
-		<key>name</key>
 		<string>帮助</string>
 		<key>image</key>
 		<string>Help.png</string>
