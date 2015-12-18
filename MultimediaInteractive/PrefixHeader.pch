@@ -39,6 +39,7 @@
 
 
 #import "Const.h"
+#import "NSObject+CheckNull.h"
 #import "UIColor+Category.h"
 #import "NSString+ConvertDate.h"
 #import "UIViewController+PresentAlertController.h"

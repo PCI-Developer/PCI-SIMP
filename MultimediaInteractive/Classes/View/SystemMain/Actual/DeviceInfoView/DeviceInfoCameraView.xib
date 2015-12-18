@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
@@ -216,36 +216,42 @@
                             </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jmK-aN-APg">
-                            <rect key="frame" x="175" y="298" width="250" height="40"/>
+                            <rect key="frame" x="175" y="298" width="250" height="50"/>
                             <subviews>
-                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkBox" highlightedImage="checkBoxSelected" translatesAutoresizingMaskIntoConstraints="NO" id="DTA-rm-T9s">
-                                    <rect key="frame" x="10" y="5" width="31.5" height="30"/>
+                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cameraFollowClose" highlightedImage="cameraFollowOpen" translatesAutoresizingMaskIntoConstraints="NO" id="DTA-rm-T9s">
+                                    <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
                                     <animations/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="DTA-rm-T9s" secondAttribute="height" multiplier="58:55" id="9SN-Hc-2eP"/>
-                                        <constraint firstAttribute="height" constant="30" id="KQq-zc-3qm"/>
+                                        <constraint firstAttribute="height" constant="36" id="KQq-zc-3qm"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="9SN-Hc-2eP"/>
+                                            <exclude reference="KQq-zc-3qm"/>
+                                        </mask>
+                                    </variation>
                                 </imageView>
-                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开启摄像头跟随" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJb-UY-7bd">
-                                    <rect key="frame" x="46.5" y="5" width="193.5" height="30"/>
-                                    <animations/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                             <animations/>
-                            <color key="backgroundColor" red="0.0" green="0.66666666669999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <gestureRecognizers/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="yJb-UY-7bd" secondAttribute="trailing" constant="10" id="4hf-BM-iFn"/>
-                                <constraint firstItem="yJb-UY-7bd" firstAttribute="centerY" secondItem="DTA-rm-T9s" secondAttribute="centerY" id="6CJ-rY-Fcg"/>
-                                <constraint firstItem="yJb-UY-7bd" firstAttribute="height" secondItem="DTA-rm-T9s" secondAttribute="height" id="6Up-fT-suc"/>
+                                <constraint firstAttribute="trailing" secondItem="DTA-rm-T9s" secondAttribute="trailing" id="OHc-At-leM"/>
                                 <constraint firstItem="DTA-rm-T9s" firstAttribute="leading" secondItem="jmK-aN-APg" secondAttribute="leading" constant="10" id="Ozu-OY-Xbx"/>
-                                <constraint firstItem="yJb-UY-7bd" firstAttribute="leading" secondItem="DTA-rm-T9s" secondAttribute="trailing" constant="5" id="RYh-6e-Kwr"/>
-                                <constraint firstAttribute="height" constant="40" id="bn3-L2-rsg"/>
+                                <constraint firstAttribute="height" constant="50" id="bn3-L2-rsg"/>
                                 <constraint firstItem="DTA-rm-T9s" firstAttribute="centerY" secondItem="jmK-aN-APg" secondAttribute="centerY" id="nQB-bo-K5o"/>
+                                <constraint firstItem="DTA-rm-T9s" firstAttribute="top" secondItem="jmK-aN-APg" secondAttribute="top" id="o3a-Bm-ESq"/>
+                                <constraint firstAttribute="width" constant="250" id="qrS-js-5VA"/>
+                                <constraint firstItem="DTA-rm-T9s" firstAttribute="leading" secondItem="jmK-aN-APg" secondAttribute="leading" id="tON-Gu-VlK"/>
+                                <constraint firstAttribute="bottom" secondItem="DTA-rm-T9s" secondAttribute="bottom" id="vYY-rL-eu2"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Ozu-OY-Xbx"/>
+                                    <exclude reference="nQB-bo-K5o"/>
+                                </mask>
+                            </variation>
                             <connections>
                                 <outletCollection property="gestureRecognizers" destination="QZC-6x-S2j" appends="YES" id="lSD-b3-DDQ"/>
                             </connections>
@@ -258,7 +264,7 @@
                         <constraint firstItem="R8s-wC-9sK" firstAttribute="centerX" secondItem="B9k-bT-IFe" secondAttribute="centerX" id="5vB-JL-Dll"/>
                         <constraint firstItem="R8s-wC-9sK" firstAttribute="top" secondItem="B9k-bT-IFe" secondAttribute="top" constant="10" id="8di-8K-OLr"/>
                         <constraint firstItem="R8s-wC-9sK" firstAttribute="centerY" secondItem="B9k-bT-IFe" secondAttribute="centerY" constant="-60" id="BUT-7P-jfr"/>
-                        <constraint firstItem="jmK-aN-APg" firstAttribute="width" secondItem="R8s-wC-9sK" secondAttribute="width" id="bwQ-Nk-LXp"/>
+                        <constraint firstItem="jmK-aN-APg" firstAttribute="width" secondItem="R8s-wC-9sK" secondAttribute="width" constant="86" id="bwQ-Nk-LXp"/>
                         <constraint firstItem="jmK-aN-APg" firstAttribute="centerX" secondItem="R8s-wC-9sK" secondAttribute="centerX" id="kIl-y9-cfl"/>
                         <constraint firstAttribute="width" constant="180" id="tyP-U3-qQT"/>
                         <constraint firstAttribute="bottom" secondItem="236-QY-fYx" secondAttribute="bottom" constant="5" id="wCL-6D-BYw"/>
@@ -276,6 +282,7 @@
                             <exclude reference="tyP-U3-qQT"/>
                             <exclude reference="8di-8K-OLr"/>
                             <exclude reference="wCL-6D-BYw"/>
+                            <exclude reference="bwQ-Nk-LXp"/>
                         </mask>
                     </variation>
                 </view>
@@ -308,8 +315,8 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="checkBox" width="128" height="128"/>
-        <image name="checkBoxSelected" width="128" height="128"/>
+        <image name="cameraFollowClose" width="250" height="50"/>
+        <image name="cameraFollowOpen" width="250" height="50"/>
         <image name="controlBg.png" width="3" height="3"/>
         <image name="down" width="100" height="231"/>
         <image name="down.png" width="375" height="375"/>

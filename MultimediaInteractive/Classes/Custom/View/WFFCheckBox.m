@@ -86,7 +86,7 @@
     if (!_textLabel) {
         self.textLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.bounds.size.height, 0, self.bounds.size.width - self.bounds.size.height, self.bounds.size.height)];
         _textLabel.textAlignment = NSTextAlignmentCenter;
-        _textLabel.textColor = [UIColor whiteColor];
+        _textLabel.textColor = [UIColor blackColor];
         [self insertSubview:_textLabel aboveSubview:self.backgroundImageView];
     }
     return _textLabel;

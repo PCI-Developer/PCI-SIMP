@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MultimediaInteractive/Classes/View/SystemMain/Actual/ProcessView.m"
-            timestampString = "471752342.180257"
+            filePath = "MultimediaInteractive/Classes/Custom/Category/NSObject+CheckNull.m"
+            timestampString = "472026260.318132"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "-checkNull"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

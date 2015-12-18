@@ -140,7 +140,7 @@
             result = @"成功";
         }
         cell.resultLabel.text = result;
-        cell.userLabel.text = [model.createUserID isEqualToString:@"demo"] ? @"演示用户" : model.createUserID;
+        cell.userLabel.text = [model.createUserID checkNull]  ? @"演示用户" : model.createUserID;
         cell.createDateLabel.text = [NSString stringWithDate:[NSDate dateWithTimeIntervalSince1970:model.createDate]];
         
         return cell;

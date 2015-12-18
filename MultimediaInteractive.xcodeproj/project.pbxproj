@@ -57,6 +57,7 @@
 		608A33601BB536ED00E0AA57 /* OPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 608A335F1BB536ED00E0AA57 /* OPManager.m */; };
 		609B6F9E1C040DC600B62D95 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 609B6F9D1C040DC600B62D95 /* UIView+AutoLayout.m */; };
 		609B6FA81C04559700B62D95 /* DeviceInfoMicView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 609B6FA71C04559700B62D95 /* DeviceInfoMicView.xib */; };
+		609DB8551C228B6600330979 /* NSObject+CheckNull.m in Sources */ = {isa = PBXBuildFile; fileRef = 609DB8541C228B6600330979 /* NSObject+CheckNull.m */; };
 		60A3D5A11BCCCFAA00313F8F /* Chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A3D58E1BCCCFAA00313F8F /* Chat.png */; };
 		60A3D5A21BCCCFAA00313F8F /* Graph.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A3D58F1BCCCFAA00313F8F /* Graph.png */; };
 		60A3D5A31BCCCFAA00313F8F /* Home.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A3D5901BCCCFAA00313F8F /* Home.png */; };
@@ -223,6 +224,8 @@
 		609B6F9C1C040DC600B62D95 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
 		609B6F9D1C040DC600B62D95 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
 		609B6FA71C04559700B62D95 /* DeviceInfoMicView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoMicView.xib; sourceTree = "<group>"; };
+		609DB8531C228B6600330979 /* NSObject+CheckNull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CheckNull.h"; sourceTree = "<group>"; };
+		609DB8541C228B6600330979 /* NSObject+CheckNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CheckNull.m"; sourceTree = "<group>"; };
 		60A3D58E1BCCCFAA00313F8F /* Chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chat.png; sourceTree = "<group>"; };
 		60A3D58F1BCCCFAA00313F8F /* Graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Graph.png; sourceTree = "<group>"; };
 		60A3D5901BCCCFAA00313F8F /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home.png; sourceTree = "<group>"; };
@@ -537,6 +540,8 @@
 				6077D75E1BCB585600DABD89 /* UIView+Animation.m */,
 				60AE84181BD0DFC000F85304 /* UIColor+Category.h */,
 				60AE84191BD0DFC000F85304 /* UIColor+Category.m */,
+				609DB8531C228B6600330979 /* NSObject+CheckNull.h */,
+				609DB8541C228B6600330979 /* NSObject+CheckNull.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1057,6 +1062,11 @@
 					602C3A9E1BAFCC88000C41DA = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = CL9XNG6749;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					602C3AB71BAFCC88000C41DA = {
 						CreatedOnToolsVersion = 7.1;
@@ -1203,6 +1213,7 @@
 				60FAE6511BBB74560064ECB9 /* DetailOfAreaConfig.m in Sources */,
 				602C3B761BAFCCCC000C41DA /* AsyncSocket.m in Sources */,
 				606E12501BF2F194001E9B80 /* SHMenuItem.m in Sources */,
+				609DB8551C228B6600330979 /* NSObject+CheckNull.m in Sources */,
 				6077D7631BCB9A6F00DABD89 /* DetaiLayoutOfAreaByViewpointType.m in Sources */,
 				602C3B4F1BAFCCCC000C41DA /* DBHelper.m in Sources */,
 				602C3B651BAFCCCC000C41DA /* DeviceForUser.m in Sources */,

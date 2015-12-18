@@ -20,6 +20,7 @@
 
 - (CGSize)intrinsicContentSize
 {
+    
     if (self.contentSize.width == 0) {
         return CGSizeMake(1, UIViewNoIntrinsicMetric);
     } else if (self.contentSize.width >= kScreenWidth) {
