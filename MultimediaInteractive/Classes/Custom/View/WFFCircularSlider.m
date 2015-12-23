@@ -158,8 +158,14 @@
 }
 
 #pragma mark - 手势
-- (void)grAction:(UIGestureRecognizer *)sender
+- (void)grAction:(UIPanGestureRecognizer *)sender
 {
+    CGPoint translationPoint = [sender translationInView:self];
+    // 平移量少 return
+    // 防止误操作
+    if (fabs(translationPoint.x) < 3 || fabs(translationPoint.y) < 3) {
+        return;
+    }
     CGPoint touchPoint = [sender locationInView:self];
     CGFloat radian = [self point2RadianWithLoc:touchPoint view:self];
     
@@ -180,8 +186,6 @@
 //        self.value = value > 1 ? 1 : value;
 //    }
 //    // --- Old
-    
-    
     
     /**
      *  触摸点移动到最大最小无效区间后,停止手势

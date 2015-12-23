@@ -1474,7 +1474,6 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         cell.backgroundColor = [UIColor clearColor];
         
         cell.imageView.image = [UIImage imageNamed:@"state_0"];
-        
         cell.deviceImageView.image = [UIImage imageNamed:[model imageNameByStatusRunAnimationOnImageView:cell.deviceImageView]];
         
         cell.tag = indexPath.row;
