@@ -110,10 +110,13 @@
 }
 
 
-#if __IPAD_OS_VERSION_MAX_ALLOWED >= __IPAD_6_0
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
-    return UIInterfaceOrientationMaskAll;
+    if (_isMaskAllForInterfaceOrientations) {
+        return UIInterfaceOrientationMaskAll;
+    } else {
+        return UIInterfaceOrientationMaskLandscape;
+    }
 }
-#endif
+
 
 @end

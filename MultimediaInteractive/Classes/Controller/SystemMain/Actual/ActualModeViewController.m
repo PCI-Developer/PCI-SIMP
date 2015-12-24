@@ -27,6 +27,7 @@
 
 #import "ProcessView.h"
 
+#import "AppDelegate.h"
 /**
  枚举值.当前置顶的view类型
  */
@@ -1759,7 +1760,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     __weak typeof(self) weakSelf = self;
     if (isCameraSupport) {
         [alertController addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [alertController dismissViewControllerAnimated:YES completion:nil];
+            ((AppDelegate *)[UIApplication sharedApplication].delegate).isMaskAllForInterfaceOrientations = YES;
+
             //指定使用照相机模式,可以指定使用相册／照片库
             weakSelf.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
             /// 相机相关 [sourceType不设置为Camera.下面属性无法设置]
@@ -1786,6 +1788,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     
     if (isPhotoLibrarySupport) {
         [alertController addAction:[UIAlertAction actionWithTitle:@"从照片库选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            ((AppDelegate *)[UIApplication sharedApplication].delegate).isMaskAllForInterfaceOrientations = YES;
             //指定使用照相机模式,可以指定使用相册／照片库
             weakSelf.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             [weakSelf presentViewController:weakSelf.imagePickerController animated:YES completion:nil];
@@ -1794,7 +1797,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     
     if (isSavedPhotosAlbumSupport) {
         [alertController addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [alertController dismissViewControllerAnimated:YES completion:nil];
+            ((AppDelegate *)[UIApplication sharedApplication].delegate).isMaskAllForInterfaceOrientations = YES;
+
             //指定使用照相机模式,可以指定使用相册／照片库
             weakSelf.imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
             [weakSelf presentViewController:weakSelf.imagePickerController animated:YES completion:nil];
@@ -1802,7 +1806,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     }
     // 取消
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//        self.currentMode = ActualModeTypeNormal;
+        ((AppDelegate *)[UIApplication sharedApplication].delegate).isMaskAllForInterfaceOrientations = NO;
+
         if (cancleHandle) {
             cancleHandle();
         }
@@ -1817,6 +1822,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).isMaskAllForInterfaceOrientations = NO;
+
     UIImage *image = info[UIImagePickerControllerEditedImage] ? info[UIImagePickerControllerEditedImage] : info[UIImagePickerControllerOriginalImage];
     kSetActualImage(self.currentViewpointType, image);
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -1826,6 +1833,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).isMaskAllForInterfaceOrientations = NO;
+
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 

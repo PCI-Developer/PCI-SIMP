@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+// 是否所有方向都支持 - 当UIImagePickerController出现时，支持所有方向。
+@property (nonatomic, assign) BOOL isMaskAllForInterfaceOrientations;
 
 @end
 
