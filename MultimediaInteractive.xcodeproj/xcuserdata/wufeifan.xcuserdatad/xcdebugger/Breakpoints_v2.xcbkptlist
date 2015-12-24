@@ -4,13 +4,19 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            scope = "0"
-            stopOnStyle = "0">
+            filePath = "MultimediaInteractive/Classes/Controller/SystemMain/Actual/ActualModeViewController.m"
+            timestampString = "472618442.059343"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1754"
+            endingLineNumber = "1754"
+            landmarkName = "-showImagePickerControllerWithTitle:cancleHandle:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -19,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MultimediaInteractive/Classes/Custom/Category/NSObject+CheckNull.m"
-            timestampString = "472026260.318132"
+            filePath = "MultimediaInteractive/Classes/Controller/SystemMain/Actual/ActualModeViewController.m"
+            timestampString = "472618442.059343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "-checkNull"
+            startingLineNumber = "1790"
+            endingLineNumber = "1790"
+            landmarkName = "-showImagePickerControllerWithTitle:cancleHandle:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

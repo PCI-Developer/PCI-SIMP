@@ -71,12 +71,13 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+    [_menuTableView registerNib:[UINib nibWithNibName:@"SHMenuCell" bundle:nil] forCellReuseIdentifier:@"cell"];
+
 	// Do any additional setup after loading the view from its nib.
 	[self setupMenuItems];
 	[self setupGestures];
     [self setTableView];
 //    [self setUpBackView];
-    [_menuTableView registerNib:[UINib nibWithNibName:@"SHMenuCell" bundle:nil] forCellReuseIdentifier:@"cell"];
 }
 
 //- (void)setUpBackView
@@ -113,7 +114,7 @@
     
     // backView 跟随tableview
     _backView.frame = _menuTableView.frame;
-    
+
 }
 
 - (void)setupMenuItems

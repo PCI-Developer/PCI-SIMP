@@ -163,9 +163,12 @@
     CGPoint translationPoint = [sender translationInView:self];
     // 平移量少 return
     // 防止误操作
-    if (fabs(translationPoint.x) < 3 || fabs(translationPoint.y) < 3) {
+    CGFloat dx = fabs(translationPoint.x);
+    CGFloat dy = fabs(translationPoint.y);
+    if (sqrt(dx * dx + dy * dy) < 5) {
         return;
     }
+    
     CGPoint touchPoint = [sender locationInView:self];
     CGFloat radian = [self point2RadianWithLoc:touchPoint view:self];
     

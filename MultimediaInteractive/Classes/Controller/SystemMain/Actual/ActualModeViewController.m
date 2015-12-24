@@ -807,7 +807,13 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 #pragma mark - 图片点击切换操作状态
 - (void)actualImageViewTapGRAction:(UITapGestureRecognizer *)sender
 {
+    // 正常模式时，点击底图出现视角切换
+    if (self.currentMode == ActualModeTypeNormal) {
+        [self startTimerForAutoHideViewpointButtonsView];// 几秒后自动隐藏
+    }
+    
     [self updateViewHideOrShowByType:TopViewTypeNone];
+    
 }
 
 #pragma mark - 根据AUTOID获取设备的布局模型
@@ -1732,10 +1738,16 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     }
 }
 
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
 #pragma mark - UIImagePickerController
 - (void)showImagePickerControllerWithTitle:(NSString *)title cancleHandle:(void (^)())cancleHandle
 {
     self.imagePickerController = [[UIImagePickerController alloc]init];
+    
     _imagePickerController.delegate = self;
     
     // 判断支持来源类型(拍照,照片库,相册)
