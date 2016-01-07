@@ -9,7 +9,10 @@
 #import "AppDelegate.h"
 #import "PermissionCheckingViewController.h"
 @interface AppDelegate ()
-
+{
+    int _timeInterval;
+    UIBackgroundTaskIdentifier _bgTask;
+}
 @end
 
 @implementation AppDelegate
@@ -42,59 +45,36 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    UIApplication*
-    app = [UIApplication sharedApplication];
-    
-    __block
-    UIBackgroundTaskIdentifier bgTask;
-    
-    bgTask
-    = [app beginBackgroundTaskWithExpirationHandler:^{
-        
-        dispatch_async(dispatch_get_main_queue(),
-                       ^{
-                           
-                           if
-                               
-                               (bgTask != UIBackgroundTaskInvalid)
-                               
-                           {
-                               
-                               bgTask
-                               = UIBackgroundTaskInvalid;
-                               
-                           }
-                           
-                       });
-        
-    }];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,
-                                             0),
-                   ^{
-                       
-                       dispatch_async(dispatch_get_main_queue(),
-                                      ^{
-                                          
-                                          if
-                                              
-                                              (bgTask != UIBackgroundTaskInvalid)
-                                              
-                                          {
-                                              
-                                              bgTask
-                                              = UIBackgroundTaskInvalid;
-                                              
-                                          }
-                                          
-                                      });
-                       
-                   });
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+//程序已经进入后台
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    // 刚进入后台，应用有几秒的保存时间。因此在1秒内足够进入定时器开启后台任务。
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
 }
-
+#pragma mark -- 无限后台 -- 定时器无限创建后台任务。
+-(void)timerAction:(NSTimer *)timer
+{
+    _timeInterval++;
+    if(_timeInterval == 500)//后台任务的生命同期为600s
+    {
+        UIApplication *application = [UIApplication sharedApplication];
+        //结束旧的后台任务
+        if (_bgTask != UIBackgroundTaskInvalid) { // 有效的后台任务
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [application endBackgroundTask:_bgTask];
+            });
+        }
+        
+        //开启一个新的后台任务
+        _bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
+              // 当应用程序留给后台的时间快要到结束时（应用程序留给后台执行的时间是有限的）， 这个Block块将被执行
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [application endBackgroundTask:_bgTask];
+            });
+        }];
+        _timeInterval = 0;
+    }
+}
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationWillEnterForeground object:nil];

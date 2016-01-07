@@ -58,8 +58,8 @@ kSingleTon_M(SocketManager)
         // 2. 绑定监听端口
         [_serverSocket acceptOnPort:8000 error:nil];
         
-        // 要连接,说明之前已经断开.重新开始计算命令编号
-        currentNum = 1;
+//        // 要连接,说明之前已经断开.重新开始计算命令编号
+//        currentNum = 1;
         
         kLog(@"开始监听8000端口,等待连接...%d", _serverSocket.isConnected);
     }

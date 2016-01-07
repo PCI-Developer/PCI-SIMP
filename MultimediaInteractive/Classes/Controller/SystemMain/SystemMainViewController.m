@@ -258,8 +258,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-
 #pragma mark - 更新电池状态
 - (void)updateBattery
 {

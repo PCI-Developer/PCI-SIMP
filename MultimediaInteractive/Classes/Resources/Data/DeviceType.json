@@ -3,12 +3,8 @@
         "name" : "音箱",
         "inOrOut":"out",
         "soundConnectedType":[
-                              "麦克",
-                              "电脑",
-                              "笔记本",
-                              "DVD",
-                              "视频会议"
-                              ],
+        
+        ],
         "videoConnectedType":[
         
         ],
@@ -41,11 +37,7 @@
         
         ],
         "videoConnectedType":[
-                              "摄像头",
-                              "电脑",
-                              "笔记本",
-                              "DVD",
-                              "视频会议"
+        
         ],
         "imageName" : "led",
         "isActual" : true,
@@ -102,20 +94,8 @@
     "电视":{
         "name" : "电视",
         "inOrOut":"out",
-        "soundConnectedType":[
-                              "麦克",
-                              "电脑",
-                              "笔记本",
-                              "DVD",
-                              "视频会议"
-                              ],
-        "videoConnectedType":[
-                              "摄像头",
-                              "电脑",
-                              "笔记本",
-                              "DVD",
-                              "视频会议"
-                              ],
+        "soundConnectedType":[],
+        "videoConnectedType":[],
         "imageName" : "tv",
         "isActual" : true,
         "controlCMD" : ["oc", "slider", "channel"],
@@ -155,6 +135,5 @@
         "controlCMD" : ["oc", "slider"],
         "minValue" : -50,
         "maxValue" : 5
-    }
-    
+    }    
 }
