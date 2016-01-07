@@ -10,8 +10,8 @@
 #import "PermissionCheckingViewController.h"
 @interface AppDelegate ()
 {
-    int _timeInterval;
     UIBackgroundTaskIdentifier _bgTask;
+    dispatch_source_t _timer;
 }
 @end
 
@@ -45,18 +45,15 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
-//程序已经进入后台
+// 程序已经进入后台
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // 刚进入后台，应用有几秒的保存时间。因此在1秒内足够进入定时器开启后台任务。
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
-}
-#pragma mark -- 无限后台 -- 定时器无限创建后台任务。
--(void)timerAction:(NSTimer *)timer
-{
-    _timeInterval++;
-    if(_timeInterval == 500)//后台任务的生命同期为600s
-    {
+
+    // 无限后台 -- 定时器无限创建后台任务。
+    _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
+    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 500.0f * NSEC_PER_SEC, 0);
+    // 马上执行一次
+    dispatch_source_set_event_handler(_timer, ^{
         UIApplication *application = [UIApplication sharedApplication];
         //结束旧的后台任务
         if (_bgTask != UIBackgroundTaskInvalid) { // 有效的后台任务
@@ -67,14 +64,18 @@
         
         //开启一个新的后台任务
         _bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
-              // 当应用程序留给后台的时间快要到结束时（应用程序留给后台执行的时间是有限的）， 这个Block块将被执行
+            // 当应用程序留给后台的时间快要到结束时（应用程序留给后台执行的时间是有限的）， 这个Block块将被执行
             dispatch_async(dispatch_get_main_queue(), ^{
                 [application endBackgroundTask:_bgTask];
             });
         }];
-        _timeInterval = 0;
-    }
+    });
+
+    // 开启定时
+    dispatch_resume(_timer);
+    
 }
+
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationWillEnterForeground object:nil];
@@ -82,6 +83,10 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    if (_timer != NULL) {
+        dispatch_source_cancel(_timer);
+        _timer = NULL;
+    }
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
