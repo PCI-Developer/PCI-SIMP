@@ -11,6 +11,7 @@
 @interface DeviceCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIImageView *deviceImageView;
+@property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 
 - (void)changeImageViewWithStatus:(DeviceViewImageStatus)status;
 @end

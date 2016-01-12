@@ -10,4 +10,6 @@
 
 @interface AutoSizeCollectionView : UICollectionView
 
+@property (nonatomic, assign) IBInspectable CGFloat maxWidth;
+
 @end

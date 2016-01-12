@@ -30,6 +30,7 @@
 
 @property (nonatomic, strong) NSMutableArray *commonDeviceArray; // 公共设备
 
+
 #pragma mark - 实景图
 @property (nonatomic, strong) UIImage *actualImage;
 
@@ -236,6 +237,11 @@ kSingleTon_M(Common)
 {
     return  self.commonDeviceArray;
 }
+
+- (NSArray *)musicFiles
+{
+    return [self getDeviceWithType:@"音频文件"];
+}
 #pragma mark - 实景图
 - (UIImage *)actualImageWithViewpointType:(NSString *)viewpointType
 {
@@ -399,7 +405,7 @@ kSingleTon_M(Common)
     
     if (self.isDemo) {
         self.allAreasArray = [NSMutableArray array];
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             NSDictionary *dict = @{@"AreaID" : [NSString stringWithFormat:@"AreaID%02d", i],
                                    @"AreaName" : [NSString stringWithFormat:@"AreaName%02d", i]
                                    };
@@ -409,7 +415,7 @@ kSingleTon_M(Common)
         }
         
         self.allDevicesDict = [NSMutableDictionary dictionary];
-        for (int i = 0; i < 36; i++) {
+        for (int i = 0; i < 40; i++) {
             
             NSString *typeString = self.deviceTypeDict.allKeys[i % self.deviceTypeDict.allKeys.count];
             // 允许开关的设备,默认打开
@@ -460,9 +466,12 @@ kSingleTon_M(Common)
             [model setValuesForKeysWithDictionary:dict];
             [self.commonDeviceArray addObject:model];
         }
+        
+       
         if (completionHandle) {
             completionHandle(YES, nil);
         }
+        
 
     } else { // 从PC获取
         [WFFProgressHud showWithStatus:@"加载数据..."];

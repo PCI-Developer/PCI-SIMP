@@ -52,7 +52,7 @@
                 imageView.animationDuration = 0.5;
                 imageView.animationRepeatCount = HUGE_VAL;
                 
-                imageView.animationImages = @[[UIImage imageNamed:[NSString stringWithFormat:@"%@_open", self.imageName]], [UIImage imageNamed:[NSString stringWithFormat:@"%@_open", self.imageName]]];
+                imageView.animationImages = @[[UIImage imageNamed:[NSString stringWithFormat:@"%@_open", self.imageName]], [UIImage imageNamed:[NSString stringWithFormat:@"%@_open1", self.imageName]]];
                 [imageView startAnimating];
             }
         } else {// 不需要动画

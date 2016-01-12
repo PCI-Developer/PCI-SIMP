@@ -39,6 +39,15 @@ typedef enum
     TopViewTypeForCommonDeviceView
 } TopViewType;
 
+/**
+ 底部其他视图的种类
+ */
+typedef enum
+{
+    OtherViewTypeCommonDevice,
+    OtherViewTypeMusicFile
+} OtherViewType;
+
 @interface ActualModeViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, WFFFollowHandsViewDelegate,UIGestureRecognizerDelegate, WFFDropdownListDelegate, DeviceInfoBaseViewDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary *movingViewDict; // 存放正在移动的所有view的字典
@@ -68,7 +77,6 @@ typedef enum
 
 - (IBAction)changeActualImageButtonAction:(UIButton *)sender;
 - (IBAction)changeCurrenScreenButtonAction:(UIButton *)sender;
-- (IBAction)showViewpointsViewButtonAction:(UIButton *)sender;
 // 修改场景时出现的按钮
 @property (weak, nonatomic) IBOutlet UIImageView *trashImageView;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
@@ -104,7 +112,6 @@ typedef enum
  */
 @property (nonatomic, strong) CameraFollowConfigView *cameraFollowConfigView;
 
-@property (weak, nonatomic) IBOutlet UIView *deviceInfoTypeChoose; // 快速选择类型
 // 显示快速选择
 - (IBAction)showQuickChooseButtonAction:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UIButton *showQuickChooseButton;
@@ -120,10 +127,6 @@ typedef enum
  */
 @property (nonatomic, strong) DeviceForUser *selectedDevice;
 
-/**
- *  选中设备类型
- */
-@property (nonatomic, copy) NSString *selectedDeviceType;
 
 /**
  *  切换视角按钮的父视图
@@ -148,14 +151,14 @@ typedef enum
 @property (nonatomic, strong) NSArray *allTypeOfDevicesArray;
 
 /**
- *  设备类型的collectionView - 自适应宽度(内容宽度<屏幕宽度时,自适应;内容宽度>屏幕宽度时,可滑动)
- */
-@property (weak, nonatomic) IBOutlet AutoSizeCollectionView *deviceTypeCollectionView;
-/**
- *  公共设备的collectionView - 自适应宽度(内容宽度<屏幕宽度时,自适应;内容宽度>屏幕宽度时,可滑动)
+ *  公共设备的collectionView
  */
 @property (weak, nonatomic) IBOutlet AutoSizeCollectionView *commonDeviceCollectionView;
 @property (weak, nonatomic) IBOutlet UIView *commonDeviceBackgroundView;
+@property (weak, nonatomic) IBOutlet UIButton *musicFileButton;
+@property (weak, nonatomic) IBOutlet UIButton *commonDeviceButton;
+@property (nonatomic, assign) OtherViewType selectedOtherViewType;
+- (IBAction)otherViewButtonAction:(UIButton *)sender;
 
 @end
 
@@ -169,7 +172,6 @@ typedef enum
     self.channelArray = @[@"切换频道", @"TV", @"HDMI1", @"HDMI2", @"DVI-I", @"USB", @"VGA"];
     // 新建场景时的collectionView注册Cell
     [self.deviceCollectionView registerNib:[UINib nibWithNibName:@"DeviceCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"deviceCell"];
-    [self.deviceTypeCollectionView registerNib:[UINib nibWithNibName:@"DeviceCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"deviceTypeCell"];
     [self.commonDeviceCollectionView registerNib:[UINib nibWithNibName:@"DeviceCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"commonDeviceCell"];
     //
     self.actualImageViewTapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actualImageViewTapGRAction:)];
@@ -218,7 +220,6 @@ typedef enum
 {
     [super viewDidLayoutSubviews];
     
-    [self.deviceTypeCollectionView invalidateIntrinsicContentSize];
     [self.commonDeviceCollectionView invalidateIntrinsicContentSize];
     
 }
@@ -237,7 +238,6 @@ typedef enum
 #pragma mark 屏幕旋转
 - (void)handleDeviceOrientationDidChange:(NSNotification *)notification
 {
-    [self.deviceTypeCollectionView invalidateIntrinsicContentSize];
     [self.commonDeviceCollectionView invalidateIntrinsicContentSize];
 }
 // END
@@ -246,8 +246,10 @@ typedef enum
 - (void)recieveDeviceUpdateNotification:(NSNotification *)sender
 {
     DeviceForUser *device = sender.object;
-    if ([kCommonDevices containsObject:device]) {// 公共设备
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[kCommonDevices indexOfObject:device] inSection:0];
+    if (([kCommonDevices containsObject:device] && self.selectedOtherViewType == OtherViewTypeCommonDevice) ||
+        ([kMusicFile containsObject:device] && self.selectedOtherViewType == OtherViewTypeMusicFile) ) {// 公共设备 || 音频文件
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.selectedOtherViewType == OtherViewTypeCommonDevice ? kCommonDevices : kMusicFile indexOfObject:device] inSection:0];
         DeviceCollectionViewCell *cell = (DeviceCollectionViewCell *)[self.commonDeviceCollectionView cellForItemAtIndexPath:indexPath];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (self.selectedDevice == device) {
@@ -307,7 +309,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 #pragma mark - DeviceInfoBaseViewDelegate
 - (void)deviceInfoView:(DeviceInfoBaseView *)deviceInfoView orientationButtonTouchDown:(UIButton *)button
 {
-    if (![self checkPermissions]) {
+    if (![self checkPermissionsByDevice:self.selectedDevice]) {
         return;
     }
     isDeviceInfoOrientationButtonTouchDown = YES;
@@ -340,7 +342,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 
 - (void)deviceInfoView:(DeviceInfoBaseView *)deviceInfoView channelIndexChanged:(NSInteger)channelIndex
 {
-    if (![self checkPermissions]) {
+    if (![self checkPermissionsByDevice:self.selectedDevice]) {
         return;
     }
     
@@ -356,7 +358,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
                 //                [self showAlertControllerWithTitle:@"网络连接故障,请重试!"];
             }
         }];
-    } else { // 批量
+    } /*else { // 批量
         NSArray *selectedDetailOfAreaScreen = [self getAllDetailOfAreaScreenWithDeviceType:self.selectedDeviceType];
         NSMutableArray *deviceArray = [NSMutableArray array];
         for (DetaiLayoutOfAreaByViewpointType *model in selectedDetailOfAreaScreen) {
@@ -369,13 +371,13 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
                 //                [self showAlertControllerWithTitle:@"网络连接故障,请重试!"];
             }
         }];
-    }
+    }*/
     
 }
 
 - (void)deviceInfoViewCloseButtonClicked:(DeviceInfoBaseView *)deviceInfoView
 {
-    if (![self checkPermissions]) {
+    if (![self checkPermissionsByDevice:self.selectedDevice]) {
         return;
     }
     if (self.selectedDevice) {
@@ -387,7 +389,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             }
             
         });
-    } else { // 批量
+    }/* else { // 批量
         NSArray *selectedDetailOfAreaScreen = [self getAllDetailOfAreaScreenWithDeviceType:self.selectedDeviceType];
         NSMutableArray *deviceArray = [NSMutableArray array];
         for (DetaiLayoutOfAreaByViewpointType *model in selectedDetailOfAreaScreen) {
@@ -401,13 +403,13 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             }
         });
     }
-    
+    */
     
 }
 
 - (void)deviceInfoViewOpenButtonClicked:(DeviceInfoBaseView *)deviceInfoView
 {
-    if (![self checkPermissions]) {
+    if (![self checkPermissionsByDevice:self.selectedDevice]) {
         return;
     }
     if (self.selectedDevice) {
@@ -418,7 +420,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
                 //                [self showAlertControllerWithTitle:@"网络连接故障,请重试!"];
             }
         });
-    } else { // 批量
+    }/* else { // 批量
         NSArray *selectedDetailOfAreaScreen = [self getAllDetailOfAreaScreenWithDeviceType:self.selectedDeviceType];
         NSMutableArray *deviceArray = [NSMutableArray array];
         for (DetaiLayoutOfAreaByViewpointType *model in selectedDetailOfAreaScreen) {
@@ -431,13 +433,13 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
                 //                [self showAlertControllerWithTitle:@"网络连接故障,请重试!"];
             }
         });
-    }
+    }*/
     
 }
 
 - (void)deviceInfoViewSliderLeaveFoucsWithValue:(CGFloat)value
 {
-    if (![self checkPermissions]) {
+    if (![self checkPermissionsByDevice:self.selectedDevice]) {
         // 滑块归位
         [self updateUIOfDeviceInfoView];
         return;
@@ -454,7 +456,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
                 //                [self showAlertControllerWithTitle:@"网络连接故障,请重试!"];
             }
         }];
-    } else { // 批量
+    } /*else { // 批量
         //        CGFloat maxValue = [kDeviceTypeInfo(self.selectedDevice.UEQP_Type)[@"maxValue"] floatValue];
         CGFloat minValue = [kDeviceTypeInfo(self.selectedDevice.UEQP_Type)[@"minValue"] floatValue];
         NSString *valueForSet = [NSString stringWithFormat:@"%.2f", minValue];
@@ -471,13 +473,13 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
                 //                [self showAlertControllerWithTitle:@"网络连接故障,请重试!"];
             }
         }];
-    }
+    }*/
     
 }
 
 - (void)deviceInfoViewVolumeAddButtonClicked
 {
-    if (![self checkPermissions]) {
+    if (![self checkPermissionsByDevice:self.selectedDevice]) {
         // 滑块归位
         [self updateUIOfDeviceInfoView];
         return;
@@ -510,7 +512,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 //
 - (void)deviceInfoViewVolumeMinusButtonClicked
 {
-    if (![self checkPermissions]) {
+    if (![self checkPermissionsByDevice:self.selectedDevice]) {
         // 滑块归位
         [self updateUIOfDeviceInfoView];
         return;
@@ -595,12 +597,6 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             if (self.operatioinView.hidden) {
                 [self.operatioinView setHidden:NO animated:YES];
             }
-            // 隐藏快速选择
-            if (self.deviceInfoTypeChoose.hidden == NO) {
-                [self.deviceInfoTypeChoose setHidden:YES animated:YES];
-            }
-            
-            
             
             // 隐藏公共设备
             if (self.commonDeviceBackgroundView.hidden == NO) {
@@ -624,14 +620,12 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
                 [self.processBackgroundView setHidden:YES animated:YES];
             }
             self.selectedDevice = nil;
-            self.selectedDeviceType = nil;
             // 公共设备 && 快速选择
-            [self setCellHighlightWithCollectionView:self.deviceTypeCollectionView indexPath:nil];
             [self setCellHighlightWithCollectionView:self.commonDeviceCollectionView indexPath:nil];
             break;
         case TopViewTypeForDeviceInfoView:
             // 显示设备信息界面 -- 拖动的时候,不一定选中了.没选中就不需要显示
-            if (self.deviceInfoBackgroundView.hidden && (self.selectedDevice || self.selectedDeviceType)) {
+            if (self.deviceInfoBackgroundView.hidden && (self.selectedDevice/* || self.selectedDeviceType*/)) {
                 [self.deviceInfoBackgroundView setHidden:NO animated:YES];
             }
             // 隐藏操作界面
@@ -653,6 +647,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             } else {
                 if (self.commonDeviceBackgroundView.hidden) {
                     [self.commonDeviceBackgroundView setHidden:NO animated:YES];
+                    // 出现的时候默认为公共设备
+                    self.selectedOtherViewType = OtherViewTypeCommonDevice;
                 }
             }
             
@@ -687,9 +683,11 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 #pragma mark 更新设备详情界面的值
 - (void)updateUIOfDeviceInfoView
 {
-    
-    NSString *deviceType = self.selectedDeviceType ? self.selectedDeviceType : self.selectedDevice.UEQP_Type;
-    NSString *value = self.selectedDeviceType ? nil : self.selectedDevice.value;
+    if (!self.selectedDevice) {
+        return ;
+    }
+    NSString *deviceType = self.selectedDevice.UEQP_Type;
+    NSString *value = self.selectedDevice.value;
     NSString *deviceInfoNibName;
     NSArray *cmdArray = kDeviceTypeInfo(deviceType)[@"controlCMD"];
     /**
@@ -734,9 +732,9 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     }
     
     
-    
+    // 当前版本已 取消批量 功能
     // 根据是否批量操作,改变控件的enabled
-    _deviceInfoView.isBatch = self.selectedDeviceType != nil;
+    _deviceInfoView.isBatch = FALSE;
     
     // 更新值
     if (self.selectedDevice) {
@@ -770,7 +768,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         }
         [self.deviceInfoView.cameraFollowConfigButton setTitle:cameraFollowText forState:UIControlStateNormal];
         
-    } else {
+    } /*else {
         if (self.deviceInfoView.deviceInfoImageView.isAnimating) {// 正在动画,就停止 -- 之前选中过该类型下的某个连接打开的设备
             [self.deviceInfoView.deviceInfoImageView stopAnimating];
         }
@@ -778,7 +776,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         self.deviceInfoView.deviceInfoNameLabel.text = @"批量操作";
         [self.deviceInfoView.deviceInfoCloseButton setSelected:NO];
         [self.deviceInfoView.deviceInfoOpenButton setSelected:NO];
-    }
+    }*/
     
     
     // 换算slider中的大小(0 - 1)
@@ -890,15 +888,16 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 }
 
 /**
- *  根据ID获取公共设备
+ *  根据ID获取其他设备
  *
  *  @param autoID ID
  *
- *  @return 公共设备,nil说明ID对应的设备不是公共设备
+ *  @return 其他设备,nil说明ID对应的设备是实体设备（非公共设备或音频文件）
  */
-- (DeviceForUser *)commonDevicesIsContainDeviceByAutoID:(NSInteger)autoID
+- (DeviceForUser *)otherDevicesIsContainDeviceByAutoID:(NSInteger)autoID
 {
-    for (DeviceForUser *model in kCommonDevices) {
+    NSArray *otherDeviceArray = self.selectedOtherViewType == OtherViewTypeCommonDevice ? kCommonDevices : kMusicFile;
+    for (DeviceForUser *model in otherDeviceArray) {
         if (model.AutoID == autoID) {
             return model;
         }
@@ -925,7 +924,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     // 放入移动设备字典中
     [self.movingViewDict setObject:followHandsView forKey:@(followHandsView.tag)];
     
-    DeviceForUser *commonDevice = [self commonDevicesIsContainDeviceByAutoID:followHandsView.tag];
+    DeviceForUser *commonDevice = [self otherDevicesIsContainDeviceByAutoID:followHandsView.tag];
     NSString *deviceType = nil;
     if (commonDevice) { // 当前拖动的是公共设备
         deviceType = commonDevice.UEQP_Type;
@@ -956,11 +955,10 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     }
     
 
-    DeviceForUser *commonDevice = [self commonDevicesIsContainDeviceByAutoID:followHandsView.tag];
+    DeviceForUser *commonDevice = [self otherDevicesIsContainDeviceByAutoID:followHandsView.tag];
     NSString *deviceType = nil;
     if (commonDevice) { // 当前拖动的是公共设备
         deviceType = commonDevice.UEQP_Type;
-        
     } else {
         DetaiLayoutOfAreaByViewpointType *model = [self getDetailOfAreaScreenWithAutoID:followHandsView.tag];
         
@@ -997,7 +995,9 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     [self.movingViewDict removeObjectForKey:@(followHandsView.tag)];
     
     
-    DeviceForUser *commonDevice = [self commonDevicesIsContainDeviceByAutoID:followHandsView.tag];
+    DeviceForUser *commonDevice = [self otherDevicesIsContainDeviceByAutoID:followHandsView.tag];
+
+    
     DeviceForUser *device = nil;
     if (commonDevice) { // 当前拖动的是公共设备
         device = commonDevice;
@@ -1031,7 +1031,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     
         DetaiLayoutOfAreaByViewpointType *conn = [self getDetailLayoutOfDeviceWhichShouldConnByDeviceType:device.UEQP_Type point:followHandsView.center];
         
-        if (conn && [self checkPermissions]) { // 放到正确的输出源上.判断是否有权限
+        if (conn && [self checkPermissionsByDevice:device]) { // 放到正确的输出源上.判断是否有权限
             DeviceForUser *outDevice = conn.device;
             flag = YES;
             kDeviceConn(device, outDevice, ^(BOOL isSuccess, NSInteger cmdNumber, DeviceForUser *deviceForUser, DeviceForUser *otherDeviceForUser) {
@@ -1181,7 +1181,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 }
 
 #pragma mark - 公共设备长按 - 可拖动
-- (void)commonDeviceImageViewLongPressGRAction:(UILongPressGestureRecognizer *)sender
+- (void)otherDeviceImageViewLongPressGRAction:(UILongPressGestureRecognizer *)sender
 {
     NSIndexPath *indexPath = nil;
     DeviceCollectionViewCell *cell = nil;
@@ -1191,7 +1191,12 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             // 刚触摸的时候才赋值,移动过程中进来后,indexPath对应的cell已经删除,若再执行下面语句就会溢出
             cell = (DeviceCollectionViewCell *)sender.view;
             indexPath = [self.commonDeviceCollectionView indexPathForCell:cell];
-            model = kCommonDevices[indexPath.row];
+            if (self.selectedOtherViewType == OtherViewTypeCommonDevice) {
+                model = kCommonDevices[indexPath.row];
+            } else {
+                model = kMusicFile[indexPath.row];
+            }
+            
             
             // 显示跟随的view
             self.currentHandsView = [WFFFollowHandsView followHandsViewWithWidth:kFollowHandsViewOfDeviceWidth height:kFollowHandsViewOfDeviceHeight deviceCell:cell device:model onView:self.contentView];
@@ -1461,16 +1466,19 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    NSInteger count = 0;
     if (collectionView == self.deviceCollectionView) {
-        return self.devicesArray.count;
-    }
-    if (collectionView == self.deviceTypeCollectionView) {
-        return self.allTypeOfDevicesArray.count;
+        count = self.devicesArray.count;
     }
     if (collectionView == self.commonDeviceCollectionView) {
-        return kCommonDevices.count;
+        if (self.selectedOtherViewType == OtherViewTypeCommonDevice) {
+            count = kCommonDevices.count;
+        } else if (self.selectedOtherViewType == OtherViewTypeMusicFile){
+            count = kMusicFile.count;
+        }
     }
-    return 0;
+    
+    return count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -1479,7 +1487,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         DeviceCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"deviceCell" forIndexPath:indexPath];
         DeviceForUser *model = self.devicesArray[indexPath.row];
         cell.backgroundColor = [UIColor clearColor];
-        
+        cell.infoLabel.text = model.UEQP_Name;
         cell.imageView.image = [UIImage imageNamed:@"state_0"];
         cell.deviceImageView.image = [UIImage imageNamed:[model imageNameByStatusRunAnimationOnImageView:cell.deviceImageView]];
         
@@ -1491,20 +1499,18 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         }
         return cell;
     }
-    if (collectionView == self.deviceTypeCollectionView) {
-        [collectionView invalidateIntrinsicContentSize];
-        DeviceCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"deviceTypeCell" forIndexPath:indexPath];
-        NSString *imageName = kDeviceTypeInfo(self.allTypeOfDevicesArray[indexPath.row])[@"imageName"];
-        cell.imageView.image = [UIImage imageNamed:@"state_0"];
-        cell.deviceImageView.image = [UIImage imageNamed:imageName];
-        
-        [cell.imageView setHighlightedImage:[UIImage imageNamed:[NSString stringWithFormat:@"state_%d", DeviceViewImageStatusForHighlight]]];
-        return cell;
-    }
+    
     if (collectionView == self.commonDeviceCollectionView) {
-        DeviceForUser *model = kCommonDevices[indexPath.row];
+        DeviceForUser *model = nil;
+        if (self.selectedOtherViewType == OtherViewTypeCommonDevice) {
+            model = kCommonDevices[indexPath.row];
+        } else {
+            model = kMusicFile[indexPath.row];
+        }
+        
         [collectionView invalidateIntrinsicContentSize];
         DeviceCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"commonDeviceCell" forIndexPath:indexPath];
+        cell.infoLabel.text = model.UEQP_Name;
         cell.imageView.image = [UIImage imageNamed:@"state_0"];
 //        NSString *imageName = [model imageName];
 //        cell.deviceImageView.image = [UIImage imageNamed:imageName];
@@ -1516,7 +1522,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 //        cell.imageView.userInteractionEnabled = YES;
         if (cell.gestureRecognizers.count == 0) {
             // 手势事件中,根据view的tag来决定选中的哪一个设备.
-            [cell addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(commonDeviceImageViewLongPressGRAction:)]];
+            [cell addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(otherDeviceImageViewLongPressGRAction:)]];
         }
         return cell;
     }
@@ -1525,11 +1531,14 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (collectionView == self.deviceTypeCollectionView) {
-        self.selectedDeviceType = self.allTypeOfDevicesArray[indexPath.row];
-    }
+
     if (collectionView == self.commonDeviceCollectionView) {
-        self.selectedDevice = kCommonDevices[indexPath.row];
+        if (self.selectedOtherViewType == OtherViewTypeCommonDevice) {
+            self.selectedDevice = kCommonDevices[indexPath.row];
+        } else {
+            self.selectedDevice = kMusicFile[indexPath.row];
+        }
+        
     }
     return;
 }
@@ -1561,12 +1570,12 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         
         if (_selectedDevice) {
             self.lastSelectedDevice = _selectedDevice;
-            // 原本选中设备的布局模型 -- 如果是公共设备,则为空
+            // 原本选中设备的布局模型 -- 如果是其他设备,则为空
             DetaiLayoutOfAreaByViewpointType *oldSelectedDeviceDetailLayout = [self getDetailOfAreaScreenWithAutoID:_selectedDevice.AutoID];
             // 修改界面的选中状态
             if (oldSelectedDeviceDetailLayout) {
                  [self changeFollowViewImageWithStatus:DeviceViewImageStatusForNormal inArray:@[oldSelectedDeviceDetailLayout]];
-            } else { // 原本的为公共设备
+            } else { // 原本的为其他视图中的设备
                 [self setCellHighlightWithCollectionView:self.commonDeviceCollectionView indexPath:nil];
             }
         }
@@ -1581,8 +1590,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         if (!selectedDevice) {
             return;
         }
-        // 选中设备,则不选中类型
-        self.selectedDeviceType = nil;
+//        // 选中设备,则不选中类型
+//        self.selectedDeviceType = nil;
         
         // 选中设备的布局模型
         DetaiLayoutOfAreaByViewpointType *selectedDeviceDetailLayout = [self getDetailOfAreaScreenWithAutoID:_selectedDevice.AutoID];
@@ -1590,7 +1599,13 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         if (selectedDeviceDetailLayout) {
             [self changeFollowViewImageWithStatus:DeviceViewImageStatusForHighlight inArray:@[selectedDeviceDetailLayout]];
         } else { // 选中的为公共设备
-            NSIndexPath *cellIndexPath = [NSIndexPath indexPathForRow:[kCommonDevices indexOfObject:_selectedDevice] inSection:0];
+            NSIndexPath *cellIndexPath = nil;
+            if (self.selectedOtherViewType == OtherViewTypeCommonDevice) {
+                cellIndexPath  = [NSIndexPath indexPathForRow:[kCommonDevices indexOfObject:_selectedDevice] inSection:0];
+            } else {
+                cellIndexPath = [NSIndexPath indexPathForRow:[kMusicFile indexOfObject:_selectedDevice] inSection:0];
+            }
+            
             [self setCellHighlightWithCollectionView:self.commonDeviceCollectionView indexPath:cellIndexPath];
         }
         
@@ -1599,7 +1614,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         
     }
 }
-
+/*
 - (void)setSelectedDeviceType:(NSString *)selectedDeviceType
 {
     if (_selectedDeviceType != selectedDeviceType) {
@@ -1618,7 +1633,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         
         [self changeFollowViewImageWithStatus:DeviceViewImageStatusForHighlight inArray:[self getAllDetailOfAreaScreenWithDeviceType:_selectedDeviceType]];
     }
-}
+}*/
 
 #pragma mark 修改视角模式
 - (void)setCurrentViewpointType:(NSString *)currentViewpointType
@@ -1670,7 +1685,6 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     // 视角切换默认隐藏
     self.viewpointButtonsView.hidden = YES;
     self.deviceInfoBackgroundView.hidden = YES;
-    self.deviceInfoTypeChoose.hidden = YES;
     
     if (_currentMode == ActualModeTypeNormal) {
         
@@ -1910,10 +1924,6 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         
 }
 
-- (IBAction)showViewpointsViewButtonAction:(UIButton *)sender {
-    [self startTimerForAutoHideViewpointButtonsView];// 几秒后自动隐藏
-}
-
 #pragma mark - 3秒后自动隐藏 视角切换按钮组(点击按钮租中的任何一个,会刷新时间)
 - (void)startTimerForAutoHideViewpointButtonsView
 {
@@ -1982,10 +1992,10 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     }
 }
 
-- (BOOL)checkPermissions
+- (BOOL)checkPermissionsByDevice:(DeviceForUser *)device
 {
     // 假设没有批量操作
-    if (kCurrentUser.level < self.selectedDevice.needLevel) {
+    if (kCurrentUser.level < device.needLevel) {
         [WFFProgressHud showErrorStatus:@"对不起,您没有权限操控该设备!"];
         return NO;
     } else {
@@ -1995,5 +2005,12 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 
 - (IBAction)processBackgroundViewTapGRAction:(UITapGestureRecognizer *)sender {
     [self updateViewHideOrShowByType:TopViewTypeNone];
+}
+- (IBAction)otherViewButtonAction:(UIButton *)sender {
+    if (self.selectedOtherViewType != (OtherViewType)sender.tag) {
+        self.selectedOtherViewType = (OtherViewType)sender.tag;
+        
+        [self.commonDeviceCollectionView reloadData];
+    }
 }
 @end

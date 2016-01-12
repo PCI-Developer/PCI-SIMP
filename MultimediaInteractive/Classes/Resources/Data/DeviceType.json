@@ -135,5 +135,20 @@
         "controlCMD" : ["oc", "slider"],
         "minValue" : -50,
         "maxValue" : 5
-    }    
+    },
+    "音频文件":{
+        "name" : "音频文件",
+        "inOrOut":"in",
+        "soundConnectedType":[
+                              "音箱",
+                              "电视"
+                              ],
+        "videoConnectedType":[
+                              ],
+        "imageName" : "musicFile",
+        "isActual" : false,
+        "controlCMD" : ["oc"],
+        "minValue" : -50,
+        "maxValue" : 5
+    }
 }

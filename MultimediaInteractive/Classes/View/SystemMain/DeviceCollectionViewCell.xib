@@ -1,47 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="DeviceCollectionViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="190" height="121"/>
+            <rect key="frame" x="0.0" y="0.0" width="190" height="151"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="190" height="121"/>
+                <rect key="frame" x="0.0" y="0.0" width="190" height="151"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O8D-Ff-6oG">
-                        <rect key="frame" x="0.0" y="0.0" width="190" height="121"/>
-                        <animations/>
+                        <rect key="frame" x="0.0" y="0.0" width="190" height="131"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o4g-9a-88c">
-                        <rect key="frame" x="0.0" y="0.0" width="190" height="121"/>
-                        <animations/>
+                        <rect key="frame" x="0.0" y="0.0" width="190" height="131"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYT-Yj-vy2">
+                        <rect key="frame" x="0.0" y="131" width="190" height="20"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="BNs-qd-zW6"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
-                <animations/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <animations/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="AYT-Yj-vy2" secondAttribute="bottom" id="58a-Xv-oVk"/>
+                <constraint firstItem="AYT-Yj-vy2" firstAttribute="top" secondItem="O8D-Ff-6oG" secondAttribute="bottom" id="84M-WR-ce1"/>
                 <constraint firstAttribute="bottom" secondItem="O8D-Ff-6oG" secondAttribute="bottom" id="DOU-SB-lj2"/>
+                <constraint firstAttribute="trailing" secondItem="AYT-Yj-vy2" secondAttribute="trailing" id="EVk-GT-z5x"/>
                 <constraint firstItem="O8D-Ff-6oG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Fv2-TE-dgi"/>
+                <constraint firstItem="AYT-Yj-vy2" firstAttribute="top" secondItem="o4g-9a-88c" secondAttribute="bottom" id="Ggi-Zr-sxx"/>
                 <constraint firstItem="O8D-Ff-6oG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="NbF-4H-THm"/>
                 <constraint firstAttribute="bottom" secondItem="o4g-9a-88c" secondAttribute="bottom" id="amh-Nj-agf"/>
                 <constraint firstItem="o4g-9a-88c" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="arA-HQ-bLp"/>
+                <constraint firstItem="AYT-Yj-vy2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="dGH-97-WLT"/>
                 <constraint firstAttribute="trailing" secondItem="O8D-Ff-6oG" secondAttribute="trailing" id="fBG-rH-SPQ"/>
                 <constraint firstAttribute="trailing" secondItem="o4g-9a-88c" secondAttribute="trailing" id="kc0-hz-yYo"/>
                 <constraint firstItem="o4g-9a-88c" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="wy3-9V-ybt"/>
+                <constraint firstItem="AYT-Yj-vy2" firstAttribute="top" secondItem="o4g-9a-88c" secondAttribute="bottom" id="zfQ-1C-QqM"/>
             </constraints>
-            <size key="customSize" width="190" height="121"/>
+            <size key="customSize" width="190" height="151"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="DOU-SB-lj2"/>
+                    <exclude reference="amh-Nj-agf"/>
+                    <exclude reference="Ggi-Zr-sxx"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="deviceImageView" destination="o4g-9a-88c" id="c4c-Td-ujM"/>
                 <outlet property="imageView" destination="O8D-Ff-6oG" id="n0M-Rb-a41"/>
+                <outlet property="infoLabel" destination="AYT-Yj-vy2" id="xJJ-Id-uUC"/>
             </connections>
-            <point key="canvasLocation" x="635" y="357.5"/>
+            <point key="canvasLocation" x="635" y="372.5"/>
         </collectionViewCell>
     </objects>
 </document>

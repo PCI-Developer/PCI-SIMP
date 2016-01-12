@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MultimediaInteractive/Classes/Controller/SystemMain/Actual/ActualModeViewController.m"
-            timestampString = "472619186.759671"
+            filePath = "MultimediaInteractive/Classes/AppDelegate.m"
+            timestampString = "474281573.188224"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1755"
-            endingLineNumber = "1755"
-            landmarkName = "-showImagePickerControllerWithTitle:cancleHandle:"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "-applicationDidEnterBackground:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

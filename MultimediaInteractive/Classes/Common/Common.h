@@ -68,6 +68,8 @@
 
 
 #define kCommonDevices [[Common shareCommon] commonDevices]
+
+#define kMusicFile [[Common shareCommon] musicFiles]
 @class Area;
 @class User;
 @class DeviceForUser;
@@ -129,6 +131,9 @@ kSingleTon_H(Common)
 
 #pragma mark - 公共设备列表
 - (NSArray *)commonDevices;
+
+#pragma mark - 音频文件列表
+- (NSArray *)musicFiles;
 
 #pragma mark - 实景图
 - (UIImage *)actualImageWithViewpointType:(NSString *)viewpointType;
