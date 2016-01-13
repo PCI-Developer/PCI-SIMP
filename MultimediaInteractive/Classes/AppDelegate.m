@@ -10,7 +10,7 @@
 #import "PermissionCheckingViewController.h"
 @interface AppDelegate ()
 {
-    UIBackgroundTaskIdentifier _bgTask;
+    __block UIBackgroundTaskIdentifier _bgTask;
     dispatch_source_t _timer;
 }
 @end
@@ -58,6 +58,7 @@
         if (_bgTask != UIBackgroundTaskInvalid) { // 有效的后台任务
             dispatch_async(dispatch_get_main_queue(), ^{
                 [application endBackgroundTask:_bgTask];
+                _bgTask = UIBackgroundTaskInvalid;
             });
         }
         
@@ -66,6 +67,7 @@
             // 当应用程序留给后台的时间快要到结束时（应用程序留给后台执行的时间是有限的）， 这个Block块将被执行
             dispatch_async(dispatch_get_main_queue(), ^{
                 [application endBackgroundTask:_bgTask];
+                _bgTask = UIBackgroundTaskInvalid;
             });
         }];
     });
