@@ -658,7 +658,7 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="addDevice" width="106" height="60"/>
+        <image name="addDevice" width="72" height="64"/>
         <image name="addDeviceHighlight.png" width="140" height="140"/>
         <image name="autoOrderForDeviceConfig.png" width="170" height="48"/>
         <image name="autoOrderForDeviceConfigHighlight.png" width="170" height="48"/>
@@ -667,7 +667,7 @@
         <image name="cancelForDeviceConfig.png" width="170" height="48"/>
         <image name="cancelForDeviceConfigHighlight.png" width="170" height="48"/>
         <image name="cancelHighlight" width="436" height="137"/>
-        <image name="changeActual" width="106" height="60"/>
+        <image name="changeActual" width="72" height="64"/>
         <image name="changeActualHighlight.png" width="140" height="140"/>
         <image name="controlBg.png" width="3" height="3"/>
         <image name="headBg.png" width="1" height="48"/>
@@ -675,10 +675,10 @@
         <image name="okForDeviceConfig.png" width="170" height="48"/>
         <image name="okForDeviceConfigHighlight.png" width="170" height="48"/>
         <image name="okHighlight" width="436" height="137"/>
-        <image name="process" width="106" height="60"/>
-        <image name="processHighlight" width="106" height="60"/>
-        <image name="screenConfig" width="106" height="60"/>
-        <image name="screenConfigHighlight" width="106" height="60"/>
+        <image name="process" width="72" height="64"/>
+        <image name="processHighlight" width="72" height="64"/>
+        <image name="screenConfig" width="72" height="64"/>
+        <image name="screenConfigHighlight" width="72" height="64"/>
         <image name="showDeviceTypes" width="71" height="71"/>
         <image name="trash" width="375" height="375"/>
         <image name="trashHighlight" width="375" height="375"/>

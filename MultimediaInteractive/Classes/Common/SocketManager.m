@@ -272,6 +272,7 @@ kSingleTon_M(SocketManager)
 #pragma mark - Socket Delegate
 #pragma mark 接收到一个请求
 - (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket {
+
     // 建立连接
     kLog(@"%@", @"建立连接");
     self.pcSocket = newSocket;
@@ -289,7 +290,9 @@ kSingleTon_M(SocketManager)
 
 #pragma mark 接收到数据
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
-    
+    if (sock != self.pcSocket) {
+        return;
+    }
     // GBK编码
     NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     
@@ -309,6 +312,7 @@ kSingleTon_M(SocketManager)
 
 // 失去连接
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
+
     // 停止心跳包 - 必须停止,否则再次连接重复开启,发送心跳包频率加快
     [self stopNetLink];
     
@@ -327,6 +331,9 @@ kSingleTon_M(SocketManager)
 // 发送数据成功
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
 {
+    if (sock != self.pcSocket) {
+        return;
+    }
     if (tag == 0) {
         kLog(@"心跳包发送成功~~");
         return;
@@ -337,6 +344,9 @@ kSingleTon_M(SocketManager)
 // 发送数据超时
 - (NSTimeInterval)socket:(GCDAsyncSocket *)sock shouldTimeoutWriteWithTag:(long)tag elapsed:(NSTimeInterval)elapsed bytesDone:(NSUInteger)length
 {
+    if (sock != self.pcSocket) {
+        return 0;
+    }
     if (tag == 0) {
         kLog(@"心跳包发送失败~~");
         return 0;

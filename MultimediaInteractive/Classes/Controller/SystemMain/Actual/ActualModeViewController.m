@@ -28,6 +28,12 @@
 #import "ProcessView.h"
 
 #import "AppDelegate.h"
+
+
+
+
+#define kTagOfPlaceholderLabelForOtherDeviceView 777 //　xib中设置
+
 /**
  枚举值.当前置顶的view类型
  */
@@ -1716,7 +1722,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         self.operatioinView.hidden = NO;
         
         // 显示视角切换(3秒消失)
-        [self startTimerForAutoHideViewpointButtonsView];
+//        [self startTimerForAutoHideViewpointButtonsView];
         [self setDeviceViewGREnable:YES withType:@"move"];
         [self setDeviceViewGREnable:NO withType:@"longPress"];
         [self setDeviceViewGREnable:YES withType:@"click"];
@@ -1981,14 +1987,34 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     [self startTimerForAutoHideViewpointButtonsView];
 }
 
+
 - (IBAction)showQuickChooseButtonAction:(UIButton *)sender {
     // 操作界面隐藏(视角切换/更改布局/更改底图)
     [self updateViewHideOrShowByType:TopViewTypeForCommonDeviceView];
     
-    if ([kCommonDevices count] > 0) { // 根据数据有无,隐藏或显示collectionView
-        [self.commonDeviceBackgroundView viewWithTag:777].hidden = YES;
+    BOOL flag; // 根据数据有无,隐藏或显示 占位Label
+    if (self.selectedOtherViewType == OtherViewTypeCommonDevice) {
+        if ([kCommonDevices count] > 0) {
+            flag = YES;
+        } else {
+            flag = NO;
+        }
+    } else if (self.selectedOtherViewType == OtherViewTypeMusicFile){
+        if ([kMusicFile count] > 0) {
+            flag = YES;
+        } else {
+            flag = NO;
+        }
     } else {
-        [self.commonDeviceBackgroundView viewWithTag:777].hidden = NO;
+        flag = NO;
+    }
+    
+    if (flag) {
+        [self.commonDeviceBackgroundView viewWithTag:kTagOfPlaceholderLabelForOtherDeviceView].hidden = YES;
+        self.commonDeviceCollectionView.hidden = NO;
+    } else {
+        [self.commonDeviceBackgroundView viewWithTag:kTagOfPlaceholderLabelForOtherDeviceView].hidden = NO;
+        self.commonDeviceCollectionView.hidden = YES;
     }
 }
 

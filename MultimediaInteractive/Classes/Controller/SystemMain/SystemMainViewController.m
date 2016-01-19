@@ -110,7 +110,6 @@
     // 屏幕旋转通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDeviceOrientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationDidConnectedStateChange object:nil];
 
     
     self.dropDownList.dataArray = [self getAreasName];

@@ -12,6 +12,7 @@
 {
     __block UIBackgroundTaskIdentifier _bgTask;
     dispatch_source_t _timer;
+    
 }
 @end
 
@@ -34,6 +35,10 @@
     
     [self.window makeKeyAndVisible];
     
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"state"]) {
+        NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"state"]);
+    }
+
 
     kLog(@"%@", NSTemporaryDirectory());
     
@@ -48,6 +53,10 @@
 // 程序已经进入后台
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    // 进入后台断开连接
+    if ([SocketManager shareSocketManager].state == SocketStateConnected) {
+        [[SocketManager shareSocketManager] breakTcpSocket];
+    }
     // 无限后台 -- 定时器无限创建后台任务。
     _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
     dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 500.0f * NSEC_PER_SEC, 0);
@@ -78,7 +87,15 @@
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationWillEnterForeground object:nil];
+    
+//    [[NSUserDefaults standardUserDefaults] setObject:@([SocketManager shareSocketManager].state) forKey:@"lastState"];
+    // 进入后台之前的连接状态
+    if ([Common shareCommon].hasLogin) { // 已经登陆
+        // 重连
+        [[SocketManager shareSocketManager] createTcpSocket];
+    }
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
