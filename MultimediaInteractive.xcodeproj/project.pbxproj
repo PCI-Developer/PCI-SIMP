@@ -92,6 +92,7 @@
 		60CC2F971BC79043004836D6 /* UIViewController+PresentAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CC2F961BC79043004836D6 /* UIViewController+PresentAlertController.m */; };
 		60CD4E431C03F95400CF51F9 /* DeviceInfoOCSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60CD4E421C03F95400CF51F9 /* DeviceInfoOCSliderView.xib */; };
 		60CD4E451C03FE0500CF51F9 /* DeviceInfoSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60CD4E441C03FE0500CF51F9 /* DeviceInfoSliderView.xib */; };
+		60E49BCB1C4F2B200074A1DC /* UIView+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E49BCA1C4F2B200074A1DC /* UIView+Addition.m */; };
 		60E78C441BB4DC2C00EF6074 /* LogInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E78C421BB4DC2C00EF6074 /* LogInfoViewController.m */; };
 		60E78C451BB4DC2C00EF6074 /* LogInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60E78C431BB4DC2C00EF6074 /* LogInfoViewController.xib */; };
 		60E78C731BB4E3C300EF6074 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E78C491BB4E3C200EF6074 /* MJRefreshAutoFooter.m */; };
@@ -282,6 +283,8 @@
 		60CC2F961BC79043004836D6 /* UIViewController+PresentAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PresentAlertController.m"; sourceTree = "<group>"; };
 		60CD4E421C03F95400CF51F9 /* DeviceInfoOCSliderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoOCSliderView.xib; sourceTree = "<group>"; };
 		60CD4E441C03FE0500CF51F9 /* DeviceInfoSliderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoSliderView.xib; sourceTree = "<group>"; };
+		60E49BC91C4F2B200074A1DC /* UIView+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Addition.h"; sourceTree = "<group>"; };
+		60E49BCA1C4F2B200074A1DC /* UIView+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Addition.m"; sourceTree = "<group>"; };
 		60E78C411BB4DC2C00EF6074 /* LogInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInfoViewController.h; sourceTree = "<group>"; };
 		60E78C421BB4DC2C00EF6074 /* LogInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInfoViewController.m; sourceTree = "<group>"; };
 		60E78C431BB4DC2C00EF6074 /* LogInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogInfoViewController.xib; sourceTree = "<group>"; };
@@ -530,6 +533,8 @@
 		602C3AF81BAFCCCC000C41DA /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				60E49BC91C4F2B200074A1DC /* UIView+Addition.h */,
+				60E49BCA1C4F2B200074A1DC /* UIView+Addition.m */,
 				602C3AF91BAFCCCC000C41DA /* CALayer+BorderColorFromUIColor.h */,
 				602C3AFA1BAFCCCC000C41DA /* CALayer+BorderColorFromUIColor.m */,
 				60EA3D691BB2A34700AE1372 /* NSString+ConvertDate.h */,
@@ -1223,6 +1228,7 @@
 				6015FBA51C197376003A417E /* CameraFollowConfigView.m in Sources */,
 				602C3B531BAFCCCC000C41DA /* ActualModeViewController.m in Sources */,
 				602C3B601BAFCCCC000C41DA /* WFFDropdownList.m in Sources */,
+				60E49BCB1C4F2B200074A1DC /* UIView+Addition.m in Sources */,
 				60A3E22D1BD48E3100B4FFCA /* AutoSizeCollectionView.m in Sources */,
 				60E78C841BB4E3C300EF6074 /* UIScrollView+MJRefresh.m in Sources */,
 				60A3D5AD1BCCCFAA00313F8F /* UIApplication+AppDimensions.m in Sources */,
