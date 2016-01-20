@@ -35,8 +35,8 @@
 
 - (void)sliderLeaveFocus:(NSNotification *)sender {
     WFFCircularSlider *slider = (WFFCircularSlider *)sender.object;
-    if ([self.delegate respondsToSelector:@selector(deviceInfoViewSliderLeaveFoucsWithValue:)]) {
-        [self.delegate deviceInfoViewSliderLeaveFoucsWithValue:slider.value];
+    if ([self.delegate respondsToSelector:@selector(deviceInfoViewVolumeSliderLeaveFoucsWithValue:)]) {
+        [self.delegate deviceInfoViewVolumeSliderLeaveFoucsWithValue:slider.value];
     }
 }
 

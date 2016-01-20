@@ -18,7 +18,7 @@
 - (void)deviceInfoView:(DeviceInfoBaseView *)deviceInfoView orientationButtonTouchDown:(UIButton *)button;
 - (void)deviceInfoView:(DeviceInfoBaseView *)deviceInfoView orientationButtonTouchUp:(UIButton *)button;
 - (void)deviceInfoView:(DeviceInfoBaseView *)deviceInfoView channelIndexChanged:(NSInteger)channelIndex;
-- (void)deviceInfoViewSliderLeaveFoucsWithValue:(CGFloat)value;
+- (void)deviceInfoViewVolumeSliderLeaveFoucsWithValue:(CGFloat)value;
 - (void)deviceInfoViewVolumeAddButtonClicked;
 - (void)deviceInfoViewVolumeMinusButtonClicked;
 - (void)deviceInfoView:(DeviceInfoBaseView *)deviceInfoView cameraFollowButtonClicked:(UIButton *)button;

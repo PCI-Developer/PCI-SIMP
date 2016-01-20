@@ -48,7 +48,7 @@
 		6045B2D31C03534900D22D01 /* DeviceInfoBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6045B2D21C03534900D22D01 /* DeviceInfoBaseView.m */; };
 		6045B2D81C0353AC00D22D01 /* DeviceInfoCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6045B2D71C0353AC00D22D01 /* DeviceInfoCameraView.xib */; };
 		6045B2DD1C035DFE00D22D01 /* DeviceInfoOCView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6045B2DC1C035DFE00D22D01 /* DeviceInfoOCView.xib */; };
-		6045B2E21C0360BF00D22D01 /* DeviceInfoOCSliderChannelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6045B2E11C0360BF00D22D01 /* DeviceInfoOCSliderChannelView.xib */; };
+		6045B2E21C0360BF00D22D01 /* DeviceInfoOCVolumeSliderChannelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6045B2E11C0360BF00D22D01 /* DeviceInfoOCVolumeSliderChannelView.xib */; };
 		606E12501BF2F194001E9B80 /* SHMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 606E124F1BF2F194001E9B80 /* SHMenuItem.m */; };
 		6077D75F1BCB585600DABD89 /* UIView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6077D75E1BCB585600DABD89 /* UIView+Animation.m */; };
 		6077D7631BCB9A6F00DABD89 /* DetaiLayoutOfAreaByViewpointType.m in Sources */ = {isa = PBXBuildFile; fileRef = 6077D7621BCB9A6F00DABD89 /* DetaiLayoutOfAreaByViewpointType.m */; };
@@ -90,8 +90,8 @@
 		60CBC2DF1BE9FC79001E5DFE /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CBC2D81BE9FC79001E5DFE /* FMDatabaseQueue.m */; };
 		60CBC2E01BE9FC79001E5DFE /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CBC2DB1BE9FC79001E5DFE /* FMResultSet.m */; };
 		60CC2F971BC79043004836D6 /* UIViewController+PresentAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CC2F961BC79043004836D6 /* UIViewController+PresentAlertController.m */; };
-		60CD4E431C03F95400CF51F9 /* DeviceInfoOCSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60CD4E421C03F95400CF51F9 /* DeviceInfoOCSliderView.xib */; };
-		60CD4E451C03FE0500CF51F9 /* DeviceInfoSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60CD4E441C03FE0500CF51F9 /* DeviceInfoSliderView.xib */; };
+		60CD4E431C03F95400CF51F9 /* DeviceInfoOCVolumeSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60CD4E421C03F95400CF51F9 /* DeviceInfoOCVolumeSliderView.xib */; };
+		60CD4E451C03FE0500CF51F9 /* DeviceInfoVolumeSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60CD4E441C03FE0500CF51F9 /* DeviceInfoVolumeSliderView.xib */; };
 		60E49BCB1C4F2B200074A1DC /* UIView+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E49BCA1C4F2B200074A1DC /* UIView+Addition.m */; };
 		60E78C441BB4DC2C00EF6074 /* LogInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E78C421BB4DC2C00EF6074 /* LogInfoViewController.m */; };
 		60E78C451BB4DC2C00EF6074 /* LogInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60E78C431BB4DC2C00EF6074 /* LogInfoViewController.xib */; };
@@ -209,7 +209,7 @@
 		6045B2D21C03534900D22D01 /* DeviceInfoBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfoBaseView.m; sourceTree = "<group>"; };
 		6045B2D71C0353AC00D22D01 /* DeviceInfoCameraView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoCameraView.xib; sourceTree = "<group>"; };
 		6045B2DC1C035DFE00D22D01 /* DeviceInfoOCView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoOCView.xib; sourceTree = "<group>"; };
-		6045B2E11C0360BF00D22D01 /* DeviceInfoOCSliderChannelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoOCSliderChannelView.xib; sourceTree = "<group>"; };
+		6045B2E11C0360BF00D22D01 /* DeviceInfoOCVolumeSliderChannelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoOCVolumeSliderChannelView.xib; sourceTree = "<group>"; };
 		606E124E1BF2F194001E9B80 /* SHMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMenuItem.h; sourceTree = "<group>"; };
 		606E124F1BF2F194001E9B80 /* SHMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMenuItem.m; sourceTree = "<group>"; };
 		6077D75D1BCB585600DABD89 /* UIView+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Animation.h"; sourceTree = "<group>"; };
@@ -281,8 +281,8 @@
 		60CBC2DB1BE9FC79001E5DFE /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		60CC2F951BC79043004836D6 /* UIViewController+PresentAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PresentAlertController.h"; sourceTree = "<group>"; };
 		60CC2F961BC79043004836D6 /* UIViewController+PresentAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PresentAlertController.m"; sourceTree = "<group>"; };
-		60CD4E421C03F95400CF51F9 /* DeviceInfoOCSliderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoOCSliderView.xib; sourceTree = "<group>"; };
-		60CD4E441C03FE0500CF51F9 /* DeviceInfoSliderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoSliderView.xib; sourceTree = "<group>"; };
+		60CD4E421C03F95400CF51F9 /* DeviceInfoOCVolumeSliderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoOCVolumeSliderView.xib; sourceTree = "<group>"; };
+		60CD4E441C03FE0500CF51F9 /* DeviceInfoVolumeSliderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoVolumeSliderView.xib; sourceTree = "<group>"; };
 		60E49BC91C4F2B200074A1DC /* UIView+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Addition.h"; sourceTree = "<group>"; };
 		60E49BCA1C4F2B200074A1DC /* UIView+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Addition.m"; sourceTree = "<group>"; };
 		60E78C411BB4DC2C00EF6074 /* LogInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInfoViewController.h; sourceTree = "<group>"; };
@@ -806,10 +806,10 @@
 				6045B2D11C03534900D22D01 /* DeviceInfoBaseView.h */,
 				6045B2D21C03534900D22D01 /* DeviceInfoBaseView.m */,
 				6045B2D71C0353AC00D22D01 /* DeviceInfoCameraView.xib */,
-				6045B2E11C0360BF00D22D01 /* DeviceInfoOCSliderChannelView.xib */,
+				6045B2E11C0360BF00D22D01 /* DeviceInfoOCVolumeSliderChannelView.xib */,
 				6045B2DC1C035DFE00D22D01 /* DeviceInfoOCView.xib */,
-				60CD4E441C03FE0500CF51F9 /* DeviceInfoSliderView.xib */,
-				60CD4E421C03F95400CF51F9 /* DeviceInfoOCSliderView.xib */,
+				60CD4E441C03FE0500CF51F9 /* DeviceInfoVolumeSliderView.xib */,
+				60CD4E421C03F95400CF51F9 /* DeviceInfoOCVolumeSliderView.xib */,
 				609B6FA71C04559700B62D95 /* DeviceInfoMicView.xib */,
 			);
 			path = DeviceInfoView;
@@ -1110,9 +1110,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6045B2E21C0360BF00D22D01 /* DeviceInfoOCSliderChannelView.xib in Resources */,
+				6045B2E21C0360BF00D22D01 /* DeviceInfoOCVolumeSliderChannelView.xib in Resources */,
 				60E78C9C1BB4E7FA00EF6074 /* LogTableViewCell.xib in Resources */,
-				60CD4E451C03FE0500CF51F9 /* DeviceInfoSliderView.xib in Resources */,
+				60CD4E451C03FE0500CF51F9 /* DeviceInfoVolumeSliderView.xib in Resources */,
 				6045B2D81C0353AC00D22D01 /* DeviceInfoCameraView.xib in Resources */,
 				602C3B691BAFCCCC000C41DA /* DeviceType.json in Resources */,
 				60A3D5AC1BCCCFAA00313F8F /* SHStripeMenuViewController.xib in Resources */,
@@ -1125,7 +1125,7 @@
 				6015FBA61C197376003A417E /* CameraFollowConfigView.xib in Resources */,
 				6009C7041BF5E97A00C8B183 /* hudSuccess.png in Resources */,
 				602C3B781BAFCCCC000C41DA /* 库的配置.rtf in Resources */,
-				60CD4E431C03F95400CF51F9 /* DeviceInfoOCSliderView.xib in Resources */,
+				60CD4E431C03F95400CF51F9 /* DeviceInfoOCVolumeSliderView.xib in Resources */,
 				60A3D5A31BCCCFAA00313F8F /* Home.png in Resources */,
 				602C3AB21BAFCC88000C41DA /* LaunchScreen.storyboard in Resources */,
 				6009C7061BF5EAAA00C8B183 /* hudLoading.png in Resources */,

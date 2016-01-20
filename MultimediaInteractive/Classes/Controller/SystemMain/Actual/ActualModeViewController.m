@@ -443,7 +443,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     
 }
 
-- (void)deviceInfoViewSliderLeaveFoucsWithValue:(CGFloat)value
+- (void)deviceInfoViewVolumeSliderLeaveFoucsWithValue:(CGFloat)value
 {
     if (![self checkPermissionsByDevice:self.selectedDevice]) {
         // 滑块归位
@@ -704,13 +704,13 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     } else if ([deviceType isEqualToString:@"摄像头"]) { // ORIENTATION
         deviceInfoNibName = @"DeviceInfoCameraView";
     } else if ([deviceType isEqualToString:@"电视"]) { // OC SLIDER CHANNEL
-        deviceInfoNibName = @"DeviceInfoOCSliderChannelView";
+        deviceInfoNibName = @"DeviceInfoOCVolumeSliderChannelView";
     } else if ([cmdArray containsObject:@"oc"] && [cmdArray containsObject:@"slider"]) { // OC SLIDER
-        deviceInfoNibName = @"DeviceInfoOCSliderView";
+        deviceInfoNibName = @"DeviceInfoOCVolumeSliderView";
     } else if ([cmdArray containsObject:@"oc"]) { // OC
         deviceInfoNibName = @"DeviceInfoOCView";
     } else if ([cmdArray containsObject:@"slider"]) { // SLIDER
-        deviceInfoNibName = @"DeviceInfoSliderView";
+        deviceInfoNibName = @"DeviceInfoVolumeSliderView";
     }
     
    
@@ -766,13 +766,14 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             [self.deviceInfoView.deviceInfoCloseButton setSelected:NO];
             [self.deviceInfoView.deviceInfoOpenButton setSelected:NO];
         }
-        NSString *cameraFollowText = nil;
-        if (self.selectedDevice.followUEQP_ID) {
-            cameraFollowText = [[Common shareCommon] getDeviceWithUEQP_ID:self.selectedDevice.followUEQP_ID].UEQP_Name;
-        } else {
-            cameraFollowText = kHintForCameraFollow;
-        }
-        [self.deviceInfoView.cameraFollowConfigButton setTitle:cameraFollowText forState:UIControlStateNormal];
+        // 摄像头跟随配置按钮 文字更新
+//        NSString *cameraFollowText = nil;
+//        if (self.selectedDevice.followUEQP_ID) {
+//            cameraFollowText = [[Common shareCommon] getDeviceWithUEQP_ID:self.selectedDevice.followUEQP_ID].UEQP_Name;
+//        } else {
+//            cameraFollowText = kHintForCameraFollow;
+//        }
+//        [self.deviceInfoView.cameraFollowConfigButton setTitle:cameraFollowText forState:UIControlStateNormal];
         
     } /*else {
         if (self.deviceInfoView.deviceInfoImageView.isAnimating) {// 正在动画,就停止 -- 之前选中过该类型下的某个连接打开的设备
