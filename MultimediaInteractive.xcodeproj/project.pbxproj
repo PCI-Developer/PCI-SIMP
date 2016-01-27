@@ -58,11 +58,6 @@
 		609B6F9E1C040DC600B62D95 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 609B6F9D1C040DC600B62D95 /* UIView+AutoLayout.m */; };
 		609B6FA81C04559700B62D95 /* DeviceInfoMicView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 609B6FA71C04559700B62D95 /* DeviceInfoMicView.xib */; };
 		609DB8551C228B6600330979 /* NSObject+CheckNull.m in Sources */ = {isa = PBXBuildFile; fileRef = 609DB8541C228B6600330979 /* NSObject+CheckNull.m */; };
-		60A3D5A11BCCCFAA00313F8F /* Chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A3D58E1BCCCFAA00313F8F /* Chat.png */; };
-		60A3D5A21BCCCFAA00313F8F /* Graph.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A3D58F1BCCCFAA00313F8F /* Graph.png */; };
-		60A3D5A31BCCCFAA00313F8F /* Home.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A3D5901BCCCFAA00313F8F /* Home.png */; };
-		60A3D5A41BCCCFAA00313F8F /* Mail-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A3D5911BCCCFAA00313F8F /* Mail-2.png */; };
-		60A3D5A51BCCCFAA00313F8F /* Stat.png in Resources */ = {isa = PBXBuildFile; fileRef = 60A3D5921BCCCFAA00313F8F /* Stat.png */; };
 		60A3D5A61BCCCFAA00313F8F /* menu_info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60A3D5931BCCCFAA00313F8F /* menu_info.plist */; };
 		60A3D5A71BCCCFAA00313F8F /* SHLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A3D5951BCCCFAA00313F8F /* SHLineView.m */; };
 		60A3D5AA1BCCCFAA00313F8F /* SHStripeMenuExecuter.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A3D59B1BCCCFAA00313F8F /* SHStripeMenuExecuter.m */; };
@@ -227,11 +222,6 @@
 		609B6FA71C04559700B62D95 /* DeviceInfoMicView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoMicView.xib; sourceTree = "<group>"; };
 		609DB8531C228B6600330979 /* NSObject+CheckNull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CheckNull.h"; sourceTree = "<group>"; };
 		609DB8541C228B6600330979 /* NSObject+CheckNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CheckNull.m"; sourceTree = "<group>"; };
-		60A3D58E1BCCCFAA00313F8F /* Chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chat.png; sourceTree = "<group>"; };
-		60A3D58F1BCCCFAA00313F8F /* Graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Graph.png; sourceTree = "<group>"; };
-		60A3D5901BCCCFAA00313F8F /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home.png; sourceTree = "<group>"; };
-		60A3D5911BCCCFAA00313F8F /* Mail-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mail-2.png"; sourceTree = "<group>"; };
-		60A3D5921BCCCFAA00313F8F /* Stat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stat.png; sourceTree = "<group>"; };
 		60A3D5931BCCCFAA00313F8F /* menu_info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = menu_info.plist; sourceTree = "<group>"; };
 		60A3D5941BCCCFAA00313F8F /* SHLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHLineView.h; sourceTree = "<group>"; };
 		60A3D5951BCCCFAA00313F8F /* SHLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLineView.m; sourceTree = "<group>"; };
@@ -838,7 +828,6 @@
 		60A3D58C1BCCCFAA00313F8F /* SHStripeMenu */ = {
 			isa = PBXGroup;
 			children = (
-				60A3D58D1BCCCFAA00313F8F /* Icons */,
 				60A3D5931BCCCFAA00313F8F /* menu_info.plist */,
 				60A3D5941BCCCFAA00313F8F /* SHLineView.h */,
 				60A3D5951BCCCFAA00313F8F /* SHLineView.m */,
@@ -857,18 +846,6 @@
 				60A3D5A01BCCCFAA00313F8F /* UIApplication+AppDimensions.m */,
 			);
 			path = SHStripeMenu;
-			sourceTree = "<group>";
-		};
-		60A3D58D1BCCCFAA00313F8F /* Icons */ = {
-			isa = PBXGroup;
-			children = (
-				60A3D58E1BCCCFAA00313F8F /* Chat.png */,
-				60A3D58F1BCCCFAA00313F8F /* Graph.png */,
-				60A3D5901BCCCFAA00313F8F /* Home.png */,
-				60A3D5911BCCCFAA00313F8F /* Mail-2.png */,
-				60A3D5921BCCCFAA00313F8F /* Stat.png */,
-			);
-			path = Icons;
 			sourceTree = "<group>";
 		};
 		60A3E22A1BD48E2900B4FFCA /* Actual */ = {
@@ -1116,17 +1093,13 @@
 				6045B2D81C0353AC00D22D01 /* DeviceInfoCameraView.xib in Resources */,
 				602C3B691BAFCCCC000C41DA /* DeviceType.json in Resources */,
 				60A3D5AC1BCCCFAA00313F8F /* SHStripeMenuViewController.xib in Resources */,
-				60A3D5A41BCCCFAA00313F8F /* Mail-2.png in Resources */,
 				6045B2DD1C035DFE00D22D01 /* DeviceInfoOCView.xib in Resources */,
 				609B6FA81C04559700B62D95 /* DeviceInfoMicView.xib in Resources */,
-				60A3D5A51BCCCFAA00313F8F /* Stat.png in Resources */,
 				6089BB661BBA64B600BAAE4E /* ConfigViewController.xib in Resources */,
-				60A3D5A21BCCCFAA00313F8F /* Graph.png in Resources */,
 				6015FBA61C197376003A417E /* CameraFollowConfigView.xib in Resources */,
 				6009C7041BF5E97A00C8B183 /* hudSuccess.png in Resources */,
 				602C3B781BAFCCCC000C41DA /* 库的配置.rtf in Resources */,
 				60CD4E431C03F95400CF51F9 /* DeviceInfoOCVolumeSliderView.xib in Resources */,
-				60A3D5A31BCCCFAA00313F8F /* Home.png in Resources */,
 				602C3AB21BAFCC88000C41DA /* LaunchScreen.storyboard in Resources */,
 				6009C7061BF5EAAA00C8B183 /* hudLoading.png in Resources */,
 				60BEC2991C166D89001BEED5 /* PermissionCheckingViewController.xib in Resources */,
@@ -1141,7 +1114,6 @@
 				6009C6FC1BF5DCDF00C8B183 /* WFFProgressHud.xib in Resources */,
 				60E78C811BB4E3C300EF6074 /* MJRefresh.bundle in Resources */,
 				6009C6FF1BF5DD4C00C8B183 /* hudBackground.png in Resources */,
-				60A3D5A11BCCCFAA00313F8F /* Chat.png in Resources */,
 				602C3B5A1BAFCCCC000C41DA /* SystemMainViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

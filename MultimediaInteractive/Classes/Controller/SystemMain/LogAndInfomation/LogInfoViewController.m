@@ -72,7 +72,6 @@
 
 - (void)appendDataWithType:(LogInfoType)type completionHandle:(void(^)())completionHandle
 {
-    
     self.currentLogPage++;
     [self loadDataWithType:type completionHandle:completionHandle];
 }

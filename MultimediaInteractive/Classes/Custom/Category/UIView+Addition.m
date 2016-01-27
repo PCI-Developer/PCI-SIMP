@@ -41,6 +41,8 @@ static const char *additionLayerKey = "additionLayer";
         CALayer *layer = [CALayer layer];
         layer.frame = self.bounds;
         [self.layer insertSublayer:layer atIndex:0];
+        // 确保位于底层
+        layer.zPosition = -1;
         self.additionLayer = layer;
     }
     objc_setAssociatedObject(self, additionImageKey, additionImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);

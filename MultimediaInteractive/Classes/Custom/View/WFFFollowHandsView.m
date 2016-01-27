@@ -9,6 +9,7 @@
 #import "WFFFollowHandsView.h"
 #import "DeviceCollectionViewCell.h"
 #import "DeviceForUser.h"
+#import "UIView+Addition.h"
 @interface WFFFollowHandsView()<UIGestureRecognizerDelegate>
 {
     CGPoint defaultPoint;
@@ -33,7 +34,8 @@
         self.canMove = YES;
         self.canClick = NO;
         self.canLongPress = NO;
-
+        self.additionImage = [UIImage imageNamed:@"glow"];
+        self.additionScale = 0.5;
     }
     return self;
 }

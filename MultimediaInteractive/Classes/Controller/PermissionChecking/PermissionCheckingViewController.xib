@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -29,7 +29,6 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GHl-gl-hm9">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="image" keyPath="backgroundColorFromUIImage" value="bottomBg.png"/>
@@ -40,11 +39,9 @@
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginBg" translatesAutoresizingMaskIntoConstraints="NO" id="geY-dB-7O7">
                             <rect key="frame" x="0.0" y="0.0" width="630" height="420"/>
-                            <animations/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xs-kN-cBf">
                             <rect key="frame" x="136" y="325" width="145" height="44"/>
-                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
                             <state key="normal" backgroundImage="demo">
@@ -62,7 +59,6 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEc-eF-7c2">
                             <rect key="frame" x="341" y="325" width="145" height="44"/>
-                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="ERO-44-4PF"/>
@@ -84,7 +80,6 @@
                         </button>
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inputBgGray" highlightedImage="inputBgBlue" translatesAutoresizingMaskIntoConstraints="NO" id="YlP-fX-lkP">
                             <rect key="frame" x="136" y="180" width="350" height="40"/>
-                            <animations/>
                             <gestureRecognizers/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Bbo-ig-9H5"/>
@@ -95,7 +90,6 @@
                         </imageView>
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inputBgGray" highlightedImage="inputBgBlue" translatesAutoresizingMaskIntoConstraints="NO" id="7wB-4W-6S4">
                             <rect key="frame" x="136" y="225" width="350" height="40"/>
-                            <animations/>
                             <gestureRecognizers/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="lKH-d1-FVL"/>
@@ -106,7 +100,6 @@
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" image="icon_account" translatesAutoresizingMaskIntoConstraints="NO" id="M4n-56-8LQ">
                             <rect key="frame" x="146" y="190" width="18" height="20"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="18" id="54E-0b-qv5"/>
                                 <constraint firstAttribute="height" constant="20" id="fbH-WD-dES"/>
@@ -114,7 +107,6 @@
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" image="icon_secret" translatesAutoresizingMaskIntoConstraints="NO" id="en9-12-dBv">
                             <rect key="frame" x="146" y="235" width="18" height="20"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="O9Q-Z5-72c"/>
                                 <constraint firstAttribute="width" constant="18" id="jzo-Ic-QFb"/>
@@ -122,7 +114,6 @@
                         </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="pSf-6g-yZa" userLabel="pwdTextField">
                             <rect key="frame" x="179" y="236" width="292" height="18"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="Nq7-BM-Le7"/>
                             </constraints>
@@ -134,7 +125,6 @@
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入用户名" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ezz-Bu-G6O" userLabel="userTextField">
                             <rect key="frame" x="179" y="191" width="292" height="18"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="7Dn-0G-4LE"/>
                             </constraints>
@@ -146,7 +136,6 @@
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="多媒体智能交互管理系统" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klO-t5-ENt">
                             <rect key="frame" x="174" y="74" width="312" height="30"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="6bY-cu-9OD"/>
                             </constraints>
@@ -156,14 +145,12 @@
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="eXV-cL-Z6j">
                             <rect key="frame" x="136" y="74" width="30" height="30"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="eXV-cL-Z6j" secondAttribute="height" multiplier="1:1" id="elN-Qp-n0T"/>
                             </constraints>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ONh-t2-Af8" customClass="WFFCheckBox">
                             <rect key="frame" x="345.5" y="275" width="140" height="40"/>
-                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="240" id="LLl-ec-WcJ"/>
@@ -185,7 +172,6 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NWU-Nh-pUO" customClass="WFFCheckBox">
                             <rect key="frame" x="136" y="275" width="140" height="40"/>
-                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="RGk-ab-4EF"/>
@@ -206,7 +192,6 @@
                             </connections>
                         </view>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="NWU-Nh-pUO" firstAttribute="width" secondItem="YlP-fX-lkP" secondAttribute="width" multiplier="1:2.5" id="1kq-qS-cBM"/>
@@ -264,7 +249,6 @@
                     </variation>
                 </view>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="20t-9m-MHJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="87" id="AgQ-dl-wr1"/>
