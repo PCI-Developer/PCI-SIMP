@@ -30,7 +30,7 @@
 #import "AppDelegate.h"
 
 
-
+#import "UIView+Addition.h"
 
 #define kTagOfPlaceholderLabelForOtherDeviceView 777 //　xib中设置
 
@@ -266,8 +266,20 @@ typedef enum
             cell.deviceImageView.image = [UIImage imageNamed:[device imageNameByStatusRunAnimationOnImageView:cell.deviceImageView]];
         });
     } else {
-        //    kLog(@"%@ %@", device.UEQP_Name, device.value);
+        
         WFFFollowHandsView *deviceView = (WFFFollowHandsView *)[self.contentView viewWithTag:[device AutoID]];
+        // 判断是否灯光
+        if ([device.UEQP_Type isEqualToString:@"灯光"]) {
+            if (device.value) {
+                
+                deviceView.additionImage = [UIImage imageNamed:@"glow"];
+                
+                CGFloat maxValue = [kDeviceTypeInfo(device.UEQP_Type)[@"maxValue"] floatValue];
+                CGFloat minValue = [kDeviceTypeInfo(device.UEQP_Type)[@"minValue"] floatValue];
+                deviceView.additionScale = ([device.value floatValue] - minValue) / (maxValue - minValue);;
+
+            }
+        }
         if (deviceView) { // 已经布局
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (self.selectedDevice == device) {
@@ -441,6 +453,29 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         });
     }*/
     
+}
+
+- (void)deviceInfoView:(DeviceInfoBaseView *)deviceinfoView brightnessSliderWithValue:(CGFloat)value
+{
+    if (![self checkPermissionsByDevice:self.selectedDevice]) {
+        // 滑块归位
+        [self updateUIOfDeviceInfoView];
+        return;
+    }
+    
+    if (self.selectedDevice) {
+        CGFloat maxValue = [kDeviceTypeInfo(self.selectedDevice.UEQP_Type)[@"maxValue"] floatValue];
+        CGFloat minValue = [kDeviceTypeInfo(self.selectedDevice.UEQP_Type)[@"minValue"] floatValue];
+        NSString *valueForSet = [NSString stringWithFormat:@"%.2f", ((maxValue - minValue) * value + minValue)];
+        
+        [[OPManager shareOPManager] deviceSetValueWithDevice:self.selectedDevice deviceValue:valueForSet resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, DeviceForUser *deviceForUser, DeviceForUser *otherDeviceForUser) {
+            if (isSuccess) {
+                kLog(@"命令编号%ld 操作设备类型:%@ 设备ID:%@ 修改设备值为:%@ %@",(long)cmdNumber, kDeviceTypeInfo(deviceForUser.UEQP_Type)[@"name"], deviceForUser.UEQP_ID, deviceForUser.value, isSuccess ? @"成功" : @"失败");
+            } else {
+                //                [self showAlertControllerWithTitle:@"网络连接故障,请重试!"];
+            }
+        }];
+    }
 }
 
 - (void)deviceInfoViewVolumeSliderLeaveFoucsWithValue:(CGFloat)value
@@ -658,8 +693,6 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
                 }
             }
             
-            
-            
             // 隐藏操作界面
             if (self.operatioinView.hidden == NO) {
                 [self.operatioinView setHidden:YES animated:YES];
@@ -705,6 +738,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         deviceInfoNibName = @"DeviceInfoCameraView";
     } else if ([deviceType isEqualToString:@"电视"]) { // OC SLIDER CHANNEL
         deviceInfoNibName = @"DeviceInfoOCVolumeSliderChannelView";
+    } else if ([deviceType isEqualToString:@"灯光"]) {
+        deviceInfoNibName = @"DeviceInfoLightView";
     } else if ([cmdArray containsObject:@"oc"] && [cmdArray containsObject:@"slider"]) { // OC SLIDER
         deviceInfoNibName = @"DeviceInfoOCVolumeSliderView";
     } else if ([cmdArray containsObject:@"oc"]) { // OC
@@ -794,6 +829,16 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             self.deviceInfoView.volumeSlider.value = ([value floatValue] - minValue) / (maxValue - minValue);
         } else { // 选中多个设备
             self.deviceInfoView.volumeSlider.value = 0;
+        }
+    }
+    
+    if ([kDeviceTypeInfo(deviceType)[@"controlCMD"] containsObject:@"brightness"]) {
+        CGFloat maxValue = [kDeviceTypeInfo(deviceType)[@"maxValue"] floatValue];
+        CGFloat minValue = [kDeviceTypeInfo(deviceType)[@"minValue"] floatValue];
+        if (value) { // 选中单个设备
+            self.deviceInfoView.brightnessSlider.value = ([value floatValue] - minValue) / (maxValue - minValue);
+        } else { // 选中多个设备
+            self.deviceInfoView.brightnessSlider.value = 0;
         }
     }
     
@@ -1437,6 +1482,19 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         deviceImage.tag = kTagForDeviceImageInWFFFollowHandsView;
         [deviceView addSubview:deviceImage];
         
+    // 判断是否灯光
+    if ([model.device.UEQP_Type isEqualToString:@"灯光"]) {
+        if (model.device.value) {
+        deviceView.additionImage = [UIImage imageNamed:@"glow"];
+
+        CGFloat maxValue = [kDeviceTypeInfo(model.device.UEQP_Type)[@"maxValue"] floatValue];
+        CGFloat minValue = [kDeviceTypeInfo(model.device.UEQP_Type)[@"minValue"] floatValue];
+        
+        deviceView.additionScale = ([model.device.value floatValue] - minValue) / (maxValue - minValue);;
+        }
+    }
+
+        
         // 设置不能移动
         deviceView.canMove = NO;
         // 单机出现设备信息
@@ -1958,6 +2016,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
                 });
             }
         });
+        
         // 开启定时
         dispatch_resume(timer);
     } else { // > 0  -- 已经显示,刷新计时时间

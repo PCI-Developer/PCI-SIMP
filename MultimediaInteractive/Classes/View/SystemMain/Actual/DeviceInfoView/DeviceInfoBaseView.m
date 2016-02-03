@@ -33,7 +33,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)sliderLeaveFocus:(NSNotification *)sender {
+- (void)volumeSliderLeaveFocus:(NSNotification *)sender {
     WFFCircularSlider *slider = (WFFCircularSlider *)sender.object;
     if ([self.delegate respondsToSelector:@selector(deviceInfoViewVolumeSliderLeaveFoucsWithValue:)]) {
         [self.delegate deviceInfoViewVolumeSliderLeaveFoucsWithValue:slider.value];
@@ -47,7 +47,7 @@
         _isBatch = NO;
         _nibName = [nibName copy];
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sliderLeaveFocus:) name:kSliderLeaveFocusNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(volumeSliderLeaveFocus:) name:kSliderLeaveFocusNotification object:nil];
     
     self.backgroundColor = [UIColor clearColor];
     return self;
@@ -74,9 +74,6 @@
     }
 }
 
-- (IBAction)fsdf:(id)sender {
-    NSLog(@"fdsf");
-}
 
 - (IBAction)orientationButtonTouchUp:(UIButton *)sender
 {
@@ -108,10 +105,16 @@
     }
 }
 
+- (IBAction)brightnessSliderLeaveFoucs:(UISlider *)sender {
+    if ([self.delegate respondsToSelector:@selector(deviceInfoView:brightnessSliderWithValue:)]) {
+        [self.delegate deviceInfoView:self brightnessSliderWithValue:sender.value];
+    }
+}
+
 #pragma mark - 更新SliderValue的提示文字
-- (IBAction)sliderValueChanged:(WFFCircularSlider *)sender
+- (IBAction)sliderValueChanged:(id)sender
 {
-    UILabel *label = (UILabel *)[[UIApplication sharedApplication].keyWindow viewWithTag:kTagForLabelOfVolumeSlider];
+    UILabel *label = (UILabel *)[self viewWithTag:kTagForLabelOfVolumeSlider];
     if (!label) {
         label = [[UILabel alloc] initWithFrame:CGRectZero];
         label.tag = kTagForLabelOfVolumeSlider;
@@ -120,12 +123,18 @@
         label.shadowOffset = CGSizeMake(1, 1);
         label.textAlignment = NSTextAlignmentCenter;
         //        label.backgroundColor = [UIColor cyanColor];
-        [[UIApplication sharedApplication].keyWindow addSubview:label];
+        [self addSubview:label];
     }
+    
+    [self bringSubviewToFront:label];
+    
     label.hidden = NO;
     label.alpha = 1;
-    label.text = [NSString stringWithFormat:@"%.0f", sender.value * 100];
-    CGRect sliderThumbRect = [sender convertRect:sender.bounds toView:[UIApplication sharedApplication].keyWindow];
+    
+    CGFloat value = [sender isKindOfClass:[WFFCircularSlider class]] ? ((WFFCircularSlider *)sender).value : ((UISlider *)sender).value;
+    
+    label.text = [NSString stringWithFormat:@"%.0f", value * 100];
+    CGRect sliderThumbRect = [sender convertRect:((UIControl *)sender).bounds toView:self];
     label.frame = CGRectMake(CGRectGetMidX(sliderThumbRect) - 40 / 2, CGRectGetMinY(sliderThumbRect) - 30, 40, 30);
     
     static NSTimer *timer;
@@ -142,13 +151,27 @@
 
 - (void)dismissVolumeSliderValueLabel:(NSTimer *)sender
 {
-    UILabel *label = (UILabel *)[[UIApplication sharedApplication].keyWindow viewWithTag:kTagForLabelOfVolumeSlider];
+    
+    UILabel *label = (UILabel *)[self viewWithTag:kTagForLabelOfVolumeSlider];
+    if (label.hidden) {
+        return;
+    }
     [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
         label.alpha = 0.0f;
     } completion:^(BOOL finished) {
         // 隐藏sliderValueLabel
         label.hidden = YES;
     }];
+}
+
+- (void)hiddenLabelForSlider
+{
+    UILabel *label = (UILabel *)[self viewWithTag:kTagForLabelOfVolumeSlider];
+
+    if (label.hidden) {
+        return;
+    }
+    label.hidden = YES;
 }
 
 - (void)setIsBatch:(BOOL)isBatch

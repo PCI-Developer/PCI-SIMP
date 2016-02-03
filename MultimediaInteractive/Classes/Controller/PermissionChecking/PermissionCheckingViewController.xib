@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -143,7 +143,7 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="eXV-cL-Z6j">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="eXV-cL-Z6j">
                             <rect key="frame" x="136" y="74" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="eXV-cL-Z6j" secondAttribute="height" multiplier="1:1" id="elN-Qp-n0T"/>
@@ -282,11 +282,11 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="Logo" width="72" height="72"/>
         <image name="bottomBg.png" width="3" height="3"/>
         <image name="checkBox" width="128" height="128"/>
         <image name="checkBoxSelected" width="128" height="128"/>
         <image name="demo" width="338" height="91"/>
+        <image name="icon" width="1" height="48"/>
         <image name="icon_account" width="12" height="13"/>
         <image name="icon_secret" width="12" height="13"/>
         <image name="inputBgBlue" width="300" height="40"/>

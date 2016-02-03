@@ -34,8 +34,8 @@
         self.canMove = YES;
         self.canClick = NO;
         self.canLongPress = NO;
-        self.additionImage = [UIImage imageNamed:@"glow"];
-        self.additionScale = 0.5;
+//        self.additionImage = [UIImage imageNamed:@"glow"];
+//        self.additionScale = 0.5;
     }
     return self;
 }
@@ -281,6 +281,9 @@
     int ori_X = currentCol * (width + colMargin);
     int ori_Y = 100 + currentRow * (height + rowMargin);
     WFFFollowHandsView *followHandsView = [[WFFFollowHandsView alloc] initWithFrame:CGRectMake(ori_X, ori_Y, width, height)];
+    
+
+    
     // 选中状态
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"state_%d",1]]];
     imageView.frame = followHandsView.bounds;

@@ -13,6 +13,7 @@
 		6009C7031BF5E97A00C8B183 /* hudError.png in Resources */ = {isa = PBXBuildFile; fileRef = 6009C7011BF5E97A00C8B183 /* hudError.png */; };
 		6009C7041BF5E97A00C8B183 /* hudSuccess.png in Resources */ = {isa = PBXBuildFile; fileRef = 6009C7021BF5E97A00C8B183 /* hudSuccess.png */; };
 		6009C7061BF5EAAA00C8B183 /* hudLoading.png in Resources */ = {isa = PBXBuildFile; fileRef = 6009C7051BF5EAAA00C8B183 /* hudLoading.png */; };
+		600C5B261C59A65F00EB21EC /* DeviceInfoLightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 600C5B251C59A65F00EB21EC /* DeviceInfoLightView.xib */; };
 		6015FBA51C197376003A417E /* CameraFollowConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6015FBA31C197376003A417E /* CameraFollowConfigView.m */; };
 		6015FBA61C197376003A417E /* CameraFollowConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6015FBA41C197376003A417E /* CameraFollowConfigView.xib */; };
 		6015FBA91C197384003A417E /* ProcessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6015FBA81C197384003A417E /* ProcessView.m */; };
@@ -141,6 +142,7 @@
 		6009C7011BF5E97A00C8B183 /* hudError.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudError.png; sourceTree = "<group>"; };
 		6009C7021BF5E97A00C8B183 /* hudSuccess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudSuccess.png; sourceTree = "<group>"; };
 		6009C7051BF5EAAA00C8B183 /* hudLoading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudLoading.png; sourceTree = "<group>"; };
+		600C5B251C59A65F00EB21EC /* DeviceInfoLightView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoLightView.xib; sourceTree = "<group>"; };
 		6015FBA21C197376003A417E /* CameraFollowConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFollowConfigView.h; sourceTree = "<group>"; };
 		6015FBA31C197376003A417E /* CameraFollowConfigView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraFollowConfigView.m; sourceTree = "<group>"; };
 		6015FBA41C197376003A417E /* CameraFollowConfigView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraFollowConfigView.xib; sourceTree = "<group>"; };
@@ -801,6 +803,7 @@
 				60CD4E441C03FE0500CF51F9 /* DeviceInfoVolumeSliderView.xib */,
 				60CD4E421C03F95400CF51F9 /* DeviceInfoOCVolumeSliderView.xib */,
 				609B6FA71C04559700B62D95 /* DeviceInfoMicView.xib */,
+				600C5B251C59A65F00EB21EC /* DeviceInfoLightView.xib */,
 			);
 			path = DeviceInfoView;
 			sourceTree = "<group>";
@@ -1105,6 +1108,7 @@
 				60BEC2991C166D89001BEED5 /* PermissionCheckingViewController.xib in Resources */,
 				60A3E2261BD48DB900B4FFCA /* DeviceCollectionViewCell.xib in Resources */,
 				60A3D5A61BCCCFAA00313F8F /* menu_info.plist in Resources */,
+				600C5B261C59A65F00EB21EC /* DeviceInfoLightView.xib in Resources */,
 				602C3AAF1BAFCC88000C41DA /* Assets.xcassets in Resources */,
 				6009C7031BF5E97A00C8B183 /* hudError.png in Resources */,
 				6015FBAB1C197390003A417E /* ProcessView.xib in Resources */,

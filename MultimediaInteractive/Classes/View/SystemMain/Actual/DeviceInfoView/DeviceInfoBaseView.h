@@ -23,6 +23,7 @@
 - (void)deviceInfoViewVolumeMinusButtonClicked;
 - (void)deviceInfoView:(DeviceInfoBaseView *)deviceInfoView cameraFollowButtonClicked:(UIButton *)button;
 - (void)deviceInfoViewCheckBoxClicked:(DeviceInfoBaseView *)deviceInfoView;
+- (void)deviceInfoView:(DeviceInfoBaseView *)deviceinfoView brightnessSliderWithValue:(CGFloat)value;
 @end
 
 
@@ -47,13 +48,14 @@
 @property (nonatomic, assign) NSInteger selectedChannel;
 
 @property (weak, nonatomic) IBOutlet WFFCircularSlider *volumeSlider;
+@property (weak, nonatomic) IBOutlet UISlider *brightnessSlider;
 
 @property (nonatomic, weak) IBOutlet UIButton *deviceInfoOpenButton;
 @property (nonatomic, weak) IBOutlet UIButton *deviceInfoCloseButton;
 @property (nonatomic, weak) IBOutlet UIView *orientationView;
 @property (weak, nonatomic) IBOutlet UIButton *cameraFollowConfigButton;
 
-- (IBAction)sliderValueChanged:(WFFCircularSlider *)sender;
+- (IBAction)sliderValueChanged:(id)sender;
 
 - (instancetype)initWithNibName:(NSString *)nibName;
 
@@ -69,6 +71,10 @@
 - (IBAction)cameraFollowConfigButtonClicked:(UIButton *)sender;
 
 - (IBAction)checkBoxClicked:(UITapGestureRecognizer *)sender;
+- (IBAction)brightnessSliderLeaveFoucs:(UISlider *)sender;
+
+- (void)hiddenLabelForSlider;
+
 
 @end
 

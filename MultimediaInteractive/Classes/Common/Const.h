@@ -79,6 +79,31 @@ typedef enum {
     DeviceViewImageStatusForShouldConn // 允许连接高亮 - 拖动设备,经过可连接设备时
 } DeviceViewImageStatus;
 
+#pragma mark - 单例
+#define kSingleTon_M(classname) \
++ (instancetype)share##classname\
+{ \
+static classname *share = nil; \
+static dispatch_once_t onceToken; \
+dispatch_once(&onceToken, ^{ \
+share = [classname new]; \
+}); \
+return share; \
+}
+
+#define kSingleTon_H(classname) \
++ (instancetype)share##classname;
+
+
+
+#ifdef DEBUG
+#define kLog(...) NSLog(__VA_ARGS__)
+#else
+#define kLog(...)
+#endif
+
+
+
 #define kTagForImageViewInWFFFollowHandsView 999 // 设备选中状态图标
 #define kTagForDeviceImageInWFFFollowHandsView 99 // 设备图标
 #define kRightViewTransitionType kCATransitionPush // 右侧子视图过场动画类型

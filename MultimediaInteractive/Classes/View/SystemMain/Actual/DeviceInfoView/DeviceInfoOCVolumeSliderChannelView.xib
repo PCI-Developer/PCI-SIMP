@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -91,7 +91,7 @@
                                 <constraint firstAttribute="height" constant="200" id="hYv-ZH-1tW"/>
                             </constraints>
                             <connections>
-                                <action selector="sliderValueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="n7Y-Gl-mo8"/>
+                                <action selector="sliderValueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="D5u-w8-dOp"/>
                             </connections>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqH-Ww-7lh">

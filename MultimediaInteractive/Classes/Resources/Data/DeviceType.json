@@ -150,5 +150,19 @@
         "controlCMD" : ["oc"],
         "minValue" : -50,
         "maxValue" : 5
+    },
+    "灯光":{
+        "name" : "灯光",
+        "inOrOut":"in",
+        "soundConnectedType":[
+        
+                              ],
+        "videoConnectedType":[
+        ],
+        "imageName" : "musicFile",
+        "isActual" : true,
+        "controlCMD" : ["oc", "brightness"],
+        "minValue" : 100,
+        "maxValue" : 0
     }
 }
