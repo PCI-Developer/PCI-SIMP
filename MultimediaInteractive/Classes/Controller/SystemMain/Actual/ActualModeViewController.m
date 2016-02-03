@@ -1793,6 +1793,10 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             return;
         }
         
+        [self setDeviceViewGREnable:NO withType:@"move"];
+        [self setDeviceViewGREnable:NO withType:@"longPress"];
+        [self setDeviceViewGREnable:NO withType:@"click"];
+        
         [self showShadeView:YES];
         
         self.actualImageView.alpha = 1;
