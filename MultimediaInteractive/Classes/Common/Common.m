@@ -242,6 +242,7 @@ kSingleTon_M(Common)
 {
     return [self getDeviceWithType:@"音频文件"];
 }
+
 #pragma mark - 实景图
 - (UIImage *)actualImageWithViewpointType:(NSString *)viewpointType
 {
