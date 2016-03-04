@@ -7,7 +7,6 @@
 //
 
 #import "PopMenu.h"
-#import "UIView+Animation.h"
 #define kRadius 100 // 半径
 
 #define kPopViewSize 30 // 每个弹出view的大小
