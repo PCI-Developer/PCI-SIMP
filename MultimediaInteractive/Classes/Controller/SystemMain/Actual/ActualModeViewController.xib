@@ -344,7 +344,7 @@
                         </mask>
                     </variation>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Toc-St-8ge" userLabel="设备信息控制界面">
+                <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Toc-St-8ge" userLabel="设备信息控制界面">
                     <rect key="frame" x="350" y="25" width="250" height="550"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -620,10 +620,11 @@
                 <constraint firstAttribute="trailing" secondItem="blS-BE-Hzp" secondAttribute="trailing" id="WPZ-fW-fHu"/>
                 <constraint firstItem="Fjn-st-gNz" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ZbK-Ge-Wlb"/>
                 <constraint firstAttribute="bottom" secondItem="Wna-2D-YyQ" secondAttribute="bottom" id="fuG-xC-Ubk"/>
-                <constraint firstAttribute="trailing" secondItem="Toc-St-8ge" secondAttribute="trailing" id="gi5-JR-ylb"/>
+                <constraint firstAttribute="trailing" secondItem="Toc-St-8ge" secondAttribute="trailing" constant="10" id="gi5-JR-ylb"/>
                 <constraint firstItem="26J-VK-AlS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hWQ-es-Jye"/>
                 <constraint firstItem="bNx-ez-qQY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hci-Xx-hfA"/>
                 <constraint firstItem="K1w-Ef-a1u" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="iPY-GU-w2e"/>
+                <constraint firstItem="Toc-St-8ge" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="iie-cm-DTu"/>
                 <constraint firstItem="Fjn-st-gNz" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="ivJ-Sd-Z5X"/>
                 <constraint firstItem="JW8-he-GWV" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="kwV-5d-eOw"/>
                 <constraint firstItem="Fjn-st-gNz" firstAttribute="trailing" secondItem="JW8-he-GWV" secondAttribute="trailing" id="l7d-FA-1qX"/>
@@ -652,6 +653,7 @@
                     <exclude reference="sgF-Q6-hRX"/>
                     <exclude reference="O2P-1C-Ml6"/>
                     <exclude reference="P8w-D2-6s2"/>
+                    <exclude reference="2eI-kk-JJ1"/>
                     <exclude reference="DwS-4R-47n"/>
                     <exclude reference="9z9-92-yFL"/>
                     <exclude reference="hci-Xx-hfA"/>

@@ -1097,20 +1097,18 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 //    }
     
     [self changeFollowViewImageWithStatus:DeviceViewImageStatusForNormal inArray:self.detailLayoutOfAreaByViewpointTypeArray];
-    // 选中的高亮
+
+    // 非公共设备，则需要恢复之前选中设备的状态为高亮
     if (_selectedDevice) {
-        // 选中的高亮
-        if (_selectedDevice) {
+        
+        DetaiLayoutOfAreaByViewpointType *detailLayout = [self getDetailOfAreaScreenWithAutoID:_selectedDevice.AutoID];
+        if (detailLayout) { // 说明是非公共设备（即布局在背景上的设备）
             [self changeFollowViewImageWithStatus:DeviceViewImageStatusForHighlight inArray:@[[self getDetailOfAreaScreenWithAutoID:_selectedDevice.AutoID]]];
-            // 选中的非公共设备
-            // 公共设备不需要更新
-           if (!commonDevice) {
-                [self changeFollowViewImageWithStatus:DeviceViewImageStatusForHighlight inArray:@[[self getDetailOfAreaScreenWithAutoID:_selectedDevice.AutoID]]];
-           }
+        } else { // 公共设备的话，不需要执行任何操作，因为moving的时候，collectionView的选中状态未去除
             
         }
-
     }
+
     
     
     if (flag) {
@@ -1662,6 +1660,9 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         _selectedDevice = selectedDevice;
         
         if (!selectedDevice) {
+            
+            [self.deviceInfoBackgroundView setHidden:YES animated:YES];
+
             return;
         }
 //        // 选中设备,则不选中类型
@@ -2105,8 +2106,12 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 - (IBAction)processBackgroundViewTapGRAction:(UITapGestureRecognizer *)sender {
     [self updateViewHideOrShowByType:TopViewTypeNone];
 }
+
 - (IBAction)otherViewButtonAction:(UIButton *)sender {
     if (self.selectedOtherViewType != (OtherViewType)sender.tag) {
+        
+        self.selectedDevice = nil;
+        
         self.selectedOtherViewType = (OtherViewType)sender.tag;
         
         [self.commonDeviceCollectionView reloadData];
