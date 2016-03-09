@@ -14,7 +14,6 @@
 #import "WFFDropdownList.h"
 #import "Area.h"
 #import "DetaiLayoutOfAreaByViewpointType.h"
-#import "PopMenu.h"
 #import "LogInfo.h"
 #import "AutoSizeCollectionView.h"
 #import "OPManager.h"
@@ -1100,7 +1099,17 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     [self changeFollowViewImageWithStatus:DeviceViewImageStatusForNormal inArray:self.detailLayoutOfAreaByViewpointTypeArray];
     // 选中的高亮
     if (_selectedDevice) {
-        [self changeFollowViewImageWithStatus:DeviceViewImageStatusForHighlight inArray:@[[self getDetailOfAreaScreenWithAutoID:_selectedDevice.AutoID]]];
+        // 选中的高亮
+        if (_selectedDevice) {
+            [self changeFollowViewImageWithStatus:DeviceViewImageStatusForHighlight inArray:@[[self getDetailOfAreaScreenWithAutoID:_selectedDevice.AutoID]]];
+            // 选中的非公共设备
+            // 公共设备不需要更新
+           if (!commonDevice) {
+                [self changeFollowViewImageWithStatus:DeviceViewImageStatusForHighlight inArray:@[[self getDetailOfAreaScreenWithAutoID:_selectedDevice.AutoID]]];
+           }
+            
+        }
+
     }
     
     
