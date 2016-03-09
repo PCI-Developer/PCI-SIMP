@@ -79,7 +79,6 @@
 		60C3212B1C0E995F00A89DA5 /* WFFCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C3212A1C0E995F00A89DA5 /* WFFCircularSlider.m */; };
 		60C32BF61BE74F690036D208 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C32BF51BE74F690036D208 /* Reachability.m */; };
 		60C32BF81BE7570D0036D208 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60C32BF71BE7570D0036D208 /* SystemConfiguration.framework */; };
-		60CBB6E51BE2F7CD00A4D471 /* PopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CBB6E41BE2F7CD00A4D471 /* PopMenu.m */; };
 		60CBC2DC1BE9FC79001E5DFE /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CBC2D21BE9FC79001E5DFE /* FMDatabase.m */; };
 		60CBC2DD1BE9FC79001E5DFE /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CBC2D41BE9FC79001E5DFE /* FMDatabaseAdditions.m */; };
 		60CBC2DE1BE9FC79001E5DFE /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CBC2D61BE9FC79001E5DFE /* FMDatabasePool.m */; };
@@ -258,8 +257,6 @@
 		60C32BF41BE74F690036D208 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		60C32BF51BE74F690036D208 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		60C32BF71BE7570D0036D208 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		60CBB6E31BE2F7CD00A4D471 /* PopMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopMenu.h; sourceTree = "<group>"; };
-		60CBB6E41BE2F7CD00A4D471 /* PopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopMenu.m; sourceTree = "<group>"; };
 		60CBC2D11BE9FC79001E5DFE /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		60CBC2D21BE9FC79001E5DFE /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		60CBC2D31BE9FC79001E5DFE /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -554,8 +551,6 @@
 				602C3B031BAFCCCC000C41DA /* WFFDropdownList.m */,
 				602C3B041BAFCCCC000C41DA /* WFFFollowHandsView.h */,
 				602C3B051BAFCCCC000C41DA /* WFFFollowHandsView.m */,
-				60CBB6E31BE2F7CD00A4D471 /* PopMenu.h */,
-				60CBB6E41BE2F7CD00A4D471 /* PopMenu.m */,
 				6009C6F81BF5DC8000C8B183 /* WFFProgressHud.h */,
 				6009C6F91BF5DC8000C8B183 /* WFFProgressHud.m */,
 				6009C6FB1BF5DCDF00C8B183 /* WFFProgressHud.xib */,
@@ -1210,7 +1205,6 @@
 				60A3D5AD1BCCCFAA00313F8F /* UIApplication+AppDimensions.m in Sources */,
 				60E78C771BB4E3C300EF6074 /* MJRefreshHeader.m in Sources */,
 				60E78C7B1BB4E3C300EF6074 /* MJRefreshBackGifFooter.m in Sources */,
-				60CBB6E51BE2F7CD00A4D471 /* PopMenu.m in Sources */,
 				60A3D5AB1BCCCFAA00313F8F /* SHStripeMenuViewController.m in Sources */,
 				6089BB651BBA64B600BAAE4E /* ConfigViewController.m in Sources */,
 				602C3B741BAFCCCC000C41DA /* GCDAsyncSocket.m in Sources */,
