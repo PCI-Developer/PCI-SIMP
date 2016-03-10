@@ -231,6 +231,7 @@ typedef enum
 
 - (void)dealloc
 {
+
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -1910,7 +1911,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         alertController.title = @"无法找到可用图片源,请检查设备后重试";
     }
     
-    [self presentViewController:alertController animated:YES completion:nil];
+    NSLog(@"%@", self.parentViewController);
+    [self.parentViewController presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

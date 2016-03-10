@@ -35,8 +35,6 @@
 // 当前选中的菜单项
 @property (nonatomic, copy) NSString *selectedVC;
 
-// 上一次选中的菜单项
-@property (nonatomic, copy) NSString *lastVC;
 // 当前展示的子vc的view
 @property (nonatomic, strong) UIView *currentView;
 
@@ -150,9 +148,9 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    kLog(@"system dealloc");
-}
+    
 
+}
 
 // BEGIN
 // 视图切换时,对子视图的frame进行了设置. 因此子视图的frame如果不再手动改变的话,是恒定值,里面的子视图也就不会按autolaytou来布局
@@ -368,7 +366,6 @@
     
     self.hasChangedArea = NO;
     
-    self.lastVC = _selectedVC;
     _selectedVC = selectedVC;
     
     UIViewController *vc = self.viewControllersDict[selectedVC];
@@ -376,12 +373,18 @@
     // 创建vc
     if (!vc) {
         vc = [((UIViewController *)[NSClassFromString(_selectedVC) alloc]) initWithNibName:_selectedVC bundle:nil];
-        //        [self addChildViewController:vc];//加进去后,更改区域时也必须删掉,否则随着区域切换次数的增加,内存会无穷增加.因此直接略去
+        // 加进去后,更改区域时也必须删掉,否则随着区域切换次数的增加,内存会无穷增加 --
+        // 上面的字典。只是为了根据选中的模块来进行区分。
+        // 添加到childViewControllers中是为了在actualModeViewController中可以根据parentViewController获取到当前vc，并且present出相册
+        [self addChildViewController:vc];
+        
+        
         [self.viewControllersDict setObject:vc forKey:_selectedVC];
         vc.view.frame = _contentView.bounds;
     }
     
     self.currentView = vc.view;
 }
+
 
 @end
