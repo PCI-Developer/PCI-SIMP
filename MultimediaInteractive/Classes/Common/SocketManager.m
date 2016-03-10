@@ -389,8 +389,10 @@ kSingleTon_M(SocketManager)
     } else {
         // 发送成功后执行代理方法 didWriteData
         [self.pcSocket writeData:data withTimeout:kTimeOut tag:currentNum];
-        // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
-        [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
+        if (resultBlock) {
+            // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
+            [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
+        }
     }
     currentNum++;
 }

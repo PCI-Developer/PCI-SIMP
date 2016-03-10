@@ -1911,7 +1911,6 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         alertController.title = @"无法找到可用图片源,请检查设备后重试";
     }
     
-    NSLog(@"%@", self.parentViewController);
     [self.parentViewController presentViewController:alertController animated:YES completion:nil];
 }
 
