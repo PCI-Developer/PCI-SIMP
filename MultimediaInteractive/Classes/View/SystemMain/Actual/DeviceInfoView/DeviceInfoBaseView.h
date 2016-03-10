@@ -15,6 +15,7 @@
 @optional
 - (void)deviceInfoViewOpenButtonClicked:(DeviceInfoBaseView *)deviceInfoView;
 - (void)deviceInfoViewCloseButtonClicked:(DeviceInfoBaseView *)deviceInfoView;
+- (void)deviceInfoView:(DeviceInfoBaseView *)deviceInfoView controlMusicFileButtonClicked:(UIButton *)button;
 - (void)deviceInfoView:(DeviceInfoBaseView *)deviceInfoView orientationButtonTouchDown:(UIButton *)button;
 - (void)deviceInfoView:(DeviceInfoBaseView *)deviceInfoView orientationButtonTouchUp:(UIButton *)button;
 - (void)deviceInfoView:(DeviceInfoBaseView *)deviceInfoView channelIndexChanged:(NSInteger)channelIndex;
@@ -52,6 +53,9 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *deviceInfoOpenButton;
 @property (nonatomic, weak) IBOutlet UIButton *deviceInfoCloseButton;
+@property (weak, nonatomic) IBOutlet UIButton *playMusicFileButtonClicked;
+@property (weak, nonatomic) IBOutlet UIButton *stopMusicFileButtonClicked;
+@property (weak, nonatomic) IBOutlet UIButton *pauseMusicFileButtonClicked;
 @property (nonatomic, weak) IBOutlet UIView *orientationView;
 @property (weak, nonatomic) IBOutlet UIButton *cameraFollowConfigButton;
 
@@ -59,9 +63,12 @@
 
 - (instancetype)initWithNibName:(NSString *)nibName;
 
+
 - (IBAction)openButtonClicked:(UIButton *)sender;
 
 - (IBAction)closeButtonClicked:(UIButton *)sender;
+
+- (IBAction)controlMusicFileButtonClicked:(UIButton *)sender;
 
 - (IBAction)orientationButtonTouchDown:(UIButton *)sender;
 

@@ -21,7 +21,7 @@
 /**
  *  视角
  */
-@property (nonatomic, copy) NSString *viewpointType;
+@property (nonatomic, assign) ViewPointType viewpointType;
 
 /*
  * 获取设备后,自动生成.

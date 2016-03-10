@@ -67,6 +67,13 @@
     }
 }
 
+- (IBAction)controlMusicFileButtonClicked:(UIButton *)sender
+{
+    if ([self.delegate respondsToSelector:@selector(deviceInfoView:controlMusicFileButtonClicked:)]) {
+        [self.delegate deviceInfoView:self controlMusicFileButtonClicked:sender];
+    }
+}
+
 - (IBAction)orientationButtonTouchDown:(UIButton *)sender
 {
     if ([self.delegate respondsToSelector:@selector(deviceInfoView:orientationButtonTouchDown:)]) {

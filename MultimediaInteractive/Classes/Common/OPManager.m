@@ -72,6 +72,31 @@ kSingleTon_M(OPManager)
     [self deviceOPWithCmdType:CMDTypeChangeChannel arg:channel deviceForUser:device otherDevice:nil resultBlock:resultBlock];
 }
 
+// 音频文件
+- (void)deviceConnMusicFileWithFile:(DeviceForUser *)device otherDevice:(DeviceForUser *)otherDevice resultBlock:(ControlResultWithDeviceBlock)resultBlock
+{
+    [self deviceOPWithCmdType:CMDTypeConnFile arg:nil deviceForUser:device otherDevice:otherDevice resultBlock:resultBlock];
+}
+- (void)deviceControlMusicFileWithTag:(NSInteger)tag file:(DeviceForUser *)device resultBlock:(ControlResultWithDeviceBlock)resultBlock
+{
+    CMDType cmdType;
+    switch (tag) {
+        case 0:
+            cmdType = CMDTypePlayFile;
+            break;
+        case 1:
+            cmdType = CMDTypeStopFile;
+            break;
+        case 2:
+            cmdType = CMDTypePauseFile;
+            break;
+            
+        default:
+            return;
+    }
+    [self deviceOPWithCmdType:cmdType arg:nil deviceForUser:device otherDevice:nil resultBlock:resultBlock];
+}
+
 // 配置摄像头跟随
 - (void)deviceConfigCameraFollowWithDevice:(DeviceForUser *)device deviceValue:(NSString *)value resultBlock:(ControlResultWithDeviceBlock)resultBlock
 {
@@ -121,11 +146,11 @@ kSingleTon_M(OPManager)
         logInfo.result = -1;
         
         NSString *ID = logInfo.UEQP_ID;
-        if (cmdType == CMDTypeClose || cmdType == CMDTypeOpen || cmdType == CMDTypeCaDown || cmdType == CMDTypeCaUp || cmdType == CMDTypeCaLeft || cmdType == CMDTypeCaRight || cmdType == CMDTypeCaStop) { // 无参数命令
+        if (cmdType == CMDTypeClose || cmdType == CMDTypeOpen || cmdType == CMDTypeCaDown || cmdType == CMDTypeCaUp || cmdType == CMDTypeCaLeft || cmdType == CMDTypeCaRight || cmdType == CMDTypeCaStop || cmdType == CMDTypePlayFile || cmdType == CMDTypeStopFile || cmdType == CMDTypePauseFile) { // 无参数命令
             logInfo.value = @"";
         } else if (cmdType == CMDTypeSetValue || cmdType == CMDTypeChangeChannel || cmdType == CMDTypeConfigCameraFollow){
             logInfo.value = arg;
-        } else if (cmdType == CMDTypeConn) {
+        } else if (cmdType == CMDTypeConn || cmdType == CMDTypeConnFile) {
             logInfo.value = @"";
             ID = [logInfo.UEQP_ID stringByAppendingFormat:@",%@", logInfo.otherUEQP_ID];
         }
@@ -313,15 +338,22 @@ kSingleTon_M(OPManager)
             if (isSuccess) {
                 // 统一更新设备[也可放在上面循环中,此处可读性强]
                 for (DeviceForUser *device in devicesArray) {
-                    if (model.cmdType == CMDTypeClose || model.cmdType == CMDTypeOpen) { // 开关
+                    if (model.cmdType == CMDTypeClose || model.cmdType == CMDTypeOpen || model.cmdType == CMDTypePlayFile || model.cmdType == CMDTypeStopFile || model.cmdType == CMDTypePauseFile) { // 开关
                         // 操作后,保存配置
                         if ([resultDict[device.UEQP_ID] intValue] == 1) { // 判断该设备是否操作成功
                             [device.currentConfigs setObject:@(model.cmdType) forKey:kConfigOCKey];
-                            device.deviceOCState = (DeviceOCState)model.cmdType;
-                            //                        kLog(@"设备更新发出通知 : %@", device);
+                            if (model.cmdType > 2) { // 音频文件
+                                if (model.cmdType > CMDTypePlayFile) { // 暂停或者停止
+                                    device.deviceOCState = DeviceClose;
+                                } else {
+                                    device.deviceOCState = DeviceOpen;
+                                }
+                            } else { // 其他设备
+                                device.deviceOCState = (DeviceOCState)model.cmdType;
+                            }
                             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUpdateDevice object:device];
                         } else {
-                            kLog(@"设备编号 : %@ 开关操作中失败", device.UEQP_ID);
+                            kLog(@"设备编号 : %@ 开关操作失败", device.UEQP_ID);
                         }
                     } else if (model.cmdType == CMDTypeSetValue){
                         // 操作后,保存配置
@@ -329,13 +361,12 @@ kSingleTon_M(OPManager)
                         device.value = model.value;
                         //                    kLog(@"设备更新发出通知 : %@", device);
                         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUpdateDevice object:device];
-                    } else if (model.cmdType == CMDTypeConn) {
+                    } else if (model.cmdType == CMDTypeConn || model.cmdType == CMDTypeConnFile) {
                         // 连接操作,则devicesArray必定个数为1[输入源为1 输出源为多]
                         for (DeviceForUser *otherDevice in otherDevicesArray) {
                             // 操作后,保存配置
                             [otherDevice.currentConfigs setObject:device.UEQP_ID forKey:kConfigConnKey];
                             otherDevice.connectedDevice = device;
-                            //                        kLog(@"设备更新发出通知 : %@", device);
                             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUpdateDevice object:otherDevice];
                         }
                     } else if (model.cmdType == CMDTypeChangeChannel) {

@@ -44,7 +44,7 @@ kSingleTon_M(DBHelper)
 
 - (void)createTable
 {
-    NSString *sqlStringForDetailLayoutOfAreaByViewpointType = @"create table if not exists detailLayoutOfAreaByViewpointType(areaID,viewpointType, deviceID, origin_X double, origin_Y double, size_Width double, size_Height double)";
+    NSString *sqlStringForDetailLayoutOfAreaByViewpointType = @"create table if not exists detailLayoutOfAreaByViewpointType(areaID,viewpointType int, deviceID, origin_X double, origin_Y double, size_Width double, size_Height double)";
     NSString *sqlStringForLogInfo = @"create table if not exists LogInfo(UEQP_ID, otherUEQP_ID, cmdType integer, value, type integer, createDate double, result integer, areaID, createUserID)";
     NSString *sqlStringForAreaConfig = @"create table if not exists AreaConfig(areaID, configName)";
     NSString *sqlStringForDetailOfAreaConfig = @"create table if not exists DetailOfAreaConfig(configName, deviceID, deviceData blob)";
@@ -68,16 +68,16 @@ kSingleTon_M(DBHelper)
 
 
 #pragma mark - 获取当前区域指定视图的布局
-- (NSArray *)getDeviceLayoutWithViewpointType:(NSString *)viewpointType
+- (NSArray *)getDeviceLayoutWithViewpointType:(ViewPointType)viewpointType
 {
     NSString *sqlString = [NSString stringWithFormat:@"select * from %@ where areaID = ? and viewpointType = ?", detailLayoutOfAreaByViewpointTypeTableName];
     __block NSMutableArray *resultArray = [NSMutableArray array];
     [_dbQueue inDatabase:^(FMDatabase *db) {
-        FMResultSet *set = [db executeQuery:sqlString, kCurrentArea.AreaID, viewpointType];
+        FMResultSet *set = [db executeQuery:sqlString, kCurrentArea.AreaID, @(viewpointType)];
         while ([set next]) {
             DetaiLayoutOfAreaByViewpointType *detailLayout = [DetaiLayoutOfAreaByViewpointType new];
             detailLayout.areaID = [set stringForColumn:@"areaID"];
-            detailLayout.viewpointType = [set stringForColumn:@"viewpointType"];
+            detailLayout.viewpointType = [set intForColumn:@"viewpointType"];
             detailLayout.deviceID = [set stringForColumn:@"deviceID"];
             detailLayout.origin_X = [set doubleForColumn:@"origin_X"];
             detailLayout.origin_Y = [set doubleForColumn:@"origin_Y"];
@@ -92,17 +92,17 @@ kSingleTon_M(DBHelper)
 }
 
 #pragma mark - 为当前区域指定视图插入布局配置
-- (BOOL)setDeviceLayoutWithViewpointType:(NSString *)viewpointType layouts:(NSArray *)layouts
+- (BOOL)setDeviceLayoutWithViewpointType:(ViewPointType)viewpointType layouts:(NSArray *)layouts
 {
     __block BOOL flag = YES;
     [_dbQueue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        if (![db executeUpdate:[NSString stringWithFormat:@"delete from %@ where areaID = :areaID and viewpointType = :viewpointType", detailLayoutOfAreaByViewpointTypeTableName] withParameterDictionary:@{@"areaID" : kCurrentArea.AreaID, @"viewpointType" : viewpointType}]) {
+        if (![db executeUpdate:[NSString stringWithFormat:@"delete from %@ where areaID = :areaID and viewpointType = :viewpointType", detailLayoutOfAreaByViewpointTypeTableName] withParameterDictionary:@{@"areaID" : kCurrentArea.AreaID, @"viewpointType" : @(viewpointType)}]) {
             *rollback = YES;
             flag = NO;
             return ;
         }
         for (DetaiLayoutOfAreaByViewpointType *detailLayout in layouts) {
-            if (![db executeUpdate:[NSString stringWithFormat:@"insert into %@(areaID,viewpointType, deviceID, origin_X, origin_Y, size_Width, size_Height) values (?, ?, ?, ?, ?, ?, ?)", detailLayoutOfAreaByViewpointTypeTableName]  withArgumentsInArray:@[detailLayout.areaID, detailLayout.viewpointType, detailLayout.deviceID, @(detailLayout.origin_X), @(detailLayout.origin_Y), @(detailLayout.size_Width), @(detailLayout.size_Height)]]) {
+            if (![db executeUpdate:[NSString stringWithFormat:@"insert into %@(areaID,viewpointType, deviceID, origin_X, origin_Y, size_Width, size_Height) values (?, ?, ?, ?, ?, ?, ?)", detailLayoutOfAreaByViewpointTypeTableName]  withArgumentsInArray:@[detailLayout.areaID, @(detailLayout.viewpointType), detailLayout.deviceID, @(detailLayout.origin_X), @(detailLayout.origin_Y), @(detailLayout.size_Width), @(detailLayout.size_Height)]]) {
                 *rollback = YES;
                 flag = NO;
                 return ;
@@ -123,10 +123,10 @@ kSingleTon_M(DBHelper)
     [_dbQueue inDatabase:^(FMDatabase *db) {
         FMResultSet *set = [db executeQuery:sqlString, kCurrentArea.AreaID];
         while ([set next]) {
-            NSString *viewpointType = [set stringForColumn:@"viewpointType"];
-            if (![resultArray containsObject:viewpointType]) {
+            ViewPointType viewpointType = [set intForColumn:@"viewpointType"];
+            if (![resultArray containsObject:@(viewpointType)]) {
                 
-                [resultArray addObject:viewpointType];
+                [resultArray addObject:@(viewpointType)];
             }
         }
         [set close];
@@ -136,30 +136,30 @@ kSingleTon_M(DBHelper)
 }
 
 #pragma mark - 删除当前区域指定视图的某个设备布局
-- (BOOL)deleteDetailLayoutItemWithViewpointType:(NSString *)viewpointType deviceID:(NSString *)deviceID
+- (BOOL)deleteDetailLayoutItemWithViewpointType:(ViewPointType)viewpointType deviceID:(NSString *)deviceID
 {
     __block BOOL flag;
     [_dbQueue inDatabase:^(FMDatabase *db) {
-        flag = [db executeUpdate:[NSString stringWithFormat:@"delete from %@ where areaID = :areaID and deviceID = :deviceID and viewpointType = :viewpointType", detailLayoutOfAreaByViewpointTypeTableName] withParameterDictionary:@{@"areaID" : kCurrentArea.AreaID, @"deviceID" : deviceID, @"viewpointType" : viewpointType}];
+        flag = [db executeUpdate:[NSString stringWithFormat:@"delete from %@ where areaID = :areaID and deviceID = :deviceID and viewpointType = :viewpointType", detailLayoutOfAreaByViewpointTypeTableName] withParameterDictionary:@{@"areaID" : kCurrentArea.AreaID, @"deviceID" : deviceID, @"viewpointType" : @(viewpointType)}];
     }];
     return flag;
 }
 #pragma mark - 修改当前区域 指定视角的 全景图
-- (BOOL)updateImageName:(NSString *)imageName viewpointType:(NSString *)viewpointType
+- (BOOL)updateImageName:(NSString *)imageName viewpointType:(ViewPointType)viewpointType
 {
     __block BOOL flag;
     [_dbQueue inDatabase:^(FMDatabase *db) {
-        flag = [db executeUpdate:[NSString stringWithFormat:@"update %@ set imageName = :imageName where areaID = :areaId and viewpointType = :viewpointType", detailLayoutOfAreaByViewpointTypeTableName] withParameterDictionary:@{@"imageName" : imageName, @"areaID" : kCurrentArea.AreaID, @"viewpointType" : viewpointType}];
+        flag = [db executeUpdate:[NSString stringWithFormat:@"update %@ set imageName = :imageName where areaID = :areaId and viewpointType = :viewpointType", detailLayoutOfAreaByViewpointTypeTableName] withParameterDictionary:@{@"imageName" : imageName, @"areaID" : kCurrentArea.AreaID, @"viewpointType" : @(viewpointType)}];
     }];
     return flag;
 }
 
 #pragma mark - 获取当前区域 指定视角 的全景图
-- (NSString *)getImageNameWithViewpointType:(NSString *)viewpointType
+- (NSString *)getImageNameWithViewpointType:(ViewPointType)viewpointType
 {
     __block NSString *result = nil;
     [_dbQueue inDatabase:^(FMDatabase *db) {
-        FMResultSet *set = [db executeQuery:[NSString stringWithFormat:@"select imageName from %@ where areaID = :areaID and viewpointType = :viewpointType", detailLayoutOfAreaByViewpointTypeTableName] withParameterDictionary:@{@"areaID" : kCurrentArea.AreaID, @"viewpointType" : viewpointType}];
+        FMResultSet *set = [db executeQuery:[NSString stringWithFormat:@"select imageName from %@ where areaID = :areaID and viewpointType = :viewpointType", detailLayoutOfAreaByViewpointTypeTableName] withParameterDictionary:@{@"areaID" : kCurrentArea.AreaID, @"viewpointType" : @(viewpointType)}];
         
         if ([set next]) {
             result = [set stringForColumn:@"imageName"];
@@ -356,7 +356,6 @@ kSingleTon_M(DBHelper)
             
         }
         for (DetailOfAreaConfig *model in array) {
-            
             if (![db executeUpdate:[NSString stringWithFormat:@"insert into %@(configName, deviceID, deviceData) values (?, ?, ?)", detailOfAreaConfigTableName] withArgumentsInArray:@[kNameForSave(model.configName), model.deviceID, model.configData]]) {
                 flag = NO;
                 *rollback = YES;

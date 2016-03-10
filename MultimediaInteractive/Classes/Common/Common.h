@@ -136,9 +136,9 @@ kSingleTon_H(Common)
 - (NSArray *)musicFiles;
 
 #pragma mark - 实景图
-- (UIImage *)actualImageWithViewpointType:(NSString *)viewpointType;
+- (UIImage *)actualImageWithViewpointType:(ViewPointType)viewpointType;
 
-- (void)setActualImage:(UIImage *)actualImage withViewpointType:(NSString *)viewpointType;
+- (void)setActualImage:(UIImage *)actualImage withViewpointType:(ViewPointType)viewpointType;
 #pragma mark - 登陆
 - (void)loginWithUserName:(NSString *)userName
                       pwd:(NSString *)pwd

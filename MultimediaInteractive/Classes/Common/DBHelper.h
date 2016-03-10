@@ -30,22 +30,22 @@ kSingleTon_H(DBHelper)
 
 
 #pragma mark - 获取当前区域指定视图的布局
-- (NSArray *)getDeviceLayoutWithViewpointType:(NSString *)viewpointType;
+- (NSArray *)getDeviceLayoutWithViewpointType:(ViewPointType)viewpointType;
 
 #pragma mark - 为当前区域指定视图插入布局配置
-- (BOOL)setDeviceLayoutWithViewpointType:(NSString *)viewpointType layouts:(NSArray *)layouts;
+- (BOOL)setDeviceLayoutWithViewpointType:(ViewPointType)viewpointType layouts:(NSArray *)layouts;
 
 #pragma mark - 获取当前区域已配置的视角
 - (NSArray *)getAllViewpointTypes;
 
 #pragma mark - 删除当前区域指定视图的某个设备布局
-- (BOOL)deleteDetailLayoutItemWithViewpointType:(NSString *)viewpointType deviceID:(NSString *)deviceID;
+- (BOOL)deleteDetailLayoutItemWithViewpointType:(ViewPointType)viewpointType deviceID:(NSString *)deviceID;
 
 #pragma mark - 修改当前区域 指定视角的 全景图
-- (BOOL)updateImageName:(NSString *)imageName viewpointType:(NSString *)viewpointType;
+- (BOOL)updateImageName:(NSString *)imageName viewpointType:(ViewPointType)viewpointType;
 
 #pragma mark - 获取当前区域 指定视角 的全景图
-- (NSString *)getImageNameWithViewpointType:(NSString *)viewpointType;
+- (NSString *)getImageNameWithViewpointType:(ViewPointType)viewpointType;
 
 #pragma mark - 插入当前区域的日志
 - (BOOL)insertLog:(LogInfo *)log;

@@ -12,6 +12,11 @@
 #define kDeviceOpen(device, block) [[OPManager shareOPManager] deviceOpenWithDevice:device resultBlock:block]
 // 关闭设备
 #define kDeviceClose(device, block) [[OPManager shareOPManager] deviceCloseWithDevice:device resultBlock:block]
+// 音频文件操控
+#define kControlMusicFile(tag, device, block) [[OPManager shareOPManager] deviceControlMusicFileWithTag:tag file:device resultBlock:block]
+// 音频设备连接
+#define kConnMusicFile(device, other, block) [[OPManager shareOPManager] deviceConnMusicFileWithFile:device otherDevice:other resultBlock:block]
+
 // 设置设备值
 #define kDeviceSetValue(device, value, block) [[OPManager shareOPManager] deviceSetValueWithDevice:device deviceValue:value resultBlock:block]
 // 连接设备
@@ -53,10 +58,13 @@ typedef void (^BatchControlResultWithDeviceBlock)(BOOL isSuccess, NSInteger cmdN
 - (void)deviceStartPTZWithOrientation:(NSInteger)orientation deviceForUser:(DeviceForUser *)device resultBlock:(ControlResultWithDeviceBlock)resultBlock;
 
 - (void)deviceStopPTZWtihDevice:(DeviceForUser *)device resultBlock:(ControlResultWithDeviceBlock)resultBlock;
-// 频道
+// 电视频道
 - (void)deviceChangeChannelWtihDevice:(DeviceForUser *)device channel:(NSString *)channel  resultBlock:(ControlResultWithDeviceBlock)resultBlock;
 // 配置摄像头跟随
 - (void)deviceConfigCameraFollowWithDevice:(DeviceForUser *)device deviceValue:(NSString *)value resultBlock:(ControlResultWithDeviceBlock)resultBlock;
+// 音频文件
+- (void)deviceConnMusicFileWithFile:(DeviceForUser *)device otherDevice:(DeviceForUser *)otherDevice resultBlock:(ControlResultWithDeviceBlock)resultBlock;
+- (void)deviceControlMusicFileWithTag:(NSInteger)tag file:(DeviceForUser *)device resultBlock:(ControlResultWithDeviceBlock)resultBlock;
 
 #pragma mark - 批量操作
 - (void)deviceBatchOpenWithDevices:(NSArray *)deviceArray resultBlock:(BatchControlResultWithDeviceBlock)resultBlock;
@@ -67,6 +75,7 @@ typedef void (^BatchControlResultWithDeviceBlock)(BOOL isSuccess, NSInteger cmdN
 
 // 频道
 - (void)deviceBatchChangeChannelWithDevice:(NSArray *)deviceArray  channel:(NSString *)channel otherDevice:(NSArray *)otherDeviceArray resultBlock:(BatchControlResultWithDeviceBlock)resultBlock;
+
 
 
 @end

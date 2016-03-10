@@ -98,9 +98,9 @@ typedef enum
 
 @property (nonatomic, assign) ActualModeType currentMode;
 // 当前视角
-@property (nonatomic, copy) NSString *currentViewpointType;
+@property (nonatomic, assign) ViewPointType currentViewpointType;
 // 上一次选择的视角(当选择视角,不配置底图用于自动跳转的)
-@property (nonatomic, copy) NSString *lastViewpointType;
+@property (nonatomic, assign) ViewPointType lastViewpointType;
 // 放置设备信息界面的View
 @property (weak, nonatomic) IBOutlet UIView *deviceInfoBackgroundView;
 /**
@@ -137,11 +137,6 @@ typedef enum
  *  切换视角按钮的父视图
  */
 @property (weak, nonatomic) IBOutlet UIView *viewpointButtonsView;
-
-/**
- *  视角类型数组
- */
-@property (nonatomic, strong) NSArray *viewpointTypeArray;
 
 /**
  *  视角切换按钮的响应事件
@@ -189,7 +184,6 @@ typedef enum
     // 从后台返回的通知 (返回后,所有动画停止,必须手动layoutDevice.否则在演示版[不会收到设备更新通知]会出现空的设备图标)
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:kNotificationWillEnterForeground object:nil];
     
-    self.viewpointTypeArray = @[ViewpointTypeVertical, ViewpointTypeFront, ViewpointTypeBack, ViewpointTypeLeft, ViewpointTypeRight];
     
     self.allTypeOfDevicesArray = kAllTypeOfCurrentDevices;
 }
@@ -201,16 +195,22 @@ typedef enum
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveDeviceUpdateNotification:) name:kNotificationUpdateDevice object:nil];
     
     // 第一次进来的时候,为nil
-    if (!_lastViewpointType) {
-        self.currentViewpointType = self.viewpointTypeArray[0];
+    if (_lastViewpointType == ViewPointTypeNone) {
+        self.currentViewpointType = ViewpointTypeVertical;
     }
+    self.currentMode = ActualModeTypeNormal;
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationUpdateDevice object:nil];
     
+    [self updateViewHideOrShowByType:TopViewTypeNone];
+
+    self.selectedDevice = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -452,6 +452,23 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             }
         });
     }*/
+    
+}
+
+- (void)deviceInfoView:(DeviceInfoBaseView *)deviceInfoView controlMusicFileButtonClicked:(UIButton *)button
+{
+    if (![self checkPermissionsByDevice:self.selectedDevice]) {
+        return;
+    }
+    if (self.selectedDevice) {
+        kControlMusicFile(button.tag, self.selectedDevice, ^(BOOL isSuccess, NSInteger cmdNumber, DeviceForUser *deviceForUser, DeviceForUser *otherDeviceForUser) {
+            if (isSuccess) {
+                kLog(@"命令编号%ld 操作设备类型:%@ 设备ID:%@ 操作%@",(long)cmdNumber, kDeviceTypeInfo(deviceForUser.UEQP_Type)[@"name"], deviceForUser.UEQP_ID, isSuccess ? @"成功" : @"失败");
+            } else {
+                //                [self showAlertControllerWithTitle:@"网络连接故障,请重试!"];
+            }
+        });
+    }
     
 }
 
@@ -732,7 +749,9 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     /**
      *   根据支持的命令种类 或 类型决定加载的nib文件
      */
-    if ([deviceType isEqualToString:@"麦克"]) {
+    if ([deviceType isEqualToString:@"音频文件"]) {
+        deviceInfoNibName = @"DeviceInfoMusicFileView";
+    } else if ([deviceType isEqualToString:@"麦克"]) {
         deviceInfoNibName = @"DeviceInfoMicView";
     } else if ([deviceType isEqualToString:@"摄像头"]) { // ORIENTATION
         deviceInfoNibName = @"DeviceInfoCameraView";
@@ -1081,21 +1100,28 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 //        kLog(@"设备模型和布局模型不匹配!请重新启动!");
 //    } else {
     
-        DetaiLayoutOfAreaByViewpointType *conn = [self getDetailLayoutOfDeviceWhichShouldConnByDeviceType:device.UEQP_Type point:followHandsView.center];
+    DetaiLayoutOfAreaByViewpointType *conn = [self getDetailLayoutOfDeviceWhichShouldConnByDeviceType:device.UEQP_Type point:followHandsView.center];
+    
+    if (conn && [self checkPermissionsByDevice:device]) { // 放到正确的输出源上.判断是否有权限
+        DeviceForUser *outDevice = conn.device;
+        flag = YES;
         
-        if (conn && [self checkPermissionsByDevice:device]) { // 放到正确的输出源上.判断是否有权限
-            DeviceForUser *outDevice = conn.device;
-            flag = YES;
-            kDeviceConn(device, outDevice, ^(BOOL isSuccess, NSInteger cmdNumber, DeviceForUser *deviceForUser, DeviceForUser *otherDeviceForUser) {
-                if (isSuccess) {
-                    kLog(@"命令编号%ld 操作设备类型:%@ 设备ID:%@ 与  操作设备类型:%@ 设备ID:%@ 连接%@",(long)cmdNumber, kDeviceTypeInfo(deviceForUser.UEQP_Type)[@"name"], deviceForUser.UEQP_ID, kDeviceTypeInfo(otherDeviceForUser.UEQP_Type)[@"name"], otherDeviceForUser.UEQP_ID, isSuccess ? @"成功" : @"失败");
-                } else {
-//                    [self showAlertControllerWithTitle:@"网络连接故障,请重试!"];
-                }
-                
-            });
+        ControlResultWithDeviceBlock resultBlock = ^(BOOL isSuccess, NSInteger cmdNumber, DeviceForUser *deviceForUser, DeviceForUser *otherDeviceForUser) {
+            if (isSuccess) {
+                kLog(@"命令编号%ld 操作设备类型:%@ 设备ID:%@ 与  操作设备类型:%@ 设备ID:%@ 连接%@",(long)cmdNumber, kDeviceTypeInfo(deviceForUser.UEQP_Type)[@"name"], deviceForUser.UEQP_ID, kDeviceTypeInfo(otherDeviceForUser.UEQP_Type)[@"name"], otherDeviceForUser.UEQP_ID, isSuccess ? @"成功" : @"失败");
+            } else {
+                //                    [self showAlertControllerWithTitle:@"网络连接故障,请重试!"];
+            }
+            
+        };
+        
+        if (commonDevice && [kMusicFile containsObject:commonDevice]) { // 如果是音频文件
+            kConnMusicFile(device, outDevice, resultBlock);
+        } else {
+            kDeviceConn(device, outDevice, resultBlock);
+
         }
-//    }
+    }
     
     [self changeFollowViewImageWithStatus:DeviceViewImageStatusForNormal inArray:self.detailLayoutOfAreaByViewpointTypeArray];
 
@@ -1712,10 +1738,10 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 }*/
 
 #pragma mark 修改视角模式
-- (void)setCurrentViewpointType:(NSString *)currentViewpointType
+- (void)setCurrentViewpointType:(ViewPointType)currentViewpointType
 {
     self.lastViewpointType = _currentViewpointType;
-    NSInteger index = [self.viewpointTypeArray indexOfObject:currentViewpointType];
+    NSInteger index = (NSInteger)(currentViewpointType - 1);
     // 视角5个按钮的选中
     for (UIView *view in self.viewpointButtonsView.subviews) {
         if ([view isKindOfClass:[UIButton class]]) {
@@ -1728,7 +1754,6 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     }
     
     if (_currentViewpointType != currentViewpointType) {
-        _currentViewpointType = nil;
         _currentViewpointType = currentViewpointType;
         
     }
@@ -2055,8 +2080,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 }
 
 - (IBAction)viewpointButtonAction:(UIButton *)sender {
-    if (self.currentViewpointType != self.viewpointTypeArray[sender.tag]) {
-        self.currentViewpointType = self.viewpointTypeArray[sender.tag];
+    if (self.currentViewpointType - 1 != sender.tag) {
+        self.currentViewpointType = sender.tag + 1;
     }
     // 开启自动隐藏视角切换的定时器
     [self startTimerForAutoHideViewpointButtonsView];

@@ -70,6 +70,15 @@
         } else {
             return [NSString stringWithFormat:@"类型:%@ 名称:%@ 设置跟随摄像头ID%@", deviceType, deviceName, self.value];
         }
+    } else if (self.cmdType == CMDTypeConnFile) {
+        return [NSString stringWithFormat:@"类型:%@ 名称:%@ 连接%ld个%@", deviceType, deviceName, (long)[self.otherUEQP_ID componentsSeparatedByString:@","].count,
+                kDeviceTypeInfo([[Common shareCommon] getDeviceWithUEQP_ID:[self.otherUEQP_ID componentsSeparatedByString:@","].firstObject].UEQP_Type)[@"name"]];
+    } else if (self.cmdType == CMDTypePlayFile) {
+        return [NSString stringWithFormat:@"类型:%@ 名称:%@ 开始播放", deviceType, deviceName];
+    } else if (self.cmdType == CMDTypeStopFile) {
+        return [NSString stringWithFormat:@"类型:%@ 名称:%@ 停止播放", deviceType, deviceName];
+    } else if (self.cmdType == CMDTypePauseFile) {
+        return [NSString stringWithFormat:@"类型:%@ 名称:%@ 暂停播放", deviceType, deviceName];
     }
     return nil;
 }

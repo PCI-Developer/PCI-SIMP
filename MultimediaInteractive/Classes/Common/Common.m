@@ -244,9 +244,9 @@ kSingleTon_M(Common)
 }
 
 #pragma mark - 实景图
-- (UIImage *)actualImageWithViewpointType:(NSString *)viewpointType
+- (UIImage *)actualImageWithViewpointType:(ViewPointType)viewpointType
 {
-    NSString *filePath = kActualImageFilePathWithAreaName([[Common shareCommon] areaName], viewpointType);
+    NSString *filePath = kActualImageFilePathWithAreaName([[Common shareCommon] areaName], @(viewpointType));
     if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         return nil;
     }
@@ -254,9 +254,9 @@ kSingleTon_M(Common)
 }
 
 
-- (void)setActualImage:(UIImage *)actualImage withViewpointType:(NSString *)viewpointType
+- (void)setActualImage:(UIImage *)actualImage withViewpointType:(ViewPointType)viewpointType
 {
-    NSString *filePath = kActualImageFilePathWithAreaName([[Common shareCommon] areaName], viewpointType);
+    NSString *filePath = kActualImageFilePathWithAreaName([[Common shareCommon] areaName], @(viewpointType));
     // 创建目录
     if (![[NSFileManager defaultManager] fileExistsAtPath:kActualImageFolder]) {
         [[NSFileManager defaultManager] createDirectoryAtPath:kActualImageFolder withIntermediateDirectories:YES attributes:nil error:nil];
@@ -454,8 +454,8 @@ kSingleTon_M(Common)
                 deviceOCState = 1;
             }
             NSDictionary *dict = @{@"AutoID" : @(i + 1000),
-                                   @"UEQP_ID" : [NSString stringWithFormat:@"UEQP_ID%02d", 36 + i],
-                                   @"UEQP_Name" : [NSString stringWithFormat:@"UEQP_Name%02d", 36 + i],
+                                   @"UEQP_ID" : [NSString stringWithFormat:@"UEQP_ID%02d", 100 + i],
+                                   @"UEQP_Name" : [NSString stringWithFormat:@"UEQP_Name%02d", 100 + i],
                                    @"UEQP_Type" : typeString,
                                    @"AreaID" : [NSString stringWithFormat:@"AreaID%02d", 100],
                                    @"deviceConnectState" : @(1),
@@ -498,10 +498,11 @@ kSingleTon_M(Common)
                 }
                 [WFFProgressHud dismiss];
             }
-            
+        
         });
-        dispatch_queue_t queue = dispatch_queue_create(0, DISPATCH_QUEUE_SERIAL);
-        dispatch_async(queue, ^{
+        dispatch_group_t group = dispatch_group_create();
+        dispatch_queue_t queue = dispatch_queue_create(0, DISPATCH_QUEUE_CONCURRENT);
+        dispatch_group_async(group, queue, ^{
             [[SocketManager shareSocketManager] getDataListWithType:DataListTypeArea resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
                 NSArray *areaArray = [info componentsSeparatedByString:@"&"];
                 if (isSuccess) {
@@ -526,11 +527,7 @@ kSingleTon_M(Common)
                 }
             }];
         });
-        
-        dispatch_async(queue, ^{
-            if (errorDes) {
-                return ;
-            }
+        dispatch_group_async(group, queue, ^{
             [[SocketManager shareSocketManager] getDataListWithType:DataListTypeDevice resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
                 NSArray *areaArray = [info componentsSeparatedByString:@"&"];
                 if (isSuccess) {
@@ -572,22 +569,24 @@ kSingleTon_M(Common)
                             }
                         }
                     }
-                    
-                    if (weakSelf.allAreasArray) {
-                        if (completionHandle) {
-                            completionHandle(YES, nil);
-                        }
-                        [WFFProgressHud dismiss];
-                    } else {
+                    kLog(@"%@", weakSelf.allAreasArray);
+
+                    if ([weakSelf.allDevicesDict count] == 0) {
                         errorDes = @"服务器没有配置设备列表!";
                     }
-                    kLog(@"%@", weakSelf.allDevicesDict);
                 } else {
                     errorDes = @"获取设备列表失败!请重试!";
                 }
             }];
+
         });
-        
+        // 数据都加载结束，执行
+        dispatch_group_notify(group, queue, ^{
+            if (completionHandle) {
+                completionHandle(errorDes == nil, errorDes);
+            }
+            [WFFProgressHud dismiss];
+        });
         
     }
 }
