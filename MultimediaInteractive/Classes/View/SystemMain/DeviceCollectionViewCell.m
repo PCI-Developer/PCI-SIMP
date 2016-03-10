@@ -17,7 +17,7 @@
 - (void)changeImageViewWithStatus:(DeviceViewImageStatus)status
 {
     // 设置当前状态应展示的image
-    NSString *imageName = [NSString stringWithFormat:@"state_%d", status];
+    NSString *imageName = [NSString stringWithFormat:@"state_%lu", (unsigned long)status];
     
     _imageView.image = [UIImage imageNamed:imageName];
     // 根据状态,调整大小

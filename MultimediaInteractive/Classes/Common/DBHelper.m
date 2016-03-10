@@ -177,13 +177,13 @@ kSingleTon_M(DBHelper)
 {
     __block BOOL flag;
     [_dbQueue inDatabase:^(FMDatabase *db) {
-        flag = [db executeUpdate:[NSString stringWithFormat:@"insert into %@(UEQP_ID, otherUEQP_ID, cmdType, value, type, createDate, result, areaID, createUserID) values('%@', '%@', %u, '%@', %u, %f, %ld, '%@', '%@')",
+        flag = [db executeUpdate:[NSString stringWithFormat:@"insert into %@(UEQP_ID, otherUEQP_ID, cmdType, value, type, createDate, result, areaID, createUserID) values('%@', '%@', %lu, '%@', %lu, %f, %ld, '%@', '%@')",
                             logInfoTableName,
                             log.UEQP_ID ? log.UEQP_ID : @"",
                             log.otherUEQP_ID ? log.otherUEQP_ID : @"",
-                            log.cmdType,
+                            (unsigned long)log.cmdType,
                             log.value ? log.value : @"",
-                            log.type,
+                            (unsigned long)log.type,
                             log.createDate,
                             (long)log.result,
                             log.areaID,

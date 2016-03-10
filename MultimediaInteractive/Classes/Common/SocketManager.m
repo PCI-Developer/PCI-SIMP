@@ -478,6 +478,18 @@ kSingleTon_M(SocketManager)
         case CMDTypeChangeChannel:
             control = kProtocolControlDeviceCMDofChangeChannel; // EQPCTRlOK
             break;
+        case CMDTypeConnFile:
+            control = kProtocolControlDeviceCMDofConnFile; //
+            break;
+        case CMDTypePlayFile:
+            control = kProtocolControlDeviceCMDofPlayFile; //
+            break;
+        case CMDTypeStopFile:
+            control = kProtocolControlDeviceCMDofStopFile; //
+            break;
+        case CMDTypePauseFile:
+            control = kProtocolControlDeviceCMDofPauseFile; //
+            break;
         case CMDTypeConfigCameraFollow:
             isEQPCTRL = NO;
             break;
