@@ -26,7 +26,7 @@
 
 @end
 
-static int serverTimerLastHeartHit; // 服务器心跳包倒计时 -- 5秒没接收到认为失去连接,则断开当前套接字,重新创建监听端口
+static int serverTimerLastHeartHit; // 服务器心跳包倒计时 -- 10秒没接收到认为失去连接,则断开当前套接字,重新创建监听端口
 
 
 
@@ -164,14 +164,6 @@ kSingleTon_M(SocketManager)
 #pragma mark - 根据协议串执行相应操作
 - (void)doSomethingWithProtocolString:(NSString *)protocolString
 {
-    //    if (![Common shareCommon].hasLogin) {
-    //        return;
-    //    }
-    //    if (![self checkProtocolString:protocolString]) {
-    //        kLog(@"%@ 不合法的协议", protocolString);
-    //        return ;
-    //    }
-    
     
     // 心跳包
     //    if ([protocolString containsString:kProtocolNetLink]) {
@@ -414,7 +406,76 @@ kSingleTon_M(SocketManager)
 
 
 
+#pragma mark - 生成协议串 , 根据命令字+信息元
+- (NSString *)getProtocolStringWithCMD:(NSString *)CMD info:(NSString *)info
+{
+    // 包头
+    NSMutableString *result = [NSMutableString stringWithString:kHead];
+    // 命令长度
+    [result appendString:@"0000@"];
+    // 命令方向
+    [result appendString:@"C2S@"];
+    // 命令编号
+    [result appendFormat:@"%04ld@", (long)currentNum];
+    // 命令字
+    [result appendFormat:@"%@@", CMD];
+    // 信息元
+    [result appendFormat:@"%@@", info];
+    // 校验码
+    [result appendString:@"AA"];
+    // 包尾
+    [result appendString:kEnd];
+    
+    return result;
+}
 
+
+#pragma mark - 根据更新设备的协议串获取设备信息
+- (DeviceForUser *)getDeviceWithProtocolString:(NSString *)protocolString
+{
+    NSArray *array = [protocolString componentsSeparatedByString:@"@"];
+    NSString *info = array[4];
+    NSString *UEQP_ID = [info componentsSeparatedByString:@"&"].firstObject;
+    DeviceForUser *device = [[Common shareCommon] getDeviceWithUEQP_ID:UEQP_ID];
+    NSInteger deviceConnectState = [[[info componentsSeparatedByString:@"&"].lastObject componentsSeparatedByString:@":"].firstObject intValue];
+    if (deviceConnectState > 2) { // 开关状态
+        device.deviceConnectState = 1;
+        device.deviceOCState = (int)deviceConnectState - 2;
+    } else  {
+        device.deviceConnectState = (int)deviceConnectState;
+    }
+    
+    device.value = [[info componentsSeparatedByString:@"&"].lastObject componentsSeparatedByString:@":"].lastObject;
+    
+    return device;
+}
+
+
+#pragma mark - 根据协议串获取命令编号
+- (id)getItemWithProtocolString:(NSString *)protocolString index:(NSInteger)index
+{
+    return [protocolString componentsSeparatedByString:@"@"][index];
+}
+
+#pragma mark - 检测协议串
+- (BOOL)checkProtocolString:(NSString *)protocolString
+{
+    NSError *error = nil;
+    // 包头+4位长度@信息来源标识2信息目的标识@命令编号@命令字+@+信息元（1个或N个）+@2位校验+包尾
+    NSString *pattern = [NSString stringWithFormat:@"%@%@%@", kHead, @"[0-9]{4}@[C,S]2[C,S]@[0-9]{4}@.*@.*@[0-9A-Z]{2}", kEnd];
+    
+    NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&error];
+    
+    if ([reg matchesInString:protocolString options:0 range:NSMakeRange(0, protocolString.length)].count > 0) {
+        return YES;
+    } else {
+        return NO;
+    }
+    
+}
+
+
+#pragma mark - 发送命令
 // 信息元 --  设备编号1,设备编号2,…&命令&命令参数[&控制地址]
 - (void)ctrlDevicesWithDevicesID:(NSString *)devicesID
                      ControlType:(CMDType)controlType
@@ -494,88 +555,22 @@ kSingleTon_M(SocketManager)
             isEQPCTRL = NO;
             break;
     }
-//    NSData *data = nil;
     if (isEQPCTRL) { // 控制设备
         //
         [info appendFormat:@"&%@", control];
         [info appendFormat:@"&%@", arg ? arg : @""];
         [self sendMessageWithCMD:kProtocolCMDByControlDevice cmdInfo:info resultBlock:resultBlock];
-//        // 生成协议串,并转成要发送的data数据
-//        NSString *protocolString = [self getProtocolStringWithCMD:kProtocolCMDByControlDevice info:info];
-//        kLog(@"%@", protocolString);
-//        data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
+
     } else {
         [info appendFormat:@"&%@", arg ? arg : @""];
         [self sendMessageWithCMD:kProtocolCMDByCameraFollow cmdInfo:info resultBlock:resultBlock];
-//        // 生成协议串,并转成要发送的data数据
-//        NSString *protocolString = [self getProtocolStringWithCMD:kProtocolCMDByCameraFollow info:info];
-//        kLog(@"%@", protocolString);
-//        data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
+
     }
     
-//    if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
-//        if (resultBlock) {
-//            resultBlock(NO, currentNum, nil);
-//        }
-//    } else {
-//        // 发送成功后执行代理方法 didWriteData
-//        [self.pcSocket writeData:data withTimeout:kTimeOut tag:currentNum];
-//        // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
-//        [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
-//    }
-//    currentNum++;
-}
 
-#pragma mark - 生成协议串 , 根据命令字+信息元
-- (NSString *)getProtocolStringWithCMD:(NSString *)CMD info:(NSString *)info
-{
-    // 包头
-    NSMutableString *result = [NSMutableString stringWithString:kHead];
-    // 命令长度
-    [result appendString:@"0000@"];
-    // 命令方向
-    [result appendString:@"C2S@"];
-    // 命令编号
-    [result appendFormat:@"%04ld@", (long)currentNum];
-    // 命令字
-    [result appendFormat:@"%@@", CMD];
-    // 信息元
-    [result appendFormat:@"%@@", info];
-    // 校验码
-    [result appendString:@"AA"];
-    // 包尾
-    [result appendString:kEnd];
-    
-    return result;
 }
 
 
-
-#pragma mark - 根据协议串获取命令编号
-- (id)getItemWithProtocolString:(NSString *)protocolString index:(NSInteger)index
-{
-    return [protocolString componentsSeparatedByString:@"@"][index];
-}
-
-#pragma mark - 检测协议串
-- (BOOL)checkProtocolString:(NSString *)protocolString
-{
-    NSError *error = nil;
-    // 包头+4位长度@信息来源标识2信息目的标识@命令编号@命令字+@+信息元（1个或N个）+@2位校验+包尾
-    NSString *pattern = [NSString stringWithFormat:@"%@%@%@", kHead, @"[0-9]{4}@[C,S]2[C,S]@[0-9]{4}@.*@.*@[0-9A-Z]{2}", kEnd];
-    
-    NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&error];
-    
-    if ([reg matchesInString:protocolString options:0 range:NSMakeRange(0, protocolString.length)].count > 0) {
-        return YES;
-    } else {
-        return NO;
-    }
-    
-}
-
-
-#pragma mark - 分割开
 // 获取基础数据
 - (void)getDataListWithType:(DataListType)type
                 resultBlock:(RequestServerResponseBlock)resultBlock
@@ -590,22 +585,7 @@ kSingleTon_M(SocketManager)
             break;
     }
     [self sendMessageWithCMD:protocolCMD cmdInfo:nil resultBlock:resultBlock];
-    //    // 生成协议串,并转成要发送的data数据
-    //    NSString *protocolString = [self getProtocolStringWithCMD:protocolCMD info:nil];
-    //
-    //    NSData *data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
-    //
-    //    if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
-    //        if (resultBlock) {
-    //            resultBlock(NO, currentNum, nil);
-    //        }
-    //    } else {
-    //        // 发送成功后执行代理方法 didWriteData
-    //        [self.pcSocket writeData:data withTimeout:kTimeOut tag:currentNum];
-    //        // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
-    //        [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
-    //    }
-    //    currentNum++;
+
 }
 
 
@@ -632,23 +612,7 @@ kSingleTon_M(SocketManager)
     
     NSString *info = [NSString stringWithFormat:@"%@&%@", userId, pwd];
     [self sendMessageWithCMD:kProtocolLogin cmdInfo:info resultBlock:resultBlock];
-    //    // 生成协议串,并转成要发送的data数据
-    //    NSString *protocolString = [self getProtocolStringWithCMD:kProtocolLogin info:info];
-    //
-    //    NSData *data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
-    //
-    //    if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
-    //        if (resultBlock) {
-    //            resultBlock(NO, currentNum, nil/*[NSString stringWithFormat:@"%@&%@", userId, @"-1"]*/);
-    //        }
-    //    } else {
-    //        // 发送成功后执行代理方法 didWriteData
-    //        [self.pcSocket writeData:data withTimeout:kTimeOut tag:currentNum];
-    //        // 有连接则发送,发送后保存block. 当发送失败移除block,当接收到回应,执行block,并移除
-    //        [self.operationBlockDict setObject:[resultBlock copy] forKey:@(currentNum)];
-    //    }
-    //    currentNum++;
-    //
+
 }
 
 
@@ -688,26 +652,6 @@ kSingleTon_M(SocketManager)
     NSString *info = [NSString stringWithFormat:@"%@&%@", isStart ? @"OPEN" : @"CLOSE", processID];
     [self sendMessageWithCMD:kProtocolCMDByDoProcess cmdInfo:info resultBlock:resultBlock];
     
-}
-
-#pragma mark - 根据更新设备的协议串获取设备信息
-- (DeviceForUser *)getDeviceWithProtocolString:(NSString *)protocolString
-{
-    NSArray *array = [protocolString componentsSeparatedByString:@"@"];
-    NSString *info = array[4];
-    NSString *UEQP_ID = [info componentsSeparatedByString:@"&"].firstObject;
-    DeviceForUser *device = [[Common shareCommon] getDeviceWithUEQP_ID:UEQP_ID];
-    NSInteger deviceConnectState = [[[info componentsSeparatedByString:@"&"].lastObject componentsSeparatedByString:@":"].firstObject intValue];
-    if (deviceConnectState > 2) { // 开关状态
-        device.deviceConnectState = 1;
-        device.deviceOCState = (int)deviceConnectState - 2;
-    } else  {
-        device.deviceConnectState = (int)deviceConnectState;
-    }
-    
-    device.value = [[info componentsSeparatedByString:@"&"].lastObject componentsSeparatedByString:@":"].lastObject;
-    
-    return device;
 }
 
 

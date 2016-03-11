@@ -1361,7 +1361,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pci-china.SIMP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -1383,7 +1383,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pci-china.SIMP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

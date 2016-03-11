@@ -3,43 +3,43 @@
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "iconiPadSpootlight5_29pt.png",
+      "filename" : "icon_29.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "iconiPadSpootlight5_29pt-1.png",
+      "filename" : "icon_29@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "iconiPadSpootlight7_40pt.png",
+      "filename" : "icon_40.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "iconiPadSpootlight7_40pt@2x.png",
+      "filename" : "icon_40@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "icon.png",
+      "filename" : "icon_76.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "icon@2x.png",
+      "filename" : "icon_76@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "iconiPadProApp_83.5pt@2x.png",
+      "filename" : "icon_83.5@2x.png",
       "scale" : "2x"
     }
   ],
