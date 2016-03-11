@@ -295,8 +295,12 @@ kSingleTon_M(SocketManager)
     [self.readStream appendString:string];
     
     kLog(@"接收到新数据 - 线程 %@  当前数据 : %@", [NSThread currentThread], self.readStream);
-    // 每次获取到就调用 -- 提取出协议串并处理
-    [self doSomethingFromStream];
+    
+#warning 此处需要注意线程安全问题，因为处理字符串速度较快，直接用@synchronized来处理。
+    @synchronized(self) {
+        // 每次获取到就调用 -- 提取出协议串并处理
+        [self doSomethingFromStream];
+    }
     
     // 只读一次,因此再次执行,继续读数据
     [sock readDataWithTimeout:-1 tag:200];
