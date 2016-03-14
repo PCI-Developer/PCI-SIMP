@@ -178,9 +178,9 @@ kSingleTon_M(SocketManager)
         RequestServerResponseBlock block = self.operationBlockDict[@(cmdNum)];
         if (block) {
             block(YES, cmdNum, nil);
+            // 执行完移除
+            [self.operationBlockDict removeObjectForKey:@(cmdNum)];
         }
-        // 执行完移除
-        [self.operationBlockDict removeObjectForKey:@(cmdNum)];
     }
     
     // 流程列表
@@ -190,9 +190,9 @@ kSingleTon_M(SocketManager)
         if (block) {
             NSString *info = (NSString *)[self getItemWithProtocolString:protocolString index:4];
             block(YES, cmdNum, info);
+            // 执行完移除
+            [self.operationBlockDict removeObjectForKey:@(cmdNum)];
         }
-        // 执行完移除
-        [self.operationBlockDict removeObjectForKey:@(cmdNum)];
 
     }
     
@@ -206,9 +206,9 @@ kSingleTon_M(SocketManager)
             } else { // ERROR
                 block(NO, cmdNum, info);
             }
+            // 执行完移除
+            [self.operationBlockDict removeObjectForKey:@(cmdNum)];
         }
-        // 执行完移除
-        [self.operationBlockDict removeObjectForKey:@(cmdNum)];
     }
     
     // 登陆验证
@@ -218,9 +218,9 @@ kSingleTon_M(SocketManager)
         if (block) {
             NSString *info = (NSString *)[self getItemWithProtocolString:protocolString index:4];
             block(YES, cmdNum, info);
+            // 执行完移除
+            [self.operationBlockDict removeObjectForKey:@(cmdNum)];
         }
-        // 执行完移除
-        [self.operationBlockDict removeObjectForKey:@(cmdNum)];
         
     }
     // 设备控制反馈. 获取控制编号,取出其中的block执行
@@ -230,9 +230,9 @@ kSingleTon_M(SocketManager)
         if (block) {
             NSString *info = (NSString *)[self getItemWithProtocolString:protocolString index:4];
             block(YES, cmdNum, info);
+            // 执行完移除
+            [self.operationBlockDict removeObjectForKey:@(cmdNum)];
         }
-        // 执行完移除
-        [self.operationBlockDict removeObjectForKey:@(cmdNum)];
     }
     // 更新设备状态
     if ([protocolString containsString:kProtocolCMDFromServerToUpdate]) {
@@ -249,6 +249,8 @@ kSingleTon_M(SocketManager)
         if (block) {
             NSString *cmd = (NSString *)[self getItemWithProtocolString:protocolString index:4];
             block(YES, cmdNum, cmd);
+            // 执行完移除
+            [self.operationBlockDict removeObjectForKey:@(cmdNum)];
         }
     }
     // 获取设备列表
@@ -258,6 +260,8 @@ kSingleTon_M(SocketManager)
         if (block) {
             NSString *cmd = (NSString *)[self getItemWithProtocolString:protocolString index:4];
             block(YES, cmdNum, cmd);
+            // 执行完移除
+            [self.operationBlockDict removeObjectForKey:@(cmdNum)];
         }
     }
 }
@@ -633,7 +637,7 @@ kSingleTon_M(SocketManager)
     if ([Common shareCommon].isDemo) {
         if (resultBlock) {
             // 模拟返回999权限的用户
-            resultBlock(YES, currentNum, [NSString stringWithFormat:@"%@,process001,流程001,说明说明...&%@,process002,流程002,说明说明说明.", kCurrentArea.AreaID, kCurrentArea.AreaID]);
+            resultBlock(YES, currentNum, [NSString stringWithFormat:@"%@,process001,流程001,这是一个测试流程。。。。嘿嘿嘿&%@,process002,流程002,这也是一个测试流程。。。。哈哈哈", kCurrentArea.AreaID, kCurrentArea.AreaID]);
         }
         currentNum++;
         return;
