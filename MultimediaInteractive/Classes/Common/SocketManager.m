@@ -8,6 +8,7 @@
 
 #import "SocketManager.h"
 #import "Area.h"
+#import <libkern/OSAtomic.h>
 #define kHeartHitTimeOut 10
 @interface SocketManager ()<GCDAsyncSocketDelegate> {
     
@@ -285,6 +286,7 @@ kSingleTon_M(SocketManager)
     if (sock != self.pcSocket) {
         return;
     }
+    
     // GBK编码
     NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     
@@ -296,14 +298,16 @@ kSingleTon_M(SocketManager)
     
     kLog(@"接收到新数据 - 线程 %@  当前数据 : %@", [NSThread currentThread], self.readStream);
     
-#warning 此处需要注意线程安全问题，因为处理字符串速度较快，直接用@synchronized来处理。
-    @synchronized(self) {
-        // 每次获取到就调用 -- 提取出协议串并处理
-        [self doSomethingFromStream];
-    }
+#warning 此处需要注意线程安全问题
+    static OSSpinLock lock = OS_SPINLOCK_INIT;
+    OSSpinLockLock(&lock);
+    // 每次获取到就调用 -- 提取出协议串并处理
+    [self doSomethingFromStream];
+    OSSpinLockUnlock(&lock);
     
     // 只读一次,因此再次执行,继续读数据
     [sock readDataWithTimeout:-1 tag:200];
+    
 }
 
 // 失去连接
@@ -321,7 +325,6 @@ kSingleTon_M(SocketManager)
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationDidConnectedStateChange object:nil];
     });
-    
 }
 
 // 发送数据成功
