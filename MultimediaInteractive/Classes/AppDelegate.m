@@ -38,7 +38,8 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"state"]) {
         NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"state"]);
     }
-
+    
+    
 
     kLog(@"%@", NSTemporaryDirectory());
     

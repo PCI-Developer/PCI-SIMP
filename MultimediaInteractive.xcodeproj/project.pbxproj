@@ -21,7 +21,6 @@
 		602B52CC1C916C4600EBBDDD /* DeviceInfoMusicFileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 602B52CB1C916C4600EBBDDD /* DeviceInfoMusicFileView.xib */; };
 		602C3AA41BAFCC88000C41DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3AA31BAFCC88000C41DA /* main.m */; };
 		602C3AAF1BAFCC88000C41DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 602C3AAE1BAFCC88000C41DA /* Assets.xcassets */; };
-		602C3AB21BAFCC88000C41DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 602C3AB01BAFCC88000C41DA /* LaunchScreen.storyboard */; };
 		602C3ABD1BAFCC88000C41DA /* MultimediaInteractiveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3ABC1BAFCC88000C41DA /* MultimediaInteractiveTests.m */; };
 		602C3AC81BAFCC88000C41DA /* MultimediaInteractiveUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3AC71BAFCC88000C41DA /* MultimediaInteractiveUITests.m */; };
 		602C3B4D1BAFCCCC000C41DA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 602C3AD71BAFCCCC000C41DA /* AppDelegate.m */; };
@@ -153,7 +152,6 @@
 		602C3A9F1BAFCC88000C41DA /* MultimediaInteractive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultimediaInteractive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		602C3AA31BAFCC88000C41DA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		602C3AAE1BAFCC88000C41DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		602C3AB11BAFCC88000C41DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		602C3AB31BAFCC88000C41DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		602C3AB81BAFCC88000C41DA /* MultimediaInteractiveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultimediaInteractiveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		602C3ABC1BAFCC88000C41DA /* MultimediaInteractiveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultimediaInteractiveTests.m; sourceTree = "<group>"; };
@@ -241,7 +239,6 @@
 		60A3E2241BD48DB900B4FFCA /* DeviceCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceCollectionViewCell.xib; sourceTree = "<group>"; };
 		60A3E22B1BD48E3100B4FFCA /* AutoSizeCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoSizeCollectionView.h; sourceTree = "<group>"; };
 		60A3E22C1BD48E3100B4FFCA /* AutoSizeCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoSizeCollectionView.m; sourceTree = "<group>"; };
-		60A631F31BB140A50048AE28 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		60AE84181BD0DFC000F85304 /* UIColor+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Category.h"; sourceTree = "<group>"; };
 		60AE84191BD0DFC000F85304 /* UIColor+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Category.m"; sourceTree = "<group>"; };
 		60AE84291BD0EEE900F85304 /* SHMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMenuCell.h; sourceTree = "<group>"; };
@@ -390,7 +387,6 @@
 				602C3AD51BAFCCCC000C41DA /* Classes */,
 				602C3B7E1BAFCCE3000C41DA /* PrefixHeader.pch */,
 				602C3AAE1BAFCC88000C41DA /* Assets.xcassets */,
-				602C3AB01BAFCC88000C41DA /* LaunchScreen.storyboard */,
 				602C3AB31BAFCC88000C41DA /* Info.plist */,
 				602C3AA21BAFCC88000C41DA /* Supporting Files */,
 			);
@@ -1101,7 +1097,6 @@
 				6009C7041BF5E97A00C8B183 /* hudSuccess.png in Resources */,
 				602C3B781BAFCCCC000C41DA /* 库的配置.rtf in Resources */,
 				60CD4E431C03F95400CF51F9 /* DeviceInfoOCVolumeSliderView.xib in Resources */,
-				602C3AB21BAFCC88000C41DA /* LaunchScreen.storyboard in Resources */,
 				602B52CC1C916C4600EBBDDD /* DeviceInfoMusicFileView.xib in Resources */,
 				6009C7061BF5EAAA00C8B183 /* hudLoading.png in Resources */,
 				60BEC2991C166D89001BEED5 /* PermissionCheckingViewController.xib in Resources */,
@@ -1248,18 +1243,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		602C3AB01BAFCC88000C41DA /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				602C3AB11BAFCC88000C41DA /* Base */,
-				60A631F31BB140A50048AE28 /* zh-Hans */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		602C3ACA1BAFCC88000C41DA /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1347,6 +1330,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -1369,6 +1353,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
