@@ -42,7 +42,7 @@ static const char *additionLayerKey = "additionLayer";
         layer.frame = self.bounds;
         [self.layer insertSublayer:layer atIndex:0];
         // 确保位于底层
-        layer.zPosition = -1;
+        layer.zPosition = HUGE_VAL;
         self.additionLayer = layer;
     }
     objc_setAssociatedObject(self, additionImageKey, additionImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -56,7 +56,7 @@ static const char *additionLayerKey = "additionLayer";
 
 - (void)setAdditionScale:(CGFloat)additionScale
 {
-    self.additionLayer.transform = CATransform3DMakeScale(1 + additionScale, 1 + additionScale, 0);
+    self.additionLayer.transform = CATransform3DMakeScale(0.5 + additionScale, 0.5 + additionScale, 0);
 }
 
 @end

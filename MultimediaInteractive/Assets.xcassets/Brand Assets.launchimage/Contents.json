@@ -10,7 +10,7 @@
     {
       "orientation" : "landscape",
       "idiom" : "ipad",
-      "filename" : "launchScreen_03.png",
+      "filename" : "launchScreen.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "1x"
@@ -25,7 +25,7 @@
     {
       "orientation" : "landscape",
       "idiom" : "ipad",
-      "filename" : "launchScreen_03@2x.png",
+      "filename" : "launchScreen@2x.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"

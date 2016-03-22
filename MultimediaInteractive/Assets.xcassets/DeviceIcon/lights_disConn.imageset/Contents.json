@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "lights_disConn.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "demo@2x.png",
       "scale" : "2x"
     },
     {

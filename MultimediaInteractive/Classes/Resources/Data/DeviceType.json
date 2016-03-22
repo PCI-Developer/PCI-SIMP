@@ -159,7 +159,7 @@
                               ],
         "videoConnectedType":[
         ],
-        "imageName" : "musicFile",
+        "imageName" : "lights",
         "isActual" : true,
         "controlCMD" : ["oc", "brightness"],
         "minValue" : 100,
