@@ -42,7 +42,7 @@ static const char *additionLayerKey = "additionLayer";
         layer.frame = self.bounds;
         [self.layer insertSublayer:layer atIndex:0];
         // 确保位于底层
-        layer.zPosition = HUGE_VAL;
+        layer.zPosition = FLT_MAX;
         self.additionLayer = layer;
     }
     objc_setAssociatedObject(self, additionImageKey, additionImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
