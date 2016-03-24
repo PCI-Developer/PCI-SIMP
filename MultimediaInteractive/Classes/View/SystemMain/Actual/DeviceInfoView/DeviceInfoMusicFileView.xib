@@ -24,8 +24,8 @@
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
-                                    <exclude reference="jrX-3I-A5g"/>
                                     <exclude reference="XLV-Rx-akN"/>
+                                    <exclude reference="jrX-3I-A5g"/>
                                 </mask>
                             </variation>
                         </imageView>
@@ -63,8 +63,8 @@
                     </userDefinedRuntimeAttributes>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="pzf-EI-ZuS"/>
                             <exclude reference="Dcc-hC-Nqj"/>
+                            <exclude reference="pzf-EI-ZuS"/>
                         </mask>
                     </variation>
                 </view>
@@ -84,38 +84,41 @@
                     <rect key="frame" x="0.0" y="173" width="600" height="427"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxH-6r-ql7">
-                            <rect key="frame" x="13" y="195" width="80" height="36"/>
+                            <rect key="frame" x="35" y="195" width="36" height="36"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="36" id="82E-wY-5ZP"/>
-                                <constraint firstAttribute="width" constant="80" id="Crq-Xf-1RP"/>
+                                <constraint firstAttribute="width" constant="36" id="Crq-Xf-1RP"/>
                             </constraints>
-                            <state key="normal" title="play">
+                            <state key="normal" backgroundImage="playMusic">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="highlighted" backgroundImage="playMusicHighlight"/>
                             <connections>
                                 <action selector="controlMusicFileButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="ODu-bI-M3t"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIR-2K-it5">
-                            <rect key="frame" x="507" y="195" width="80" height="36"/>
+                            <rect key="frame" x="529" y="195" width="36" height="36"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="stop">
+                            <state key="normal" backgroundImage="stopMusic">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="highlighted" backgroundImage="stopMusicHighlight"/>
                             <connections>
                                 <action selector="controlMusicFileButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="Zzo-BE-Rvj"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dC-Z1-1WL">
-                            <rect key="frame" x="106" y="195" width="80" height="36"/>
+                            <rect key="frame" x="106" y="195" width="36" height="36"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="pause">
+                            <state key="normal" backgroundImage="pauseMusic">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="highlighted" backgroundImage="pauseMusicHighlight"/>
                             <connections>
                                 <action selector="controlMusicFileButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="fBX-Tc-nSE"/>
                             </connections>
@@ -124,7 +127,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="jxH-6r-ql7" secondAttribute="bottom" constant="40" id="1a0-2x-0bd"/>
-                        <constraint firstItem="5dC-Z1-1WL" firstAttribute="leading" secondItem="jxH-6r-ql7" secondAttribute="trailing" constant="13" id="6S5-UC-TvS"/>
+                        <constraint firstItem="5dC-Z1-1WL" firstAttribute="leading" secondItem="jxH-6r-ql7" secondAttribute="trailing" constant="35" id="6S5-UC-TvS"/>
                         <constraint firstAttribute="width" constant="180" id="CIp-et-JNz"/>
                         <constraint firstItem="NIR-2K-it5" firstAttribute="bottom" secondItem="jxH-6r-ql7" secondAttribute="bottom" id="HS1-zh-JwN"/>
                         <constraint firstItem="5dC-Z1-1WL" firstAttribute="height" secondItem="NIR-2K-it5" secondAttribute="height" id="P87-xz-6fY"/>
@@ -134,9 +137,9 @@
                         <constraint firstAttribute="height" constant="180" id="ekO-eO-gdI"/>
                         <constraint firstItem="5dC-Z1-1WL" firstAttribute="top" secondItem="jxH-6r-ql7" secondAttribute="top" id="ifp-qv-gF7"/>
                         <constraint firstItem="5dC-Z1-1WL" firstAttribute="width" secondItem="jxH-6r-ql7" secondAttribute="width" id="px7-qn-lsL"/>
-                        <constraint firstItem="jxH-6r-ql7" firstAttribute="leading" secondItem="otq-BZ-c7Q" secondAttribute="leading" constant="13" id="thh-aL-6tk"/>
+                        <constraint firstItem="jxH-6r-ql7" firstAttribute="leading" secondItem="otq-BZ-c7Q" secondAttribute="leading" constant="35" id="thh-aL-6tk"/>
                         <constraint firstItem="NIR-2K-it5" firstAttribute="leading" secondItem="jxH-6r-ql7" secondAttribute="trailing" constant="10" id="wbJ-cK-xVM"/>
-                        <constraint firstAttribute="trailing" secondItem="NIR-2K-it5" secondAttribute="trailing" constant="13" id="yFo-PL-kbE"/>
+                        <constraint firstAttribute="trailing" secondItem="NIR-2K-it5" secondAttribute="trailing" constant="35" id="yFo-PL-kbE"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="image" keyPath="backgroundColorFromUIImage" value="controlBg.png"/>
@@ -179,5 +182,11 @@
     <resources>
         <image name="controlBg.png" width="2" height="23"/>
         <image name="infoSplit" width="2" height="23"/>
+        <image name="pauseMusic" width="36" height="36"/>
+        <image name="pauseMusicHighlight" width="36" height="36"/>
+        <image name="playMusic" width="36" height="36"/>
+        <image name="playMusicHighlight" width="36" height="36"/>
+        <image name="stopMusic" width="36" height="36"/>
+        <image name="stopMusicHighlight" width="36" height="36"/>
     </resources>
 </document>
