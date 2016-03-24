@@ -497,7 +497,7 @@ kSingleTon_M(SocketManager)
     if ([Common shareCommon].isDemo) {
         NSString *info = @"";
         // 演示版,(开关操作,模拟成功)模拟成功
-        if (controlType == CMDTypeOpen || controlType == CMDTypeClose) {
+        if (controlType == CMDTypeOpen || controlType == CMDTypeClose || controlType == CMDTypePlayFile || controlType == CMDTypeStopFile || controlType == CMDTypePauseFile) {
             for (NSString *item in [devicesID componentsSeparatedByString:@","]) {
                 info = [info stringByAppendingFormat:@"%@,1&", item];
             }

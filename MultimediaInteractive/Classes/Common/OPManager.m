@@ -182,12 +182,15 @@ kSingleTon_M(OPManager)
             DeviceForUser *otherDevice = [[Common shareCommon] getDeviceWithUEQP_ID:logInfo.otherUEQP_ID];
             
             if (isSuccess) {
-                if (model.cmdType == CMDTypeClose || model.cmdType == CMDTypeOpen) { // 开关 - 更新设备状态
+                if (model.cmdType == CMDTypeClose || model.cmdType == CMDTypeOpen || model.cmdType == CMDTypePlayFile || model.cmdType == CMDTypePauseFile || model.cmdType == CMDTypeStopFile) { // 开关 - 更新设备状态
                     // 操作后,保存配置
                     if ([resultDict[device.UEQP_ID] intValue] == 1) { // 判断该设备是否操作成功
+                        if (model.cmdType <= 2) {
+                            device.deviceOCState = (DeviceOCState)model.cmdType;
+                        } else {
+                            device.deviceOCState = model.cmdType == CMDTypePlayFile ? DeviceOpen : DeviceClose;
+                        }
                         [device.currentConfigs setObject:@(model.cmdType) forKey:kConfigOCKey];
-                        
-                        device.deviceOCState = (DeviceOCState)model.cmdType;
                         //                    kLog(@"设备更新发出通知 : %@", device);
                         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUpdateDevice object:device];
                     } else {
