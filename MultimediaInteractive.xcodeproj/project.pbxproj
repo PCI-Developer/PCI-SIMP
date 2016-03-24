@@ -114,6 +114,7 @@
 		60EA3D6B1BB2A34700AE1372 /* NSString+ConvertDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60EA3D6A1BB2A34700AE1372 /* NSString+ConvertDate.m */; };
 		60FAE64E1BBB744C0064ECB9 /* AreaConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FAE64D1BBB744C0064ECB9 /* AreaConfig.m */; };
 		60FAE6511BBB74560064ECB9 /* DetailOfAreaConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FAE6501BBB74560064ECB9 /* DetailOfAreaConfig.m */; };
+		A40137F81CA39ABA001EA501 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40137F71CA39ABA001EA501 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -323,6 +324,7 @@
 		60FAE64D1BBB744C0064ECB9 /* AreaConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AreaConfig.m; path = MultimediaInteractive/Classes/Controller/SystemMain/Config/AreaConfig.m; sourceTree = SOURCE_ROOT; };
 		60FAE64F1BBB74560064ECB9 /* DetailOfAreaConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailOfAreaConfig.h; path = MultimediaInteractive/Classes/Controller/SystemMain/Config/DetailOfAreaConfig.h; sourceTree = SOURCE_ROOT; };
 		60FAE6501BBB74560064ECB9 /* DetailOfAreaConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailOfAreaConfig.m; path = MultimediaInteractive/Classes/Controller/SystemMain/Config/DetailOfAreaConfig.m; sourceTree = SOURCE_ROOT; };
+		A40137F71CA39ABA001EA501 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -424,6 +426,7 @@
 			children = (
 				602C3AD61BAFCCCC000C41DA /* AppDelegate.h */,
 				602C3AD71BAFCCCC000C41DA /* AppDelegate.m */,
+				A40137F71CA39ABA001EA501 /* LaunchScreen.xib */,
 				606314F11BE89220009FEEC8 /* Framework */,
 				602C3AF71BAFCCCC000C41DA /* Custom */,
 				602C3AD81BAFCCCC000C41DA /* Common */,
@@ -1094,6 +1097,7 @@
 				609B6FA81C04559700B62D95 /* DeviceInfoMicView.xib in Resources */,
 				6089BB661BBA64B600BAAE4E /* ConfigViewController.xib in Resources */,
 				6015FBA61C197376003A417E /* CameraFollowConfigView.xib in Resources */,
+				A40137F81CA39ABA001EA501 /* LaunchScreen.xib in Resources */,
 				6009C7041BF5E97A00C8B183 /* hudSuccess.png in Resources */,
 				602C3B781BAFCCCC000C41DA /* 库的配置.rtf in Resources */,
 				60CD4E431C03F95400CF51F9 /* DeviceInfoOCVolumeSliderView.xib in Resources */,
@@ -1330,7 +1334,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -1353,7 +1356,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
