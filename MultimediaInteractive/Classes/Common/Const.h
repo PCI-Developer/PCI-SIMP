@@ -119,6 +119,8 @@ return share; \
 
 
 
+#define kBottomMarginOfOCButton 40
+
 #define kTagForImageViewInWFFFollowHandsView 999 // 设备选中状态图标
 #define kTagForDeviceImageInWFFFollowHandsView 99 // 设备图标
 #define kRightViewTransitionType kCATransitionPush // 右侧子视图过场动画类型

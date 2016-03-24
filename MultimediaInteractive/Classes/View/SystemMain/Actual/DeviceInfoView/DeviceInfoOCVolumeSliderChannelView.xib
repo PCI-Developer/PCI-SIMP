@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -84,7 +84,7 @@
                     <rect key="frame" x="0.0" y="173" width="600" height="427"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fe4-wQ-2WP" userLabel="siderView" customClass="WFFCircularSlider">
-                            <rect key="frame" x="200" y="96" width="200" height="200"/>
+                            <rect key="frame" x="200" y="93.5" width="200" height="200"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="200" id="EaF-w3-FQt"/>
@@ -95,7 +95,7 @@
                             </connections>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqH-Ww-7lh">
-                            <rect key="frame" x="20" y="316" width="103" height="36"/>
+                            <rect key="frame" x="20" y="351" width="103" height="36"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="36" id="QxW-3d-zVA"/>
@@ -112,7 +112,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUB-O2-DtO">
-                            <rect key="frame" x="477" y="316" width="103" height="36"/>
+                            <rect key="frame" x="477" y="351" width="103" height="36"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" backgroundImage="close">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -158,6 +158,7 @@
                         <constraint firstAttribute="trailing" secondItem="PUB-O2-DtO" secondAttribute="trailing" constant="20" id="6Ch-ho-bLS"/>
                         <constraint firstItem="wqH-Ww-7lh" firstAttribute="top" secondItem="Fe4-wQ-2WP" secondAttribute="bottom" constant="20" id="FRX-vQ-tyP"/>
                         <constraint firstItem="NAq-SI-L5N" firstAttribute="centerX" secondItem="E3a-Lt-yhf" secondAttribute="centerX" id="Ihw-H6-M35"/>
+                        <constraint firstItem="Fe4-wQ-2WP" firstAttribute="centerY" secondItem="E3a-Lt-yhf" secondAttribute="centerY" constant="-20" id="MmZ-Jo-wrH"/>
                         <constraint firstAttribute="width" constant="180" id="OZw-Sk-gCk"/>
                         <constraint firstItem="wqH-Ww-7lh" firstAttribute="top" secondItem="Fe4-wQ-2WP" secondAttribute="bottom" constant="20" id="TAf-lB-Ebc"/>
                         <constraint firstItem="PUB-O2-DtO" firstAttribute="leading" secondItem="wqH-Ww-7lh" secondAttribute="trailing" constant="10" id="U7J-uO-4iA"/>
@@ -168,6 +169,7 @@
                         <constraint firstItem="wqH-Ww-7lh" firstAttribute="top" secondItem="NAq-SI-L5N" secondAttribute="bottom" constant="70" id="jhL-Hq-dg8"/>
                         <constraint firstAttribute="bottom" secondItem="wqH-Ww-7lh" secondAttribute="bottom" constant="40" id="knw-4t-Ppn"/>
                         <constraint firstItem="NAq-SI-L5N" firstAttribute="top" secondItem="E3a-Lt-yhf" secondAttribute="top" constant="20" id="vGo-RL-8fM"/>
+                        <constraint firstAttribute="bottom" secondItem="wqH-Ww-7lh" secondAttribute="bottom" constant="40" id="wkQ-GI-NNY"/>
                         <constraint firstItem="PUB-O2-DtO" firstAttribute="bottom" secondItem="wqH-Ww-7lh" secondAttribute="bottom" id="xvc-kr-hCR"/>
                         <constraint firstItem="PUB-O2-DtO" firstAttribute="height" secondItem="wqH-Ww-7lh" secondAttribute="height" id="zBQ-qU-9Rz"/>
                     </constraints>
@@ -181,9 +183,12 @@
                         <mask key="constraints">
                             <exclude reference="5hU-qE-55N"/>
                             <exclude reference="OZw-Sk-gCk"/>
+                            <exclude reference="4PN-rD-F7K"/>
                             <exclude reference="5TF-l6-zYP"/>
                             <exclude reference="bi3-lw-YPe"/>
                             <exclude reference="FRX-vQ-tyP"/>
+                            <exclude reference="TAf-lB-Ebc"/>
+                            <exclude reference="j1t-Jk-4J5"/>
                             <exclude reference="jhL-Hq-dg8"/>
                             <exclude reference="knw-4t-Ppn"/>
                             <exclude reference="U7J-uO-4iA"/>

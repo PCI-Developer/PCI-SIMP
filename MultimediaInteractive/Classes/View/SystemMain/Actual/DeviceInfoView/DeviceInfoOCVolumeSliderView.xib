@@ -83,19 +83,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s1f-xh-ESp" userLabel="controlView">
                     <rect key="frame" x="0.0" y="173" width="600" height="427"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kGY-8o-Mpo" userLabel="siderView" customClass="WFFCircularSlider">
-                            <rect key="frame" x="200" y="40" width="200" height="200"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="200" id="DL4-rB-nGz"/>
-                                <constraint firstAttribute="height" constant="200" id="exS-hF-hX4"/>
-                            </constraints>
-                            <connections>
-                                <action selector="sliderValueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="pd9-yd-eFf"/>
-                            </connections>
-                        </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gI0-O7-4yo">
-                            <rect key="frame" x="477" y="280" width="103" height="36"/>
+                            <rect key="frame" x="477" y="351" width="103" height="36"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" backgroundImage="close">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -108,7 +97,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLf-Xn-NGf">
-                            <rect key="frame" x="20" y="280" width="103" height="36"/>
+                            <rect key="frame" x="20" y="351" width="103" height="36"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="103" id="3aL-Bk-zm2"/>
@@ -124,6 +113,17 @@
                                 <action selector="openButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="ebi-za-HXT"/>
                             </connections>
                         </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kGY-8o-Mpo" userLabel="siderView" customClass="WFFCircularSlider">
+                            <rect key="frame" x="200" y="93.5" width="200" height="200"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="DL4-rB-nGz"/>
+                                <constraint firstAttribute="height" constant="200" id="exS-hF-hX4"/>
+                            </constraints>
+                            <connections>
+                                <action selector="sliderValueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="pd9-yd-eFf"/>
+                            </connections>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -131,6 +131,7 @@
                         <constraint firstItem="XLf-Xn-NGf" firstAttribute="leading" secondItem="s1f-xh-ESp" secondAttribute="leading" constant="20" id="Axh-dW-kUW"/>
                         <constraint firstItem="kGY-8o-Mpo" firstAttribute="top" secondItem="s1f-xh-ESp" secondAttribute="top" constant="40" id="C4M-Im-ti4"/>
                         <constraint firstAttribute="height" constant="180" id="Cbg-BI-Wme"/>
+                        <constraint firstItem="kGY-8o-Mpo" firstAttribute="centerY" secondItem="s1f-xh-ESp" secondAttribute="centerY" constant="-20" id="H67-3D-rba"/>
                         <constraint firstItem="gI0-O7-4yo" firstAttribute="bottom" secondItem="XLf-Xn-NGf" secondAttribute="bottom" id="JDM-T3-bXT"/>
                         <constraint firstAttribute="trailing" secondItem="gI0-O7-4yo" secondAttribute="trailing" constant="20" id="KTA-Xb-EYx"/>
                         <constraint firstItem="XLf-Xn-NGf" firstAttribute="top" secondItem="kGY-8o-Mpo" secondAttribute="bottom" priority="750" constant="20" id="LTz-Om-1Dk"/>
@@ -143,6 +144,7 @@
                         <constraint firstItem="gI0-O7-4yo" firstAttribute="leading" secondItem="XLf-Xn-NGf" secondAttribute="trailing" constant="10" id="iAI-oK-4UW"/>
                         <constraint firstItem="kGY-8o-Mpo" firstAttribute="leading" secondItem="s1f-xh-ESp" secondAttribute="leading" constant="5" id="iOp-UA-osK"/>
                         <constraint firstItem="XLf-Xn-NGf" firstAttribute="centerY" secondItem="s1f-xh-ESp" secondAttribute="centerY" priority="750" id="kdA-ie-mqi"/>
+                        <constraint firstAttribute="bottom" secondItem="XLf-Xn-NGf" secondAttribute="bottom" constant="40" id="wwM-dQ-V67"/>
                         <constraint firstAttribute="width" constant="180" id="xL0-St-LAr"/>
                         <constraint firstItem="XLf-Xn-NGf" firstAttribute="top" secondItem="kGY-8o-Mpo" secondAttribute="bottom" constant="150" id="zTu-m5-KwQ"/>
                     </constraints>
@@ -156,11 +158,13 @@
                         <mask key="constraints">
                             <exclude reference="Cbg-BI-Wme"/>
                             <exclude reference="xL0-St-LAr"/>
+                            <exclude reference="C4M-Im-ti4"/>
                             <exclude reference="QqG-nZ-9Ez"/>
                             <exclude reference="iOp-UA-osK"/>
                             <exclude reference="9z1-g9-ha1"/>
                             <exclude reference="LTz-Om-1Dk"/>
                             <exclude reference="Sy9-5I-DPc"/>
+                            <exclude reference="ZlJ-Dj-sCK"/>
                             <exclude reference="zTu-m5-KwQ"/>
                             <exclude reference="iAI-oK-4UW"/>
                         </mask>

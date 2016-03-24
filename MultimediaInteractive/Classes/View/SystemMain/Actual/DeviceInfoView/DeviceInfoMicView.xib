@@ -27,7 +27,7 @@
                     <rect key="frame" x="0.0" y="173" width="600" height="427"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLK-IK-sDO">
-                            <rect key="frame" x="477" y="195" width="103" height="36"/>
+                            <rect key="frame" x="477" y="351" width="103" height="36"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" backgroundImage="close">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -40,7 +40,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ikh-F5-Zhn">
-                            <rect key="frame" x="20" y="195" width="103" height="36"/>
+                            <rect key="frame" x="20" y="351" width="103" height="36"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="103" id="ahU-Gu-TYW"/>
@@ -57,7 +57,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnN-in-GHV">
-                            <rect key="frame" x="20" y="94" width="560" height="36"/>
+                            <rect key="frame" x="20" y="155.5" width="560" height="36"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="摄像头跟随配置">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -72,6 +72,8 @@
                         <constraint firstItem="uLK-IK-sDO" firstAttribute="width" secondItem="Ikh-F5-Zhn" secondAttribute="width" id="4dG-OT-cXx"/>
                         <constraint firstItem="uLK-IK-sDO" firstAttribute="height" secondItem="Ikh-F5-Zhn" secondAttribute="height" id="67Y-UT-GbX"/>
                         <constraint firstAttribute="bottom" secondItem="Ikh-F5-Zhn" secondAttribute="bottom" constant="40" id="82e-Ib-SrD"/>
+                        <constraint firstItem="tnN-in-GHV" firstAttribute="centerY" secondItem="aEL-6J-cjy" secondAttribute="centerY" constant="-40" id="G3k-B5-vsn"/>
+                        <constraint firstAttribute="bottom" secondItem="Ikh-F5-Zhn" secondAttribute="bottom" constant="40" id="GdT-1k-T5g"/>
                         <constraint firstAttribute="height" constant="180" id="LwC-ZN-hiU"/>
                         <constraint firstItem="tnN-in-GHV" firstAttribute="top" secondItem="aEL-6J-cjy" secondAttribute="top" constant="94" id="Mjq-bJ-ZCp"/>
                         <constraint firstItem="Ikh-F5-Zhn" firstAttribute="centerY" secondItem="aEL-6J-cjy" secondAttribute="centerY" id="PEn-wb-BPM"/>
@@ -93,7 +95,9 @@
                         <mask key="constraints">
                             <exclude reference="LwC-ZN-hiU"/>
                             <exclude reference="VmQ-f7-bWo"/>
+                            <exclude reference="Mjq-bJ-ZCp"/>
                             <exclude reference="82e-Ib-SrD"/>
+                            <exclude reference="PEn-wb-BPM"/>
                             <exclude reference="aqA-ta-oz0"/>
                         </mask>
                     </variation>

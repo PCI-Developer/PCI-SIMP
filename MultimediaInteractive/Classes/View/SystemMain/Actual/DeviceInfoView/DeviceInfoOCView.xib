@@ -84,7 +84,7 @@
                     <rect key="frame" x="0.0" y="173" width="600" height="427"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9h-zN-Flk">
-                            <rect key="frame" x="477" y="195.5" width="103" height="36"/>
+                            <rect key="frame" x="477" y="351" width="103" height="36"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" backgroundImage="close">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -97,7 +97,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edB-57-ljQ">
-                            <rect key="frame" x="20" y="195.5" width="103" height="36"/>
+                            <rect key="frame" x="20" y="351" width="103" height="36"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="36" id="MZM-x8-s9F"/>
@@ -118,6 +118,7 @@
                     <constraints>
                         <constraint firstItem="J9h-zN-Flk" firstAttribute="leading" secondItem="edB-57-ljQ" secondAttribute="trailing" constant="10" id="9Bd-wa-bGf"/>
                         <constraint firstAttribute="width" constant="180" id="9jE-X8-d4x"/>
+                        <constraint firstAttribute="bottom" secondItem="edB-57-ljQ" secondAttribute="bottom" constant="40" id="CLa-w2-6b6"/>
                         <constraint firstAttribute="bottom" secondItem="edB-57-ljQ" secondAttribute="bottom" constant="40" id="DjP-74-fAp"/>
                         <constraint firstAttribute="height" constant="180" id="HqU-DQ-QY1"/>
                         <constraint firstItem="J9h-zN-Flk" firstAttribute="width" secondItem="edB-57-ljQ" secondAttribute="width" id="KQt-zs-3lk"/>
@@ -138,6 +139,7 @@
                             <exclude reference="9jE-X8-d4x"/>
                             <exclude reference="HqU-DQ-QY1"/>
                             <exclude reference="DjP-74-fAp"/>
+                            <exclude reference="nZB-dI-vkQ"/>
                             <exclude reference="9Bd-wa-bGf"/>
                         </mask>
                     </variation>
@@ -167,7 +169,7 @@
     <resources>
         <image name="close" width="308" height="108"/>
         <image name="closeHighlight" width="317" height="108"/>
-        <image name="controlBg.png" width="2" height="23"/>
+        <image name="controlBg.png" width="3" height="3"/>
         <image name="infoSplit" width="2" height="23"/>
         <image name="open" width="308" height="108"/>
         <image name="openHighlight" width="317" height="108"/>

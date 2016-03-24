@@ -84,7 +84,7 @@
                     <rect key="frame" x="0.0" y="173" width="600" height="427"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfH-G0-i6E">
-                            <rect key="frame" x="477" y="195.5" width="103" height="36"/>
+                            <rect key="frame" x="477" y="351" width="103" height="36"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" backgroundImage="close">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -97,7 +97,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fv9-vD-zIb">
-                            <rect key="frame" x="20" y="195.5" width="103" height="36"/>
+                            <rect key="frame" x="20" y="351" width="103" height="36"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="103" id="0RH-rU-e52"/>
@@ -114,7 +114,7 @@
                             </connections>
                         </button>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="pjn-zm-WcN">
-                            <rect key="frame" x="18" y="100" width="564" height="31"/>
+                            <rect key="frame" x="18" y="158.5" width="564" height="31"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="114" id="HQt-KD-pkO"/>
                             </constraints>
@@ -140,9 +140,11 @@
                         <constraint firstItem="DfH-G0-i6E" firstAttribute="leading" secondItem="Fv9-vD-zIb" secondAttribute="trailing" constant="10" id="9AS-Er-THa"/>
                         <constraint firstItem="pjn-zm-WcN" firstAttribute="trailing" secondItem="DfH-G0-i6E" secondAttribute="trailing" id="9NL-aS-Yfq"/>
                         <constraint firstItem="DfH-G0-i6E" firstAttribute="height" secondItem="Fv9-vD-zIb" secondAttribute="height" id="CFw-Kt-qSE"/>
+                        <constraint firstItem="pjn-zm-WcN" firstAttribute="centerY" secondItem="goj-Ub-kyh" secondAttribute="centerY" constant="-40" id="FeU-w8-IFf"/>
                         <constraint firstAttribute="trailing" secondItem="DfH-G0-i6E" secondAttribute="trailing" constant="20" id="XPR-2d-Ic1"/>
                         <constraint firstItem="pjn-zm-WcN" firstAttribute="leading" secondItem="Fv9-vD-zIb" secondAttribute="leading" id="hRD-nT-qp9"/>
                         <constraint firstItem="DfH-G0-i6E" firstAttribute="bottom" secondItem="Fv9-vD-zIb" secondAttribute="bottom" id="lnq-18-Esm"/>
+                        <constraint firstAttribute="bottom" secondItem="Fv9-vD-zIb" secondAttribute="bottom" constant="40" id="ndU-xh-ORN"/>
                         <constraint firstItem="DfH-G0-i6E" firstAttribute="width" secondItem="Fv9-vD-zIb" secondAttribute="width" id="pcn-c2-6Ia"/>
                         <constraint firstItem="Fv9-vD-zIb" firstAttribute="centerY" secondItem="goj-Ub-kyh" secondAttribute="centerY" priority="750" id="phs-qW-C7h"/>
                         <constraint firstAttribute="bottom" secondItem="Fv9-vD-zIb" secondAttribute="bottom" constant="40" id="r6o-E6-duI"/>
@@ -158,6 +160,8 @@
                         <mask key="constraints">
                             <exclude reference="6qa-5e-h3Q"/>
                             <exclude reference="889-w2-sPK"/>
+                            <exclude reference="3sY-Cq-tht"/>
+                            <exclude reference="phs-qW-C7h"/>
                             <exclude reference="r6o-E6-duI"/>
                             <exclude reference="9AS-Er-THa"/>
                         </mask>
