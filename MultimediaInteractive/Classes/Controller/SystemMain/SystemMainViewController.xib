@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -30,7 +30,7 @@
                     <rect key="frame" x="0.0" y="48" width="600" height="552"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loading..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jg0-mr-11v" userLabel="loadLabel">
-                            <rect key="frame" x="229" y="255" width="141.5" height="42"/>
+                            <rect key="frame" x="229" y="255" width="142" height="42"/>
                             <fontDescription key="fontDescription" type="system" pointSize="35"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -57,10 +57,10 @@
                             </variation>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ssr-uD-3Id" userLabel="left">
-                            <rect key="frame" x="0.0" y="0.0" width="207" height="48"/>
+                            <rect key="frame" x="0.0" y="0.0" width="190" height="48"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoMain" translatesAutoresizingMaskIntoConstraints="NO" id="mfU-0D-nUq">
-                                    <rect key="frame" x="5" y="4" width="197" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="190" height="48"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="Bzl-Wv-b05"/>
                                         <constraint firstAttribute="height" constant="50" id="fh8-gH-vuE"/>
@@ -75,14 +75,14 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="mfU-0D-nUq" firstAttribute="leading" secondItem="Ssr-uD-3Id" secondAttribute="leading" constant="5" id="4MO-Bv-BsC"/>
+                                <constraint firstItem="mfU-0D-nUq" firstAttribute="leading" secondItem="Ssr-uD-3Id" secondAttribute="leading" id="4MO-Bv-BsC"/>
                                 <constraint firstItem="mfU-0D-nUq" firstAttribute="centerY" secondItem="Ssr-uD-3Id" secondAttribute="centerY" id="HJ9-sL-mDl"/>
                                 <constraint firstItem="mfU-0D-nUq" firstAttribute="height" secondItem="Ssr-uD-3Id" secondAttribute="height" id="Lcv-38-qwD"/>
                                 <constraint firstAttribute="trailing" secondItem="mfU-0D-nUq" secondAttribute="trailing" constant="10" id="R3j-fi-Flg"/>
-                                <constraint firstAttribute="trailing" secondItem="mfU-0D-nUq" secondAttribute="trailing" constant="5" id="g3C-B7-kbM"/>
-                                <constraint firstAttribute="bottom" secondItem="mfU-0D-nUq" secondAttribute="bottom" constant="4" id="ghr-ja-YMq"/>
+                                <constraint firstAttribute="trailing" secondItem="mfU-0D-nUq" secondAttribute="trailing" id="g3C-B7-kbM"/>
+                                <constraint firstAttribute="bottom" secondItem="mfU-0D-nUq" secondAttribute="bottom" id="ghr-ja-YMq"/>
                                 <constraint firstItem="mfU-0D-nUq" firstAttribute="centerY" secondItem="Ssr-uD-3Id" secondAttribute="centerY" id="hQl-Jw-Eng"/>
-                                <constraint firstItem="mfU-0D-nUq" firstAttribute="top" secondItem="Ssr-uD-3Id" secondAttribute="top" constant="4" id="xBu-AN-YiM"/>
+                                <constraint firstItem="mfU-0D-nUq" firstAttribute="top" secondItem="Ssr-uD-3Id" secondAttribute="top" id="xBu-AN-YiM"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
@@ -114,7 +114,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vo9-o5-cPS" userLabel="batteryLabel">
-                            <rect key="frame" x="482" y="17" width="28" height="13.5"/>
+                            <rect key="frame" x="482" y="17" width="28" height="14"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -130,7 +130,7 @@
                             <rect key="frame" x="510" y="8" width="32" height="32"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:13" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LcT-t9-MPv" userLabel="timeLabel">
-                            <rect key="frame" x="552" y="14" width="38" height="20.5"/>
+                            <rect key="frame" x="552" y="14" width="38" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -272,7 +272,7 @@
                     <exclude reference="8Ru-MK-tHU"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="231" y="308"/>
+            <point key="canvasLocation" x="569" y="356"/>
         </view>
     </objects>
     <resources>
@@ -288,7 +288,7 @@
         <image name="helpIcon" width="35" height="35"/>
         <image name="indicatorConn" width="20" height="20"/>
         <image name="indicatorDisConn" width="20" height="20"/>
-        <image name="logoMain" width="197" height="40"/>
+        <image name="logoMain" width="190" height="48"/>
         <image name="wifiIcon" width="21" height="15"/>
         <image name="wifiLoseIcon" width="21" height="15"/>
     </resources>

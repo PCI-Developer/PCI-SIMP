@@ -408,7 +408,7 @@ kSingleTon_M(Common)
         self.allAreasArray = [NSMutableArray array];
         for (int i = 0; i < 3; i++) {
             NSDictionary *dict = @{@"AreaID" : [NSString stringWithFormat:@"AreaID%02d", i],
-                                   @"AreaName" : [NSString stringWithFormat:@"AreaName%02d", i]
+                                   @"AreaName" : [NSString stringWithFormat:@"区域%02d", i]
                                    };
             Area *area = [Area new];
             [area setValuesForKeysWithDictionary:dict];
@@ -426,7 +426,7 @@ kSingleTon_M(Common)
             }
             NSDictionary *dict = @{@"AutoID" : @(i + 100),
                                    @"UEQP_ID" : [NSString stringWithFormat:@"UEQP_ID%02d", i],
-                                   @"UEQP_Name" : [NSString stringWithFormat:@"UEQP_Name%02d", i],
+                                   @"UEQP_Name" : [NSString stringWithFormat:@"%@%02d", typeString, i],
                                    @"UEQP_Type" : typeString,
                                    @"AreaID" : [NSString stringWithFormat:@"AreaID%02ld", (long)i % self.allAreasArray.count],
                                    @"deviceConnectState" : @(1),
@@ -455,7 +455,7 @@ kSingleTon_M(Common)
             }
             NSDictionary *dict = @{@"AutoID" : @(i + 1000),
                                    @"UEQP_ID" : [NSString stringWithFormat:@"UEQP_ID%02d", 100 + i],
-                                   @"UEQP_Name" : [NSString stringWithFormat:@"UEQP_Name%02d", 100 + i],
+                                   @"UEQP_Name" : [NSString stringWithFormat:@"%@%02d", typeString, 100 + i],
                                    @"UEQP_Type" : typeString,
                                    @"AreaID" : [NSString stringWithFormat:@"AreaID%02d", 100],
                                    @"deviceConnectState" : @(1),
