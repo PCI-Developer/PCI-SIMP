@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -84,23 +85,29 @@
                     <rect key="frame" x="0.0" y="173" width="600" height="427"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxH-6r-ql7">
-                            <rect key="frame" x="35" y="195" width="36" height="36"/>
+                            <rect key="frame" x="27" y="189" width="48" height="48"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="36" id="82E-wY-5ZP"/>
-                                <constraint firstAttribute="width" constant="36" id="Crq-Xf-1RP"/>
+                                <constraint firstAttribute="width" constant="48" id="Crq-Xf-1RP"/>
+                                <constraint firstAttribute="width" secondItem="jxH-6r-ql7" secondAttribute="height" id="uhH-Cx-eqU"/>
                             </constraints>
                             <state key="normal" backgroundImage="playMusic">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="highlighted" backgroundImage="playMusicHighlight"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="82E-wY-5ZP"/>
+                                </mask>
+                            </variation>
                             <connections>
                                 <action selector="controlMusicFileButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="ODu-bI-M3t"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIR-2K-it5">
-                            <rect key="frame" x="529" y="195" width="36" height="36"/>
+                            <rect key="frame" x="525" y="189" width="48" height="48"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" backgroundImage="stopMusic">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -112,7 +119,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dC-Z1-1WL">
-                            <rect key="frame" x="106" y="195" width="36" height="36"/>
+                            <rect key="frame" x="101" y="189" width="48" height="48"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" backgroundImage="pauseMusic">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -127,7 +134,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="jxH-6r-ql7" secondAttribute="bottom" constant="40" id="1a0-2x-0bd"/>
-                        <constraint firstItem="5dC-Z1-1WL" firstAttribute="leading" secondItem="jxH-6r-ql7" secondAttribute="trailing" constant="35" id="6S5-UC-TvS"/>
+                        <constraint firstItem="5dC-Z1-1WL" firstAttribute="leading" secondItem="jxH-6r-ql7" secondAttribute="trailing" constant="26" id="6S5-UC-TvS"/>
                         <constraint firstAttribute="width" constant="180" id="CIp-et-JNz"/>
                         <constraint firstItem="NIR-2K-it5" firstAttribute="bottom" secondItem="jxH-6r-ql7" secondAttribute="bottom" id="HS1-zh-JwN"/>
                         <constraint firstItem="5dC-Z1-1WL" firstAttribute="height" secondItem="NIR-2K-it5" secondAttribute="height" id="P87-xz-6fY"/>
@@ -137,9 +144,9 @@
                         <constraint firstAttribute="height" constant="180" id="ekO-eO-gdI"/>
                         <constraint firstItem="5dC-Z1-1WL" firstAttribute="top" secondItem="jxH-6r-ql7" secondAttribute="top" id="ifp-qv-gF7"/>
                         <constraint firstItem="5dC-Z1-1WL" firstAttribute="width" secondItem="jxH-6r-ql7" secondAttribute="width" id="px7-qn-lsL"/>
-                        <constraint firstItem="jxH-6r-ql7" firstAttribute="leading" secondItem="otq-BZ-c7Q" secondAttribute="leading" constant="35" id="thh-aL-6tk"/>
+                        <constraint firstItem="jxH-6r-ql7" firstAttribute="leading" secondItem="otq-BZ-c7Q" secondAttribute="leading" constant="27" id="thh-aL-6tk"/>
                         <constraint firstItem="NIR-2K-it5" firstAttribute="leading" secondItem="jxH-6r-ql7" secondAttribute="trailing" constant="10" id="wbJ-cK-xVM"/>
-                        <constraint firstAttribute="trailing" secondItem="NIR-2K-it5" secondAttribute="trailing" constant="35" id="yFo-PL-kbE"/>
+                        <constraint firstAttribute="trailing" secondItem="NIR-2K-it5" secondAttribute="trailing" constant="27" id="yFo-PL-kbE"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="image" keyPath="backgroundColorFromUIImage" value="controlBg.png"/>
@@ -182,11 +189,11 @@
     <resources>
         <image name="controlBg.png" width="2" height="23"/>
         <image name="infoSplit" width="2" height="23"/>
-        <image name="pauseMusic" width="36" height="36"/>
-        <image name="pauseMusicHighlight" width="36" height="36"/>
-        <image name="playMusic" width="36" height="36"/>
-        <image name="playMusicHighlight" width="36" height="36"/>
-        <image name="stopMusic" width="36" height="36"/>
-        <image name="stopMusicHighlight" width="36" height="36"/>
+        <image name="pauseMusic" width="48" height="48"/>
+        <image name="pauseMusicHighlight" width="48" height="48"/>
+        <image name="playMusic" width="48" height="48"/>
+        <image name="playMusicHighlight" width="48" height="48"/>
+        <image name="stopMusic" width="48" height="48"/>
+        <image name="stopMusicHighlight" width="48" height="48"/>
     </resources>
 </document>
