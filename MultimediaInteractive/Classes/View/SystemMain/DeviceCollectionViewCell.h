@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *deviceImageView;
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 
+@property (nonatomic, assign) BOOL needAnimation;
 - (void)changeImageViewWithStatus:(DeviceViewImageStatus)status;
 @end

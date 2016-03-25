@@ -923,7 +923,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             UIImageView *imageView = (UIImageView *)[deviceView viewWithTag:kTagForImageViewInWFFFollowHandsView];
 
             // 设置当前状态应展示的image
-            NSString *imageName = [NSString stringWithFormat:@"state_%d", status];
+            NSString *imageName = [NSString stringWithFormat:@"state_%d", (int)status];
             
             imageView.image = [UIImage imageNamed:imageName];
             // 根据状态,调整大小
@@ -1586,7 +1586,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         cell.backgroundColor = [UIColor clearColor];
         cell.infoLabel.text = model.UEQP_Name;
         cell.imageView.image = [UIImage imageNamed:@"state_0"];
-        [model setImageWithDeviceStatusAndRunAnimationOnImageView:cell.deviceImageView];
+        cell.needAnimation = [model setImageWithDeviceStatusAndRunAnimationOnImageView:cell.deviceImageView];
         
         cell.tag = indexPath.row;
 
@@ -1611,8 +1611,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         cell.imageView.image = [UIImage imageNamed:@"state_0"];
 //        NSString *imageName = [model imageName];
 //        cell.deviceImageView.image = [UIImage imageNamed:imageName];
-        [model setImageWithDeviceStatusAndRunAnimationOnImageView:cell.deviceImageView];
-        [cell.imageView setHighlightedImage:[UIImage imageNamed:[NSString stringWithFormat:@"state_%d", DeviceViewImageStatusForHighlight]]];
+        cell.needAnimation = [model setImageWithDeviceStatusAndRunAnimationOnImageView:cell.deviceImageView];
+        [cell.imageView setHighlightedImage:[UIImage imageNamed:[NSString stringWithFormat:@"state_%d", (int)DeviceViewImageStatusForHighlight]]];
         
         cell.tag = indexPath.row;
         

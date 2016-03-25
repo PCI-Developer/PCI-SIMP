@@ -68,7 +68,7 @@
  *
  *  @return 获取图片名字
  */
-- (NSString *)setImageWithDeviceStatusAndRunAnimationOnImageView:(UIImageView *)imageView;
+- (BOOL)setImageWithDeviceStatusAndRunAnimationOnImageView:(UIImageView *)imageView;
 
 @end
 

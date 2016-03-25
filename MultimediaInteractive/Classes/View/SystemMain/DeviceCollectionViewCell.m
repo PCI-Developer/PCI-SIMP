@@ -46,7 +46,7 @@
 - (void)willMoveToWindow:(UIWindow *)newWindow
 {
     if (newWindow) {// 每次cell即将出现都会执行方法 。 此处主要修复切换到其他vc再切回来时（切换到其他vc会停止当前vc的imageview的动画），因为当前actualvc没有移除，当前的cell之前走过cellfor代理，不会再重新走，导致不会再重新获取cell的imageview的动画组并且开启动画。 出现cell的imageview不显示内容
-        if ([self.deviceImageView.animationImages count] > 0 && !self.deviceImageView.isAnimating) { // 包含动画图片而动画已经停止，则重新开启
+        if (self.needAnimation && !self.deviceImageView.isAnimating) { // 需要动画
             [self.deviceImageView startAnimating];
         }
     }

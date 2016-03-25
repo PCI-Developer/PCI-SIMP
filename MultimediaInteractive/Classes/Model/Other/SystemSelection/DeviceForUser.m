@@ -20,7 +20,7 @@
     return [NSString stringWithFormat:@"设备类型:%@ 名称:%@", kDeviceTypeInfo(self.UEQP_Type)[@"name"], self.UEQP_Name];
 }
 
-- (NSString *)setImageWithDeviceStatusAndRunAnimationOnImageView:(UIImageView *)imageView
+- (BOOL)setImageWithDeviceStatusAndRunAnimationOnImageView:(UIImageView *)imageView
 {
     NSString *imageName = nil;
     BOOL needAnimation = NO;
@@ -65,8 +65,7 @@
         }
     }
     
-//    kLog(@"%@", imageName);
-    return imageName;
+    return needAnimation;
 }
 
 #pragma mark - LazyLoading
