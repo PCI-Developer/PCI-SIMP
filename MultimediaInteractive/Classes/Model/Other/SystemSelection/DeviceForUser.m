@@ -22,6 +22,13 @@
 
 - (BOOL)setImageWithDeviceStatusAndRunAnimationOnImageView:(UIImageView *)imageView
 {
+    // cell重用。 清空原有图片
+    imageView.image = nil;
+    if ([imageView.animationImages count] > 0 || imageView.isAnimating) {
+        imageView.animationImages = nil;
+        [imageView stopAnimating];
+    }
+    
     NSString *imageName = nil;
     BOOL needAnimation = NO;
     if (self.deviceConnectState == DeviceStateConnect) { // 返回该值,说明无法获取开关状态,开关状态由DeviceOCState判断
@@ -46,7 +53,6 @@
     
     if (imageView) {
         if (needAnimation) { // 需要动画
-            imageView.image = nil;
             if ([imageView.animationImages count] > 0) { // 之前配过
                 [imageView startAnimating];
             } else {
@@ -58,10 +64,6 @@
             }
         } else {// 不需要动画
             imageView.image = [UIImage imageNamed:imageName];
-            if ([imageView.animationImages count] > 0) {
-                [imageView stopAnimating];
-                imageView.animationImages = nil;
-            }
         }
     }
     
