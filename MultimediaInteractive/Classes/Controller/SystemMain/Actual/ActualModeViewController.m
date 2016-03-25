@@ -923,7 +923,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             UIImageView *imageView = (UIImageView *)[deviceView viewWithTag:kTagForImageViewInWFFFollowHandsView];
 
             // 设置当前状态应展示的image
-            NSString *imageName = [NSString stringWithFormat:@"state_%d", status];
+            NSString *imageName = [NSString stringWithFormat:@"state_%d", (int)status];
             
             imageView.image = [UIImage imageNamed:imageName];
             // 根据状态,调整大小
@@ -1612,7 +1612,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 //        NSString *imageName = [model imageName];
 //        cell.deviceImageView.image = [UIImage imageNamed:imageName];
         [model setImageWithDeviceStatusAndRunAnimationOnImageView:cell.deviceImageView];
-        [cell.imageView setHighlightedImage:[UIImage imageNamed:[NSString stringWithFormat:@"state_%d", DeviceViewImageStatusForHighlight]]];
+        [cell.imageView setHighlightedImage:[UIImage imageNamed:[NSString stringWithFormat:@"state_%d", (int)DeviceViewImageStatusForHighlight]]];
         
         cell.tag = indexPath.row;
         
