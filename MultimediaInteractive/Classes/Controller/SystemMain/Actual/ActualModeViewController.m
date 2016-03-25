@@ -1611,7 +1611,11 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         cell.imageView.image = [UIImage imageNamed:@"state_0"];
 //        NSString *imageName = [model imageName];
 //        cell.deviceImageView.image = [UIImage imageNamed:imageName];
+<<<<<<< HEAD
         cell.needAnimation = [model setImageWithDeviceStatusAndRunAnimationOnImageView:cell.deviceImageView];
+=======
+        [model setImageWithDeviceStatusAndRunAnimationOnImageView:cell.deviceImageView];
+>>>>>>> PCI-SIMP/master
         [cell.imageView setHighlightedImage:[UIImage imageNamed:[NSString stringWithFormat:@"state_%d", (int)DeviceViewImageStatusForHighlight]]];
         
         cell.tag = indexPath.row;
