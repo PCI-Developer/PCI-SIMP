@@ -88,31 +88,72 @@
 // 是否带转场动画的隐藏
 - (void)setHidden:(BOOL)hidden animated:(BOOL)animated
 {
-    if (animated) {
-        NSString *subType = hidden ? kCATransitionFromLeft : kCATransitionFromRight;
-        [self addTransitionWithType:kRightViewTransitionType subType:subType duration:0.25 key:@"transition"];
-    }
-    if (!hidden) { // 要显示
-        [self.superview bringSubviewToFront:self];
-    }
-    [super setValue:@(hidden) forKey:@"hidden"];
+    [self setHidden:hidden animated:animated completionHandle:nil];
 }
 
 // 是否带转场动画的隐藏
 - (void)setHidden:(BOOL)hidden animated:(BOOL)animated completionHandle:(void (^)())completionHandle
 {
+    NSTimeInterval timeInterval = 0;
     if (animated) {
         NSString *subType = hidden ? kCATransitionFromLeft : kCATransitionFromRight;
+        timeInterval = 0.25;
         [self addTransitionWithType:kRightViewTransitionType subType:subType duration:0.25 key:@"transition"];
     }
     if (!hidden) { // 要显示
         [self.superview bringSubviewToFront:self];
     }
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        completionHandle();
-    });
     [super setValue:@(hidden) forKey:@"hidden"];
+    
+    if (completionHandle) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            completionHandle();
+        });
+    }
+    
 }
 
+- (void)addSubview:(UIView *)view animated:(BOOL)animated
+{
+    [self addSubview:view animated:animated completionHandle:nil];
+}
+
+- (void)removeFromSuperviewWithAnimated:(BOOL)animated
+{
+    [self removeFromSuperviewWithAnimated:animated completionHandle:nil];
+}
+
+- (void)addSubview:(UIView *)view animated:(BOOL)animated completionHandle:(void (^)())completionHandle
+{
+    if (!view) {
+        return;
+    }
+    NSTimeInterval timeInterval = 0;
+    if (animated) {
+        timeInterval = 0.25;
+        [self addTransitionWithType:kRightViewTransitionType subType:kCATransitionFromRight duration:0.25 key:@"transition"];
+    }
+    [self removeFromSuperview];
+    if (completionHandle) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            completionHandle();
+        });
+    }
+}
+
+- (void)removeFromSuperviewWithAnimated:(BOOL)animated completionHandle:(void (^)())completionHandle
+{
+    NSTimeInterval timeInterval = 0;
+    if (animated) {
+        timeInterval = 0.25;
+        [self addTransitionWithType:kRightViewTransitionType subType:kCATransitionFromLeft duration:0.25 key:@"transition"];
+    }
+    [self removeFromSuperview];
+    if (completionHandle) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            completionHandle();
+        });
+    }
+}
 @end

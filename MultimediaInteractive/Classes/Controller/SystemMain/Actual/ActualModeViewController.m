@@ -194,6 +194,8 @@ typedef enum
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveDeviceUpdateNotification:) name:kNotificationUpdateDevice object:nil];
     
+    [self.commonDeviceBackgroundView addObserver:self forKeyPath:@"hidden" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
+    
     // 第一次进来的时候,为nil
     if (_lastViewpointType == ViewPointTypeNone) {
         self.currentViewpointType = ViewpointTypeVertical;
@@ -208,6 +210,8 @@ typedef enum
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationUpdateDevice object:nil];
     
+    [self.commonDeviceBackgroundView removeObserver:self forKeyPath:@"hidden"];
+    
     [self updateViewHideOrShowByType:TopViewTypeNone];
 
     self.selectedDevice = nil;
@@ -217,6 +221,26 @@ typedef enum
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - 解决公共设备列表cell偶尔不显示动画图片的bug（猜测是切换vc的时候，导致当前vc动画停止。再切换回来，没有动画图片，导致不显示。。。。。。因此在显示时，手动开启应该播放动画的cell）
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"hidden"] && [object isEqual:self.commonDeviceBackgroundView]) {
+        if (![change[@"new"] boolValue]) { // 显示的时候
+            [self reStartAnimationForCommonDeviceCollectionViewCell];
+        }
+    }
+}
+
+- (void)reStartAnimationForCommonDeviceCollectionViewCell
+{
+    for (DeviceCollectionViewCell *cell in self.commonDeviceCollectionView.visibleCells) {
+        if (cell.needAnimation && !cell.deviceImageView.isAnimating) {
+            [cell.deviceImageView startAnimating];
+        }
+    }
+}
+
 
 // BEGIN 旋转前也会调用这句
 // 视图切换时,对子视图的frame进行了设置. 因此子视图的frame如果不再手动改变的话,是恒定值,里面的子视图也就不会按autolaytou来布局
@@ -1609,11 +1633,6 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         DeviceCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"commonDeviceCell" forIndexPath:indexPath];
         cell.infoLabel.text = model.UEQP_Name;
         cell.imageView.image = [UIImage imageNamed:@"state_0"];
-//        NSString *imageName = [model imageName];
-//        cell.deviceImageView.image = [UIImage imageNamed:imageName];
-        cell.needAnimation = [model setImageWithDeviceStatusAndRunAnimationOnImageView:cell.deviceImageView];
-        [model setImageWithDeviceStatusAndRunAnimationOnImageView:cell.deviceImageView];
-
         cell.needAnimation = [model setImageWithDeviceStatusAndRunAnimationOnImageView:cell.deviceImageView];
         [model setImageWithDeviceStatusAndRunAnimationOnImageView:cell.deviceImageView];
 

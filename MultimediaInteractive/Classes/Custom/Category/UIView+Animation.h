@@ -59,4 +59,12 @@
 
 // 是否带转场动画的隐藏
 - (void)setHidden:(BOOL)hidden animated:(BOOL)animated completionHandle:(void (^)())completionHandle;
+
+- (void)addSubview:(UIView *)view animated:(BOOL)animated;
+
+- (void)addSubview:(UIView *)view animated:(BOOL)animated completionHandle:(void (^)())completionHandle;
+
+- (void)removeFromSuperviewWithAnimated:(BOOL)animated completionHandle:(void (^)())completionHandle;
+
+- (void)removeFromSuperviewWithAnimated:(BOOL)animated;
 @end

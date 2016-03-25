@@ -47,18 +47,18 @@
     if (imageView) {
         if (needAnimation) { // 需要动画
             imageView.image = nil;
-            if ([imageView.animationImages count] > 0 && !imageView.isAnimating) { // 之前配过
+            if ([imageView.animationImages count] > 0) { // 之前配过
                 [imageView startAnimating];
             } else {
                 imageView.animationDuration = 0.5;
                 imageView.animationRepeatCount = HUGE_VAL;
-                
+            
                 imageView.animationImages = @[[UIImage imageNamed:[NSString stringWithFormat:@"%@_open", self.imageName]], [UIImage imageNamed:[NSString stringWithFormat:@"%@_open1", self.imageName]]];
                 [imageView startAnimating];
             }
         } else {// 不需要动画
             imageView.image = [UIImage imageNamed:imageName];
-            if ([imageView.animationImages count] > 0 && imageView.isAnimating) {
+            if ([imageView.animationImages count] > 0) {
                 [imageView stopAnimating];
                 imageView.animationImages = nil;
             }
