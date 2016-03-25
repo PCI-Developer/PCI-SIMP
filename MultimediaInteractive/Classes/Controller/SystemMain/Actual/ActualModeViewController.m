@@ -262,8 +262,7 @@ typedef enum
                 // 更新界面的图标和值
                 [self updateUIOfDeviceInfoView];
             }
-            
-            cell.deviceImageView.image = [UIImage imageNamed:[device imageNameByStatusRunAnimationOnImageView:cell.deviceImageView]];
+            [device setImageWithDeviceStatusAndRunAnimationOnImageView:cell.deviceImageView];
         });
     } else {
         
@@ -288,8 +287,8 @@ typedef enum
                 }
                 
                 UIImageView *deviceImage = [deviceView viewWithTag:kTagForDeviceImageInWFFFollowHandsView];
-                NSString *imageName = [device imageNameByStatusRunAnimationOnImageView:deviceImage];
-                deviceImage.image = [UIImage imageNamed:imageName];
+                [device setImageWithDeviceStatusAndRunAnimationOnImageView:deviceImage];
+
             });
         }
     }
@@ -808,7 +807,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             _deviceInfoView.selectedChannel = [self.channelArray indexOfObject:self.selectedDevice.channel];
         }
         
-        self.deviceInfoView.deviceInfoImageView.image = [UIImage imageNamed:[self.selectedDevice imageNameByStatusRunAnimationOnImageView:self.deviceInfoView.deviceInfoImageView]];
+        [self.selectedDevice setImageWithDeviceStatusAndRunAnimationOnImageView:self.deviceInfoView.deviceInfoImageView];
         self.deviceInfoView.deviceInfoNameLabel.text = self.selectedDevice.UEQP_Name;
         if (self.selectedDevice.deviceOCState == DeviceClose) {
             [self.deviceInfoView.deviceInfoOpenButton setSelected:NO];
@@ -1510,8 +1509,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         
         // 设备图标
         UIImageView *deviceImage = [UIImageView new];
-        deviceImage.image = [UIImage imageNamed:[model.device imageNameByStatusRunAnimationOnImageView:deviceImage]];
-//        UIImageView *deviceImage = [[UIImageView alloc] initWithImage:]];
+        [model.device setImageWithDeviceStatusAndRunAnimationOnImageView:deviceImage];
         deviceImage.frame = deviceView.bounds;
         deviceImage.tag = kTagForDeviceImageInWFFFollowHandsView;
         [deviceView addSubview:deviceImage];
@@ -1588,7 +1586,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         cell.backgroundColor = [UIColor clearColor];
         cell.infoLabel.text = model.UEQP_Name;
         cell.imageView.image = [UIImage imageNamed:@"state_0"];
-        cell.deviceImageView.image = [UIImage imageNamed:[model imageNameByStatusRunAnimationOnImageView:cell.deviceImageView]];
+        [model setImageWithDeviceStatusAndRunAnimationOnImageView:cell.deviceImageView];
         
         cell.tag = indexPath.row;
 
@@ -1613,7 +1611,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         cell.imageView.image = [UIImage imageNamed:@"state_0"];
 //        NSString *imageName = [model imageName];
 //        cell.deviceImageView.image = [UIImage imageNamed:imageName];
-        cell.deviceImageView.image = [UIImage imageNamed:[model imageNameByStatusRunAnimationOnImageView:cell.deviceImageView]];
+        [model setImageWithDeviceStatusAndRunAnimationOnImageView:cell.deviceImageView];
         [cell.imageView setHighlightedImage:[UIImage imageNamed:[NSString stringWithFormat:@"state_%d", DeviceViewImageStatusForHighlight]]];
         
         cell.tag = indexPath.row;

@@ -231,7 +231,7 @@
     
     // 设备图标 (一个个移动,需要加载图片动画)
     UIImageView *deviceImage = [[UIImageView alloc] initWithFrame:followHandsView.bounds];
-    deviceImage.image = [UIImage imageNamed:[device imageNameByStatusRunAnimationOnImageView:deviceImage]];
+    [device setImageWithDeviceStatusAndRunAnimationOnImageView:deviceImage];
     [followHandsView addSubview:deviceImage];
     
     followHandsView.tag = device.AutoID;
@@ -251,9 +251,8 @@
     [followHandsView addSubview:imageView];
     
     // 设备图标
-    
-    UIImageView *deviceImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[device imageNameByStatusRunAnimationOnImageView:nil]]];
-    deviceImage.frame = followHandsView.bounds;
+    UIImageView *deviceImage = [[UIImageView alloc] initWithFrame:followHandsView.bounds];
+    [device setImageWithDeviceStatusAndRunAnimationOnImageView:deviceImage];
     [followHandsView addSubview:deviceImage];
     
     followHandsView.tag = device.AutoID;
@@ -292,8 +291,8 @@
     
     // 设备图标
     
-    UIImageView *deviceImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[device imageNameByStatusRunAnimationOnImageView:nil]]];
-    deviceImage.frame = followHandsView.bounds;
+    UIImageView *deviceImage = [[UIImageView alloc] initWithFrame:followHandsView.bounds];
+    [device setImageWithDeviceStatusAndRunAnimationOnImageView:deviceImage];
     [followHandsView addSubview:deviceImage];
     
     followHandsView.tag = device.AutoID;

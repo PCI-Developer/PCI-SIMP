@@ -20,7 +20,7 @@
     return [NSString stringWithFormat:@"设备类型:%@ 名称:%@", kDeviceTypeInfo(self.UEQP_Type)[@"name"], self.UEQP_Name];
 }
 
-- (NSString *)imageNameByStatusRunAnimationOnImageView:(UIImageView *)imageView
+- (NSString *)setImageWithDeviceStatusAndRunAnimationOnImageView:(UIImageView *)imageView
 {
     NSString *imageName = nil;
     BOOL needAnimation = NO;
@@ -46,6 +46,7 @@
     
     if (imageView) {
         if (needAnimation) { // 需要动画
+            imageView.image = nil;
             if ([imageView.animationImages count] > 0 && !imageView.isAnimating) { // 之前配过
                 [imageView startAnimating];
             } else {
@@ -56,6 +57,7 @@
                 [imageView startAnimating];
             }
         } else {// 不需要动画
+            imageView.image = [UIImage imageNamed:imageName];
             if ([imageView.animationImages count] > 0 && imageView.isAnimating) {
                 [imageView stopAnimating];
                 imageView.animationImages = nil;

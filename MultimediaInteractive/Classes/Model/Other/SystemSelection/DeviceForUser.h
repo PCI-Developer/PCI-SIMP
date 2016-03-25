@@ -61,14 +61,14 @@
 @property (nonatomic, copy) NSString *followUEQP_ID;
 
 /**
- *  获取当前开关状态及连接状态所对应的图片
+ *  设置当前开关状态及连接状态所对应的图片
  *  连接打开时,执行或停止动画
  *
- *  @param imageView 动画组所属的imageView
+ *  @param imageView 要设置的imageView
  *
  *  @return 获取图片名字
  */
-- (NSString *)imageNameByStatusRunAnimationOnImageView:(UIImageView *)imageView;
+- (NSString *)setImageWithDeviceStatusAndRunAnimationOnImageView:(UIImageView *)imageView;
 
 @end
 
