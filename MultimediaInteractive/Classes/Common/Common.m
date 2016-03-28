@@ -240,7 +240,7 @@ kSingleTon_M(Common)
 
 - (NSArray *)musicFiles
 {
-    return [self getDeviceWithType:@"音频文件"];
+    return [self getDeviceWithType:kDeviceTypeMusicFile];
 }
 
 #pragma mark - 实景图
@@ -396,6 +396,12 @@ kSingleTon_M(Common)
     return _logDict;
 }
 
+#pragma mark - 从服务器获取基础数据（区域、设备）
+- (void)loadBaseDataFromServerWithCompletionHandle:(void (^)(BOOL hasData, NSString *errorInfo))completionHandle
+{
+    
+}
+
 #pragma mark - 第一次加载基础数据(所有设备等等)
 - (void)initalDataWithCompletionHandle:(void (^)(BOOL hasData, NSString *errorInfo))completionHandle
 {
@@ -500,9 +506,9 @@ kSingleTon_M(Common)
             }
         
         });
-        dispatch_group_t group = dispatch_group_create();
+//        dispatch_group_t group = dispatch_group_create();
         dispatch_queue_t queue = dispatch_queue_create(0, DISPATCH_QUEUE_CONCURRENT);
-        dispatch_group_async(group, queue, ^{
+        dispatch_async(queue, ^{
             [[SocketManager shareSocketManager] getDataListWithType:DataListTypeArea resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
                 NSArray *areaArray = [info componentsSeparatedByString:@"&"];
                 if (isSuccess) {
@@ -521,13 +527,19 @@ kSingleTon_M(Common)
                     kLog(@"%@", weakSelf.allAreasArray);
                     if ([weakSelf.allAreasArray count] == 0) {
                         errorDes = @"服务器没有配置区域列表!";
+                    } else {
+                        if ([weakSelf.allDevicesDict count] > 0) {
+                            if (completionHandle) {
+                                completionHandle(errorDes == nil, errorDes);
+                            }
+                        }
                     }
                 } else {
                     errorDes = @"获取区域列表失败!请重试!";
                 }
             }];
         });
-        dispatch_group_async(group, queue, ^{
+        dispatch_async(queue, ^{
             [[SocketManager shareSocketManager] getDataListWithType:DataListTypeDevice resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
                 NSArray *areaArray = [info componentsSeparatedByString:@"&"];
                 if (isSuccess) {
@@ -569,10 +581,16 @@ kSingleTon_M(Common)
                             }
                         }
                     }
-                    kLog(@"%@", weakSelf.allAreasArray);
+                    kLog(@"%@", weakSelf.allDevicesDict);
 
                     if ([weakSelf.allDevicesDict count] == 0) {
                         errorDes = @"服务器没有配置设备列表!";
+                    } else {
+                        if ([weakSelf.allAreasArray count] > 0) {
+                            if (completionHandle) {
+                                completionHandle(errorDes == nil, errorDes);
+                            }
+                        }
                     }
                 } else {
                     errorDes = @"获取设备列表失败!请重试!";
@@ -580,13 +598,13 @@ kSingleTon_M(Common)
             }];
 
         });
-        // 数据都加载结束，执行
-        dispatch_group_notify(group, queue, ^{
-            if (completionHandle) {
-                completionHandle(errorDes == nil, errorDes);
-            }
-            [WFFProgressHud dismiss];
-        });
+//        // 数据都加载结束，执行
+//        dispatch_group_notify(group, queue, ^{
+//            if (completionHandle) {
+//                completionHandle(errorDes == nil, errorDes);
+//            }
+//            [WFFProgressHud dismiss];
+//        });
         
     }
 }

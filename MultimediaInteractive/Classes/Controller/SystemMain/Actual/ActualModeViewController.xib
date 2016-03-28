@@ -21,6 +21,7 @@
                 <outlet property="musicFileButton" destination="DfU-1E-GMw" id="JR3-UL-y4K"/>
                 <outlet property="okButtonForAddScreen" destination="3fd-kL-Z53" id="Ifo-9Y-OuV"/>
                 <outlet property="operatioinView" destination="Ogg-zB-ziF" id="mZg-r6-767"/>
+                <outlet property="placeHolderLabelForOtherDeviceView" destination="tnb-Il-MZB" id="RIn-Sa-SV4"/>
                 <outlet property="processBackgroundView" destination="Fjn-st-gNz" id="E68-i4-fEK"/>
                 <outlet property="saveButton" destination="KvA-z9-nJM" id="SqX-bi-bKn"/>
                 <outlet property="screenConfigShadeView" destination="JW8-he-GWV" id="FaQ-Ct-SQG"/>
@@ -344,8 +345,8 @@
                         </mask>
                     </variation>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Toc-St-8ge" userLabel="设备信息控制界面">
-                    <rect key="frame" x="350" y="25" width="250" height="550"/>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Toc-St-8ge" userLabel="设备信息控制界面">
+                    <rect key="frame" x="340" y="10" width="250" height="550"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="550" id="9Ch-AQ-gHM"/>
@@ -392,7 +393,7 @@
                                 <userDefinedRuntimeAttribute type="image" keyPath="backgroundColorFromUIImage" value="bottomBorderBg"/>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" tag="777" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无公共设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tnb-Il-MZB" userLabel="placeholder">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无公共设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tnb-Il-MZB" userLabel="placeholder">
                             <rect key="frame" x="0.0" y="10" width="600" height="130"/>
                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

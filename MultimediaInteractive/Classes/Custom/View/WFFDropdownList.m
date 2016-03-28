@@ -208,7 +208,7 @@
 - (void)setSelectedIndex:(NSInteger)selectedIndex
 {
     _selectedIndex = selectedIndex;
-    if (_dataArray) {
+    if ([_dataArray count] > 0) {
         if (_selectedIndex > [_dataArray count] - 1) {
             _selectedIndex = [_dataArray count] - 1;
         }

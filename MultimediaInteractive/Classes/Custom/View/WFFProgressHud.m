@@ -55,18 +55,6 @@ static int autoDismissDelay;
 }
 
 
-- (void)willMoveToWindow:(UIWindow *)newWindow
-{
-    if (newWindow) {
-        NSLog(@"new %@ key %@", newWindow, [UIApplication sharedApplication].keyWindow);
-    } else {
-        NSLog(@"hud 消失");
-    }
-}
-
-
-
-
 
 
 

@@ -118,6 +118,19 @@ return share; \
 #endif
 
 
+#define kDeviceTypeMusicFile @"声音文件"
+#define kDeviceTypeCamera @"摄像头"
+#define kDeviceTypeSoundBox @"音箱"
+#define kDeviceTypeMic @"麦克"
+#define kDeviceTypeLed @"大屏幕"
+#define kDeviceTypeComputer @"电脑"
+#define kDeviceTypeNoteBook @"笔记本"
+#define kDeviceTypeTV @"电视"
+#define kDeviceTypeDVD @"DVD"
+#define kDeviceTypeVideoMeetting @"视频会议"
+#define kDeviceTypeLights @"灯光"
+
+
 
 #define kBottomMarginOfOCButton 40
 

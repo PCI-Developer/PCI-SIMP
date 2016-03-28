@@ -136,8 +136,8 @@
         "minValue" : -50,
         "maxValue" : 5
     },
-    "音频文件":{
-        "name" : "音频文件",
+    "声音文件":{
+        "name" : "声音文件",
         "inOrOut":"in",
         "soundConnectedType":[
                               "音箱",

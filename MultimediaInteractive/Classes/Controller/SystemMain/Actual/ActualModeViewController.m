@@ -31,7 +31,6 @@
 
 #import "UIView+Addition.h"
 
-#define kTagOfPlaceholderLabelForOtherDeviceView 777 //　xib中设置
 
 /**
  枚举值.当前置顶的view类型
@@ -158,6 +157,7 @@ typedef enum
 @property (weak, nonatomic) IBOutlet UIButton *musicFileButton;
 @property (weak, nonatomic) IBOutlet UIButton *commonDeviceButton;
 @property (nonatomic, assign) OtherViewType selectedOtherViewType;
+@property (weak, nonatomic) IBOutlet UILabel *placeHolderLabelForOtherDeviceView;
 - (IBAction)otherViewButtonAction:(UIButton *)sender;
 
 @end
@@ -772,15 +772,15 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     /**
      *   根据支持的命令种类 或 类型决定加载的nib文件
      */
-    if ([deviceType isEqualToString:@"音频文件"]) {
+    if ([deviceType isEqualToString:kDeviceTypeMusicFile]) {
         deviceInfoNibName = @"DeviceInfoMusicFileView";
-    } else if ([deviceType isEqualToString:@"麦克"]) {
+    } else if ([deviceType isEqualToString:kDeviceTypeMic]) {
         deviceInfoNibName = @"DeviceInfoMicView";
-    } else if ([deviceType isEqualToString:@"摄像头"]) { // ORIENTATION
+    } else if ([deviceType isEqualToString:kDeviceTypeCamera]) { // ORIENTATION
         deviceInfoNibName = @"DeviceInfoCameraView";
-    } else if ([deviceType isEqualToString:@"电视"]) { // OC SLIDER CHANNEL
+    } else if ([deviceType isEqualToString:kDeviceTypeTV]) { // OC SLIDER CHANNEL
         deviceInfoNibName = @"DeviceInfoOCVolumeSliderChannelView";
-    } else if ([deviceType isEqualToString:@"灯光"]) {
+    } else if ([deviceType isEqualToString:kDeviceTypeLights]) {
         deviceInfoNibName = @"DeviceInfoLightView";
     } else if ([cmdArray containsObject:@"oc"] && [cmdArray containsObject:@"slider"]) { // OC SLIDER
         deviceInfoNibName = @"DeviceInfoOCVolumeSliderView";
@@ -1138,7 +1138,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             
         };
         
-        if (commonDevice && [kMusicFile containsObject:commonDevice]) { // 如果是音频文件
+        if (commonDevice && [commonDevice.UEQP_Type isEqualToString:kDeviceTypeMusicFile]) { // 如果是音频文件
             kConnMusicFile(device, outDevice, resultBlock);
         } else {
             kDeviceConn(device, outDevice, resultBlock);
@@ -2114,6 +2114,21 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     // 操作界面隐藏(视角切换/更改布局/更改底图)
     [self updateViewHideOrShowByType:TopViewTypeForCommonDeviceView];
     
+    
+    
+    if ([self checkDataOfOtherDeviceView]) {
+        self.placeHolderLabelForOtherDeviceView.hidden = YES;
+        self.commonDeviceCollectionView.hidden = NO;
+    } else {
+        self.placeHolderLabelForOtherDeviceView.hidden = NO;
+        [self updatePlaceHolderLabelForOtherDeviceView];
+        self.commonDeviceCollectionView.hidden = YES;
+    }
+}
+
+// 检查otherDeviceView的数据源是否有数据
+- (BOOL)checkDataOfOtherDeviceView
+{
     BOOL flag; // 根据数据有无,隐藏或显示 占位Label
     if (self.selectedOtherViewType == OtherViewTypeCommonDevice) {
         if ([kCommonDevices count] > 0) {
@@ -2130,14 +2145,13 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     } else {
         flag = NO;
     }
-    
-    if (flag) {
-        [self.commonDeviceBackgroundView viewWithTag:kTagOfPlaceholderLabelForOtherDeviceView].hidden = YES;
-        self.commonDeviceCollectionView.hidden = NO;
-    } else {
-        [self.commonDeviceBackgroundView viewWithTag:kTagOfPlaceholderLabelForOtherDeviceView].hidden = NO;
-        self.commonDeviceCollectionView.hidden = YES;
-    }
+    return flag;
+}
+
+// 根据当前选择分类，更新占位label的文字
+- (void)updatePlaceHolderLabelForOtherDeviceView
+{
+    self.placeHolderLabelForOtherDeviceView.text = self.selectedOtherViewType == OtherViewTypeCommonDevice ? @"暂无公共设备" : @"暂无音频文件";
 }
 
 - (BOOL)checkPermissionsByDevice:(DeviceForUser *)device
@@ -2161,6 +2175,12 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         self.selectedDevice = nil;
         
         self.selectedOtherViewType = (OtherViewType)sender.tag;
+        
+        // 判断当前分类是否有数据
+        if (![self checkDataOfOtherDeviceView]) {
+            [self updatePlaceHolderLabelForOtherDeviceView];
+        }
+        
         
         [self.commonDeviceCollectionView reloadData];
     }

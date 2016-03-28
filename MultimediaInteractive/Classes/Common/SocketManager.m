@@ -226,10 +226,11 @@ kSingleTon_M(SocketManager)
     // 设备控制反馈. 获取控制编号,取出其中的block执行
     if ([protocolString containsString:kProtocolCMDFromServerForRespondControlDevice]) {
         NSInteger cmdNum = [[self getItemWithProtocolString:protocolString index:2] integerValue];
+        BOOL isOK = [[self getItemWithProtocolString:protocolString index:3] isEqualToString:kProtocolCMDFromServerForRespondControlDevice];
         RequestServerResponseBlock block = self.operationBlockDict[@(cmdNum)];
         if (block) {
             NSString *info = (NSString *)[self getItemWithProtocolString:protocolString index:4];
-            block(YES, cmdNum, info);
+            block(isOK, cmdNum, info);
             // 执行完移除
             [self.operationBlockDict removeObjectForKey:@(cmdNum)];
         }
@@ -382,7 +383,7 @@ kSingleTon_M(SocketManager)
 {
     // 生成协议串,并转成要发送的data数据
     NSString *protocolString = [self getProtocolStringWithCMD:cmdString info:cmdInfo];
-    
+    NSLog(@"发送协议串 ： %@", protocolString);
     NSData *data = [protocolString dataUsingEncoding:NSUTF8StringEncoding];
     
     if (!self.state) {//判断当前是否连接 SocketStateConnected = 1
