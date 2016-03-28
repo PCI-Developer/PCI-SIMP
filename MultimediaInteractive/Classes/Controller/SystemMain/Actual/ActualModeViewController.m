@@ -164,6 +164,8 @@ typedef enum
 
 @implementation ActualModeViewController
 
+
+#pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 存放正在移动的设备view, key:设备ID
@@ -194,8 +196,6 @@ typedef enum
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveDeviceUpdateNotification:) name:kNotificationUpdateDevice object:nil];
     
-    [self.commonDeviceBackgroundView addObserver:self forKeyPath:@"hidden" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
-    
     // 第一次进来的时候,为nil
     if (_lastViewpointType == ViewPointTypeNone) {
         self.currentViewpointType = ViewpointTypeVertical;
@@ -204,17 +204,16 @@ typedef enum
     
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidDisappear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationUpdateDevice object:nil];
-    
-    [self.commonDeviceBackgroundView removeObserver:self forKeyPath:@"hidden"];
     
     [self updateViewHideOrShowByType:TopViewTypeNone];
 
     self.selectedDevice = nil;
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -222,24 +221,8 @@ typedef enum
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - 解决公共设备列表cell偶尔不显示动画图片的bug（猜测是切换vc的时候，导致当前vc动画停止。再切换回来，没有动画图片，导致不显示。。。。。。因此在显示时，手动开启应该播放动画的cell）
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"hidden"] && [object isEqual:self.commonDeviceBackgroundView]) {
-        if (![change[@"new"] boolValue]) { // 显示的时候
-            [self reStartAnimationForCommonDeviceCollectionViewCell];
-        }
-    }
-}
 
-- (void)reStartAnimationForCommonDeviceCollectionViewCell
-{
-    for (DeviceCollectionViewCell *cell in self.commonDeviceCollectionView.visibleCells) {
-        if (cell.needAnimation && !cell.deviceImageView.isAnimating) {
-            [cell.deviceImageView startAnimating];
-        }
-    }
-}
+
 
 
 // BEGIN 旋转前也会调用这句
@@ -257,6 +240,27 @@ typedef enum
 {
 
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+#pragma mark - 解决公共设备列表cell偶尔不显示动画图片的bug（猜测是切换vc的时候，导致当前vc动画停止。再切换回来，没有动画图片，导致不显示。。。。。。因此在显示时，手动开启应该播放动画的cell）
+- (void)setCommonDeviceBackgroundViewHidden:(BOOL)isHidden
+{
+    if (!isHidden) {
+        __weak typeof(self) weakSelf = self;
+        [self.commonDeviceBackgroundView setHidden:isHidden animated:YES completionHandle:^{
+            [weakSelf reStartAnimationForCommonDeviceCollectionViewCell];
+        }];
+    }
+}
+
+- (void)reStartAnimationForCommonDeviceCollectionViewCell
+{
+    for (DeviceCollectionViewCell *cell in self.commonDeviceCollectionView.visibleCells) {
+        if (cell.needAnimation && !cell.deviceImageView.isAnimating) {
+            [cell.deviceImageView startAnimating];
+        }
+    }
 }
 
 #pragma mark - 从后台返回
@@ -722,12 +726,14 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             if (self.showQuickChooseButton.hidden == NO) {
                 [self.showQuickChooseButton setHidden:YES animated:YES completionHandle:^{
                     if (weakSelf.commonDeviceBackgroundView.hidden) {
-                        [weakSelf.commonDeviceBackgroundView setHidden:NO animated:YES];
+                        // 显示的时候，重启cell动画
+                        [weakSelf setCommonDeviceBackgroundViewHidden:NO];
                     }
                 }];
             } else {
                 if (self.commonDeviceBackgroundView.hidden) {
-                    [self.commonDeviceBackgroundView setHidden:NO animated:YES];
+                    // 显示的时候，重启cell动画
+                    [weakSelf setCommonDeviceBackgroundViewHidden:NO];
                     // 出现的时候默认为公共设备
                     self.selectedOtherViewType = OtherViewTypeCommonDevice;
                 }
@@ -1329,7 +1335,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         default: // UIGestureRecognizerStateEnded UIGestureRecognizerStateFailed UIGestureRecognizerStateCancelled
             [self.currentHandsView endMoveByGR:sender];
             // 显示公共设备列表
-            [self.commonDeviceBackgroundView setHidden:NO animated:NO];
+            // 显示的时候，重启cell动画
+            [self setCommonDeviceBackgroundViewHidden:NO];
             // 代理中,动画结束会从父视图中移除
 //            [self.currentHandsView removeFromSuperview];
             self.currentHandsView = nil;
