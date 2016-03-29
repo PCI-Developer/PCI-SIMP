@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -26,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20t-9m-MHJ">
-                    <rect key="frame" x="382" y="407" width="260" height="161"/>
+                    <rect key="frame" x="382" y="403.5" width="260" height="161"/>
                     <subviews>
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inputBgGray" highlightedImage="inputBgBlue" translatesAutoresizingMaskIntoConstraints="NO" id="YlP-fX-lkP">
                             <rect key="frame" x="0.0" y="0.0" width="260" height="30"/>
@@ -186,6 +186,7 @@
                         <constraint firstItem="3xs-kN-cBf" firstAttribute="top" secondItem="7wB-4W-6S4" secondAttribute="bottom" constant="60" id="VUY-yK-IhH"/>
                         <constraint firstItem="YlP-fX-lkP" firstAttribute="leading" secondItem="M4n-56-8LQ" secondAttribute="trailing" constant="-23" id="W7s-y5-9mJ"/>
                         <constraint firstItem="pSf-6g-yZa" firstAttribute="height" secondItem="ezz-Bu-G6O" secondAttribute="height" id="WAU-Pm-10y"/>
+                        <constraint firstAttribute="height" constant="161" id="X7E-aE-EMV"/>
                         <constraint firstItem="YlP-fX-lkP" firstAttribute="leading" secondItem="ezz-Bu-G6O" secondAttribute="trailing" constant="7" id="XUA-oO-xY6"/>
                         <constraint firstItem="3xs-kN-cBf" firstAttribute="top" secondItem="NWU-Nh-pUO" secondAttribute="bottom" constant="15" id="ZLB-eO-Uzx"/>
                         <constraint firstItem="en9-12-dBv" firstAttribute="leading" secondItem="M4n-56-8LQ" secondAttribute="leading" id="cPB-o1-dXj"/>
@@ -205,6 +206,7 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="GaJ-5C-BYZ"/>
+                            <exclude reference="X7E-aE-EMV"/>
                             <exclude reference="CQz-1c-poh"/>
                             <exclude reference="IDd-6A-voZ"/>
                             <exclude reference="XUA-oO-xY6"/>
@@ -214,8 +216,8 @@
                         </mask>
                     </variation>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="eXV-cL-Z6j">
-                    <rect key="frame" x="334" y="208" width="358" height="119"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="eXV-cL-Z6j">
+                    <rect key="frame" x="333" y="204.5" width="358" height="119"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="119" id="3uR-b6-VFt"/>
                         <constraint firstAttribute="width" constant="358" id="Yu6-ca-EQL"/>
@@ -230,6 +232,7 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="20t-9m-MHJ" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="100" id="2BS-XW-Ofa"/>
                 <constraint firstItem="eXV-cL-Z6j" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="8a4-eW-1GC"/>
                 <constraint firstItem="20t-9m-MHJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="87" id="AgQ-dl-wr1"/>
                 <constraint firstItem="20t-9m-MHJ" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="HGB-hF-vYM"/>
@@ -248,6 +251,7 @@
                     <exclude reference="AgQ-dl-wr1"/>
                     <exclude reference="HGB-hF-vYM"/>
                     <exclude reference="LCf-gi-gJw"/>
+                    <exclude reference="Zj9-m5-dDo"/>
                 </mask>
             </variation>
         </view>
@@ -266,7 +270,7 @@
         <image name="checkBox" width="16" height="16"/>
         <image name="checkBoxSelected" width="16" height="16"/>
         <image name="demo" width="100" height="36"/>
-        <image name="icon" width="337" height="119"/>
+        <image name="icon" width="358" height="119"/>
         <image name="icon_account" width="16" height="16"/>
         <image name="icon_secret" width="16" height="16"/>
         <image name="inputBgBlue" width="300" height="40"/>

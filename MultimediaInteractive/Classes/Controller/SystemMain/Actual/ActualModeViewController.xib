@@ -241,27 +241,25 @@
                     </variation>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ogg-zB-ziF" userLabel="操作界面(布局/实景/视角)">
-                    <rect key="frame" x="287" y="0.0" width="313" height="69"/>
+                    <rect key="frame" x="287" y="0.0" width="313" height="77"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n7U-sj-6wu" userLabel="otherButtonView">
-                            <rect key="frame" x="0.0" y="5" width="313" height="64"/>
+                            <rect key="frame" x="0.0" y="5" width="313" height="72"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="crO-m3-XKM" userLabel="流程">
-                                    <rect key="frame" x="236" y="0.0" width="72" height="64"/>
+                                    <rect key="frame" x="236" y="0.0" width="72" height="72"/>
                                     <state key="normal" backgroundImage="process"/>
-                                    <state key="highlighted" backgroundImage="processHighlight"/>
                                     <connections>
                                         <action selector="showProcessViewButtonAction:" destination="-1" eventType="touchUpInside" id="NQm-EU-kqS"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ByJ-qc-00h" userLabel="更换地图">
-                                    <rect key="frame" x="159" y="0.0" width="72" height="64"/>
+                                    <rect key="frame" x="159" y="0.0" width="72" height="72"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="72" id="D3V-yc-706"/>
                                         <constraint firstAttribute="width" secondItem="ByJ-qc-00h" secondAttribute="height" multiplier="1:1" id="ZGD-u1-ytj"/>
                                     </constraints>
                                     <state key="normal" backgroundImage="changeActual"/>
-                                    <state key="highlighted" backgroundImage="changeActualHighlight.png"/>
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="ZGD-u1-ytj"/>
@@ -272,18 +270,16 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDj-Iy-DE3" userLabel="场景设置">
-                                    <rect key="frame" x="82" y="0.0" width="72" height="64"/>
+                                    <rect key="frame" x="82" y="0.0" width="72" height="72"/>
                                     <state key="normal" backgroundImage="screenConfig"/>
-                                    <state key="highlighted" backgroundImage="screenConfigHighlight"/>
                                     <connections>
                                         <action selector="changeCurrenScreenButtonAction:" destination="-1" eventType="touchUpInside" id="K64-of-xcQ"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w7n-cw-BHZ" userLabel="添加设备">
-                                    <rect key="frame" x="5" y="0.0" width="72" height="64"/>
+                                    <rect key="frame" x="5" y="0.0" width="72" height="72"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <state key="normal" backgroundImage="addDevice"/>
-                                    <state key="highlighted" backgroundImage="addDeviceHighlight.png"/>
                                     <connections>
                                         <action selector="addDeviceButtonAction:" destination="-1" eventType="touchUpInside" id="OF9-V3-Ca0"/>
                                     </connections>
@@ -303,7 +299,7 @@
                                 <constraint firstItem="ByJ-qc-00h" firstAttribute="leading" secondItem="XDj-Iy-DE3" secondAttribute="trailing" constant="5" id="RRi-ml-mDI"/>
                                 <constraint firstAttribute="width" constant="500" id="TYi-YL-8JM"/>
                                 <constraint firstAttribute="trailing" secondItem="crO-m3-XKM" secondAttribute="trailing" constant="5" id="UQb-9O-xcu"/>
-                                <constraint firstAttribute="height" constant="64" id="d0l-BF-pqo"/>
+                                <constraint firstAttribute="height" constant="72" id="d0l-BF-pqo"/>
                                 <constraint firstItem="XDj-Iy-DE3" firstAttribute="centerY" secondItem="ByJ-qc-00h" secondAttribute="centerY" id="goL-2T-dRu"/>
                                 <constraint firstAttribute="bottom" secondItem="ByJ-qc-00h" secondAttribute="bottom" id="i1K-Vg-z8H"/>
                                 <constraint firstItem="XDj-Iy-DE3" firstAttribute="width" secondItem="ByJ-qc-00h" secondAttribute="width" id="mIk-JV-cEP"/>
@@ -346,7 +342,7 @@
                     </variation>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Toc-St-8ge" userLabel="设备信息控制界面">
-                    <rect key="frame" x="340" y="10" width="250" height="550"/>
+                    <rect key="frame" x="340" y="-100" width="250" height="550"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="550" id="9Ch-AQ-gHM"/>
@@ -400,7 +396,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BUN-TZ-ZEX">
-                            <rect key="frame" x="0.0" y="10" width="476" height="130"/>
+                            <rect key="frame" x="0.0" y="10" width="470" height="130"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="50" minimumInteritemSpacing="10" id="bM0-PW-SmP">
                                 <size key="itemSize" width="100" height="120"/>
@@ -414,26 +410,28 @@
                             </connections>
                         </collectionView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KxF-Sq-pUt" userLabel="categoryView">
-                            <rect key="frame" x="476" y="10" width="124" height="130"/>
+                            <rect key="frame" x="470" y="10" width="130" height="130"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIj-ZG-X9w">
-                                    <rect key="frame" x="32" y="29" width="60" height="30"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIj-ZG-X9w">
+                                    <rect key="frame" x="0.0" y="0.0" width="130" height="65"/>
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                    <state key="normal" title="公共设备">
+                                    <state key="normal" backgroundImage="commonDeviceTypeButton">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <state key="selected" backgroundImage="commonDeviceTypeButtonSelected"/>
+                                    <state key="highlighted" backgroundImage="commonDeviceTypeButtonSelected"/>
                                     <connections>
                                         <action selector="otherViewButtonAction:" destination="-1" eventType="touchUpInside" id="dhI-TG-AeS"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfU-1E-GMw">
-                                    <rect key="frame" x="32" y="72" width="60" height="30"/>
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfU-1E-GMw">
+                                    <rect key="frame" x="0.0" y="65" width="130" height="65"/>
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                    <state key="normal" title="音频文件">
+                                    <state key="normal" backgroundImage="musicFileTypeButton">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <state key="selected" backgroundImage="musicFileTypeButtonSelected"/>
+                                    <state key="highlighted" backgroundImage="musicFileTypeButtonSelected"/>
                                     <connections>
                                         <action selector="otherViewButtonAction:" destination="-1" eventType="touchUpInside" id="xni-eB-tzA"/>
                                     </connections>
@@ -441,7 +439,15 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="124" id="QFI-V5-ikn"/>
+                                <constraint firstItem="JIj-ZG-X9w" firstAttribute="centerX" secondItem="KxF-Sq-pUt" secondAttribute="centerX" id="7pj-Tw-qGD"/>
+                                <constraint firstItem="DfU-1E-GMw" firstAttribute="width" secondItem="JIj-ZG-X9w" secondAttribute="width" id="ACi-zj-tBO"/>
+                                <constraint firstAttribute="width" constant="130" id="QFI-V5-ikn"/>
+                                <constraint firstItem="JIj-ZG-X9w" firstAttribute="height" secondItem="KxF-Sq-pUt" secondAttribute="height" multiplier="1:2" id="aNr-G7-1TR"/>
+                                <constraint firstItem="DfU-1E-GMw" firstAttribute="top" secondItem="JIj-ZG-X9w" secondAttribute="bottom" id="bud-N1-6ZP"/>
+                                <constraint firstItem="JIj-ZG-X9w" firstAttribute="top" secondItem="KxF-Sq-pUt" secondAttribute="top" id="exh-hb-h1v"/>
+                                <constraint firstItem="DfU-1E-GMw" firstAttribute="height" secondItem="JIj-ZG-X9w" secondAttribute="height" id="nDG-mM-CYg"/>
+                                <constraint firstItem="JIj-ZG-X9w" firstAttribute="width" secondItem="KxF-Sq-pUt" secondAttribute="width" id="vVc-8d-Hdt"/>
+                                <constraint firstItem="DfU-1E-GMw" firstAttribute="centerX" secondItem="JIj-ZG-X9w" secondAttribute="centerX" id="wdj-Ea-vNl"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -560,27 +566,31 @@
                     </constraints>
                 </view>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KvA-z9-nJM">
-                    <rect key="frame" x="360" y="10" width="110" height="34"/>
+                    <rect key="frame" x="304" y="10" width="138" height="56"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="110" id="aMI-fZ-qxx"/>
                         <constraint firstAttribute="height" constant="34" id="yAc-KX-wTY"/>
                     </constraints>
                     <state key="normal" backgroundImage="ok"/>
-                    <state key="highlighted" backgroundImage="okHighlight"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="aMI-fZ-qxx"/>
+                            <exclude reference="yAc-KX-wTY"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="saveButtonAction:" destination="-1" eventType="touchUpInside" id="O5Y-cb-URK"/>
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNx-ez-qQY">
-                    <rect key="frame" x="480" y="10" width="110" height="34"/>
+                    <rect key="frame" x="452" y="10" width="138" height="56"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="34" id="9NL-c2-X30"/>
-                        <constraint firstAttribute="width" constant="110" id="Oqc-fN-ckj"/>
+                        <constraint firstAttribute="height" constant="56" id="9NL-c2-X30"/>
+                        <constraint firstAttribute="width" constant="138" id="Oqc-fN-ckj"/>
                     </constraints>
                     <state key="normal" backgroundImage="cancel"/>
-                    <state key="highlighted" backgroundImage="cancelHighlight"/>
                     <connections>
                         <action selector="cancelButtonAction:" destination="-1" eventType="touchUpInside" id="Z2N-LT-T7O"/>
                     </connections>
@@ -593,10 +603,12 @@
                 <constraint firstItem="PvR-DT-GC5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2xO-NG-Byv"/>
                 <constraint firstItem="JW8-he-GWV" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="561-dt-S1S"/>
                 <constraint firstItem="Fjn-st-gNz" firstAttribute="leading" secondItem="JW8-he-GWV" secondAttribute="leading" id="7Ra-yk-coE"/>
+                <constraint firstItem="blS-BE-Hzp" firstAttribute="top" secondItem="Toc-St-8ge" secondAttribute="bottom" constant="10" id="7zr-bq-7vs"/>
                 <constraint firstAttribute="trailing" secondItem="26J-VK-AlS" secondAttribute="trailing" id="80k-5y-Eus"/>
                 <constraint firstItem="bNx-ez-qQY" firstAttribute="leading" secondItem="KvA-z9-nJM" secondAttribute="trailing" constant="10" id="981-NJ-Slb"/>
                 <constraint firstItem="Fjn-st-gNz" firstAttribute="top" secondItem="JW8-he-GWV" secondAttribute="top" id="9Go-61-bmu"/>
                 <constraint firstItem="bNx-ez-qQY" firstAttribute="leading" secondItem="Toc-St-8ge" secondAttribute="trailing" id="9z9-92-yFL"/>
+                <constraint firstItem="KvA-z9-nJM" firstAttribute="width" secondItem="bNx-ez-qQY" secondAttribute="width" id="Bwz-w1-Aj6"/>
                 <constraint firstAttribute="trailing" secondItem="KvA-z9-nJM" secondAttribute="trailing" constant="60" id="DwS-4R-47n"/>
                 <constraint firstItem="JW8-he-GWV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EYA-UW-PER"/>
                 <constraint firstItem="Fjn-st-gNz" firstAttribute="bottom" secondItem="JW8-he-GWV" secondAttribute="bottom" id="IAe-bg-Ygk"/>
@@ -635,6 +647,7 @@
                 <constraint firstItem="K1w-Ef-a1u" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="1:2" id="sgF-Q6-hRX"/>
                 <constraint firstItem="JW8-he-GWV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="tlh-yx-dWB"/>
                 <constraint firstAttribute="trailing" secondItem="bNx-ez-qQY" secondAttribute="trailing" constant="10" id="uhq-Fm-LJu"/>
+                <constraint firstItem="KvA-z9-nJM" firstAttribute="height" secondItem="bNx-ez-qQY" secondAttribute="height" id="wmV-hz-E0d"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
@@ -654,8 +667,9 @@
                     <exclude reference="sgF-Q6-hRX"/>
                     <exclude reference="O2P-1C-Ml6"/>
                     <exclude reference="P8w-D2-6s2"/>
-                    <exclude reference="2eI-kk-JJ1"/>
                     <exclude reference="DwS-4R-47n"/>
+                    <exclude reference="2eI-kk-JJ1"/>
+                    <exclude reference="iie-cm-DTu"/>
                     <exclude reference="9z9-92-yFL"/>
                     <exclude reference="hci-Xx-hfA"/>
                 </mask>
@@ -669,27 +683,25 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="addDevice" width="72" height="64"/>
-        <image name="addDeviceHighlight.png" width="140" height="140"/>
+        <image name="addDevice" width="72" height="72"/>
         <image name="autoOrderForDeviceConfig.png" width="170" height="48"/>
         <image name="autoOrderForDeviceConfigHighlight.png" width="170" height="48"/>
         <image name="bottomBorderBg" width="2" height="21"/>
-        <image name="cancel" width="437" height="138"/>
+        <image name="cancel" width="138" height="56"/>
         <image name="cancelForDeviceConfig.png" width="170" height="48"/>
         <image name="cancelForDeviceConfigHighlight.png" width="170" height="48"/>
-        <image name="cancelHighlight" width="436" height="137"/>
-        <image name="changeActual" width="72" height="64"/>
-        <image name="changeActualHighlight.png" width="140" height="140"/>
+        <image name="changeActual" width="72" height="72"/>
+        <image name="commonDeviceTypeButton" width="130" height="65"/>
+        <image name="commonDeviceTypeButtonSelected" width="130" height="65"/>
         <image name="controlBg.png" width="3" height="3"/>
         <image name="headBg.png" width="1" height="48"/>
-        <image name="ok" width="437" height="138"/>
+        <image name="musicFileTypeButton" width="130" height="65"/>
+        <image name="musicFileTypeButtonSelected" width="130" height="65"/>
+        <image name="ok" width="138" height="56"/>
         <image name="okForDeviceConfig.png" width="170" height="48"/>
         <image name="okForDeviceConfigHighlight.png" width="170" height="48"/>
-        <image name="okHighlight" width="436" height="137"/>
-        <image name="process" width="72" height="64"/>
-        <image name="processHighlight" width="72" height="64"/>
-        <image name="screenConfig" width="72" height="64"/>
-        <image name="screenConfigHighlight" width="72" height="64"/>
+        <image name="process" width="72" height="72"/>
+        <image name="screenConfig" width="72" height="72"/>
         <image name="showDeviceTypes" width="71" height="71"/>
         <image name="trash" width="375" height="375"/>
         <image name="trashHighlight" width="375" height="375"/>

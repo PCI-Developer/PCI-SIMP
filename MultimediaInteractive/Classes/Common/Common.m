@@ -274,6 +274,10 @@ kSingleTon_M(Common)
                 autoLogin:(BOOL)autoLogin
          completionHandle:(void (^)(BOOL isSuccess, NSString *errorDescription))completionHandle
 {
+    
+    
+    
+    
     __weak typeof(self) weakSelf = self;
     [self checkPermissionWithUserName:userName pwd:pwd completionHandle:^(BOOL isSucess) {
         if (isSucess) {
@@ -282,8 +286,7 @@ kSingleTon_M(Common)
             if (![Common shareCommon].isDemo) {
                 [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:weakSelf.currentUser] forKey:kLocalUserKey];
             }
-            
-            [weakSelf initalDataWithCompletionHandle:^(BOOL hasData, NSString *errorInfo) {
+            [weakSelf loadBaseDataFromServerWithCompletionHandle:^(BOOL hasData, NSString *errorInfo) {
                 if (hasData) {
                     weakSelf.currentArea = weakSelf.allAreasArray.firstObject;
                     completionHandle(YES, nil);
@@ -354,6 +357,12 @@ kSingleTon_M(Common)
     
     __weak typeof(self) weakSelf = self;
     [[SocketManager shareSocketManager] loginWithUserId:userName pwd:pwd resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
+        if (!isSuccess) {
+            if (completionHandle) {
+                completionHandle(NO);
+            }
+            return ;
+        }
         NSInteger level = [[info componentsSeparatedByString:@"&"].lastObject integerValue];
         if (level > 0) {
             User *user  = [User new];
@@ -399,17 +408,46 @@ kSingleTon_M(Common)
 #pragma mark - 从服务器获取基础数据（区域、设备）
 - (void)loadBaseDataFromServerWithCompletionHandle:(void (^)(BOOL hasData, NSString *errorInfo))completionHandle
 {
+    __weak typeof(self) weakSelf = self;
     
+    
+//    // 10秒后获取不到数据,就认定网络连接故障
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kTimeOut * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//        [WFFProgressHud dismiss];
+//        // 判断当前是否登陆状态.
+//        // 如果不加登陆状态的判断.当用户登陆后马上注销.此时数据均为空.就会提示错误.
+//        if (weakSelf.hasLogin && (!weakSelf.allAreasArray || !weakSelf.allDevicesDict)) {
+//            if (completionHandle) {
+//                completionHandle(NO, @"服务器连接超时!请重试!");
+//            }
+//        }
+//    
+//    });
+
+    
+    [self loadAreaDataWithCompletionHandle:^(BOOL hasData, NSString *errorInfo) {
+        if (hasData) {
+            [weakSelf loadDeviceDataWithCompletionHandle:^(BOOL hasData, NSString *errorInfo) {
+                if (completionHandle) {
+                    completionHandle(hasData, errorInfo);
+                }
+            }];
+        } else {
+            if (completionHandle) {
+                completionHandle(hasData, errorInfo);
+            }
+        }
+    }];
 }
 
-#pragma mark - 第一次加载基础数据(所有设备等等)
-- (void)initalDataWithCompletionHandle:(void (^)(BOOL hasData, NSString *errorInfo))completionHandle
+/**
+ *  公共设备的区域ID -- 服务器的公共设备,为独立区域.用字符串"公共设备"命名
+ */
+static NSString *commonAreaID;
+
+- (void)loadAreaDataWithCompletionHandle:(void (^)(BOOL hasData, NSString *errorInfo))completionHandle
 {
-    // 从WebServer获取系统所有设备
-    NSData *deviceTypeData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DeviceType" ofType:@"json"]];
-    // 设备类型的信息, 从本地json获取
-    self.deviceTypeDict = [NSJSONSerialization JSONObjectWithData:deviceTypeData options:NSJSONReadingAllowFragments error:nil];
-    
     if (self.isDemo) {
         self.allAreasArray = [NSMutableArray array];
         for (int i = 0; i < 3; i++) {
@@ -420,7 +458,76 @@ kSingleTon_M(Common)
             [area setValuesForKeysWithDictionary:dict];
             [self.allAreasArray addObject:area];
         }
+        if (completionHandle) {
+            completionHandle(YES, nil);
+        }
+    } else { // PC
+        [WFFProgressHud showWithStatus:@"加载区域数据..."];
         
+        __weak typeof(self) weakSelf = self;
+        
+        commonAreaID = nil;
+        
+        dispatch_async(dispatch_queue_create(0, DISPATCH_QUEUE_CONCURRENT), ^{
+            [[SocketManager shareSocketManager] getDataListWithType:DataListTypeArea resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
+                // 错误信息
+                NSString *errorDes = nil;
+                
+                NSArray *areaArray = [info componentsSeparatedByString:@"&"];
+                if (isSuccess) {
+                    kLog(@"***************收到区域数据************");
+                    
+                    weakSelf.allAreasArray = [NSMutableArray array];
+                    for (NSString *areaString in areaArray) {
+                        Area *area = [Area new];
+                        area.AreaID = [areaString componentsSeparatedByString:@","][0];
+                        area.AreaName = [areaString componentsSeparatedByString:@","][1];
+                        // 判断是否公共设备
+                        if ([area.AreaName isEqualToString:@"公共设备"]) {
+                            commonAreaID = area.AreaID;
+                        } else {
+                            [weakSelf.allAreasArray addObject:area];
+                        }
+                    }
+                    kLog(@"%@", weakSelf.allAreasArray);
+                    
+                    if ([weakSelf.allAreasArray count] == 0) {
+                        errorDes = @"服务器没有配置区域列表!";
+                    }
+                
+                    
+//                    else {
+//                        if ([weakSelf.allDevicesDict count] > 0) {
+//                            [WFFProgressHud dismiss];
+//                            if (completionHandle) {
+//                                completionHandle(errorDes == nil, errorDes);
+//                            }
+//                        }
+//                    }
+                } else {
+                    errorDes = @"获取区域列表失败!请重试!";
+                }
+                
+//                if (errorDes) {
+//                    [WFFProgressHud showErrorStatus:errorDes];
+//                }
+                
+                if (completionHandle) {
+                    completionHandle(errorDes == nil, errorDes);
+                }
+            }];
+        });
+        
+    }
+}
+
+- (void)loadDeviceDataWithCompletionHandle:(void (^)(BOOL hasData, NSString *errorInfo))completionHandle
+{
+    // 从WebServer获取系统所有设备
+    NSData *deviceTypeData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DeviceType" ofType:@"json"]];
+    // 设备类型的信息, 从本地json获取
+    self.deviceTypeDict = [NSJSONSerialization JSONObjectWithData:deviceTypeData options:NSJSONReadingAllowFragments error:nil];
+    if (self.isDemo) {
         self.allDevicesDict = [NSMutableDictionary dictionary];
         for (int i = 0; i < 40; i++) {
             
@@ -474,75 +581,23 @@ kSingleTon_M(Common)
             [self.commonDeviceArray addObject:model];
         }
         
-       
         if (completionHandle) {
             completionHandle(YES, nil);
         }
-        
-
-    } else { // 从PC获取
-        [WFFProgressHud showWithStatus:@"加载数据..."];
+    } else { // PC
+        [WFFProgressHud showWithStatus:@"加载设备数据..."];
         
         __weak typeof(self) weakSelf = self;
-        /**
-         *  错误信息
-         */
-        static NSString *errorDes;
-        /**
-         *  公共设备的区域ID -- 服务器的公共设备,为独立区域.用字符串"公共设备"命名
-         */
-        static NSString *commonAreaID;
-        errorDes = nil;
-        commonAreaID = nil;
-        // 5秒后获取不到数据,就认定网络连接故障
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kTimeOut * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            // 判断当前是否登陆状态.
-            // 如果不加登陆状态的判断.当用户登陆后马上注销.此时数据均为空.就会提示错误.
-            if (weakSelf.hasLogin && (!weakSelf.allAreasArray || !weakSelf.allDevicesDict)) {
-                if (completionHandle) {
-                    completionHandle(NO, errorDes ? errorDes : @"服务器连接超时!请重试!");
-                }
-                [WFFProgressHud dismiss];
-            }
         
-        });
-//        dispatch_group_t group = dispatch_group_create();
-        dispatch_queue_t queue = dispatch_queue_create(0, DISPATCH_QUEUE_CONCURRENT);
-        dispatch_async(queue, ^{
-            [[SocketManager shareSocketManager] getDataListWithType:DataListTypeArea resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
-                NSArray *areaArray = [info componentsSeparatedByString:@"&"];
-                if (isSuccess) {
-                    weakSelf.allAreasArray = [NSMutableArray array];
-                    for (NSString *areaString in areaArray) {
-                        Area *area = [Area new];
-                        area.AreaID = [areaString componentsSeparatedByString:@","][0];
-                        area.AreaName = [areaString componentsSeparatedByString:@","][1];
-                        // 判断是否公共设备
-                        if ([area.AreaName isEqualToString:@"公共设备"]) {
-                            commonAreaID = area.AreaID;
-                        } else {
-                            [weakSelf.allAreasArray addObject:area];
-                        }
-                    }
-                    kLog(@"%@", weakSelf.allAreasArray);
-                    if ([weakSelf.allAreasArray count] == 0) {
-                        errorDes = @"服务器没有配置区域列表!";
-                    } else {
-                        if ([weakSelf.allDevicesDict count] > 0) {
-                            if (completionHandle) {
-                                completionHandle(errorDes == nil, errorDes);
-                            }
-                        }
-                    }
-                } else {
-                    errorDes = @"获取区域列表失败!请重试!";
-                }
-            }];
-        });
-        dispatch_async(queue, ^{
+        dispatch_async(dispatch_queue_create(0, DISPATCH_QUEUE_CONCURRENT), ^{
             [[SocketManager shareSocketManager] getDataListWithType:DataListTypeDevice resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
+                // 错误信息
+                NSString *errorDes = nil;
+                
                 NSArray *areaArray = [info componentsSeparatedByString:@"&"];
                 if (isSuccess) {
+                    kLog(@"***************收到设备数据************");
+                    
                     static NSInteger countOfDevice = 0;
                     weakSelf.allDevicesDict = [NSMutableDictionary dictionary];
                     for (NSString *deviceString in areaArray) {
@@ -582,32 +637,239 @@ kSingleTon_M(Common)
                         }
                     }
                     kLog(@"%@", weakSelf.allDevicesDict);
-
+                    
                     if ([weakSelf.allDevicesDict count] == 0) {
                         errorDes = @"服务器没有配置设备列表!";
-                    } else {
-                        if ([weakSelf.allAreasArray count] > 0) {
-                            if (completionHandle) {
-                                completionHandle(errorDes == nil, errorDes);
-                            }
-                        }
                     }
                 } else {
                     errorDes = @"获取设备列表失败!请重试!";
                 }
+                
+//                if (errorDes) {
+//                    [WFFProgressHud showErrorStatus:errorDes];
+//                }
+                
+                if (completionHandle) {
+                    completionHandle(errorDes == nil, errorDes);
+                }
+                
             }];
-
+            
         });
-//        // 数据都加载结束，执行
-//        dispatch_group_notify(group, queue, ^{
-//            if (completionHandle) {
-//                completionHandle(errorDes == nil, errorDes);
-//            }
-//            [WFFProgressHud dismiss];
-//        });
-        
     }
 }
+
+//#pragma mark - 第一次加载基础数据(所有设备等等)
+//- (void)initalDataWithCompletionHandle:(void (^)(BOOL hasData, NSString *errorInfo))completionHandle
+//{
+//    // 从WebServer获取系统所有设备
+//    NSData *deviceTypeData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DeviceType" ofType:@"json"]];
+//    // 设备类型的信息, 从本地json获取
+//    self.deviceTypeDict = [NSJSONSerialization JSONObjectWithData:deviceTypeData options:NSJSONReadingAllowFragments error:nil];
+//    
+//    if (self.isDemo) {
+//        self.allAreasArray = [NSMutableArray array];
+//        for (int i = 0; i < 3; i++) {
+//            NSDictionary *dict = @{@"AreaID" : [NSString stringWithFormat:@"AreaID%02d", i],
+//                                   @"AreaName" : [NSString stringWithFormat:@"区域%02d", i]
+//                                   };
+//            Area *area = [Area new];
+//            [area setValuesForKeysWithDictionary:dict];
+//            [self.allAreasArray addObject:area];
+//        }
+//        
+//        self.allDevicesDict = [NSMutableDictionary dictionary];
+//        for (int i = 0; i < 40; i++) {
+//            
+//            NSString *typeString = self.deviceTypeDict.allKeys[i % self.deviceTypeDict.allKeys.count];
+//            // 允许开关的设备,默认打开
+//            NSInteger deviceOCState = 0;
+//            if ([self.deviceTypeDict[typeString][@"controlCMD"] containsObject:@"oc"]) {
+//                deviceOCState = 1;
+//            }
+//            NSDictionary *dict = @{@"AutoID" : @(i + 100),
+//                                   @"UEQP_ID" : [NSString stringWithFormat:@"UEQP_ID%02d", i],
+//                                   @"UEQP_Name" : [NSString stringWithFormat:@"%@%02d", typeString, i],
+//                                   @"UEQP_Type" : typeString,
+//                                   @"AreaID" : [NSString stringWithFormat:@"AreaID%02ld", (long)i % self.allAreasArray.count],
+//                                   @"deviceConnectState" : @(1),
+//                                   @"needFollow" : @(1),
+//                                   @"deviceOCState" : @(deviceOCState)
+//                                   };
+//            
+//            DeviceForUser *model = [DeviceForUser new];
+//            [model setValuesForKeysWithDictionary:dict];
+//            if (self.allDevicesDict[model.AreaID]) {
+//                [self.allDevicesDict[model.AreaID] addObject:model];
+//            } else {
+//                NSMutableArray *array = [NSMutableArray array];
+//                [array addObject:model];
+//                [self.allDevicesDict setObject:array forKey:model.AreaID];
+//            }
+//        }
+//        
+//        self.commonDeviceArray = [NSMutableArray array];
+//        for (int i = 0; i < self.deviceTypeDict.count; i++) {
+//            NSString *typeString = self.deviceTypeDict.allKeys[i % self.deviceTypeDict.allKeys.count];
+//            // 允许开关的设备,默认打开
+//            NSInteger deviceOCState = 0;
+//            if ([self.deviceTypeDict[typeString][@"controlCMD"] containsObject:@"oc"]) {
+//                deviceOCState = 1;
+//            }
+//            NSDictionary *dict = @{@"AutoID" : @(i + 1000),
+//                                   @"UEQP_ID" : [NSString stringWithFormat:@"UEQP_ID%02d", 100 + i],
+//                                   @"UEQP_Name" : [NSString stringWithFormat:@"%@%02d", typeString, 100 + i],
+//                                   @"UEQP_Type" : typeString,
+//                                   @"AreaID" : [NSString stringWithFormat:@"AreaID%02d", 100],
+//                                   @"deviceConnectState" : @(1),
+//                                   @"needFollow" : @(1),
+//                                   @"deviceOCState" : @(deviceOCState)
+//                                   };
+//            
+//            DeviceForUser *model = [DeviceForUser new];
+//            [model setValuesForKeysWithDictionary:dict];
+//            [self.commonDeviceArray addObject:model];
+//        }
+//        
+//       
+//        if (completionHandle) {
+//            completionHandle(YES, nil);
+//        }
+//        
+//
+//    } else { // 从PC获取
+//        [WFFProgressHud showWithStatus:@"加载数据..."];
+//        
+//        __weak typeof(self) weakSelf = self;
+//        /**
+//         *  错误信息
+//         */
+//        static NSString *errorDes;
+//        /**
+//         *  公共设备的区域ID -- 服务器的公共设备,为独立区域.用字符串"公共设备"命名
+//         */
+//        static NSString *commonAreaID;
+//        errorDes = nil;
+//        commonAreaID = nil;
+//        // 5秒后获取不到数据,就认定网络连接故障
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kTimeOut * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            
+//            [WFFProgressHud dismiss];
+//            // 判断当前是否登陆状态.
+//            // 如果不加登陆状态的判断.当用户登陆后马上注销.此时数据均为空.就会提示错误.
+//            if (weakSelf.hasLogin && (!weakSelf.allAreasArray || !weakSelf.allDevicesDict)) {
+//                if (completionHandle) {
+//                    completionHandle(NO, errorDes ? errorDes : @"服务器连接超时!请重试!");
+//                }
+//            }
+//        
+//        });
+////        dispatch_group_t group = dispatch_group_create();
+//        dispatch_queue_t queue = dispatch_queue_create(0, DISPATCH_QUEUE_CONCURRENT);
+//        dispatch_async(dispatch_queue_create(0, DISPATCH_QUEUE_CONCURRENT), ^{
+//            [[SocketManager shareSocketManager] getDataListWithType:DataListTypeArea resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
+//                NSArray *areaArray = [info componentsSeparatedByString:@"&"];
+//                if (isSuccess) {
+//                    kLog(@"***************收到区域数据************");
+//                    weakSelf.allAreasArray = [NSMutableArray array];
+//                    for (NSString *areaString in areaArray) {
+//                        Area *area = [Area new];
+//                        area.AreaID = [areaString componentsSeparatedByString:@","][0];
+//                        area.AreaName = [areaString componentsSeparatedByString:@","][1];
+//                        // 判断是否公共设备
+//                        if ([area.AreaName isEqualToString:@"公共设备"]) {
+//                            commonAreaID = area.AreaID;
+//                        } else {
+//                            [weakSelf.allAreasArray addObject:area];
+//                        }
+//                    }
+//                    kLog(@"%@", weakSelf.allAreasArray);
+//                    if ([weakSelf.allAreasArray count] == 0) {
+//                        errorDes = @"服务器没有配置区域列表!";
+//                    } else {
+//                        if ([weakSelf.allDevicesDict count] > 0) {
+//                            [WFFProgressHud dismiss];
+//                            if (completionHandle) {
+//                                completionHandle(errorDes == nil, errorDes);
+//                            }
+//                        }
+//                    }
+//                } else {
+//                    errorDes = @"获取区域列表失败!请重试!";
+//                }
+//            }];
+//        });
+//        dispatch_async(dispatch_queue_create(0, DISPATCH_QUEUE_CONCURRENT), ^{
+//            [[SocketManager shareSocketManager] getDataListWithType:DataListTypeDevice resultBlock:^(BOOL isSuccess, NSInteger cmdNumber, NSString *info) {
+//                NSArray *areaArray = [info componentsSeparatedByString:@"&"];
+//                if (isSuccess) {
+//                    kLog(@"***************收到设备数据************");
+//                    static NSInteger countOfDevice = 0;
+//                    weakSelf.allDevicesDict = [NSMutableDictionary dictionary];
+//                    for (NSString *deviceString in areaArray) {
+//                        NSArray *device = [deviceString componentsSeparatedByString:@","];
+//                        DeviceForUser *model = [DeviceForUser new];
+//                        model.AutoID = 100 + (countOfDevice++);// 防止0的出现.后面要吧这个id作为设备view的tag值
+//                        model.UEQP_ID = device[0];
+//                        model.UEQP_Name = device[1];
+//                        model.UEQP_Type = device[2];
+//                        model.AreaID = device[3];
+//                        // 设备操控所需权限
+//                        model.needLevel = [device[4] integerValue];
+//                        // 跟随功能的配置
+//                        if ([device[5] isEqualToString:@"0"] || [device[5] isEqualToString:@"1"]) { // 该设备为摄像头.是否开启跟随
+//                            model.needFollow = [device[5] boolValue];
+//                        } else if ([device[5] length] == 0){ // 设置了跟随的镜头
+//                            model.followUEQP_ID = nil;
+//                        } else {
+//                            model.followUEQP_ID = device[5];
+//                        }
+//                        
+//                        // 判断是否为公共设备
+//                        if ([model.AreaID isEqualToString:commonAreaID]) {
+//                            if (!weakSelf.commonDeviceArray) {
+//                                weakSelf.commonDeviceArray = [NSMutableArray arrayWithObject:model];
+//                            } else {
+//                                [weakSelf.commonDeviceArray addObject:model];
+//                            }
+//                        } else {
+//                            if (weakSelf.allDevicesDict[model.AreaID]) {
+//                                [weakSelf.allDevicesDict[model.AreaID] addObject:model];
+//                            } else {
+//                                NSMutableArray *array = [NSMutableArray array];
+//                                [array addObject:model];
+//                                [weakSelf.allDevicesDict setObject:array forKey:model.AreaID];
+//                            }
+//                        }
+//                    }
+//                    kLog(@"%@", weakSelf.allDevicesDict);
+//
+//                    if ([weakSelf.allDevicesDict count] == 0) {
+//                        errorDes = @"服务器没有配置设备列表!";
+//                    } else {
+//                        if ([weakSelf.allAreasArray count] > 0) {
+//                            [WFFProgressHud dismiss];
+//                            if (completionHandle) {
+//                                completionHandle(errorDes == nil, errorDes);
+//                            }
+//                        }
+//                    }
+//                } else {
+//                    errorDes = @"获取设备列表失败!请重试!";
+//                }
+//            }];
+//
+//        });
+////        // 数据都加载结束，执行
+////        dispatch_group_notify(group, queue, ^{
+////            if (completionHandle) {
+////                completionHandle(errorDes == nil, errorDes);
+////            }
+////            [WFFProgressHud dismiss];
+////        });
+//        
+//    }
+//}
 
 #pragma mark - 清除当前区域所有设备的配置信息
 - (void)clearConfigOfAllDevice

@@ -307,7 +307,6 @@
     return _dataArray ? _dataArray.count : 0;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
@@ -380,7 +379,7 @@
     if (_rightImageSelected != rightImageSelected) {
         _rightImageSelected = nil;
         _rightImageSelected = rightImageSelected;
-        self.rightImageView.image = nil;
+//        self.rightImageView.image = nil;
     }
 }
 - (void)setBackgroundImage:(UIImage *)backgroundImage
@@ -397,7 +396,7 @@
     if (_backgroundImageSelected != backgroundImageSelected) {
         _backgroundImageSelected = nil;
         _backgroundImageSelected = backgroundImageSelected;
-        self.backgroundImageView.image = nil;
+//        self.backgroundImageView.image = nil;
     }
 }
 
@@ -449,4 +448,6 @@
     }
     return _listBackgroundImageView;
 }
+
+
 @end

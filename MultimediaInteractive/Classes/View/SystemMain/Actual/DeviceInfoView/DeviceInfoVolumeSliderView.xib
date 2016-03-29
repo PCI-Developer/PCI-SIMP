@@ -147,7 +147,7 @@
         </view>
     </objects>
     <resources>
-        <image name="controlBg.png" width="2" height="23"/>
+        <image name="controlBg.png" width="3" height="3"/>
         <image name="infoSplit" width="2" height="23"/>
     </resources>
 </document>

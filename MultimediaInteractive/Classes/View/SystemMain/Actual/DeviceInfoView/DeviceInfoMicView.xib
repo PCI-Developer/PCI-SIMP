@@ -56,12 +56,23 @@
                                 <action selector="openButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="LyW-kd-9X7"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnN-in-GHV">
-                            <rect key="frame" x="20" y="155.5" width="560" height="36"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnN-in-GHV">
+                            <rect key="frame" x="20" y="148.5" width="560" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="PSE-xe-ezf"/>
+                                <constraint firstAttribute="width" constant="150" id="XUs-Hm-OVE"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                            <state key="normal" title="摄像头跟随配置">
+                            <state key="normal" title="摄像头跟随配置" backgroundImage="cameraFollowConfig">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected" backgroundImage="cameraFollowConfigSelected"/>
+                            <state key="highlighted" backgroundImage="cameraFollowConfigSelected"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="XUs-Hm-OVE"/>
+                                </mask>
+                            </variation>
                             <connections>
                                 <action selector="cameraFollowConfigButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="kTS-Wo-QWX"/>
                             </connections>
@@ -72,15 +83,18 @@
                         <constraint firstItem="uLK-IK-sDO" firstAttribute="width" secondItem="Ikh-F5-Zhn" secondAttribute="width" id="4dG-OT-cXx"/>
                         <constraint firstItem="uLK-IK-sDO" firstAttribute="height" secondItem="Ikh-F5-Zhn" secondAttribute="height" id="67Y-UT-GbX"/>
                         <constraint firstAttribute="bottom" secondItem="Ikh-F5-Zhn" secondAttribute="bottom" constant="40" id="82e-Ib-SrD"/>
+                        <constraint firstItem="tnN-in-GHV" firstAttribute="centerX" secondItem="aEL-6J-cjy" secondAttribute="centerX" id="Bdn-WV-kCc"/>
                         <constraint firstItem="tnN-in-GHV" firstAttribute="centerY" secondItem="aEL-6J-cjy" secondAttribute="centerY" constant="-40" id="G3k-B5-vsn"/>
                         <constraint firstAttribute="bottom" secondItem="Ikh-F5-Zhn" secondAttribute="bottom" constant="40" id="GdT-1k-T5g"/>
                         <constraint firstAttribute="height" constant="180" id="LwC-ZN-hiU"/>
                         <constraint firstItem="tnN-in-GHV" firstAttribute="top" secondItem="aEL-6J-cjy" secondAttribute="top" constant="94" id="Mjq-bJ-ZCp"/>
                         <constraint firstItem="Ikh-F5-Zhn" firstAttribute="centerY" secondItem="aEL-6J-cjy" secondAttribute="centerY" id="PEn-wb-BPM"/>
                         <constraint firstItem="tnN-in-GHV" firstAttribute="trailing" secondItem="uLK-IK-sDO" secondAttribute="trailing" id="RKC-hz-CxB"/>
+                        <constraint firstItem="tnN-in-GHV" firstAttribute="leading" secondItem="Ikh-F5-Zhn" secondAttribute="leading" id="Tr4-L1-g9a"/>
                         <constraint firstAttribute="width" constant="180" id="VmQ-f7-bWo"/>
                         <constraint firstItem="uLK-IK-sDO" firstAttribute="leading" secondItem="Ikh-F5-Zhn" secondAttribute="trailing" constant="10" id="aqA-ta-oz0"/>
                         <constraint firstAttribute="trailing" secondItem="uLK-IK-sDO" secondAttribute="trailing" constant="20" id="bf6-gk-IBO"/>
+                        <constraint firstItem="tnN-in-GHV" firstAttribute="trailing" secondItem="uLK-IK-sDO" secondAttribute="trailing" id="eyk-pQ-6bP"/>
                         <constraint firstItem="Ikh-F5-Zhn" firstAttribute="leading" secondItem="aEL-6J-cjy" secondAttribute="leading" constant="20" id="jBg-De-te9"/>
                         <constraint firstItem="tnN-in-GHV" firstAttribute="leading" secondItem="Ikh-F5-Zhn" secondAttribute="leading" id="mZT-lJ-8fB"/>
                         <constraint firstItem="uLK-IK-sDO" firstAttribute="bottom" secondItem="Ikh-F5-Zhn" secondAttribute="bottom" id="utb-jQ-VuZ"/>
@@ -95,7 +109,10 @@
                         <mask key="constraints">
                             <exclude reference="LwC-ZN-hiU"/>
                             <exclude reference="VmQ-f7-bWo"/>
+                            <exclude reference="Bdn-WV-kCc"/>
                             <exclude reference="Mjq-bJ-ZCp"/>
+                            <exclude reference="RKC-hz-CxB"/>
+                            <exclude reference="mZT-lJ-8fB"/>
                             <exclude reference="82e-Ib-SrD"/>
                             <exclude reference="PEn-wb-BPM"/>
                             <exclude reference="aqA-ta-oz0"/>
@@ -183,6 +200,8 @@
         </view>
     </objects>
     <resources>
+        <image name="cameraFollowConfig" width="206" height="50"/>
+        <image name="cameraFollowConfigSelected" width="206" height="50"/>
         <image name="close" width="308" height="108"/>
         <image name="closeHighlight" width="317" height="108"/>
         <image name="controlBg.png" width="375" height="375"/>

@@ -196,7 +196,7 @@
     <resources>
         <image name="close" width="308" height="108"/>
         <image name="closeHighlight" width="317" height="108"/>
-        <image name="controlBg.png" width="375" height="375"/>
+        <image name="controlBg.png" width="3" height="3"/>
         <image name="infoSplit" width="2" height="23"/>
         <image name="open" width="308" height="108"/>
         <image name="openHighlight" width="317" height="108"/>

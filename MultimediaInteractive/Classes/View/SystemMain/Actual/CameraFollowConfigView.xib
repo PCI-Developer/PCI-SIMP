@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -14,7 +14,6 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LHS-cB-foI">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="image" keyPath="backgroundColorFromUIImage" value="controlBg.png"/>
@@ -25,31 +24,13 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Zf-OM-AvQ" customClass="WFFDropdownList">
                             <rect key="frame" x="175" y="57" width="250" height="36"/>
-                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="36" id="2Mu-8m-ssy"/>
                                 <constraint firstAttribute="width" constant="250" id="Gbp-Wo-Rzt"/>
                             </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="image" keyPath="listCellBackgroundImage" value="dropdownListCellBg.png"/>
-                                <userDefinedRuntimeAttribute type="image" keyPath="listCellBackgroundImageSelected" value="dropdownListCellBgSelected.png"/>
-                                <userDefinedRuntimeAttribute type="image" keyPath="backgroundImageSelected" value="dropdownListBg_Selected.png"/>
-                                <userDefinedRuntimeAttribute type="number" keyPath="maxCountForShow">
-                                    <integer key="value" value="3"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="image" keyPath="rightImage" value="dropdownRightImage.png"/>
-                                <userDefinedRuntimeAttribute type="image" keyPath="rightImageSelected" value="dropdownRightImageClick.png"/>
-                                <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="tableTextColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="6Zf-OM-AvQ" firstAttribute="centerY" secondItem="KBN-OB-iwl" secondAttribute="centerY" id="FWZ-3V-tBi"/>
@@ -65,7 +46,6 @@
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="infoSplit" translatesAutoresizingMaskIntoConstraints="NO" id="wnQ-Fk-jPy">
                     <rect key="frame" x="0.0" y="150" width="600" height="23"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="23" id="90c-pG-jhZ"/>
                         <constraint firstAttribute="width" constant="240" id="Vtj-YQ-FNE"/>
@@ -81,7 +61,6 @@
                     <subviews>
                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Pq-bI-uwN" userLabel="下">
                             <rect key="frame" x="100" y="122" width="50" height="120"/>
-                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="120" id="N11-t0-iL1"/>
@@ -102,7 +81,6 @@
                         </button>
                         <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k9C-tH-g00" userLabel="右">
                             <rect key="frame" x="122" y="100" width="120" height="50"/>
-                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="120" id="WdV-Vr-37B"/>
@@ -129,7 +107,6 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rl6-tN-xkf" userLabel="上">
                             <rect key="frame" x="100" y="8" width="50" height="120"/>
-                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="120" id="6rU-GR-YxS"/>
@@ -150,7 +127,6 @@
                         </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="js4-k1-IpM" userLabel="左">
                             <rect key="frame" x="8" y="100" width="120" height="50"/>
-                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="js4-k1-IpM" secondAttribute="height" multiplier="16:35" id="HyO-N9-O5C"/>
@@ -180,7 +156,6 @@
                             </connections>
                         </button>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="250" id="DQf-zI-uqq"/>
@@ -203,7 +178,6 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SXd-Lq-LcN">
                     <rect key="frame" x="241" y="471" width="117" height="49"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="G8t-vK-iey"/>
                         <constraint firstAttribute="width" constant="117" id="KjI-vE-jZD"/>
@@ -223,7 +197,6 @@
                     </connections>
                 </button>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="wnQ-Fk-jPy" firstAttribute="trailing" secondItem="KBN-OB-iwl" secondAttribute="trailing" id="55j-2M-3yC"/>
@@ -270,11 +243,6 @@
         <image name="down" width="100" height="231"/>
         <image name="down.png" width="375" height="375"/>
         <image name="downHighlight.png" width="375" height="375"/>
-        <image name="dropdownListBg_Selected.png" width="375" height="375"/>
-        <image name="dropdownListCellBg.png" width="1" height="48"/>
-        <image name="dropdownListCellBgSelected.png" width="375" height="375"/>
-        <image name="dropdownRightImage.png" width="1" height="48"/>
-        <image name="dropdownRightImageClick.png" width="1" height="48"/>
         <image name="infoSplit" width="2" height="23"/>
         <image name="left" width="231" height="100"/>
         <image name="left.png" width="375" height="375"/>

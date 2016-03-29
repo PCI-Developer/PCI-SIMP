@@ -132,12 +132,12 @@
                                 <constraint firstAttribute="height" constant="36" id="med-tI-Dmo"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="image" keyPath="rightImage" value="dropdownRightImage.png"/>
+                                <userDefinedRuntimeAttribute type="image" keyPath="rightImage" value="dropdownListRightImage1"/>
                                 <userDefinedRuntimeAttribute type="number" keyPath="maxCountForShow">
                                     <integer key="value" value="3"/>
                                 </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="image" keyPath="rightImageSelected" value="dropdownRightImageClick.png"/>
-                                <userDefinedRuntimeAttribute type="image" keyPath="backgroundImageSelected" value="dropdownListBg_Selected.png"/>
+                                <userDefinedRuntimeAttribute type="image" keyPath="rightImageSelected" value="dropdownListRightImageSelected1"/>
+                                <userDefinedRuntimeAttribute type="image" keyPath="backgroundImageSelected" value="dropdownListBackground"/>
                                 <userDefinedRuntimeAttribute type="image" keyPath="listCellBackgroundImage" value="dropdownListCellBg.png"/>
                                 <userDefinedRuntimeAttribute type="image" keyPath="listCellBackgroundImageSelected" value="dropdownListCellBgSelected.png"/>
                                 <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -223,11 +223,11 @@
         <image name="close" width="308" height="108"/>
         <image name="closeHighlight" width="317" height="108"/>
         <image name="controlBg" width="3" height="3"/>
-        <image name="dropdownListBg_Selected.png" width="1" height="48"/>
+        <image name="dropdownListBackground" width="250" height="37"/>
         <image name="dropdownListCellBg.png" width="1" height="48"/>
         <image name="dropdownListCellBgSelected.png" width="1" height="48"/>
-        <image name="dropdownRightImage.png" width="375" height="375"/>
-        <image name="dropdownRightImageClick.png" width="1" height="48"/>
+        <image name="dropdownListRightImage1" width="36" height="36"/>
+        <image name="dropdownListRightImageSelected1" width="36" height="36"/>
         <image name="infoSplit" width="2" height="23"/>
         <image name="open" width="308" height="108"/>
         <image name="openHighlight" width="317" height="108"/>

@@ -27,6 +27,7 @@
 
 @end
 
+
 static int serverTimerLastHeartHit; // 服务器心跳包倒计时 -- 10秒没接收到认为失去连接,则断开当前套接字,重新创建监听端口
 
 
@@ -318,6 +319,16 @@ kSingleTon_M(SocketManager)
 // 失去连接
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
 
+    // 将所有未执行的回调全部作失败处理。
+    for (NSNumber *cmdNumberValue in self.operationBlockDict.allKeys) {
+        RequestServerResponseBlock block = self.operationBlockDict[cmdNumberValue];
+        if (block) {
+            block(YES, [cmdNumberValue integerValue], nil);
+            // 执行完移除
+            [self.operationBlockDict removeObjectForKey:cmdNumberValue];
+        }
+    }
+   
     // 停止心跳包 - 必须停止,否则再次连接重复开启,发送心跳包频率加快
     [self stopNetLink];
     

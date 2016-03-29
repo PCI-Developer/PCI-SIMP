@@ -26,19 +26,26 @@
 
 static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 
-//- (instancetype)initWithCoder:(NSCoder *)aDecoder
-//{
-//    if (self = [super initWithCoder:aDecoder]) {
-//        
-//    }
-//    return self;
-//}
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     self.cameraDropdownList.textColor = [UIColor whiteColor];
     self.cameraDropdownList.font = [UIFont systemFontOfSize:20];
+}
+
+
+- (void)willMoveToWindow:(UIWindow *)newWindow
+{
+    if (newWindow == [UIApplication sharedApplication].keyWindow) {
+        self.cameraDropdownList.textColor = [UIColor whiteColor];
+        self.cameraDropdownList.tableTextColor = [UIColor whiteColor];
+        self.cameraDropdownList.listCellBackgroundImage = [UIImage imageNamed:@"dropdownListCellBg.png"];
+        self.cameraDropdownList.listCellBackgroundImageSelected = [UIImage imageNamed:@"dropdownListCellBgSelected.png"];
+        self.cameraDropdownList.maxCountForShow = 3;
+        self.cameraDropdownList.rightImage = [UIImage imageNamed:@"dropdownListRightImage1.png"];
+        self.cameraDropdownList.rightImageSelected = [UIImage imageNamed:@"dropdownListRightImageSelected1.png"];
+        self.cameraDropdownList.backgroundImage = [UIImage imageNamed:@"dropdownListBackground.png"];
+    }
 }
 
 - (IBAction)orientationTouchDown:(UIButton *)sender {

@@ -10,7 +10,7 @@
 #import "SHMenuItem.h"
 
 #define MENU_WIDTH		100
-#define ROW_HEIGHT		90
+#define ROW_HEIGHT		84
 #define SLIDE_TIMING	.25
 
 @protocol SHStripeMenuDelegate <NSObject>

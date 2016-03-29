@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "okHighlight.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "commonDeviceTypeButtonSelected@2x.png",
       "scale" : "2x"
     },
     {

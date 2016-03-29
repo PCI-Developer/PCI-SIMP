@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -16,9 +16,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hbj-M1-VjL">
-                        <rect key="frame" x="268.5" y="-8" width="59.5" height="59.5"/>
-                        <animations/>
+                    <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hbj-M1-VjL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Hbj-M1-VjL" secondAttribute="height" multiplier="1:1" id="5pt-X0-6IV"/>
                             <constraint firstAttribute="height" constant="30" id="EOp-5K-fKM"/>
@@ -26,13 +25,13 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="5pt-X0-6IV"/>
                                 <exclude reference="EOp-5K-fKM"/>
                                 <exclude reference="SVS-jM-ng5"/>
                             </mask>
                         </variation>
                     </imageView>
                 </subviews>
-                <animations/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="Hbj-M1-VjL" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="0WW-qB-zSV"/>
@@ -41,6 +40,7 @@
                     <constraint firstItem="Hbj-M1-VjL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="OT6-RK-VfQ"/>
                     <constraint firstItem="Hbj-M1-VjL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="SOe-6B-Yfl"/>
                     <constraint firstItem="Hbj-M1-VjL" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="asf-90-UWU"/>
+                    <constraint firstItem="Hbj-M1-VjL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="hJS-eu-vT2"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Hbj-M1-VjL" secondAttribute="bottom" constant="-8" id="psK-6F-srz"/>
                 </constraints>
                 <variation key="default">
@@ -52,7 +52,6 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
-            <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
         </tableViewCell>
     </objects>

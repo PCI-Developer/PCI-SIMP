@@ -267,6 +267,7 @@ typedef enum
 - (void)applicationWillEnterForeground:(NSNotification *)sender
 {
     [self setCurrentMode:ActualModeTypeNormal];
+    [self.commonDeviceCollectionView reloadData];
 }
 
 #pragma mark 屏幕旋转
@@ -738,6 +739,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
                     self.selectedOtherViewType = OtherViewTypeCommonDevice;
                 }
             }
+            
+           
             
             // 隐藏操作界面
             if (self.operatioinView.hidden == NO) {
@@ -1690,7 +1693,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     [self.screenConfigShadeView setHidden:!isShow animated:YES];
 }
 
-#pragma mark - setter
+
 #pragma mark - 选中设备, 显示详细信息
 - (void)setSelectedDevice:(DeviceForUser *)selectedDevice
 {
@@ -1814,6 +1817,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     self.actualImageViewTapGR.enabled = NO;
     // 视角切换默认隐藏
     self.viewpointButtonsView.hidden = YES;
+    self.cameraFollowConfigView.hidden = YES;
     self.deviceInfoBackgroundView.hidden = YES;
     
     if (_currentMode == ActualModeTypeNormal) {
@@ -2121,6 +2125,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     // 操作界面隐藏(视角切换/更改布局/更改底图)
     [self updateViewHideOrShowByType:TopViewTypeForCommonDeviceView];
     
+    [self updateOtherDeviceViewSwitchButtonStatus];
     
     
     if ([self checkDataOfOtherDeviceView]) {
@@ -2128,7 +2133,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         self.commonDeviceCollectionView.hidden = NO;
     } else {
         self.placeHolderLabelForOtherDeviceView.hidden = NO;
-        [self updatePlaceHolderLabelForOtherDeviceView];
+        [self updatePlaceHolderLabelOfOtherDeviceView];
         self.commonDeviceCollectionView.hidden = YES;
     }
 }
@@ -2156,9 +2161,17 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 }
 
 // 根据当前选择分类，更新占位label的文字
-- (void)updatePlaceHolderLabelForOtherDeviceView
+- (void)updatePlaceHolderLabelOfOtherDeviceView
 {
     self.placeHolderLabelForOtherDeviceView.text = self.selectedOtherViewType == OtherViewTypeCommonDevice ? @"暂无公共设备" : @"暂无音频文件";
+    
+}
+
+- (void)updateOtherDeviceViewSwitchButtonStatus
+{
+    
+    self.commonDeviceButton.selected = _selectedOtherViewType == OtherViewTypeCommonDevice;
+    self.musicFileButton.selected = _selectedOtherViewType != OtherViewTypeCommonDevice;
 }
 
 - (BOOL)checkPermissionsByDevice:(DeviceForUser *)device
@@ -2181,13 +2194,17 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         
         self.selectedDevice = nil;
         
-        self.selectedOtherViewType = (OtherViewType)sender.tag;
         
         // 判断当前分类是否有数据
         if (![self checkDataOfOtherDeviceView]) {
-            [self updatePlaceHolderLabelForOtherDeviceView];
+            [self updatePlaceHolderLabelOfOtherDeviceView];
         }
         
+        
+        self.selectedOtherViewType = (OtherViewType)sender.tag;
+        
+        [self updateOtherDeviceViewSwitchButtonStatus];
+
         
         [self.commonDeviceCollectionView reloadData];
     }

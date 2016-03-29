@@ -222,4 +222,21 @@
         [_delegate deviceInfoView:self channelIndexChanged:selectedIndex];
     }
 }
+
+- (void)willMoveToWindow:(UIWindow *)newWindow
+{
+    if (newWindow == [UIApplication sharedApplication].keyWindow) {
+        if (!self.channelDropdown) {
+            return;
+        }
+        self.channelDropdown.textColor = [UIColor whiteColor];
+        self.channelDropdown.tableTextColor = [UIColor whiteColor];
+        self.channelDropdown.listCellBackgroundImage = [UIImage imageNamed:@"dropdownListCellBg.png"];
+        self.channelDropdown.listCellBackgroundImageSelected = [UIImage imageNamed:@"dropdownListCellBgSelected.png"];
+        self.channelDropdown.maxCountForShow = 3;
+        self.channelDropdown.rightImage = [UIImage imageNamed:@"dropdownListRightImage1.png"];
+        self.channelDropdown.rightImageSelected = [UIImage imageNamed:@"dropdownListRightImageSelected1.png"];
+        self.channelDropdown.backgroundImage = [UIImage imageNamed:@"dropdownListBackground.png"];
+    }
+}
 @end

@@ -228,17 +228,17 @@
         return;
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [WFFProgressHud showWithStatus:@"正在登陆..."];
-    });
+    [WFFProgressHud showWithStatus:@"正在登陆..."];
+    
     self.needLoginAfterConnected = NO;
     
     [[Common shareCommon] loginWithUserName:self.userNameTextField.text pwd:self.pwdTextField.text remeberPwd:self.remeberPwdCheckBox.selected autoLogin:self.autoLoginCheckBox.selected completionHandle:^(BOOL isSuccess, NSString *errorDescription) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (isSuccess) {
+                [WFFProgressHud dismiss];
                 SystemMainViewController *nextVC = [[SystemMainViewController alloc] initWithNibName:@"SystemMainViewController" bundle:nil];
                 [weakSelf presentViewController:nextVC animated:YES completion:^{
-                    [WFFProgressHud dismiss];
+                    
                 }];
             } else {
                 [WFFProgressHud showErrorStatus:errorDescription];
