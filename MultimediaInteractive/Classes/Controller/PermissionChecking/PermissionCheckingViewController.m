@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *pwdTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *pwdInputImageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintsWhileHideKeyboard;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintsWhileShowKeyboard;
 
 // 该界面刚进来并没有连接服务器,点击登陆才会开始连接服务器.连接到服务器后,需要做登陆操作.
 // 当收到通知的时候,如果连接上服务器了.根据该字段决定是否登陆
@@ -116,12 +117,13 @@
     CGRect kbRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];//得到鍵盤的高度
     if (CGRectGetMinY(kbRect) < kScreenHeight) { // 键盘显示
         [UIView animateWithDuration:0.25 animations:^{
-            self.constraintsWhileHideKeyboard.constant = kbRect.size.height;
+            [self.view removeConstraint:self.constraintsWhileHideKeyboard];
+            self.constraintsWhileShowKeyboard.constant = kbRect.size.height;
             [self.view layoutIfNeeded];
         }];
     } else { // 键盘隐藏
         [UIView animateWithDuration:0.25 animations:^{
-            self.constraintsWhileHideKeyboard.constant = 200;
+            [self.view addConstraint:self.constraintsWhileHideKeyboard];
             [self.view layoutIfNeeded];
         }];
     }

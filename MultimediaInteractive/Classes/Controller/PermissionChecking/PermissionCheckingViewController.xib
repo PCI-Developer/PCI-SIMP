@@ -10,7 +10,8 @@
             <connections>
                 <outlet property="anonLoginButton" destination="3xs-kN-cBf" id="66Z-Xv-dJy"/>
                 <outlet property="autoLoginCheckBox" destination="ONh-t2-Af8" id="wb3-KB-fw7"/>
-                <outlet property="constraintsWhileHideKeyboard" destination="Zj9-m5-dDo" id="VUT-c3-91e"/>
+                <outlet property="constraintsWhileHideKeyboard" destination="2BS-XW-Ofa" id="NFj-KP-CKu"/>
+                <outlet property="constraintsWhileShowKeyboard" destination="eqV-K9-he1" id="zKc-qt-hKg"/>
                 <outlet property="loginButton" destination="gEc-eF-7c2" id="cXc-gv-rRe"/>
                 <outlet property="pwdInputImageView" destination="7wB-4W-6S4" id="hIQ-ZB-3kS"/>
                 <outlet property="pwdTextField" destination="pSf-6g-yZa" id="qPb-zg-621"/>
