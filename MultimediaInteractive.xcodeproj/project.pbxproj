@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		6009C6FA1BF5DC8000C8B183 /* WFFProgressHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 6009C6F91BF5DC8000C8B183 /* WFFProgressHud.m */; };
 		6009C6FC1BF5DCDF00C8B183 /* WFFProgressHud.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6009C6FB1BF5DCDF00C8B183 /* WFFProgressHud.xib */; };
-		6009C6FF1BF5DD4C00C8B183 /* hudBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 6009C6FD1BF5DD4C00C8B183 /* hudBackground.png */; };
-		6009C7031BF5E97A00C8B183 /* hudError.png in Resources */ = {isa = PBXBuildFile; fileRef = 6009C7011BF5E97A00C8B183 /* hudError.png */; };
-		6009C7041BF5E97A00C8B183 /* hudSuccess.png in Resources */ = {isa = PBXBuildFile; fileRef = 6009C7021BF5E97A00C8B183 /* hudSuccess.png */; };
-		6009C7061BF5EAAA00C8B183 /* hudLoading.png in Resources */ = {isa = PBXBuildFile; fileRef = 6009C7051BF5EAAA00C8B183 /* hudLoading.png */; };
 		600C5B261C59A65F00EB21EC /* DeviceInfoLightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 600C5B251C59A65F00EB21EC /* DeviceInfoLightView.xib */; };
 		6015FBA51C197376003A417E /* CameraFollowConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6015FBA31C197376003A417E /* CameraFollowConfigView.m */; };
 		6015FBA61C197376003A417E /* CameraFollowConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6015FBA41C197376003A417E /* CameraFollowConfigView.xib */; };
@@ -139,10 +135,6 @@
 		6009C6F81BF5DC8000C8B183 /* WFFProgressHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFFProgressHud.h; sourceTree = "<group>"; };
 		6009C6F91BF5DC8000C8B183 /* WFFProgressHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFFProgressHud.m; sourceTree = "<group>"; };
 		6009C6FB1BF5DCDF00C8B183 /* WFFProgressHud.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WFFProgressHud.xib; sourceTree = "<group>"; };
-		6009C6FD1BF5DD4C00C8B183 /* hudBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudBackground.png; sourceTree = "<group>"; };
-		6009C7011BF5E97A00C8B183 /* hudError.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudError.png; sourceTree = "<group>"; };
-		6009C7021BF5E97A00C8B183 /* hudSuccess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudSuccess.png; sourceTree = "<group>"; };
-		6009C7051BF5EAAA00C8B183 /* hudLoading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudLoading.png; sourceTree = "<group>"; };
 		600C5B251C59A65F00EB21EC /* DeviceInfoLightView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceInfoLightView.xib; sourceTree = "<group>"; };
 		6015FBA21C197376003A417E /* CameraFollowConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFollowConfigView.h; sourceTree = "<group>"; };
 		6015FBA31C197376003A417E /* CameraFollowConfigView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraFollowConfigView.m; sourceTree = "<group>"; };
@@ -558,10 +550,6 @@
 				6009C6F81BF5DC8000C8B183 /* WFFProgressHud.h */,
 				6009C6F91BF5DC8000C8B183 /* WFFProgressHud.m */,
 				6009C6FB1BF5DCDF00C8B183 /* WFFProgressHud.xib */,
-				6009C7011BF5E97A00C8B183 /* hudError.png */,
-				6009C7021BF5E97A00C8B183 /* hudSuccess.png */,
-				6009C6FD1BF5DD4C00C8B183 /* hudBackground.png */,
-				6009C7051BF5EAAA00C8B183 /* hudLoading.png */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1056,7 +1044,7 @@
 				TargetAttributes = {
 					602C3A9E1BAFCC88000C41DA = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 6LN964PSG9;
+						DevelopmentTeam = CL9XNG6749;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1111,24 +1099,20 @@
 				6089BB661BBA64B600BAAE4E /* ConfigViewController.xib in Resources */,
 				6015FBA61C197376003A417E /* CameraFollowConfigView.xib in Resources */,
 				A40137F81CA39ABA001EA501 /* LaunchScreen.xib in Resources */,
-				6009C7041BF5E97A00C8B183 /* hudSuccess.png in Resources */,
 				602C3B781BAFCCCC000C41DA /* 库的配置.rtf in Resources */,
 				60CD4E431C03F95400CF51F9 /* DeviceInfoOCVolumeSliderView.xib in Resources */,
 				602B52CC1C916C4600EBBDDD /* DeviceInfoMusicFileView.xib in Resources */,
-				6009C7061BF5EAAA00C8B183 /* hudLoading.png in Resources */,
 				60BEC2991C166D89001BEED5 /* PermissionCheckingViewController.xib in Resources */,
 				60A3E2261BD48DB900B4FFCA /* DeviceCollectionViewCell.xib in Resources */,
 				60A3D5A61BCCCFAA00313F8F /* menu_info.plist in Resources */,
 				600C5B261C59A65F00EB21EC /* DeviceInfoLightView.xib in Resources */,
 				602C3AAF1BAFCC88000C41DA /* Assets.xcassets in Resources */,
-				6009C7031BF5E97A00C8B183 /* hudError.png in Resources */,
 				6015FBAB1C197390003A417E /* ProcessView.xib in Resources */,
 				60AE842D1BD0EEE900F85304 /* SHMenuCell.xib in Resources */,
 				60E78C451BB4DC2C00EF6074 /* LogInfoViewController.xib in Resources */,
 				602C3B541BAFCCCC000C41DA /* ActualModeViewController.xib in Resources */,
 				6009C6FC1BF5DCDF00C8B183 /* WFFProgressHud.xib in Resources */,
 				60E78C811BB4E3C300EF6074 /* MJRefresh.bundle in Resources */,
-				6009C6FF1BF5DD4C00C8B183 /* hudBackground.png in Resources */,
 				602C3B5A1BAFCCCC000C41DA /* SystemMainViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1359,7 +1343,7 @@
 				INFOPLIST_FILE = MultimediaInteractive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.pci-china.SIMPTEST";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pci-china.SIMP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -1381,7 +1365,7 @@
 				INFOPLIST_FILE = MultimediaInteractive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.pci-china.SIMPTEST";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pci-china.SIMP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;

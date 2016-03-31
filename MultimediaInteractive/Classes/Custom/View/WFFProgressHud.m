@@ -11,7 +11,8 @@
 typedef enum {
     WFFProgressHudTypeNormal,
     WFFProgressHudTypeError,
-    WFFProgressHudTypeSuccecss
+    WFFProgressHudTypeSuccecss,
+    WFFProgressHudTypeWarnning
 } WFFProgressHudType;
 
 @interface WFFProgressHud () {
@@ -55,6 +56,10 @@ static int autoDismissDelay;
 }
 
 
++ (void)showWarnningStatus:(NSString *)status
+{
+    [self showWarnningStatus:status onView:[UIApplication sharedApplication].keyWindow];
+}
 
 
 
@@ -70,6 +75,7 @@ kSingleTon_M(WFFProgressHud)
 {
     WFFProgressHud *progressHud = (WFFProgressHud *)[[UINib nibWithNibName:@"WFFProgressHud" bundle:nil] instantiateWithOwner:nil options:nil].firstObject;
     [progressHud addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:progressHud action:@selector(tapGRAction:)]];
+    progressHud.statusLabel.textColor = [UIColor colorFromHexRGB:@"#666666"];
     autoDismissDelay = 0;
     return progressHud;
 }
@@ -80,6 +86,26 @@ kSingleTon_M(WFFProgressHud)
         [self dismiss];
     }
 }
+
+
++ (void)showErrorStatus:(NSString *)status onView:(UIView *)view
+{
+    [self showAutoDismissHudWithStatus:status type:WFFProgressHudTypeError onView:view];
+}
+
+
++ (void)showSuccessStatus:(NSString *)status onView:(UIView *)view
+{
+    [self showAutoDismissHudWithStatus:status type:WFFProgressHudTypeSuccecss onView:view];
+}
+
++ (void)showWarnningStatus:(NSString *)status onView:(UIView *)view
+{
+    [self showAutoDismissHudWithStatus:status type:WFFProgressHudTypeWarnning onView:view];
+}
+
+
+
 
 + (void)showWithStatus:(NSString *)status onView:(UIView *)view
 {
@@ -111,7 +137,8 @@ kSingleTon_M(WFFProgressHud)
     }
 }
 
-+ (void)showErrorStatus:(NSString *)status onView:(UIView *)view
+
++ (void)showAutoDismissHudWithStatus:(NSString *)status type:(WFFProgressHudType)type onView:(UIView *)view
 {
     WFFProgressHud *hud = [WFFProgressHud shareWFFProgressHud];
     
@@ -123,7 +150,7 @@ kSingleTon_M(WFFProgressHud)
                 [view addSubview:hud];
             }
             hud.isAutoDismiss = YES;
-            hud.type = WFFProgressHudTypeError;
+            hud.type = type;
             hud.status = status;
             [hud updateUI];
         });
@@ -134,42 +161,14 @@ kSingleTon_M(WFFProgressHud)
             [view addSubview:hud];
         }
         hud.isAutoDismiss = YES;
-        hud.type = WFFProgressHudTypeError;
+        hud.type = type;
         hud.status = status;
         [hud updateUI];
     }
 }
 
 
-+ (void)showSuccessStatus:(NSString *)status onView:(UIView *)view
-{
-    WFFProgressHud *hud = [WFFProgressHud shareWFFProgressHud];
-    
-    if (![NSThread isMainThread]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (hud.superview != view) {
-                [hud removeFromSuperview];
-                hud.frame = view.bounds;
-                [view addSubview:hud];
-            }
-            hud.isAutoDismiss = YES;
-            hud.type = WFFProgressHudTypeSuccecss;
-            hud.status = status;
-            [hud updateUI];
-        });
-    } else {
-        if (hud.superview != view) {
-            [hud removeFromSuperview];
-            hud.frame = view.bounds;
-            [view addSubview:hud];
-        }
-        hud.isAutoDismiss = YES;
-        hud.type = WFFProgressHudTypeSuccecss;
-        hud.status = status;
-        [hud updateUI];
 
-    }
-}
 
 + (void)dismiss
 {
@@ -203,9 +202,13 @@ kSingleTon_M(WFFProgressHud)
         self.hudImageView.image = [UIImage imageNamed:@"hudSuccess.png"];
         [self.hudImageView stopRotation];
         
-    } else {
+    } else if(self.type == WFFProgressHudTypeError) {
         self.hudImageView.transform = CGAffineTransformIdentity;
         self.hudImageView.image = [UIImage imageNamed:@"hudError.png"];
+        [self.hudImageView stopRotation];
+    } else if (self.type == WFFProgressHudTypeWarnning) {
+        self.hudImageView.transform = CGAffineTransformIdentity;
+        self.hudImageView.image = [UIImage imageNamed:@"hudWarnning.png"];
         [self.hudImageView stopRotation];
     }
     

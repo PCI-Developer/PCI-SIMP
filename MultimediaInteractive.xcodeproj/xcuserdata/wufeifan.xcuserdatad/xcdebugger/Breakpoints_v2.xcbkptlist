@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MultimediaInteractive/Classes/Custom/View/WFFFollowHandsView.m"
-            timestampString = "481081177.879773"
+            timestampString = "481090020.664033"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
             landmarkName = "-setIsRotation:"
             landmarkType = "5">
          </BreakpointContent>

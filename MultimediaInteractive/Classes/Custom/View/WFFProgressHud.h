@@ -18,5 +18,7 @@ kSingleTon_H(WFFProgressHud)
 
 + (void)showSuccessStatus:(NSString *)status;
 
++ (void)showWarnningStatus:(NSString *)status;
+
 + (void)dismiss;
 @end

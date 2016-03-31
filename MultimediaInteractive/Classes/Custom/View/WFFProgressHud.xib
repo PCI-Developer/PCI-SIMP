@@ -12,23 +12,23 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="evR-bf-j8S">
-                    <rect key="frame" x="150" y="200" width="300" height="200"/>
+                    <rect key="frame" x="140" y="210" width="320" height="180"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hudBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="qLo-ne-4lE">
-                            <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hudBg" translatesAutoresizingMaskIntoConstraints="NO" id="qLo-ne-4lE">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hudLoading.png" translatesAutoresizingMaskIntoConstraints="NO" id="vav-xN-2yh">
-                            <rect key="frame" x="110" y="15" width="80" height="80"/>
+                            <rect key="frame" x="120" y="20" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="RqM-5O-J1p"/>
                                 <constraint firstAttribute="width" constant="80" id="Xfw-ch-UaV"/>
                             </constraints>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKP-nA-Dzr">
-                            <rect key="frame" x="0.0" y="100" width="300" height="100"/>
+                            <rect key="frame" x="0.0" y="100" width="320" height="80"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjf-Fd-gyh">
-                                    <rect key="frame" x="20" y="50" width="260" height="0.0"/>
+                                    <rect key="frame" x="20" y="40" width="280" height="0.0"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -43,16 +43,22 @@
                                 <constraint firstItem="kjf-Fd-gyh" firstAttribute="leading" secondItem="SKP-nA-Dzr" secondAttribute="leading" constant="20" id="hXd-sG-ar9"/>
                                 <constraint firstItem="kjf-Fd-gyh" firstAttribute="centerY" secondItem="SKP-nA-Dzr" secondAttribute="centerY" id="yH9-Jh-i8Y"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="YM7-yY-wFO"/>
+                                </mask>
+                            </variation>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="qLo-ne-4lE" firstAttribute="leading" secondItem="evR-bf-j8S" secondAttribute="leading" id="39x-DM-mZf"/>
-                        <constraint firstAttribute="height" constant="200" id="8dY-fD-KB0"/>
-                        <constraint firstItem="vav-xN-2yh" firstAttribute="top" secondItem="evR-bf-j8S" secondAttribute="top" constant="15" id="9pn-53-UUA"/>
-                        <constraint firstAttribute="width" constant="300" id="BPH-vm-4MV"/>
+                        <constraint firstAttribute="height" constant="180" id="8dY-fD-KB0"/>
+                        <constraint firstItem="vav-xN-2yh" firstAttribute="top" secondItem="evR-bf-j8S" secondAttribute="top" constant="20" id="9pn-53-UUA"/>
+                        <constraint firstAttribute="width" constant="320" id="BPH-vm-4MV"/>
                         <constraint firstAttribute="trailing" secondItem="SKP-nA-Dzr" secondAttribute="trailing" id="Qdd-jn-QmX"/>
                         <constraint firstAttribute="trailing" secondItem="qLo-ne-4lE" secondAttribute="trailing" id="SpE-H2-DHW"/>
+                        <constraint firstItem="SKP-nA-Dzr" firstAttribute="top" secondItem="vav-xN-2yh" secondAttribute="bottom" id="VsX-7K-rh0"/>
                         <constraint firstAttribute="bottom" secondItem="SKP-nA-Dzr" secondAttribute="bottom" id="Y54-LY-7HB"/>
                         <constraint firstAttribute="bottom" secondItem="qLo-ne-4lE" secondAttribute="bottom" id="dnV-zs-utT"/>
                         <constraint firstItem="vav-xN-2yh" firstAttribute="centerX" secondItem="evR-bf-j8S" secondAttribute="centerX" id="ncX-BZ-dtp"/>
@@ -74,7 +80,7 @@
         </view>
     </objects>
     <resources>
-        <image name="hudBackground.png" width="833" height="518"/>
+        <image name="hudBg" width="320" height="180"/>
         <image name="hudLoading.png" width="133" height="133"/>
     </resources>
 </document>

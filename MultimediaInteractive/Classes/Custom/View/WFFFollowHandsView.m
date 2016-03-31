@@ -107,7 +107,9 @@
     if (_isRotation) {
         CGPoint point = [sender locationInView:sender.view];
         if (CGRectContainsPoint([self indicatorForRotationRect], point)) {
-            self.rotationRadian += M_PI_2;
+            [self endRotation];
+        } else {
+           self.rotationRadian += M_PI_2;
         }
     } else {
         if ([_delegate respondsToSelector:@selector(clickFollowHandsView:)]) {
@@ -422,6 +424,7 @@ CGFloat convertRadianToNormal(CGFloat radian)
 
 - (void)beginRotation
 {
+    [self shakeWithDuration:0.25];
     self.isRotation = YES;
 }
 
