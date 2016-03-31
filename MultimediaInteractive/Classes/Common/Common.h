@@ -123,8 +123,8 @@ kSingleTon_H(Common)
 #pragma mark - 获取所有区域
 - (NSArray *)getAllAreas;
 
-#pragma mark - 改变选择区域
-- (void)changeAreaWithIndex:(NSInteger)index;
+#pragma mark - 改变选择区域 NO代表选中的当前区域，不切换。 YES其他区域，切换
+- (BOOL)changeAreaWithIndex:(NSInteger)index;
 
 #pragma mark - 获取所有设备字典
 - (NSDictionary *)getAllDevices;

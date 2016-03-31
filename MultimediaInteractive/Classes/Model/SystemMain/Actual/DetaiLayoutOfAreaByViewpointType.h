@@ -53,4 +53,9 @@
  */
 @property (nonatomic, strong) DeviceForUser *device;
 
+/**
+ *  旋转角度
+ */
+@property (nonatomic, assign) CGFloat rotationRadian;
+
 @end

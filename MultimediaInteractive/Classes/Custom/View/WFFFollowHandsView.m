@@ -17,7 +17,12 @@
     UIPanGestureRecognizer *panGR;
     UITapGestureRecognizer *tapGR;
     UILongPressGestureRecognizer *longPressGR;
+    CALayer *indicatorForRotationLayer;
+    CGFloat radianStartRotation;
+    CGFloat radianBeforeRotation;
 }
+
+@property (nonatomic, assign) BOOL isRotation;
 
 @end
 
@@ -34,6 +39,8 @@
         self.canMove = YES;
         self.canClick = NO;
         self.canLongPress = NO;
+        self.isRotation = NO;
+        self.rotationRadian = 0;
 //        self.additionImage = [UIImage imageNamed:@"glow"];
 //        self.additionScale = 0.5;
     }
@@ -94,10 +101,18 @@
     }
 }
 
+
 - (void)tapGRAction:(UITapGestureRecognizer *)sender
 {
-    if ([_delegate respondsToSelector:@selector(clickFollowHandsView:)]) {
-        [_delegate clickFollowHandsView:self];
+    if (_isRotation) {
+        CGPoint point = [sender locationInView:sender.view];
+        if (CGRectContainsPoint([self indicatorForRotationRect], point)) {
+            self.rotationRadian += M_PI_2;
+        }
+    } else {
+        if ([_delegate respondsToSelector:@selector(clickFollowHandsView:)]) {
+            [_delegate clickFollowHandsView:self];
+        }
     }
 }
 
@@ -115,55 +130,99 @@
     return YES;
 }
 
+CGFloat convertRadianToNormal(CGFloat radian)
+{
+    if (radian < 0) {
+        radian += 2 * M_PI;
+    }
+    return radian;
+}
+
 - (void)panGRAction:(UIPanGestureRecognizer *)sender
 {
-
-    UIView *superView = self.superview;
-    CGPoint point = [sender locationInView:superView];
-    CGFloat dx, dy;
-    dx = point.x - beginPoint.x;
-    dy = point.y - beginPoint.y;
-    CGPoint newCenterPoint = CGPointMake(defaultPoint.x + dx, defaultPoint.y + dy);
-    switch (sender.state) {
-        case UIGestureRecognizerStateBegan:
-            defaultPoint = sender.view.center;
-            beginPoint = point;
+    /*if (_isRotation) {
+        CGFloat changedRadian;
+        switch (sender.state) {
+            case UIGestureRecognizerStateBegan:
+                radianBeforeRotation = self.rotationRadian;
+                radianStartRotation = [self point2RadianWithLoc:[sender locationInView:self] view:self];
+                break;
+                
+            case UIGestureRecognizerStateCancelled:
+                changedRadian = convertRadianToNormal([self point2RadianWithLoc:[sender locationInView:self] view:self] - radianStartRotation);
+                radianStartRotation = 0;
+                break;
+                
+            case UIGestureRecognizerStateChanged:
+                changedRadian = convertRadianToNormal([self point2RadianWithLoc:[sender locationInView:self] view:self] - radianStartRotation);
+                NSLog(@"起始角度 %f 变化角度%f", radianBeforeRotation / M_PI * 180, changedRadian / M_PI * 180);
+                self.rotationRadian = radianBeforeRotation + changedRadian;
+                break;
+                
+            case UIGestureRecognizerStateEnded:
+                changedRadian = convertRadianToNormal([self point2RadianWithLoc:[sender locationInView:self] view:self] - radianStartRotation);
+                radianStartRotation = 0;
+                
+//                self.rotationRadian = radianBeforeRotation + changedRadian;
+//                NSLog(@"改变角度 %f, 最终角度 %f", changedRadian / M_PI * 180, self.rotationRadian / M_PI * 180);
+                break;
+                
+            default:
+                break;
+        }
+        
+        
+        
+        
+    } else {*/
+        UIView *superView = self.superview;
+        CGPoint point = [sender locationInView:superView];
+        CGFloat dx, dy;
+        dx = point.x - beginPoint.x;
+        dy = point.y - beginPoint.y;
+        CGPoint newCenterPoint = CGPointMake(defaultPoint.x + dx, defaultPoint.y + dy);
+        switch (sender.state) {
+            case UIGestureRecognizerStateBegan:
+                defaultPoint = sender.view.center;
+                beginPoint = point;
                 [self updateUIByState:YES];
-            
-            if ([_delegate respondsToSelector:@selector(followHandsView:beginMoveWithHandsPointInSuperView:)]) {
-                [_delegate followHandsView:self beginMoveWithHandsPointInSuperView:point];
-            }
-            break;
-            
-        case UIGestureRecognizerStateCancelled:
+                
+                if ([_delegate respondsToSelector:@selector(followHandsView:beginMoveWithHandsPointInSuperView:)]) {
+                    [_delegate followHandsView:self beginMoveWithHandsPointInSuperView:point];
+                }
+                break;
+                
+            case UIGestureRecognizerStateCancelled:
                 sender.view.center = defaultPoint;
                 [self updateUIByState:NO];
-            
-            if ([_delegate respondsToSelector:@selector(followHandsView:cancelMoveWithHandsPointInSuperView:)]) {
-                [_delegate followHandsView:self cancelMoveWithHandsPointInSuperView:point];
-            }
-            break;
-            
-        case UIGestureRecognizerStateChanged:
+                
+                if ([_delegate respondsToSelector:@selector(followHandsView:cancelMoveWithHandsPointInSuperView:)]) {
+                    [_delegate followHandsView:self cancelMoveWithHandsPointInSuperView:point];
+                }
+                break;
+                
+            case UIGestureRecognizerStateChanged:
                 sender.view.center = newCenterPoint;
                 [self updateUIByState:YES];
-            
-            if ([_delegate respondsToSelector:@selector(followHandsView:movingWithHandsPointInSuperView:)]) {
-                [_delegate followHandsView:self movingWithHandsPointInSuperView:point];
-            }
-            break;
-            
-        case UIGestureRecognizerStateEnded:
+                
+                if ([_delegate respondsToSelector:@selector(followHandsView:movingWithHandsPointInSuperView:)]) {
+                    [_delegate followHandsView:self movingWithHandsPointInSuperView:point];
+                }
+                break;
+                
+            case UIGestureRecognizerStateEnded:
                 sender.view.center = newCenterPoint;
                 [self updateUIByState:NO];
-            if ([_delegate respondsToSelector:@selector(followHandsView:endMoveWithHandsPointInSuperView:)]) {
-                [_delegate followHandsView:self endMoveWithHandsPointInSuperView:point];
-            }
-            break;
-            
-        default:
-            break;
-    }
+                if ([_delegate respondsToSelector:@selector(followHandsView:endMoveWithHandsPointInSuperView:)]) {
+                    [_delegate followHandsView:self endMoveWithHandsPointInSuperView:point];
+                }
+                break;
+                
+            default:
+                break;
+        }
+    //}
+    
 }
 
 - (void)beginMoveByGR:(UIGestureRecognizer *)gr
@@ -310,4 +369,91 @@
         self.layer.borderWidth = 0;
     }
 }
+
+#pragma mark - 旋转相关
+- (void)setRotationRadian:(CGFloat)rotationRadian
+{
+    if (rotationRadian > 2 * M_PI) {
+        self.rotationRadian = rotationRadian - (CGFloat)(((int)(rotationRadian / (M_PI * 2))) * M_PI * 2);
+    } else {
+        if (_rotationRadian != rotationRadian) {
+            
+            [self rotationWithRadian:rotationRadian];
+            _rotationRadian = rotationRadian;
+        }
+    }
+}
+
+- (void)rotationWithRadian:(CGFloat)radian
+{
+//    self.layer.transform = CATransform3DMakeRotation(radian / M_PI * 180, 0, 0, 1);
+    CALayer *topLayer = self.layer.sublayers.lastObject;
+    topLayer.transform = CATransform3DRotate(CATransform3DIdentity, radian, 0, 0, 1);
+}
+
+
+- (void)setIsRotation:(BOOL)isRotation
+{
+    if (_isRotation != isRotation) {
+        _isRotation = isRotation;
+        self.canClick = _isRotation;
+        if (isRotation) {
+            if (!indicatorForRotationLayer) {
+                indicatorForRotationLayer = [[CALayer alloc] init];
+                indicatorForRotationLayer.contents = (__bridge id _Nullable)([UIImage imageNamed:@"rotationButton"].CGImage);
+                indicatorForRotationLayer.frame = [self indicatorForRotationRect];
+                
+            }
+            [self.layer insertSublayer:indicatorForRotationLayer atIndex:0];
+        } else {
+            if (indicatorForRotationLayer) {
+                [indicatorForRotationLayer removeFromSuperlayer];
+            }
+        }
+    }
+}
+
+- (CGRect)indicatorForRotationRect
+{
+    // 45度角的点。
+    CGPoint point = [self rotationAroundCirclePoint:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2) radius:self.bounds.size.width / 2 - 10 radian:- M_PI_4];
+    return CGRectMake(point.x, point.y - (self.bounds.size.width - point.x), self.bounds.size.width - point.x, self.bounds.size.width - point.x);
+}
+
+- (void)beginRotation
+{
+    self.isRotation = YES;
+}
+
+- (void)endRotation
+{
+    self.isRotation = NO;
+}
+
+
+#pragma mark - 数学公式
+//  X+为基础,换算loc的弧度值
+- (CGFloat)point2RadianWithLoc:(CGPoint)loc view:(UIView *)view
+{
+    CGPoint c = CGPointMake(CGRectGetMidX(view.bounds),
+                            CGRectGetMidY(view.bounds));
+    
+    CGFloat radianByX = atan2(loc.y - c.y, loc.x - c.x);
+    if (radianByX < 0) {
+        radianByX += 2 * M_PI;
+    }
+    return radianByX;
+}
+
+/*
+ 圆上的某点逆时针沿着圆的轨迹旋转radian度后的坐标, X+为基础
+ */
+- (CGPoint)rotationAroundCirclePoint:(CGPoint)circlePoint radius:(CGFloat)radius radian:(CGFloat)radian
+{
+    CGFloat newX = circlePoint.x + radius * cos(radian);
+    CGFloat newY = circlePoint.y + radius * sin(radian);
+    return (CGPoint){newX, newY};
+}
+
+
 @end

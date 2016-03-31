@@ -100,6 +100,7 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.contentView.backgroundColor = [UIColor clearColor];
     }
+//    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.textLabel.text = [_processArray[indexPath.row] processName];
     
     return cell;

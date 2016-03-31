@@ -32,6 +32,7 @@
 #import "UIView+Addition.h"
 
 
+#define kOperationViewPos 0
 /**
  枚举值.当前置顶的view类型
  */
@@ -56,6 +57,7 @@ typedef enum
 
 @property (nonatomic, strong) NSMutableDictionary *movingViewDict; // 存放正在移动的所有view的字典
 
+// 放deviceView的父View
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *actualImageView;
 @property (nonatomic, strong) UITapGestureRecognizer *actualImageViewTapGR;
@@ -77,10 +79,6 @@ typedef enum
 @property (weak, nonatomic) IBOutlet UIView *operatioinView;
 
 - (IBAction)showProcessViewButtonAction:(UIButton *)sender;
-- (IBAction)addDeviceButtonAction:(UIButton *)sender;
-
-- (IBAction)changeActualImageButtonAction:(UIButton *)sender;
-- (IBAction)changeCurrenScreenButtonAction:(UIButton *)sender;
 // 修改场景时出现的按钮
 @property (weak, nonatomic) IBOutlet UIImageView *trashImageView;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
@@ -681,7 +679,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         case TopViewTypeNone: // 隐藏所有
             // 显示操作界面
             if (self.operatioinView.hidden) {
-                [self.operatioinView setHidden:NO animated:YES];
+                [self.operatioinView setHidden:NO animated:YES originPos:kOperationViewPos];
             }
             
             // 隐藏公共设备
@@ -716,7 +714,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             }
             // 隐藏操作界面
             if (self.operatioinView.hidden == NO) {
-                [self.operatioinView setHidden:YES animated:YES];
+                [self.operatioinView setHidden:YES animated:YES originPos:kOperationViewPos];
             }
             // 隐藏流程界面
             if (self.processBackgroundView.hidden == NO) {
@@ -744,7 +742,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             
             // 隐藏操作界面
             if (self.operatioinView.hidden == NO) {
-                [self.operatioinView setHidden:YES animated:YES];
+                [self.operatioinView setHidden:YES animated:YES originPos:kOperationViewPos];
             }
             // 隐藏流程界面
             if (self.processBackgroundView.hidden == NO) {
@@ -754,7 +752,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         case TopViewTypeForProcessView:
             // 隐藏操作界面
             if (self.operatioinView.hidden == NO) {
-                [self.operatioinView setHidden:YES animated:YES];
+                [self.operatioinView setHidden:YES animated:YES originPos:kOperationViewPos];
             }
             if (self.showQuickChooseButton.hidden == NO) {
                 [self.showQuickChooseButton setHidden:YES animated:YES];
@@ -1010,6 +1008,14 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
 
 
 #pragma mark - WFFFollowHandsViewDelegate
+#pragma mark - 场景配置中，长按进行单个设备旋转
+- (void)longPressFollowHandsView:(WFFFollowHandsView *)followHandsView gr:(UILongPressGestureRecognizer *)gr
+{
+    if (self.currentMode != ActualModeChangeScreen) {
+        return;
+    }
+    [followHandsView beginRotation];
+}
 #pragma mark 这里的移动的代理方法,专门处理连接操作 --- 只有正常模式才有用
 - (void)followHandsView:(WFFFollowHandsView *)followHandsView beginMoveWithHandsPointInSuperView:(CGPoint)handsPointInSuperView
 {
@@ -1502,6 +1508,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
             model.origin_Y = view.frame.origin.y;
             model.size_Width = view.frame.size.width;
             model.size_Height = view.frame.size.height;
+            model.rotationRadian = [((WFFFollowHandsView *)view) rotationRadian];
             [array addObject:model];
         }
     }
@@ -1547,6 +1554,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         deviceImage.frame = deviceView.bounds;
         deviceImage.tag = kTagForDeviceImageInWFFFollowHandsView;
         [deviceView addSubview:deviceImage];
+        
+        deviceView.rotationRadian = model.rotationRadian;
         
     // 判断是否灯光
     if ([model.device.UEQP_Type isEqualToString:@"灯光"]) {
@@ -1798,12 +1807,30 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     self.saveButton.hidden = !isShow;
     self.cancelButton.hidden = !isShow;
     self.trashImageView.hidden = !isShow;
+    
+//    [self.contentView.subviews setValue:@(isShow) forKey:@"isRotation"];
+    
+}
+
+#pragma mark 更改布局时，所有view启动旋转控制
+- (void)updateRotationStatus
+{
+    BOOL isShow = self.currentMode == ActualModeChangeScreen;
+    for (UIView *view in self.contentView.subviews) {
+        if ([view isKindOfClass:[WFFFollowHandsView class]]) {
+            SEL sel = isShow ? @selector(beginRotation) : @selector(endRotation);
+            ((void (*)(id, SEL))objc_msgSend)(view, sel);
+        }
+    }
 }
 
 #pragma mark 修改模式后,根据模式更新界面
 - (void)setCurrentMode:(ActualModeType)currentMode
 {
     _currentMode = currentMode;
+    
+    
+    [self updateViewHideOrShowByType:TopViewTypeNone];
     // 默认隐藏
     self.showQuickChooseButton.hidden = YES;
     [self showViewsForChangeLayout:NO];
@@ -1875,12 +1902,16 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     } else if(_currentMode == ActualModeChangeScreen){
         // 显示按钮
         [self showViewsForChangeLayout:YES];
-
+        
+        
         [self showShadeView:NO];
         self.actualImageView.alpha = 0.5;
         [self setDeviceViewGREnable:YES withType:@"move"];
         [self setDeviceViewGREnable:NO withType:@"click"];
-        [self setDeviceViewGREnable:NO withType:@"longPress"];
+        [self setDeviceViewGREnable:YES withType:@"longPress"];
+        
+#warning If you need to open the rotating control of all device view after application enter the scene layout mode, just cancel the following comments  如果需要在进入场景布局之后就打开所有设备视图的旋转控制，取消下面注释即可
+//        [self updateRotationStatus];
     } else {// 操作状态
         [self showShadeView:NO];
         self.actualImageView.alpha = 1;
@@ -1889,6 +1920,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
         [self setDeviceViewGREnable:NO withType:@"longPress"];
         [self setDeviceViewGREnable:NO withType:@"click"];
     }
+    
 }
 
 - (BOOL)shouldAutorotate
@@ -2059,6 +2091,7 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     [self saveDeviceLayout];
     // setter,normal自动将场景配置应用到界面
     self.currentMode = ActualModeTypeNormal;
+    
         
 }
 
@@ -2097,18 +2130,21 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     }
 }
 
-- (IBAction)addDeviceButtonAction:(UIButton *)sender {
+- (void)addDevice
+{
     self.currentMode = ActualModeTypeConfig;
 }
 
-- (IBAction)changeActualImageButtonAction:(UIButton *)sender {
+- (void)changeActual
+{
     __weak typeof(self) weakSelf = self;
     [self showImagePickerControllerWithTitle:@"更改实景图" cancleHandle:^{
         weakSelf.currentMode = ActualModeTypeNormal;
     }];
 }
 
-- (IBAction)changeCurrenScreenButtonAction:(UIButton *)sender {
+- (void)screenConfig
+{
     self.currentMode = ActualModeChangeScreen;
 }
 

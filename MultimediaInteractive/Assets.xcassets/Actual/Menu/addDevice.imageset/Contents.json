@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "addDevice.png",
       "scale" : "1x"
     },
     {

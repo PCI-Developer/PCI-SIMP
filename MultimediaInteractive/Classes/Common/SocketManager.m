@@ -304,7 +304,7 @@ kSingleTon_M(SocketManager)
     
     kLog(@"接收到新数据 - 线程 %@  当前数据 : %@", [NSThread currentThread], self.readStream);
     
-#warning 此处需要注意线程安全问题
+    // Here need to pay attention to thread safety problem 此处需要注意线程安全问题
     static OSSpinLock lock = OS_SPINLOCK_INIT;
     OSSpinLockLock(&lock);
     // 每次获取到就调用 -- 提取出协议串并处理

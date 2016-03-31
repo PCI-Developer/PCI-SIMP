@@ -15,7 +15,7 @@
 #import "SHMenuItem.h"
 #import "Reachability.h"
 #import "Area.h"
-
+#import "KxMenu.h"
 
 #define kDeviceBatteryState ([UIDevice currentDevice].batteryState)
 #define kDeviceBatteryLevel ([UIDevice currentDevice].batteryLevel)
@@ -60,6 +60,11 @@
  */
 @property (nonatomic, assign) BOOL hasChangedArea;
 
+@property (nonatomic, strong) NSArray *menuItemArray;
+
+// 标记是否需要更新menuItem。 切换区域时，需要更新。因为需要重新绑定target action；
+@property (nonatomic, assign) BOOL needUpdateKxMenu;
+
 @end
 
 #define kBatteryBgWidthOfFull (-10)
@@ -79,6 +84,8 @@
 
 #pragma mark - 生命周期函数
 - (void)viewDidLoad {
+    self.needUpdateKxMenu = YES;
+    
     [super viewDidLoad];
     
     self.hasChangedArea = NO;
@@ -100,6 +107,7 @@
     
     self.selectedVC = @"ActualModeViewController";
 
+    
     // 网络变更通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wifiStatusChanged:) name:kReachabilityChangedNotification object:nil];
     
@@ -243,8 +251,7 @@
     } else {
         if (item.function) {
             SEL sel = NSSelectorFromString(item.function);
-            // 改BuildSetting的ENABLE_STRICT_OBJC_MSGSEND字段为NO才可使用
-            objc_msgSend(self, sel);
+            ((void (*)(id, SEL))objc_msgSend)(self, sel);
         }
     }
 }
@@ -312,8 +319,13 @@
 
 - (void)gotoAreaWithIndex:(NSInteger)index
 {
-    [[Common shareCommon] changeAreaWithIndex:index];
+    // 要切换的是当前区域，直接返回
+    if (![[Common shareCommon] changeAreaWithIndex:index]) return;
+    
     [self.viewControllersDict removeAllObjects];
+    
+    // 切换区域后，需要重新更新menu，因为要重新绑定target(actualvc)  action；
+    self.needUpdateKxMenu = YES;
     
     /**
      *  标记为需要重载
@@ -384,6 +396,42 @@
     }
     
     self.currentView = vc.view;
+}
+
+// 生成菜单 （主要相应的事件绑定）
+- (void)setupMenu
+{
+    kLog(@"生成新菜单");
+//    NSArray *titles = @[@"添加设备", @"更改布局", @"更换底图"];
+    NSArray *imagesName = @[@"addDevice", @"screenConfig", @"changeActual"];
+    NSMutableArray *images = [NSMutableArray array];
+    for (int i = 0; i < 3; i++) {
+        [images addObject:[UIImage imageNamed:imagesName[i]]];
+    }
+    NSMutableArray *itemsArray = [NSMutableArray array];
+    for (int i = 0; i < 3; i++) {
+        KxMenuItem *item = [KxMenuItem menuItem:nil image:images[i] target:self.viewControllersDict[_selectedVC] action:NSSelectorFromString(imagesName[i])];
+        [itemsArray addObject:item];
+    }
+    self.menuItemArray = itemsArray;
+}
+
+- (IBAction)showMenu:(UIButton *)sender {
+    
+    if (![self.selectedVC isEqualToString:NSStringFromClass([ActualModeViewController class])]) {
+        self.selectedVC = NSStringFromClass([ActualModeViewController class]);
+    }
+    
+    if (self.needUpdateKxMenu) {
+        [self setupMenu];
+        self.needUpdateKxMenu = NO;
+    }
+    
+    CGRect buttonRectOfView = [sender convertRect:sender.bounds toView:self.view];
+
+    
+    
+    [KxMenu showMenuInView:self.view fromRect:buttonRectOfView menuItems:self.menuItemArray];
 }
 
 

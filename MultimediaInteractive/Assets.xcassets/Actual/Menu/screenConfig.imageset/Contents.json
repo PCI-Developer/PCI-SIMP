@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "screenConfig.png",
       "scale" : "1x"
     },
     {

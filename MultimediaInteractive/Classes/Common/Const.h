@@ -214,3 +214,9 @@ return share; \
 #define kLocalUserKey @"localUser"
 
 #define kNotificationWillEnterForeground @"applicationWillEnterForeground"
+
+
+// 设备View 旋转相关
+#define kIndicatorForRotationViewSize 20
+
+

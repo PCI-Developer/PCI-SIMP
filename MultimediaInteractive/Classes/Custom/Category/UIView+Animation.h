@@ -56,9 +56,14 @@
 // 是否带转场动画的隐藏
 - (void)setHidden:(BOOL)hidden animated:(BOOL)animated;
 
+// 最后一个参数。原有的方向。 0 左边 1右边
+- (void)setHidden:(BOOL)hidden animated:(BOOL)animated originPos:(NSUInteger)originPos;
+
 
 // 是否带转场动画的隐藏
 - (void)setHidden:(BOOL)hidden animated:(BOOL)animated completionHandle:(void (^)())completionHandle;
+
+
 
 - (void)addSubview:(UIView *)view animated:(BOOL)animated;
 

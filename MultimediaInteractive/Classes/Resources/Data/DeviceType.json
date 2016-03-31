@@ -162,7 +162,7 @@
         "imageName" : "lights",
         "isActual" : true,
         "controlCMD" : ["oc", "brightness"],
-        "minValue" : 100,
-        "maxValue" : 0
+        "minValue" : 0,
+        "maxValue" : 100
     }
 }

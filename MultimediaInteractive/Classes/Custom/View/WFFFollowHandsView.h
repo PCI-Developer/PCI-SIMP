@@ -55,6 +55,12 @@
  */
 @property (nonatomic, assign) BOOL canLongPress;
 
+
+/**
+ *  旋转弧度
+ */
+@property (nonatomic, assign) CGFloat rotationRadian;
+
 #pragma mark - 自定义方法
 /**
  *  平移手势
@@ -94,6 +100,8 @@
  */
 - (void)endMoveByGR:(UIGestureRecognizer *)gr;
 
+- (void)beginRotation;
+- (void)endRotation;
 #pragma mark - 便利构造器
 #pragma mark 出现可移动view[根据cell的imageView的位置出现. 根据device的id设置tag]
 + (WFFFollowHandsView *)followHandsViewWithWidth:(CGFloat)width height:(CGFloat)height deviceCell:(DeviceCollectionViewCell *)cell device:(DeviceForUser *)device onView:(UIView *)view;
@@ -101,4 +109,5 @@
 + (WFFFollowHandsView *)followHandsViewByRandomPositionWithWidth:(CGFloat)width height:(CGFloat)height device:(DeviceForUser *)device onView:(UIView *)view;
 #pragma mark 按顺序出现view(根据当前num的序号,决定位置,根据device的id设置tag)
 + (WFFFollowHandsView *)followHandsViewByOrderWithWidth:(CGFloat)width height:(CGFloat)height device:(DeviceForUser *)device onView:(UIView *)view num:(NSInteger)num;
+
 @end

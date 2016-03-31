@@ -177,12 +177,12 @@
                     </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SXd-Lq-LcN">
-                    <rect key="frame" x="241" y="471" width="117" height="49"/>
+                    <rect key="frame" x="224.5" y="471" width="150" height="63"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="G8t-vK-iey"/>
-                        <constraint firstAttribute="width" constant="117" id="KjI-vE-jZD"/>
+                        <constraint firstAttribute="width" constant="150" id="KjI-vE-jZD"/>
                         <constraint firstAttribute="width" constant="189" id="vkC-Rm-zda"/>
-                        <constraint firstAttribute="height" constant="49" id="xF4-YP-clm"/>
+                        <constraint firstAttribute="height" constant="63" id="xF4-YP-clm"/>
                     </constraints>
                     <state key="normal" backgroundImage="applyForCameraFollowConfig"/>
                     <state key="highlighted" backgroundImage="applyForCameraFollowConfigHighlight"/>

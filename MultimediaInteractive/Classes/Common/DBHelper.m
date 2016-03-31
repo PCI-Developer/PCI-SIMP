@@ -44,7 +44,7 @@ kSingleTon_M(DBHelper)
 
 - (void)createTable
 {
-    NSString *sqlStringForDetailLayoutOfAreaByViewpointType = @"create table if not exists detailLayoutOfAreaByViewpointType(areaID,viewpointType int, deviceID, origin_X double, origin_Y double, size_Width double, size_Height double)";
+    NSString *sqlStringForDetailLayoutOfAreaByViewpointType = @"create table if not exists detailLayoutOfAreaByViewpointType(areaID,viewpointType int, deviceID, origin_X double, origin_Y double, size_Width double, size_Height double, rotationRadian double)";
     NSString *sqlStringForLogInfo = @"create table if not exists LogInfo(UEQP_ID, otherUEQP_ID, cmdType integer, value, type integer, createDate double, result integer, areaID, createUserID)";
     NSString *sqlStringForAreaConfig = @"create table if not exists AreaConfig(areaID, configName)";
     NSString *sqlStringForDetailOfAreaConfig = @"create table if not exists DetailOfAreaConfig(configName, deviceID, deviceData blob)";
@@ -83,6 +83,7 @@ kSingleTon_M(DBHelper)
             detailLayout.origin_Y = [set doubleForColumn:@"origin_Y"];
             detailLayout.size_Width = [set doubleForColumn:@"size_Width"];
             detailLayout.size_Height = [set doubleForColumn:@"size_Height"];
+            detailLayout.rotationRadian = [set doubleForColumn:@"rotationRadian"];
             [resultArray addObject:detailLayout];
         }
         [set close];
@@ -102,7 +103,7 @@ kSingleTon_M(DBHelper)
             return ;
         }
         for (DetaiLayoutOfAreaByViewpointType *detailLayout in layouts) {
-            if (![db executeUpdate:[NSString stringWithFormat:@"insert into %@(areaID,viewpointType, deviceID, origin_X, origin_Y, size_Width, size_Height) values (?, ?, ?, ?, ?, ?, ?)", detailLayoutOfAreaByViewpointTypeTableName]  withArgumentsInArray:@[detailLayout.areaID, @(detailLayout.viewpointType), detailLayout.deviceID, @(detailLayout.origin_X), @(detailLayout.origin_Y), @(detailLayout.size_Width), @(detailLayout.size_Height)]]) {
+            if (![db executeUpdate:[NSString stringWithFormat:@"insert into %@(areaID,viewpointType, deviceID, origin_X, origin_Y, size_Width, size_Height, rotationRadian) values (?, ?, ?, ?, ?, ?, ?, ?)", detailLayoutOfAreaByViewpointTypeTableName]  withArgumentsInArray:@[detailLayout.areaID, @(detailLayout.viewpointType), detailLayout.deviceID, @(detailLayout.origin_X), @(detailLayout.origin_Y), @(detailLayout.size_Width), @(detailLayout.size_Height), @(detailLayout.rotationRadian)]]) {
                 *rollback = YES;
                 flag = NO;
                 return ;

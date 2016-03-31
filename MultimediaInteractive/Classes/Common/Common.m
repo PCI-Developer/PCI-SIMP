@@ -221,10 +221,14 @@ kSingleTon_M(Common)
 }
 
 #pragma mark - 改变选择区域
-- (void)changeAreaWithIndex:(NSInteger)index
+- (BOOL)changeAreaWithIndex:(NSInteger)index
 {
+    if ([self.currentArea isEqual:self.allAreasArray[index]]) {
+        return NO;
+    }
     self.currentArea = self.allAreasArray[index];
     _actualImage = nil;
+    return YES;
 }
 #pragma mark - 获取所有设备字典
 - (NSDictionary *)getAllDevices

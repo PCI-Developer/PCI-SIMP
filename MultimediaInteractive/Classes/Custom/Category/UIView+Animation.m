@@ -88,15 +88,26 @@
 // 是否带转场动画的隐藏
 - (void)setHidden:(BOOL)hidden animated:(BOOL)animated
 {
-    [self setHidden:hidden animated:animated completionHandle:nil];
+    [self setHidden:hidden animated:animated originPos:1];
 }
 
+// 最后一个参数。原有的位置。 0 左边 1右边
+- (void)setHidden:(BOOL)hidden animated:(BOOL)animated originPos:(NSUInteger)originPos
+{
+    [self setHidden:hidden animated:animated originPos:originPos completionHandle:nil];
+}
 // 是否带转场动画的隐藏
 - (void)setHidden:(BOOL)hidden animated:(BOOL)animated completionHandle:(void (^)())completionHandle
 {
+    [self setHidden:hidden animated:animated originPos:1 completionHandle:completionHandle];
+}
+
+// 是否带转场动画的隐藏
+- (void)setHidden:(BOOL)hidden animated:(BOOL)animated  originPos:(NSUInteger)originPos completionHandle:(void (^)())completionHandle
+{
     NSTimeInterval timeInterval = 0;
     if (animated) {
-        NSString *subType = hidden ? kCATransitionFromLeft : kCATransitionFromRight;
+        NSString *subType = originPos == 1 ? (hidden ? kCATransitionFromLeft : kCATransitionFromRight) :  (hidden ? kCATransitionFromRight : kCATransitionFromLeft);
         timeInterval = 0.25;
         [self addTransitionWithType:kRightViewTransitionType subType:subType duration:0.25 key:@"transition"];
     }

@@ -142,7 +142,7 @@
     
     label.text = [NSString stringWithFormat:@"%.0f", value * 100];
     CGRect sliderThumbRect = [sender convertRect:((UIControl *)sender).bounds toView:self];
-    label.frame = CGRectMake(CGRectGetMidX(sliderThumbRect) - 40 / 2, CGRectGetMinY(sliderThumbRect) - 30, 40, 30);
+    label.frame = CGRectMake(CGRectGetMinX(sliderThumbRect) - ([sender isKindOfClass:[WFFCircularSlider class]] ? 0 : 40), CGRectGetMinY(sliderThumbRect), 40, 30);
     
     static NSTimer *timer;
     // 创建定时器,1秒后隐藏音量大小文本
@@ -226,17 +226,30 @@
 - (void)willMoveToWindow:(UIWindow *)newWindow
 {
     if (newWindow == [UIApplication sharedApplication].keyWindow) {
-        if (!self.channelDropdown) {
-            return;
+        if (self.channelDropdown) {
+            self.channelDropdown.textColor = [UIColor whiteColor];
+            self.channelDropdown.tableTextColor = [UIColor whiteColor];
+            self.channelDropdown.listCellBackgroundImage = [UIImage imageNamed:@"dropdownListCellBg.png"];
+            self.channelDropdown.listCellBackgroundImageSelected = [UIImage imageNamed:@"dropdownListCellBgSelected.png"];
+            self.channelDropdown.maxCountForShow = 3;
+            self.channelDropdown.rightImage = [UIImage imageNamed:@"dropdownListRightImage1.png"];
+            self.channelDropdown.rightImageSelected = [UIImage imageNamed:@"dropdownListRightImageSelected1.png"];
+            self.channelDropdown.backgroundImage = [UIImage imageNamed:@"dropdownListBackground.png"];
         }
-        self.channelDropdown.textColor = [UIColor whiteColor];
-        self.channelDropdown.tableTextColor = [UIColor whiteColor];
-        self.channelDropdown.listCellBackgroundImage = [UIImage imageNamed:@"dropdownListCellBg.png"];
-        self.channelDropdown.listCellBackgroundImageSelected = [UIImage imageNamed:@"dropdownListCellBgSelected.png"];
-        self.channelDropdown.maxCountForShow = 3;
-        self.channelDropdown.rightImage = [UIImage imageNamed:@"dropdownListRightImage1.png"];
-        self.channelDropdown.rightImageSelected = [UIImage imageNamed:@"dropdownListRightImageSelected1.png"];
-        self.channelDropdown.backgroundImage = [UIImage imageNamed:@"dropdownListBackground.png"];
+        if (self.brightnessSlider) {
+            self.brightnessSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
+            UIImage *backImage = [UIImage imageNamed:@"brightnessBg"];
+            NSLog(@"%@", NSStringFromCGSize(backImage.size));
+            CALayer *bgLayer = [[CALayer alloc] init];
+            bgLayer.bounds = CGRectMake(0, 0, backImage.size.width, backImage.size.height);
+            bgLayer.position = CGPointMake(CGRectGetMidX(self.brightnessSlider.bounds), CGRectGetMidY(self.brightnessSlider.bounds));
+            bgLayer.contents = (__bridge id _Nullable)(backImage.CGImage);
+            [self.brightnessSlider.layer insertSublayer:bgLayer atIndex:0];
+            
+            [self.brightnessSlider setThumbImage:[UIImage imageNamed:@"brightnessThumb"] forState:UIControlStateNormal];
+            [self.brightnessSlider setMinimumTrackImage:[UIImage imageNamed:@"brightnessMin"] forState:UIControlStateNormal];
+            [self.brightnessSlider setMaximumTrackImage:[UIImage imageNamed:@"brightnessMax"] forState:UIControlStateNormal];
+        }
     }
 }
 @end

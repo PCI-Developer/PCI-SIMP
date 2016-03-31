@@ -114,9 +114,11 @@
                             </connections>
                         </button>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="pjn-zm-WcN">
-                            <rect key="frame" x="18" y="158.5" width="564" height="31"/>
+                            <rect key="frame" x="173" y="153.5" width="254" height="41"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="114" id="HQt-KD-pkO"/>
+                                <constraint firstAttribute="height" constant="40" id="Kij-A4-Lxa"/>
+                                <constraint firstAttribute="width" constant="250" id="gtm-nq-dFS"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
@@ -161,6 +163,8 @@
                             <exclude reference="6qa-5e-h3Q"/>
                             <exclude reference="889-w2-sPK"/>
                             <exclude reference="3sY-Cq-tht"/>
+                            <exclude reference="9NL-aS-Yfq"/>
+                            <exclude reference="hRD-nT-qp9"/>
                             <exclude reference="phs-qW-C7h"/>
                             <exclude reference="r6o-E6-duI"/>
                             <exclude reference="9AS-Er-THa"/>
