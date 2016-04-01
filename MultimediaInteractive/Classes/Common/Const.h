@@ -219,4 +219,7 @@ return share; \
 // 设备View 旋转相关
 #define kIndicatorForRotationViewSize 20
 
+// 流程列表选中颜色
+#define kProcessTableViewCellSelectedColor [UIColor colorFromHexRGB:@"#00aaff"];
+
 

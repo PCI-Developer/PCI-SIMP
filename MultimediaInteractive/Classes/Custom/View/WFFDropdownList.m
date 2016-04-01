@@ -311,11 +311,12 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor clearColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     UILabel *label = (UILabel *)[cell viewWithTag:100];
     if (!label) {
         label = [[UILabel alloc] init];
+        label.tag = 100;
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = self.font;
         [cell addSubview:label];
     }
     label.frame = cell.bounds;
@@ -324,20 +325,20 @@
         label.textColor = _tableTextColor;
     }
     
-    UIImage *backImage = nil;
-    if (indexPath.row == _selectedIndex) {
-        backImage = _listCellBackgroundImageSelected;
+    if (_listCellBackgroundImage) {
+        cell.backgroundColor = [UIColor colorWithPatternImage:_listCellBackgroundImage];
     } else {
-        backImage = _listCellBackgroundImage;
+        cell.backgroundColor = [UIColor clearColor];
     }
     
-    if (backImage) {
-        cell.backgroundColor = [UIColor colorWithPatternImage:backImage];
+    if (_listCellBackgroundImageSelected) {
+        cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.selectedBackgroundView.backgroundColor =  [UIColor colorWithPatternImage:_listCellBackgroundImageSelected];
+    } else {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    label.tag = 100;
+    
     label.text = _dataArray[indexPath.row];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.font = self.font;
     
     return cell;
 }

@@ -100,7 +100,8 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.contentView.backgroundColor = [UIColor clearColor];
     }
-//    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+    cell.selectedBackgroundView.backgroundColor = kProcessTableViewCellSelectedColor;
     cell.textLabel.text = [_processArray[indexPath.row] processName];
     
     return cell;
@@ -111,4 +112,5 @@
     self.selectedProcessID = [_processArray[indexPath.row] processId];
     self.processDescriptionLabel.text = [_processArray[indexPath.row] processInfo];
 }
+
 @end

@@ -2066,6 +2066,8 @@ static BOOL isDeviceInfoOrientationButtonTouchDown = NO;
     }
     
     _processView.processArray = kProcessByCurrentArea;
+    
+    
 }
 
 - (IBAction)showProcessViewButtonAction:(UIButton *)sender {

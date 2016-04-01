@@ -130,9 +130,22 @@
                                 <action selector="controlMusicFileButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="fBX-Tc-nSE"/>
                             </connections>
                         </button>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Moy-RG-fcR">
+                            <rect key="frame" x="101" y="265" width="48" height="48"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" backgroundImage="loopPlay">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="loopPlayHighlight"/>
+                            <connections>
+                                <action selector="controlMusicFileButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="FfK-x0-7AE"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="5dC-Z1-1WL" firstAttribute="top" secondItem="Moy-RG-fcR" secondAttribute="bottom" constant="26" id="0OY-QR-Hfn"/>
                         <constraint firstAttribute="bottom" secondItem="jxH-6r-ql7" secondAttribute="bottom" constant="40" id="1a0-2x-0bd"/>
                         <constraint firstAttribute="bottom" secondItem="jxH-6r-ql7" secondAttribute="bottom" constant="40" id="3Lm-TS-euj"/>
                         <constraint firstItem="5dC-Z1-1WL" firstAttribute="leading" secondItem="jxH-6r-ql7" secondAttribute="trailing" constant="26" id="6S5-UC-TvS"/>
@@ -141,10 +154,13 @@
                         <constraint firstItem="5dC-Z1-1WL" firstAttribute="height" secondItem="NIR-2K-it5" secondAttribute="height" id="P87-xz-6fY"/>
                         <constraint firstItem="NIR-2K-it5" firstAttribute="width" secondItem="jxH-6r-ql7" secondAttribute="width" id="TQ9-Oh-qJ3"/>
                         <constraint firstItem="NIR-2K-it5" firstAttribute="height" secondItem="jxH-6r-ql7" secondAttribute="height" id="TlX-Sq-Qop"/>
+                        <constraint firstItem="Moy-RG-fcR" firstAttribute="height" secondItem="5dC-Z1-1WL" secondAttribute="height" id="WWJ-Pn-it5"/>
                         <constraint firstItem="jxH-6r-ql7" firstAttribute="centerY" secondItem="otq-BZ-c7Q" secondAttribute="centerY" id="YkJ-Xg-kwW"/>
+                        <constraint firstItem="Moy-RG-fcR" firstAttribute="width" secondItem="5dC-Z1-1WL" secondAttribute="width" id="ZSo-1Y-mu9"/>
                         <constraint firstAttribute="height" constant="180" id="ekO-eO-gdI"/>
                         <constraint firstItem="5dC-Z1-1WL" firstAttribute="top" secondItem="jxH-6r-ql7" secondAttribute="top" id="ifp-qv-gF7"/>
                         <constraint firstItem="5dC-Z1-1WL" firstAttribute="width" secondItem="jxH-6r-ql7" secondAttribute="width" id="px7-qn-lsL"/>
+                        <constraint firstItem="Moy-RG-fcR" firstAttribute="centerX" secondItem="5dC-Z1-1WL" secondAttribute="centerX" id="qvA-Ov-V0L"/>
                         <constraint firstItem="jxH-6r-ql7" firstAttribute="leading" secondItem="otq-BZ-c7Q" secondAttribute="leading" constant="27" id="thh-aL-6tk"/>
                         <constraint firstItem="NIR-2K-it5" firstAttribute="leading" secondItem="jxH-6r-ql7" secondAttribute="trailing" constant="10" id="wbJ-cK-xVM"/>
                         <constraint firstAttribute="trailing" secondItem="NIR-2K-it5" secondAttribute="trailing" constant="27" id="yFo-PL-kbE"/>
@@ -191,6 +207,8 @@
     <resources>
         <image name="controlBg.png" width="2" height="23"/>
         <image name="infoSplit" width="2" height="23"/>
+        <image name="loopPlay" width="36" height="36"/>
+        <image name="loopPlayHighlight" width="36" height="36"/>
         <image name="pauseMusic" width="48" height="48"/>
         <image name="pauseMusicHighlight" width="48" height="48"/>
         <image name="playMusic" width="48" height="48"/>
