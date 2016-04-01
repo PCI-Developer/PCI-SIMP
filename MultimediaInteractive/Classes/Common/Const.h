@@ -50,8 +50,9 @@ typedef NS_ENUM(NSUInteger, CMDType) {
     
     CMDTypeConnFile,        /***    音         ***/
     CMDTypePlayFile,        /***    频         ***/
-    CMDTypeStopFile,        /***    文         ***/
-    CMDTypePauseFile,       /***    件         ***/
+    CMDTypeStopFile,        /***               ***/
+    CMDTypePauseFile,       /***    文         ***/
+    CMDTypeLoopFile,        /***    件         ***/
     CMDTypeConfigCameraFollow,
 };
 
@@ -189,6 +190,8 @@ return share; \
 #define kProtocolControlDeviceCMDofPlayFile @"PlayFile"
 #define kProtocolControlDeviceCMDofStopFile @"StopFile"
 #define kProtocolControlDeviceCMDofPauseFile @"PauseFile"
+#define kProtocolControlDeviceCMDofLoopFile (@"LoopFile")
+
 #define kProtocolControlDeviceCMDofUp @"Ca_Up" // 摄像头
 #define kProtocolControlDeviceCMDofDown @"Ca_Down"
 #define kProtocolControlDeviceCMDofLeft @"Ca_Left"

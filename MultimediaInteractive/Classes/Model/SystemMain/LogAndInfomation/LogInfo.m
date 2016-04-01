@@ -79,6 +79,8 @@
         return [NSString stringWithFormat:@"类型:%@ 名称:%@ 停止播放", deviceType, deviceName];
     } else if (self.cmdType == CMDTypePauseFile) {
         return [NSString stringWithFormat:@"类型:%@ 名称:%@ 暂停播放", deviceType, deviceName];
+    } else if (self.cmdType == CMDTypeLoopFile) {
+        return [NSString stringWithFormat:@"类型:%@ 名称:%@ 切换循环播放", deviceType, deviceName];
     }
     return nil;
 }

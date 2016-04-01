@@ -90,7 +90,9 @@ kSingleTon_M(OPManager)
         case 2:
             cmdType = CMDTypePauseFile;
             break;
-            
+        case 3:
+            cmdType = CMDTypeLoopFile;
+            break;
         default:
             return;
     }
@@ -146,7 +148,7 @@ kSingleTon_M(OPManager)
         logInfo.result = -1;
         
         NSString *ID = logInfo.UEQP_ID;
-        if (cmdType == CMDTypeClose || cmdType == CMDTypeOpen || cmdType == CMDTypeCaDown || cmdType == CMDTypeCaUp || cmdType == CMDTypeCaLeft || cmdType == CMDTypeCaRight || cmdType == CMDTypeCaStop || cmdType == CMDTypePlayFile || cmdType == CMDTypeStopFile || cmdType == CMDTypePauseFile) { // 无参数命令
+        if (cmdType == CMDTypeClose || cmdType == CMDTypeOpen || cmdType == CMDTypeCaDown || cmdType == CMDTypeCaUp || cmdType == CMDTypeCaLeft || cmdType == CMDTypeCaRight || cmdType == CMDTypeCaStop || cmdType == CMDTypePlayFile || cmdType == CMDTypeStopFile || cmdType == CMDTypePauseFile || cmdType == CMDTypeLoopFile) { // 无参数命令
             logInfo.value = @"";
         } else if (cmdType == CMDTypeSetValue || cmdType == CMDTypeChangeChannel || cmdType == CMDTypeConfigCameraFollow){
             logInfo.value = arg;
@@ -169,8 +171,6 @@ kSingleTon_M(OPManager)
             }
             
             LogInfo *model = kLogDict[@(cmdNumber)];
-            
-
             
             model.result = isSuccess;
             kUpdateLog(model);

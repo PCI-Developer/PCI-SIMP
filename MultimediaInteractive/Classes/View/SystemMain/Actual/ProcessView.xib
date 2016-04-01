@@ -91,8 +91,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="70" id="Ch0-cf-bhN"/>
                             </constraints>
-                            <state key="normal" backgroundImage="startProcessButton"/>
-                            <state key="highlighted" backgroundImage="startProcessButtonHighlight"/>
+                            <state key="normal" backgroundImage="startProcess"/>
                             <connections>
                                 <action selector="startProcessButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="MYq-YE-L9Z"/>
                             </connections>
@@ -102,8 +101,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="MJQ-hs-gnM"/>
                             </constraints>
-                            <state key="normal" backgroundImage="stopProcessButton"/>
-                            <state key="highlighted" backgroundImage="stopProcessButtonHighlight"/>
+                            <state key="normal" backgroundImage="stopProcess"/>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="MJQ-hs-gnM"/>
@@ -175,9 +173,7 @@
     <resources>
         <image name="processMainBg" width="1" height="420"/>
         <image name="processTitleBg" width="1" height="40"/>
-        <image name="startProcessButton" width="180" height="70"/>
-        <image name="startProcessButtonHighlight" width="180" height="70"/>
-        <image name="stopProcessButton" width="180" height="70"/>
-        <image name="stopProcessButtonHighlight" width="180" height="70"/>
+        <image name="startProcess" width="180" height="70"/>
+        <image name="stopProcess" width="180" height="70"/>
     </resources>
 </document>
